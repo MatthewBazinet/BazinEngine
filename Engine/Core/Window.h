@@ -20,7 +20,9 @@ public:
 	SDL_Window* GetWindow() const;
 
 private:
+	//Sets OpenGL Attributes for before the context is created
 	void SetPreAttributes();
+	//Sets OpenGL Attributes for after the context is created
 	void SetPostAttributes();
 
 	int width;

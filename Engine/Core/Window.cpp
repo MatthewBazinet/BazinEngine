@@ -36,8 +36,8 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 	context = SDL_GL_CreateContext(window);
 	SetPostAttributes();
 
-	GLenum err = glewInit();
-	if (err != GLEW_OK) {
+	GLenum error = glewInit();
+	if (error != GLEW_OK) {
 		std::cout << "Failed to initialize GLEW" << std::endl;
 	}
 	
