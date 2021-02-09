@@ -2,7 +2,7 @@
 
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
-CoreEngine::CoreEngine() :window(nullptr), isRunning(false)
+CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60)
 {
 }
 
@@ -27,6 +27,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning = false;
 	}
+	timer = new Timer();
+	timer->Start();
 	return isRunning = true;
 }
 
@@ -34,8 +36,10 @@ void CoreEngine::Run()
 {
 	while (isRunning)
 	{
-		Update(0.016f);
+		timer->UpdateFrameTicks();
+		Update(timer->GetDeltaTime());
 		Render();
+		SDL_Delay(timer->GetSleepTime(fps));
 	}
 	//if (!isRunning)
 	//{
@@ -50,7 +54,7 @@ bool CoreEngine::GetIsRunning()
 
 void CoreEngine::Update(const float deltaTime_)
 {
-
+	std::cout << deltaTime_ << std::endl;
 }
 
 void CoreEngine::Render()
@@ -64,6 +68,8 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	delete timer;
+	timer = nullptr;
 	delete window;
 	window = nullptr;
 	SDL_Quit();
