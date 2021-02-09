@@ -4,6 +4,9 @@
 #include <memory>
 #include "Window.h"
 #include "Timer.h"
+#include "Log.h"
+#include "GameInterface.h"
+#include "Scene.h"
 
 class CoreEngine
 {
@@ -22,7 +25,12 @@ public:
 	
 	//Calls Update and Render
 	void Run();
-	bool GetIsRunning();
+	void Exit();
+	bool GetIsRunning() const;
+	int GetCurrentScene() const;
+
+	void SetGameInterface(GameInterface* gameInterface_);
+	void SetCurrentScene(int sceneNum_);
 
 private:
 	CoreEngine();
@@ -39,6 +47,9 @@ private:
 	bool isRunning;
 	Timer* timer;
 	unsigned int fps;
+	GameInterface* gameInterface;
+
+	int currentSceneNum;
 
 };
 

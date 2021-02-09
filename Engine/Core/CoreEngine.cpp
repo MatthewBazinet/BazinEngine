@@ -2,7 +2,7 @@
 
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
-CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60)
+CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0)
 {
 }
 
@@ -21,12 +21,23 @@ CoreEngine* CoreEngine::GetInstance()
 
 bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 {
+	Log::OnCreate();
 	window = new Window();
 	if (!window->OnCreate(name_, width_, height_)) {
-		std::cout << "Window failed to initialize" << std::endl;
+		Log::FatalError("Window failed to initialize", "CoreEngine.cpp", __LINE__);
 		OnDestroy();
 		return isRunning = false;
 	}
+	Log::Info("Window Created Succesfully", "CoreEngine.cpp", __LINE__);
+
+	if (gameInterface) {
+		if (!gameInterface->OnCreate()) {
+			Log::FatalError("Game failed tp initialize", "CoreEngine.cpp", __LINE__);
+			OnDestroy();
+			return isRunning = false;
+		}
+	}
+	Log::Info("Game Created Succesfully", "CoreEngine.cpp", __LINE__);
 	timer = new Timer();
 	timer->Start();
 	return isRunning = true;
@@ -47,14 +58,39 @@ void CoreEngine::Run()
 	//}
 }
 
-bool CoreEngine::GetIsRunning()
+void CoreEngine::Exit()
+{
+	isRunning = false;
+}
+
+bool CoreEngine::GetIsRunning() const
 {
 	return isRunning;
 }
 
+int CoreEngine::GetCurrentScene() const
+{
+	return currentSceneNum;
+}
+
+void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
+{
+	gameInterface = gameInterface_;
+}
+
+void CoreEngine::SetCurrentScene(int sceneNum_)
+{
+	currentSceneNum = sceneNum_;
+}
+
 void CoreEngine::Update(const float deltaTime_)
 {
-	std::cout << deltaTime_ << std::endl;
+	if(gameInterface)
+	{
+		gameInterface->Update(deltaTime_);
+		std::cout << deltaTime_ << std::endl;
+	}
+
 }
 
 void CoreEngine::Render()
@@ -62,12 +98,17 @@ void CoreEngine::Render()
 	//Paints the backround colour
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//CALL GAME RENDER
+	if (gameInterface)
+	{
+		gameInterface->Render();
+	}
 	SDL_GL_SwapWindow(window->GetWindow());
 }
 
 void CoreEngine::OnDestroy()
 {
+	delete gameInterface;
+	gameInterface = nullptr;
 	delete timer;
 	timer = nullptr;
 	delete window;
