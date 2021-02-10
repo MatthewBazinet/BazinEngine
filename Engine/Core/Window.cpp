@@ -43,7 +43,6 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 	}
 	
 	glEnable(GL_DEPTH_TEST);
-	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 	Log::FatalError("OpenGL Version: " + std::string((char*)glGetString(GL_VERSION)), "Window.cpp", __LINE__);
 
 	return true;
