@@ -135,6 +135,9 @@
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Core\Log.cpp" />
+    <ClCompile Include="Engine\Rendering\3D\GameObject.cpp" />
+    <ClCompile Include="Engine\Rendering\3D\Mesh.cpp" />
+    <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
     <ClCompile Include="Game\Game1.cpp" />
     <ClCompile Include="Game\Scene\GameScene.cpp" />
     <ClCompile Include="Game\Scene\StartScene.cpp" />
@@ -148,6 +151,9 @@
     <ClInclude Include="Engine\Core\Timer.h" />
     <ClInclude Include="Engine\Core\Log.h" />
     <ClInclude Include="Engine\Core\GameInterface.h" />
+    <ClInclude Include="Engine\Rendering\3D\GameObject.h" />
+    <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
+    <ClInclude Include="Engine\Rendering\3D\Model.h" />
     <ClInclude Include="Game\Game1.h" />
     <ClInclude Include="Game\Scene\GameScene.h" />
     <ClInclude Include="Game\Scene\StartScene.h" />
