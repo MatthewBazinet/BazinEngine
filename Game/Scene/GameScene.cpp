@@ -31,10 +31,10 @@ bool GameScene::OnCreate()
 	squareVertexList.push_back(v);
 	//Bottom-Left Half
 	v.position = glm::vec3(0.25f, -0.5f, 0.0f);
-	v.colour = glm::vec3(0.0f, 0.0f, 1.0f);
+	v.colour = glm::vec3(0.0f, 1.0f, 1.0f);
 	squareVertexList.push_back(v);
 	v.position = glm::vec3(-0.75f, -0.5f, 0.0f);
-	v.colour = glm::vec3(1.0f, 0.0f, 1.0f);
+	v.colour = glm::vec3(1.0f, 1.0f, 0.0f);
 	squareVertexList.push_back(v);
 	v.position = glm::vec3(-0.75f, 0.5f, 0.0f);
 	v.colour = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -45,17 +45,17 @@ bool GameScene::OnCreate()
 	coffinVertexList.reserve(9);
 	//Bottom Left
 	v.position = glm::vec3(0.4f, 0.5f, 0.0f);
-	v.colour = glm::vec3(0.0f, 0.0f, 0.0f);
+	v.colour = glm::vec3(0.5f, 0.0f, 0.0f);
 	coffinVertexList.push_back(v);
 	v.position = glm::vec3(0.8f, 0.5f, 0.0f);
 	v.colour = glm::vec3(1.0f, 0.0f, 0.0f);
 	coffinVertexList.push_back(v);
 	v.position = glm::vec3(0.7f, -0.5f, 0.0f);
-	v.colour = glm::vec3(0.0f, 0.0f, 0.0f);
+	v.colour = glm::vec3(1.0f, 0.0f, 0.0f);
 	coffinVertexList.push_back(v);
 	//Bottom Right
 	v.position = glm::vec3(0.7f, -0.5f, 0.0f);
-	v.colour = glm::vec3(1.0f, 0.0f, 0.0f);
+	v.colour = glm::vec3(0.5f, 0.0f, 0.0f);
 	coffinVertexList.push_back(v);
 	v.position = glm::vec3(0.5f, -0.5f, 0.0f);
 	v.colour = glm::vec3(0.0f, 0.0f, 0.0f);
