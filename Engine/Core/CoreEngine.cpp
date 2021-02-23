@@ -30,6 +30,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	}
 	Log::Info("Window Created Succesfully", "CoreEngine.cpp", __LINE__);
 
+	ShaderHandler::GetInstance()->CreateProgram("colourShader", "Engine/Shader/ColourVertexShader.glsl", "Engine/Shader/ColourFragmentShader.glsl");
+
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Log::FatalError("Game failed tp initialize", "CoreEngine.cpp", __LINE__);
@@ -107,6 +109,7 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	ShaderHandler::GetInstance()->OnDestroy();
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete timer;
