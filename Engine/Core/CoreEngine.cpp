@@ -75,6 +75,16 @@ int CoreEngine::GetCurrentScene() const
 	return currentSceneNum;
 }
 
+float CoreEngine::GetScreenWidth() const
+{
+	return static_cast<float>(window->GetWidth());
+}
+
+float CoreEngine::GetScreenHeight() const
+{
+	return static_cast<float>(window->GetHeight());
+}
+
 void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
 {
 	gameInterface = gameInterface_;
