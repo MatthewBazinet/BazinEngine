@@ -25,27 +25,29 @@ Camera::~Camera()
 void Camera::SetPosition(glm::vec3 position_)
 {
 	position = position_;
+	UpdateCameraVectors();
 }
 
 void Camera::SetRotation(float yaw_, float pitch_)
 {
 	yaw = yaw_;
 	pitch = pitch_;
+	UpdateCameraVectors();
 }
 
 glm::mat4 Camera::GetView() const
 {
-	return glm::mat4();
+	return view;
 }
 
 glm::mat4 Camera::GetPerspective() const
 {
-	return glm::mat4();
+	return perspective;
 }
 
 glm::mat4 Camera::GetOrthographic() const
 {
-	return glm::mat4();
+	return orthographic;
 }
 
 glm::vec3 Camera::GetPosition() const
@@ -55,5 +57,14 @@ glm::vec3 Camera::GetPosition() const
 
 void Camera::UpdateCameraVectors()
 {
-	//forward.x = cos(glm::radians(yaw) * cos())
+	forward.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	forward.y = sin(glm::radians(pitch));
+	forward.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+	forward = glm::normalize(forward);
+
+	right = glm::normalize(glm::cross(forward, up));
+	up = glm::normalize(glm::cross(right, forward));
+
+	view = glm::lookAt(position, position + forward, up);
 }

@@ -1,6 +1,6 @@
 #include "GameScene.h"
 
-GameScene::GameScene() : shape(nullptr)
+GameScene::GameScene() : shape(nullptr), model(nullptr)
 {
 }
 
@@ -16,7 +16,11 @@ bool GameScene::OnCreate()
 {
 	Log::Info("Game Scene initiated", "GameScene.cpp", __LINE__);
 
+	CoreEngine::GetInstance()->SetCamera(new Camera());
+	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
+
 	Vertex v;
+	//Square and Coffin Vertices
 	/*
 	//Square/Rectangle
 	std::vector<Vertex> squareVertexList;
@@ -76,6 +80,8 @@ bool GameScene::OnCreate()
 	v.colour = glm::vec3(0.0f, 0.0f, 0.0f);
 	coffinVertexList.push_back(v);
 	*/
+
+	//Cube Vertices
 	std::vector<Vertex> vertexList;
 	vertexList.reserve(36);
 	{
@@ -242,5 +248,5 @@ void GameScene::Update(const float deltaTime_)
 void GameScene::Render()
 {
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	shape->Render();
+	shape->Render(CoreEngine::GetInstance()->GetCamera());
 }

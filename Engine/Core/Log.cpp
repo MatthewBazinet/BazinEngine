@@ -9,6 +9,10 @@ void Log::OnCreate(const std::string& name_)
 	outputName = name_ + ".txt";
 	std::ofstream out;
 	out.open(outputName.c_str(), std::ios::out);
+	if(!out.is_open())
+	{
+		std::cout << "Couldn't write to file\n";
+	}
 	out.close();
 	currentSev = MessageType::TYPE_INFO;
 }

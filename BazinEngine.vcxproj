@@ -132,10 +132,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Core\Log.cpp" />
-    <ClCompile Include="Engine\Graphics\Camera.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Rendering\3D\GameObject.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Mesh.cpp" />
@@ -147,13 +147,13 @@
     <ClCompile Include="Engine\Core\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Scene.h" />
     <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Engine\Core\Timer.h" />
     <ClInclude Include="Engine\Core\Log.h" />
     <ClInclude Include="Engine\Core\GameInterface.h" />
-    <ClInclude Include="Engine\Graphics\Camera.h" />
     <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
     <ClInclude Include="Engine\Rendering\3D\GameObject.h" />
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
