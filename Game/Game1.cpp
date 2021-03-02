@@ -37,6 +37,11 @@ void Game1::Render()
 	currentScene->Render();
 }
 
+void Game1::HandleEvents(const SDL_Event& sdlEvent)
+{
+	currentScene->HandleEvents(sdlEvent);
+}
+
 void Game1::BuildScene()
 {
 	delete currentScene;

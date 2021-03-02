@@ -13,6 +13,7 @@ public:
 	bool OnCreate() override;
 	void Update(const float deltaTime_) override;
 	void Render() override;
+	void HandleEvents(const SDL_Event& sdlEvent);
 private:
 	int currentSceneNum;
 	Scene* currentScene;

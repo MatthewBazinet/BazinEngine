@@ -250,3 +250,44 @@ void GameScene::Render()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	shape->Render(CoreEngine::GetInstance()->GetCamera());
 }
+
+void GameScene::HandleEvents(const SDL_Event& sdlEvent)
+{
+	if (sdlEvent.type == SDL_KEYDOWN) 
+	{
+		switch (sdlEvent.key.keysym.scancode) 
+		{
+		//Controls for Camera: WASD Move, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
+		case SDL_SCANCODE_W:
+			CoreEngine::GetInstance()->GetCamera()->SetPosition(CoreEngine::GetInstance()->GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+			break;
+		case SDL_SCANCODE_A:
+			CoreEngine::GetInstance()->GetCamera()->SetPosition(CoreEngine::GetInstance()->GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+			break;
+		case SDL_SCANCODE_S:
+			CoreEngine::GetInstance()->GetCamera()->SetPosition(CoreEngine::GetInstance()->GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
+			break;
+		case SDL_SCANCODE_D:
+			CoreEngine::GetInstance()->GetCamera()->SetPosition(CoreEngine::GetInstance()->GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
+			break;
+		case SDL_SCANCODE_Q:
+			CoreEngine::GetInstance()->GetCamera()->SetRotation(CoreEngine::GetInstance()->GetCamera()->GetRotation() - glm::vec3(0.5f, 0.0f, 0.0f));
+			break;
+		case SDL_SCANCODE_E:
+			CoreEngine::GetInstance()->GetCamera()->SetRotation(CoreEngine::GetInstance()->GetCamera()->GetRotation() + glm::vec3(0.5f, 0.0f, 0.0f));
+			break;
+		case SDL_SCANCODE_RIGHT:
+			CoreEngine::GetInstance()->GetCamera()->SetRotation(CoreEngine::GetInstance()->GetCamera()->GetRotation() + glm::vec3(0.0f, 0.0f, 0.1f));
+			break;
+		case SDL_SCANCODE_LEFT:
+			CoreEngine::GetInstance()->GetCamera()->SetRotation(CoreEngine::GetInstance()->GetCamera()->GetRotation() - glm::vec3(0.0f, 0.0f, 0.1f));
+			break;
+		case SDL_SCANCODE_UP:
+			CoreEngine::GetInstance()->GetCamera()->SetRotation(CoreEngine::GetInstance()->GetCamera()->GetRotation() + glm::vec3(0.0f, 0.1f, 0.0f));
+			break;
+		case SDL_SCANCODE_DOWN:
+			CoreEngine::GetInstance()->GetCamera()->SetRotation(CoreEngine::GetInstance()->GetCamera()->GetRotation() - glm::vec3(0.0f, 0.1f, 0.0f));
+			break;
+		}
+	}
+}

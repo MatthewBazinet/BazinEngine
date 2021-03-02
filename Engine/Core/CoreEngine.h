@@ -46,6 +46,8 @@ private:
 	~CoreEngine();
 	void Update(const float deltaTime_);
 	void Render();
+	void GetEvents();
+
 	void OnDestroy();
 
 	//A unique pointer to the only instance of the CoreEngine

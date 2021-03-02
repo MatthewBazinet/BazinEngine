@@ -50,6 +50,7 @@ void CoreEngine::Run()
 	while (isRunning)
 	{
 		timer->UpdateFrameTicks();
+		GetEvents();
 		Update(timer->GetDeltaTime());
 		Render();
 		SDL_Delay(timer->GetSleepTime(fps));
@@ -125,6 +126,19 @@ void CoreEngine::Render()
 		gameInterface->Render();
 	}
 	SDL_GL_SwapWindow(window->GetWindow());
+}
+
+void CoreEngine::GetEvents()
+{
+	SDL_Event sdlEvent;
+	while (SDL_PollEvent(&sdlEvent)) {
+		if (sdlEvent.type == SDL_EventType::SDL_QUIT) {
+			isRunning = false;
+			return;
+		}
+		gameInterface->HandleEvents(sdlEvent);
+	}
+
 }
 
 void CoreEngine::OnDestroy()
