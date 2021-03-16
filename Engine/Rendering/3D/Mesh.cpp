@@ -22,15 +22,29 @@ void Mesh::Render(Camera* camera_, glm::mat4 transform_)
 	glUniform1i(textureLoc, 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureID);
+	const int numOfLights = 10;
+	glm::vec3 lightPositions[numOfLights];
+	float ambients[numOfLights];
+	float diffuses[numOfLights];
+	float speculars[numOfLights];
+	glm::vec3 colours[numOfLights];
 
+	for (int i = 0; i < camera_->GetLightSources().size(); i++) {
+		lightPositions[i] = camera_->GetLightSources()[i]->GetPosition();
+		ambients[i] = camera_->GetLightSources()[i]->GetAmbient();
+		diffuses[i] = camera_->GetLightSources()[i]->GetDiffuse();
+		speculars[i] = camera_->GetLightSources()[i]->GetSpecular();
+		colours[i] = camera_->GetLightSources()[i]->GetColour();
+	}
+	
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetView()));
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetPerspective()));
 	glUniform3fv(viewPosLoc, 1, glm::value_ptr(camera_->GetPosition()));
-	glUniform3fv(lightPosLoc, 1, glm::value_ptr(camera_->GetLightSources()[0]->GetPosition()));
-	glUniform1fv(ambientLoc, 1, new GLfloat(camera_->GetLightSources()[0]->GetAmbient()));
-	glUniform1fv(diffuseLoc, 1, new GLfloat(camera_->GetLightSources()[0]->GetDiffuse()));
-	glUniform1fv(specularLoc, 1, new GLfloat(camera_->GetLightSources()[0]->GetSpecular()));
-	glUniform3fv(colourLoc, 1, glm::value_ptr(camera_->GetLightSources()[0]->GetColour()));
+	glUniform3fv(lightPosLoc, numOfLights, glm::value_ptr(lightPositions[0]));
+	glUniform1fv(ambientLoc, numOfLights, (GLfloat*) &ambients[0]);
+	glUniform1fv(diffuseLoc, numOfLights, (GLfloat*) &diffuses[0]);
+	glUniform1fv(specularLoc, numOfLights, (GLfloat*) &speculars[0]);
+	glUniform3fv(colourLoc, numOfLights, glm::value_ptr(colours[0]));
 
 	glBindVertexArray(VAO);
 
@@ -66,16 +80,17 @@ void Mesh::GenerateBuffers()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 	textureLoc = glGetUniformLocation(shaderProgram, "inputTexture");
 	
 	viewPosLoc = glGetUniformLocation(shaderProgram, "cameraPosition");
-	lightPosLoc = glGetUniformLocation(shaderProgram, "lightSource.position");
-	ambientLoc = glGetUniformLocation(shaderProgram, "lightSource.ambient");
-	diffuseLoc = glGetUniformLocation(shaderProgram, "lightSource.diffuse");
-	specularLoc = glGetUniformLocation(shaderProgram, "lightSource.specular");
-	colourLoc = glGetUniformLocation(shaderProgram, "lightSource.colour");
+	lightPosLoc = glGetUniformLocation(shaderProgram, "lightSource.position[0]");
+	ambientLoc = glGetUniformLocation(shaderProgram, "lightSource.ambient[0]");
+	diffuseLoc = glGetUniformLocation(shaderProgram, "lightSource.diffuse[0]");
+	specularLoc = glGetUniformLocation(shaderProgram, "lightSource.specular[0]");
+	colourLoc = glGetUniformLocation(shaderProgram, "lightSource.colour[0]");
 
 }

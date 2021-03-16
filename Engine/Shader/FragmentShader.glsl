@@ -1,4 +1,5 @@
 #version 450 core
+#define MAX_NUM_OF_LIGHTS 10
 
 in vec3 Normal;
 in vec2 TexCoords;
@@ -7,11 +8,11 @@ in vec3 FragPosition;
 
 struct Light
 {
-vec3 position;
-float ambient;
-float diffuse;
-float specular;
-vec3 colour;
+vec3 position[MAX_NUM_OF_LIGHTS];
+float ambient[MAX_NUM_OF_LIGHTS];
+float diffuse[MAX_NUM_OF_LIGHTS];
+float specular[MAX_NUM_OF_LIGHTS];
+vec3 colour[MAX_NUM_OF_LIGHTS];
 };
 
 uniform sampler2D inputTexture;
@@ -23,18 +24,35 @@ out vec4 fColour;
 
 void main()
 {
+vec3 ambient[MAX_NUM_OF_LIGHTS];
+vec3 diffuse[MAX_NUM_OF_LIGHTS];
+vec3 specular[MAX_NUM_OF_LIGHTS];
+
+for(int i = 0; i < MAX_NUM_OF_LIGHTS; i++)
+{
 //Ambient
-vec3 ambient = lightSource.ambient * texture(inputTexture, TexCoords).rgb * lightSource.colour;
+ambient[i] = lightSource.ambient[i] * lightSource.colour[i];
 //Diffuse
 vec3 norm = normalize(Normal);
-vec3 lightDir = normalize(lightSource.position - FragPosition);
+vec3 lightDir = normalize(lightSource.position[i] - FragPosition);
 float diff = max(dot(norm, lightDir), 0.0);
-vec3 diffuse = (diff * lightSource.diffuse) * texture(inputTexture, TexCoords).rgb * lightSource.colour;
+diffuse[i] = (diff * lightSource.diffuse[i]) * lightSource.colour[i];
 //Specular
 vec3 viewDir = normalize(cameraPosition - FragPosition);
 vec3 reflectDir = reflect(-lightDir, norm);
 float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-vec3 specular = (spec * lightSource.specular) * lightSource.colour;
-vec3 result = ambient + diffuse + specular;
-fColour = vec4(result, 1.0f);
+specular[i] = (spec * lightSource.specular[i]) * lightSource.colour[i];
+}
+
+vec3 resultAmbient;
+vec3 resultDiffuse;
+vec3 resultSpecular;
+for(int i = 0; i < MAX_NUM_OF_LIGHTS; i++)
+{
+resultAmbient+= ambient[i];
+resultDiffuse+= diffuse[i];
+resultSpecular+= specular[i];
+}
+
+fColour = vec4((resultAmbient + resultDiffuse) * texture(inputTexture, TexCoords).rgb + resultSpecular, 1.0f);
 }
