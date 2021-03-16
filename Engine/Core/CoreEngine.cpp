@@ -31,6 +31,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	Log::Info("Window Created Succesfully", "CoreEngine.cpp", __LINE__);
 
 	ShaderHandler::GetInstance()->CreateProgram("colourShader", "Engine/Shader/ColourVertexShader.glsl", "Engine/Shader/ColourFragmentShader.glsl");
+	ShaderHandler::GetInstance()->CreateProgram("basicShader", "Engine/Shader/VertexShader.glsl", "Engine/Shader/FragmentShader.glsl");
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
@@ -144,6 +145,7 @@ void CoreEngine::GetEvents()
 void CoreEngine::OnDestroy()
 {
 	ShaderHandler::GetInstance()->OnDestroy();
+	TextureHandler::GetInstance()->OnDestroy();
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete camera;

@@ -44,7 +44,8 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 	
 
 	Log::Info("OpenGL Version: " + std::string((char*)glGetString(GL_VERSION)), "Window.cpp", __LINE__);
-
+	Log::Info("Graphics Card Vendor: " + std::string((char*)glGetString(GL_VENDOR)), "Window.cpp", __LINE__);
+	std::cout << "Graphics Card Vendor: " << std::string((char*)glGetString(GL_VENDOR)) << std::endl;
 	glViewport(0, 0, width, height);
 
 	return true;
