@@ -139,6 +139,7 @@
     <ClCompile Include="Engine\FX\LightSource.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Rendering\3D\GameObject.cpp" />
+    <ClCompile Include="Engine\Rendering\3D\LoadOBJModel.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Mesh.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
     <ClCompile Include="Game\Game1.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Engine\FX\LightSource.h" />
     <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
     <ClInclude Include="Engine\Rendering\3D\GameObject.h" />
+    <ClInclude Include="Engine\Rendering\3D\LoadOBJModel.h" />
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
     <ClInclude Include="Game\Game1.h" />
@@ -171,9 +173,14 @@
     <None Include="Engine\Shader\ColourVertexShader.glsl" />
     <None Include="Engine\Shader\FragmentShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
+    <None Include="Resources\Materials\Apple.mtl" />
+    <None Include="Resources\Materials\Dice.mtl" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Textures\Apple_Body.png" />
+    <Image Include="Resources\Textures\Apple_Stem.png" />
     <Image Include="Resources\Textures\CheckerboardTexture.png" />
+    <Image Include="Resources\Textures\diceTexture.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

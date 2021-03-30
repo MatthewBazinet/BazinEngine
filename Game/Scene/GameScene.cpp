@@ -307,11 +307,14 @@ bool GameScene::OnCreate()
 		vertexList.push_back(v);
 	}
 
-	model = new Model(ShaderHandler::GetInstance()->GetShader("basicShader"));
+	model = new Model("Resources/Models/Dice.obj","Resources/Materials/Dice.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
 	//model->AddMesh(new Mesh(squareVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
 	//model->AddMesh(new Mesh(coffinVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
-	model->AddMesh(new Mesh(vertexList, TextureHandler::GetInstance()->GetTexture("Checkerboard"), ShaderHandler::GetInstance()->GetShader("basicShader")));
-	model->SetScale(glm::vec3(0.5f));
+	//SubMesh subMesh;
+	//subMesh.vertexList = vertexList;
+	//subMesh.textureID = TextureHandler::GetInstance()->GetTexture("Checkerboard");
+	//model->AddMesh(new Mesh(subMesh, ShaderHandler::GetInstance()->GetShader("basicShader")));
+	//model->SetScale(glm::vec3(0.5f));
 	shape = new GameObject(model);
 
 	return true;
@@ -319,7 +322,7 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
-	model->SetAngle(model->GetAngle() + 1 * deltaTime_);
+	shape->Update(deltaTime_);
 }
 
 void GameScene::Render()
