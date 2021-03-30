@@ -307,7 +307,7 @@ bool GameScene::OnCreate()
 		vertexList.push_back(v);
 	}
 
-	model = new Model("Resources/Models/Dice.obj","Resources/Materials/Dice.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
+	model = new Model("Resources/Models/Apple.obj","Resources/Materials/Apple.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
 	//model->AddMesh(new Mesh(squareVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
 	//model->AddMesh(new Mesh(coffinVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
 	//SubMesh subMesh;
