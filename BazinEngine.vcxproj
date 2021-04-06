@@ -137,6 +137,8 @@
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Core\Log.cpp" />
     <ClCompile Include="Engine\FX\LightSource.cpp" />
+    <ClCompile Include="Engine\FX\MaterialLoader.cpp" />
+    <ClCompile Include="Engine\Graphics\MaterialHandler.cpp" />
     <ClCompile Include="Engine\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="Engine\Rendering\3D\GameObject.cpp" />
     <ClCompile Include="Engine\Rendering\3D\LoadOBJModel.cpp" />
@@ -159,6 +161,8 @@
     <ClInclude Include="Engine\Core\Log.h" />
     <ClInclude Include="Engine\Core\GameInterface.h" />
     <ClInclude Include="Engine\FX\LightSource.h" />
+    <ClInclude Include="Engine\FX\MaterialLoader.h" />
+    <ClInclude Include="Engine\Graphics\MaterialHandler.h" />
     <ClInclude Include="Engine\Graphics\ShaderHandler.h" />
     <ClInclude Include="Engine\Rendering\3D\GameObject.h" />
     <ClInclude Include="Engine\Rendering\3D\LoadOBJModel.h" />
@@ -175,8 +179,6 @@
     <None Include="Engine\Shader\ColourVertexShader.glsl" />
     <None Include="Engine\Shader\FragmentShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
-    <None Include="Resources\Materials\Apple.mtl" />
-    <None Include="Resources\Materials\Dice.mtl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Apple_Body.png" />

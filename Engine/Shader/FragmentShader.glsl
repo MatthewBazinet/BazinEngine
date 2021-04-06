@@ -14,9 +14,21 @@ float specular[MAX_NUM_OF_LIGHTS];
 vec3 colour[MAX_NUM_OF_LIGHTS];
 };
 
-uniform sampler2D inputTexture;
+struct Material 
+{
+	sampler2D diffuseMap;
+
+	float shininess; //Ns
+	float transparency; //d
+
+	vec3 ambient; //Ka
+	vec3 diffuse; //Kd
+	vec3 specular; //Ks
+};
+
 uniform vec3 cameraPosition;
 uniform Light lightSource;
+uniform Material material;
 
 out vec4 fColour;
 
@@ -30,17 +42,17 @@ vec3 specular[MAX_NUM_OF_LIGHTS];
 for(int i = 0; i < MAX_NUM_OF_LIGHTS; i++)
 {
 //Ambient
-ambient[i] = lightSource.ambient[i] * lightSource.colour[i];
+ambient[i] = lightSource.ambient[i] * material.ambient * lightSource.colour[i];
 //Diffuse
 vec3 norm = normalize(Normal);
 vec3 lightDir = normalize(lightSource.position[i] - FragPosition);
 float diff = max(dot(norm, lightDir), 0.0);
-diffuse[i] = (diff * lightSource.diffuse[i]) * lightSource.colour[i];
+diffuse[i] = (diff * material.diffuse) * lightSource.colour[i];
 //Specular
 vec3 viewDir = normalize(cameraPosition - FragPosition);
 vec3 reflectDir = reflect(-lightDir, norm);
-float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-specular[i] = (spec * lightSource.specular[i]) * lightSource.colour[i];
+float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+specular[i] = (spec * material.specular) * lightSource.colour[i];
 }
 
 vec3 resultAmbient;
@@ -53,5 +65,5 @@ resultDiffuse+= diffuse[i];
 resultSpecular+= specular[i];
 }
 
-fColour = vec4((resultAmbient + resultDiffuse) * texture(inputTexture, TexCoords).rgb + resultSpecular, 1.0f);
+fColour = vec4((resultAmbient + resultDiffuse) * texture(material.diffuseMap, TexCoords).rgb + resultSpecular, material.transparency);
 }

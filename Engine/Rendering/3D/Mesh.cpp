@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
 
-Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0), modelLoc(0), viewLoc(0), projectionLoc(0), textureLoc(0), viewPosLoc(0), lightPosLoc(0), ambientLoc(0), diffuseLoc(0), specularLoc(0), colourLoc(0)
+Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0), modelLoc(0), viewLoc(0), projectionLoc(0), viewPosLoc(0), lightPosLoc(0), ambientLoc(0), diffuseLoc(0), specularLoc(0), colourLoc(0), diffuseMapMatLoc(0), shininessMatLoc(0), transparencyMatLoc(0), ambientMatLoc(0), diffuseMatLoc(0), specularMatLoc(0)
 {
 	subMesh = subMesh_;
 	shaderProgram = shaderProgram_;
@@ -26,9 +26,9 @@ Mesh::~Mesh()
 
 void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_)
 {
-	glUniform1i(textureLoc, 0);
+	glUniform1i(diffuseMapMatLoc, 0);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, subMesh.textureID);
+	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
 	const int numOfLights = 10;
 	glm::vec3 lightPositions[numOfLights];
 	float ambients[numOfLights];
@@ -52,6 +52,13 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_)
 	glUniform1fv(diffuseLoc, numOfLights, (GLfloat*)& diffuses[0]);
 	glUniform1fv(specularLoc, numOfLights, (GLfloat*)& speculars[0]);
 	glUniform3fv(colourLoc, numOfLights, glm::value_ptr(colours[0]));
+	
+    (diffuseMapMatLoc, 1, subMesh.material);
+	glUniform1f(shininessMatLoc, subMesh.material.shininess);
+	glUniform1f(transparencyMatLoc, subMesh.material.transparency);
+	glUniform3fv(ambientMatLoc, 1, (GLfloat*)& subMesh.material.ambient[0]);
+	glUniform3fv(diffuseMatLoc, 1, (GLfloat*)& subMesh.material.diffuse[0]);
+	glUniform3fv(specularMatLoc, 1, (GLfloat*)& subMesh.material.specular[0]);
 
 	glBindVertexArray(VAO);
 
@@ -91,7 +98,6 @@ void Mesh::GenerateBuffers()
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
-	textureLoc = glGetUniformLocation(shaderProgram, "inputTexture");
 	
 	viewPosLoc = glGetUniformLocation(shaderProgram, "cameraPosition");
 	lightPosLoc = glGetUniformLocation(shaderProgram, "lightSource.position[0]");
@@ -99,5 +105,12 @@ void Mesh::GenerateBuffers()
 	diffuseLoc = glGetUniformLocation(shaderProgram, "lightSource.diffuse[0]");
 	specularLoc = glGetUniformLocation(shaderProgram, "lightSource.specular[0]");
 	colourLoc = glGetUniformLocation(shaderProgram, "lightSource.colour[0]");
+
+	diffuseMapMatLoc = glGetUniformLocation(shaderProgram, "material.diffuseMap");
+	shininessMatLoc = glGetUniformLocation(shaderProgram, "material.shininess");
+	transparencyMatLoc = glGetUniformLocation(shaderProgram, "material.transparency");
+	ambientMatLoc = glGetUniformLocation(shaderProgram, "material.ambient");
+	diffuseMatLoc = glGetUniformLocation(shaderProgram, "material.diffuse");
+	specularMatLoc = glGetUniformLocation(shaderProgram, "material.specular");
 
 }
