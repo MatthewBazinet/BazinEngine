@@ -1,18 +1,12 @@
 #include "GameObject.h"
 
-GameObject::GameObject(Model* model_) : model(nullptr), position(glm::vec3()), angle(0.0f), rotation(glm::vec3(0.0f,1.0f,0.0f)), scale(glm::vec3(1.0f, 1.0f, 1.0f)), modelInstance(0)
-{
-	model = model_;
-	if (model)
-	{
-		modelInstance = model->CreateInstance(position, angle, rotation, scale);
-	}
-}
-
-GameObject::GameObject(Model* model_, glm::vec3 position_) : model(nullptr), position(glm::vec3()), angle(0.0f), rotation(glm::vec3(0.0f, 1.0f, 0.0f)), scale(glm::vec3(1.0f, 1.0f, 1.0f)), modelInstance(0)
+GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_)
 {
 	model = model_;
 	position = position_;
+	angle = angle_;
+	rotation = rotation_;
+	scale = scale_;
 
 	if (model)
 	{
@@ -22,9 +16,6 @@ GameObject::GameObject(Model* model_, glm::vec3 position_) : model(nullptr), pos
 
 GameObject::~GameObject()
 {
-	if (model) {
-		delete model;
-	}
 	model = nullptr;
 }
 
@@ -58,6 +49,11 @@ glm::vec3 GameObject::GetRotation() const
 glm::vec3 GameObject::GetScale() const
 {
 	return scale;
+}
+
+std::string GameObject::GetTag() const
+{
+	return tag;
 }
 
 void GameObject::SetPosition(glm::vec3 position_)
@@ -94,4 +90,9 @@ void GameObject::SetScale(glm::vec3 scale_)
 	{
 		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
 	}
+}
+
+void GameObject::SetTag(std::string tag_)
+{
+	tag = tag_;
 }

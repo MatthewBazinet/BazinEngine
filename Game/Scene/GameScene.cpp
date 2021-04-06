@@ -1,15 +1,12 @@
 #include "GameScene.h"
 
-GameScene::GameScene() : shape(nullptr), model(nullptr)
+GameScene::GameScene()
 {
 }
 
 GameScene::~GameScene()
 {
-	model = nullptr;
-
-	delete shape;
-	shape = nullptr;
+	SceneGraph::GetInstance()->OnDestroy();
 }
 
 bool GameScene::OnCreate()
@@ -89,7 +86,7 @@ bool GameScene::OnCreate()
 	//Cube Vertices
 	std::vector<Vertex> vertexList;
 	vertexList.reserve(36);
-	{
+	/*{
 		v.position = glm::vec3(-0.5f, -0.5f, -0.5f);
 		v.normal = glm::vec3(0.0f, 0.0f, -1.0f);
 		v.textureCoordinates = glm::vec2(0.0f, 0.0f);
@@ -305,30 +302,40 @@ bool GameScene::OnCreate()
 		v.textureCoordinates = glm::vec2(0.0f, 0.0f);
 		v.colour = glm::vec3(0.982f, 0.099f, 0.879f);
 		vertexList.push_back(v);
-	}
-
-	model = new Model("Resources/Models/Apple.obj","Resources/Materials/Apple.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
+	}*/
 	//model->AddMesh(new Mesh(squareVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
-	//model->AddMesh(new Mesh(coffinVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
-	//SubMesh subMesh;
-	//subMesh.vertexList = vertexList;
-	//subMesh.textureID = TextureHandler::GetInstance()->GetTexture("Checkerboard");
-	//model->AddMesh(new Mesh(subMesh, ShaderHandler::GetInstance()->GetShader("basicShader")));
-	//model->SetScale(glm::vec3(0.5f));
-	shape = new GameObject(model);
+//model->AddMesh(new Mesh(coffinVertexList, ShaderHandler::GetInstance()->GetShader("colourShader")));
+//SubMesh subMesh;
+//subMesh.vertexList = vertexList;
+//subMesh.textureID = TextureHandler::GetInstance()->GetTexture("Checkerboard");
+//model->AddMesh(new Mesh(subMesh, ShaderHandler::GetInstance()->GetShader("basicShader")));
+//model->SetScale(glm::vec3(0.5f));
+
+	Model* diceModel = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+
+	Model* appleModel = new Model("Resources/Models/Apple.obj","Resources/Materials/Apple.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
+
+	SceneGraph::GetInstance()->AddModel(diceModel);
+	SceneGraph::GetInstance()->AddModel(appleModel);
+
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, -2.0f)), "dice");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+
+	diceModel = nullptr;
+	appleModel = nullptr;
 
 	return true;
 }
 
 void GameScene::Update(const float deltaTime_)
 {
-	shape->Update(deltaTime_);
+	SceneGraph::GetInstance()->Update(deltaTime_);
 }
 
 void GameScene::Render()
 {
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	shape->Render(CoreEngine::GetInstance()->GetCamera());
+	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
 }
 
 void GameScene::HandleEvents(const SDL_Event& sdlEvent)

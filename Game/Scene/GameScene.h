@@ -13,8 +13,7 @@ public:
 	void Render() override;
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 private:
-	GameObject* shape;
-	Model* model;
+
 };
 
 #endif // !GAMESCENE_H

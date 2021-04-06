@@ -146,6 +146,8 @@ void CoreEngine::OnDestroy()
 {
 	ShaderHandler::GetInstance()->OnDestroy();
 	TextureHandler::GetInstance()->OnDestroy();
+	SceneGraph::GetInstance()->OnDestroy();
+
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete camera;
