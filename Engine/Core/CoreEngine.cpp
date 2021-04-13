@@ -30,6 +30,11 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	}
 	Log::Info("Window Created Succesfully", "CoreEngine.cpp", __LINE__);
 
+	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
+
+	MouseEventListener::RegisterEngineObject(this);
+	KeyboardEventListener::RegisterEngineObject(this);
+
 	ShaderHandler::GetInstance()->CreateProgram("colourShader", "Engine/Shader/ColourVertexShader.glsl", "Engine/Shader/ColourFragmentShader.glsl");
 	ShaderHandler::GetInstance()->CreateProgram("basicShader", "Engine/Shader/VertexShader.glsl", "Engine/Shader/FragmentShader.glsl");
 
@@ -51,7 +56,7 @@ void CoreEngine::Run()
 	while (isRunning)
 	{
 		timer->UpdateFrameTicks();
-		GetEvents();
+		EventListener::Update();
 		Update(timer->GetDeltaTime());
 		Render();
 		SDL_Delay(timer->GetSleepTime(fps));
@@ -107,6 +112,76 @@ void CoreEngine::SetCamera(Camera* camera_)
 	camera = camera_;
 }
 
+void CoreEngine::NotifyOfMousePressed(glm::ivec2 mouse_, int buttonType_)
+{
+}
+
+void CoreEngine::NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_)
+{
+}
+
+void CoreEngine::NotifyOfMouseMove(glm::ivec2 mouse_)
+{
+	if (camera)
+	{
+		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset());
+	}
+}
+
+void CoreEngine::NotifyOfMouseScroll(int y_)
+{
+	if (camera)
+	{
+		camera->ProcessMouseZoom(y_);
+	}
+}
+
+void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
+{
+	switch (key_)
+	{
+		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
+	case SDL_SCANCODE_W:
+		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+		break;
+	case SDL_SCANCODE_A:
+		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+		break;
+	case SDL_SCANCODE_S:
+		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
+		break;
+	case SDL_SCANCODE_D:
+		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
+		break;
+	case SDL_SCANCODE_SPACE:
+		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));
+		break;
+	case SDL_SCANCODE_LCTRL:
+		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.01f, 0.0f));
+		break;
+	case SDL_SCANCODE_Q:
+		GetCamera()->SetRotation(GetCamera()->GetRotation() - glm::vec3(0.5f, 0.0f, 0.0f));
+		break;
+	case SDL_SCANCODE_E:
+		GetCamera()->SetRotation(GetCamera()->GetRotation() + glm::vec3(0.5f, 0.0f, 0.0f));
+		break;
+	case SDL_SCANCODE_RIGHT:
+		GetCamera()->SetRotation(GetCamera()->GetRotation() + glm::vec3(0.0f, 0.0f, 0.1f));
+		break;
+	case SDL_SCANCODE_LEFT:
+		GetCamera()->SetRotation(GetCamera()->GetRotation() - glm::vec3(0.0f, 0.0f, 0.1f));
+		break;
+	case SDL_SCANCODE_UP:
+		GetCamera()->SetRotation(GetCamera()->GetRotation() + glm::vec3(0.0f, 0.1f, 0.0f));
+		break;
+	case SDL_SCANCODE_DOWN:
+		GetCamera()->SetRotation(GetCamera()->GetRotation() - glm::vec3(0.0f, 0.1f, 0.0f));
+		break;
+	default:
+		break;
+	}
+}
+
 void CoreEngine::Update(const float deltaTime_)
 {
 	if(gameInterface)
@@ -129,18 +204,6 @@ void CoreEngine::Render()
 	SDL_GL_SwapWindow(window->GetWindow());
 }
 
-void CoreEngine::GetEvents()
-{
-	SDL_Event sdlEvent;
-	while (SDL_PollEvent(&sdlEvent)) {
-		if (sdlEvent.type == SDL_EventType::SDL_QUIT) {
-			isRunning = false;
-			return;
-		}
-		gameInterface->HandleEvents(sdlEvent);
-	}
-
-}
 
 void CoreEngine::OnDestroy()
 {

@@ -14,15 +14,22 @@ public:
 	void SetPosition(glm::vec3 position_);
 	void SetRotation(float yaw_, float pitch_, float roll_ = 0.0f);
 	void SetRotation(glm::vec3 rotation_);
+	void SetZoomSpeed(float speed_);
+	void SetMouseSensitivity(float sensitivity_);
 
 	glm::mat4 GetView() const;
 	glm::mat4 GetPerspective() const;
 	glm::mat4 GetOrthographic() const;
 	glm::vec3 GetPosition() const;
 	glm::vec3 GetRotation() const;
+	float GetZoomSpeed();
+	float GetMouseSensitivity();
 
 	void AddLightSource(LightSource* light_);
 	const std::vector<LightSource*> GetLightSources() const;
+
+	void ProcessMouseMovement(glm::vec2 offset_);
+	void ProcessMouseZoom(int y_);
 
 private:
 	void UpdateCameraVectors();
@@ -34,6 +41,9 @@ private:
 	glm::vec3 forward, up, right, worldUp;
 
 	std::vector<LightSource*> lightSources;
+
+	float mouseSensitivity;
+	float zoomSpeed;
 
 };
 

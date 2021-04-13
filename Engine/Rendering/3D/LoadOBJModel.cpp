@@ -35,6 +35,11 @@ std::vector<SubMesh> LoadOBJModel::GetSubMeshes()
 	return subMeshes;
 }
 
+BoundingBox LoadOBJModel::GetBoundingBox() const
+{
+	return bb;
+}
+
 void LoadOBJModel::PostProcessing()
 {
 	for (unsigned int i = 0; i < indices.size(); i++)
@@ -80,6 +85,14 @@ void LoadOBJModel::LoadModel(const std::string& objFilePath_)
 			float x, y, z;
 			v >> x >> y >> z;
 			vertices.push_back(glm::vec3(x, y, z));
+
+			if (x > bb.maxVert.x) bb.maxVert.x = x;
+			if (y > bb.maxVert.y) bb.maxVert.y = y;
+			if (z > bb.maxVert.z) bb.maxVert.z = z;
+
+			if (x < bb.minVert.x) bb.minVert.x = x;
+			if (y < bb.minVert.y) bb.minVert.y = y;
+			if (z < bb.minVert.z) bb.minVert.z = z;
 		}
 
 		//NORMAL DATA

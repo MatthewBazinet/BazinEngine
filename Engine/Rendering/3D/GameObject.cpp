@@ -11,6 +11,10 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	if (model)
 	{
 		modelInstance = model->CreateInstance(position, angle, rotation, scale);
+		boundingBox = model->GetBoundingBox();
+		boundingBox.transform = model->GetTransform(modelInstance);
+
+		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
 }
 
@@ -56,12 +60,18 @@ std::string GameObject::GetTag() const
 	return tag;
 }
 
+BoundingBox GameObject::GetBoundingBox() const
+{
+	return boundingBox;
+}
+
 void GameObject::SetPosition(glm::vec3 position_)
 {
 	position = position_;
 	if (model)
 	{
 		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		boundingBox.transform = model->GetTransform(modelInstance);
 	}
 }
 
@@ -71,6 +81,7 @@ void GameObject::SetAngle(float angle_)
 	if (model)
 	{
 		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		boundingBox.transform = model->GetTransform(modelInstance);
 	}
 }
 
@@ -80,6 +91,7 @@ void GameObject::SetRotation(glm::vec3 rotation_)
 	if (model)
 	{
 		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		boundingBox.transform = model->GetTransform(modelInstance);
 	}
 }
 
@@ -89,6 +101,9 @@ void GameObject::SetScale(glm::vec3 scale_)
 	if (model)
 	{
 		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		boundingBox.transform = model->GetTransform(modelInstance);
+		boundingBox.minVert = scale.x > 1.0f ? scale : (scale / 2.0f);
+		boundingBox.maxVert = scale.x > 1.0f ? scale : (scale / 2.0f);
 	}
 }
 

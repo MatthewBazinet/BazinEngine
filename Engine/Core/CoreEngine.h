@@ -14,6 +14,7 @@
 #include "..//Graphics/TextureHandler.h"
 #include "..//Graphics/MaterialHandler.h"
 #include "..//Camera/Camera.h"
+#include "..//Events/EventListener.h"
 
 class CoreEngine
 {
@@ -44,12 +45,18 @@ public:
 	void SetCurrentScene(int sceneNum_);
 	void SetCamera(Camera* camera_);
 
+	void NotifyOfMousePressed(glm::ivec2 mouse_,  int buttonType_);
+	void NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_);
+	void NotifyOfMouseMove(glm::ivec2 mouse_);
+	void NotifyOfMouseScroll(int y_);
+	void NotifyOfKeyDown(SDL_Scancode key_);
+
 private:
 	CoreEngine();
 	~CoreEngine();
 	void Update(const float deltaTime_);
 	void Render();
-	void GetEvents();
+
 
 	void OnDestroy();
 
