@@ -1,4 +1,5 @@
 #include "Mesh.h"
+#include <iostream>
 
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0), modelLoc(0), viewLoc(0), projectionLoc(0), viewPosLoc(0), lightPosLoc(0), ambientLoc(0), diffuseLoc(0), specularLoc(0), colourLoc(0), diffuseMapMatLoc(0), shininessMatLoc(0), transparencyMatLoc(0), ambientMatLoc(0), diffuseMatLoc(0), specularMatLoc(0)
@@ -24,8 +25,9 @@ Mesh::~Mesh()
 	}
 }
 
-void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_)
+void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vector<bool>& instancesVisible_)
 {
+
 	glUniform1i(diffuseMapMatLoc, 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
@@ -66,8 +68,14 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_)
 
 	for (int i = 0; i < instances_.size(); i++)
 	{
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(instances_[i]));
-		glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
+		if (instancesVisible_[i]) {
+			//std::cout << "Rendered\n";
+			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(instances_[i]));
+			glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
+		}
+		else {
+			//std::cout << "Not Rendered\n";
+		}
 	}
 
 	glBindVertexArray(0);

@@ -77,6 +77,9 @@ void LoadOBJModel::LoadModel(const std::string& objFilePath_)
 	
 	std::string line;
 
+	bb.maxVert = glm::vec3(FLT_MIN);
+	bb.minVert = glm::vec3(FLT_MAX);
+
 	while (std::getline(in, line))
 	{
 		//VERTEX DATA

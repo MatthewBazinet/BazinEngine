@@ -6,6 +6,7 @@ Model::Model(const std::string& objPath_, const std::string& matPath_, GLuint sh
 	shaderProgram = shaderProgram_;
 	meshes.reserve(10);
 	modelInstances.reserve(5);
+	modelInstancesVisable.reserve(5);
 	obj = new LoadOBJModel();
 	obj->LoadModel(objPath_, matPath_);
 	LoadModel();
@@ -34,7 +35,7 @@ void Model::Render(Camera* camera_)
 	glUseProgram(shaderProgram);
 	for (auto m : meshes)
 	{
-		m->Render(camera_, modelInstances);
+		m->Render(camera_, modelInstances, modelInstancesVisable);
 	}
 }
 
@@ -46,12 +47,18 @@ void Model::AddMesh(Mesh* mesh_)
 unsigned int Model::CreateInstance(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_)
 {
 	modelInstances.push_back(CreateTransform(position_, angle_, rotation_, scale_));
+	modelInstancesVisable.push_back(false);
 	return modelInstances.size() - 1;
 }
 
 void Model::UpdateInstance(unsigned int index_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_)
 {
 	modelInstances[index_] = CreateTransform(position_, angle_, rotation_, scale_);
+}
+
+void Model::SetInstanceVisiblity(unsigned int index_, bool visible_)
+{
+	modelInstancesVisable[index_] = visible_;
 }
 
 glm::mat4 Model::GetTransform(unsigned int index_) const

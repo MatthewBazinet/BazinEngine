@@ -26,7 +26,7 @@ public:
 	Mesh(SubMesh& subMesh_, GLuint shaderProgram_);
 	~Mesh();
 
-	void Render(Camera* camera_, std::vector<glm::mat4>& instances_);
+	void Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vector<bool>& instancesVisible_);
 
 private:
 	void GenerateBuffers();

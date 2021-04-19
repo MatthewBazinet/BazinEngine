@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "../../Core/CoreEngine.h"
 
 GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_)
 {
@@ -7,6 +8,7 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	angle = angle_;
 	rotation = rotation_;
 	scale = scale_;
+	hit = false;
 
 	if (model)
 	{
@@ -26,6 +28,8 @@ GameObject::~GameObject()
 void GameObject::Update(const float deltaTime_)
 {
 	SetAngle(angle + 1.0f * deltaTime_);
+	CheckVisible();
+	
 }
 
 void GameObject::Render(Camera* camera_)
@@ -63,6 +67,11 @@ std::string GameObject::GetTag() const
 BoundingBox GameObject::GetBoundingBox() const
 {
 	return boundingBox;
+}
+
+bool GameObject::GetHit() const
+{
+	return hit;
 }
 
 void GameObject::SetPosition(glm::vec3 position_)
@@ -110,4 +119,40 @@ void GameObject::SetScale(glm::vec3 scale_)
 void GameObject::SetTag(std::string tag_)
 {
 	tag = tag_;
+}
+
+void GameObject::SetHit(bool hit_, int buttonType_)
+{
+	hit = hit_;
+	if (hit)
+	{
+		std::cout << tag << " was hit" << std::endl;
+	}
+}
+
+void GameObject::CheckVisible()
+{
+	if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(position, glm::mat4())) {
+		model->SetInstanceVisiblity(modelInstance, true);
+		return;
+	}
+	
+	glm::mat4 transform;
+	transform = glm::translate(transform, position);
+	transform = glm::rotate(transform, angle, rotation);
+
+	if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(boundingBox.minVert, transform)) {
+		model->SetInstanceVisiblity(modelInstance, true);
+		return;
+	}
+	
+	else if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(boundingBox.maxVert, transform)) {
+		model->SetInstanceVisiblity(modelInstance, true);
+		return;
+	}
+	
+	else {
+
+		model->SetInstanceVisiblity(modelInstance, false);
+	}
 }

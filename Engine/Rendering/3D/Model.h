@@ -16,6 +16,7 @@ public:
 
 	unsigned int CreateInstance(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
 	void UpdateInstance(unsigned int index_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
+	void SetInstanceVisiblity(unsigned int index_, bool visible_);
 
 	glm::mat4 GetTransform(unsigned int index_) const;
 	GLuint GetShaderProgram() const;
@@ -28,6 +29,7 @@ private:
 	std::vector<Mesh*> meshes;
 	GLuint shaderProgram;
 	std::vector<glm::mat4> modelInstances;
+	std::vector<bool> modelInstancesVisable;
 	BoundingBox boundingBox;
 	
 };

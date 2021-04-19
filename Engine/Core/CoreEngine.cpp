@@ -32,6 +32,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 
 	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
 
+	CollisionHandler::GetInstance()->OnCreate();
+
 	MouseEventListener::RegisterEngineObject(this);
 	KeyboardEventListener::RegisterEngineObject(this);
 
@@ -118,6 +120,7 @@ void CoreEngine::NotifyOfMousePressed(glm::ivec2 mouse_, int buttonType_)
 
 void CoreEngine::NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_)
 {
+	CollisionHandler::GetInstance()->MouseUpdate(mouse_, buttonType_);
 }
 
 void CoreEngine::NotifyOfMouseMove(glm::ivec2 mouse_)

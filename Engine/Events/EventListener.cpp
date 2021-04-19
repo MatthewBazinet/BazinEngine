@@ -24,6 +24,7 @@ void EventListener::Update()
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			KeyboardEventListener::Update(sdlEvent);
+			break;
 		default:
 			break;
 		}
