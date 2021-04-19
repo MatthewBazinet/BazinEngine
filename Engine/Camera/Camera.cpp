@@ -254,35 +254,35 @@ void Camera::UpdateCameraVectors()
 	view = glm::lookAt(position, position + forward, up);
 
 	glm::mat4 perspectiveView = perspective * view;
-	leftPlane = NormalizePlane(glm::vec4(perspectiveView[3][0] + perspectiveView[0][0],
-		perspectiveView[3][1] + perspectiveView[0][1],
-		perspectiveView[3][2] + perspectiveView[0][2],
-		perspectiveView[3][3] + perspectiveView[0][3]));
+	leftPlane = NormalizePlane(glm::vec4(perspectiveView[0][3] + perspectiveView[0][0],
+										 perspectiveView[1][3] + perspectiveView[1][0],
+										 perspectiveView[2][3] + perspectiveView[2][0],
+										 perspectiveView[3][3] + perspectiveView[3][0]));
 
-	rightPlane = NormalizePlane(glm::vec4(perspectiveView[3][0] - perspectiveView[0][0],
-		perspectiveView[3][1] - perspectiveView[0][1],
-		perspectiveView[3][2] - perspectiveView[0][2],
-		perspectiveView[3][3] - perspectiveView[0][3]));
+	rightPlane = NormalizePlane(glm::vec4(perspectiveView[0][3] - perspectiveView[0][0],
+										  perspectiveView[1][3] - perspectiveView[1][0],
+										  perspectiveView[2][3] - perspectiveView[2][0],
+										  perspectiveView[3][3] - perspectiveView[3][0]));
 
-	bottomPlane = NormalizePlane(glm::vec4(perspectiveView[3][0] + perspectiveView[1][0],
-		perspectiveView[3][1] + perspectiveView[1][1],
-		perspectiveView[3][2] + perspectiveView[1][2],
-		perspectiveView[3][3] + perspectiveView[1][3]));
+	bottomPlane = NormalizePlane(glm::vec4(perspectiveView[0][3] + perspectiveView[0][1],
+										   perspectiveView[1][3] + perspectiveView[1][1],
+										   perspectiveView[2][3] + perspectiveView[2][1],
+										   perspectiveView[3][3] + perspectiveView[3][1]));
 
-	upPlane = NormalizePlane(glm::vec4(perspectiveView[3][0] - perspectiveView[1][0],
-		perspectiveView[3][1] - perspectiveView[1][1],
-		perspectiveView[3][2] - perspectiveView[1][2],
-		perspectiveView[3][3] - perspectiveView[1][3]));
+	upPlane = NormalizePlane(glm::vec4(perspectiveView[0][3] - perspectiveView[0][1],
+									   perspectiveView[1][3] - perspectiveView[1][1],
+									   perspectiveView[2][3] - perspectiveView[2][1],
+									   perspectiveView[3][3] - perspectiveView[3][1]));
 
-	nearFRPlane = NormalizePlane(glm::vec4(perspectiveView[3][0] + perspectiveView[2][0],
-		perspectiveView[3][1] + perspectiveView[2][1],
-		perspectiveView[3][2] + perspectiveView[2][2],
-		perspectiveView[3][3] + perspectiveView[2][3]));
+	nearFRPlane = NormalizePlane(glm::vec4(perspectiveView[0][3] + perspectiveView[0][2],
+										   perspectiveView[1][3] + perspectiveView[1][2],
+										   perspectiveView[2][3] + perspectiveView[2][2],
+										   perspectiveView[3][3] + perspectiveView[3][2]));
 
-	farFRPlane = NormalizePlane(glm::vec4(perspectiveView[3][0] - perspectiveView[2][0],
-		perspectiveView[3][1] - perspectiveView[2][1],
-		perspectiveView[3][2] - perspectiveView[2][2],
-		perspectiveView[3][3] - perspectiveView[2][3]));
+	farFRPlane = NormalizePlane(glm::vec4(perspectiveView[0][3] - perspectiveView[0][2],
+										  perspectiveView[1][3] - perspectiveView[1][2],
+										  perspectiveView[2][3] - perspectiveView[2][2],
+										  perspectiveView[3][3] - perspectiveView[3][2]));
 }
 
 glm::vec4 Camera::NormalizePlane(glm::vec4 plane_)

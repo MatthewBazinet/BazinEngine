@@ -74,7 +74,7 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vect
 			glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
 		}
 		else {
-			//std::cout << "Not Rendered\n";
+			std::cout << "Not Rendered\n";
 		}
 	}
 
