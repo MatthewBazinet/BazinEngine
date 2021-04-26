@@ -32,8 +32,6 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 
 	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
 
-	CollisionHandler::GetInstance()->OnCreate();
-
 	MouseEventListener::RegisterEngineObject(this);
 	KeyboardEventListener::RegisterEngineObject(this);
 

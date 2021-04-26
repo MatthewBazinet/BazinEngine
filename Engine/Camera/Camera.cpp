@@ -102,6 +102,11 @@ float Camera::GetFarPlane() const
 	return farPlane;
 }
 
+glm::vec3 Camera::GetForward() const
+{
+	return forward;
+}
+
 float Camera::GetZoomSpeed()
 {
 	return zoomSpeed;
@@ -288,12 +293,12 @@ void Camera::UpdateCameraVectors()
 glm::vec4 Camera::NormalizePlane(glm::vec4 plane_)
 {
 	glm::vec4 Result = plane_;
-    /*
+    
 	float Distance = sqrtf(plane_.x * plane_.x + plane_.y * plane_.y + plane_.z * plane_.z);
 	Result.x = plane_.x / Distance;
 	Result.y = plane_.y / Distance;
 	Result.z = plane_.z / Distance;
 	Result.w = plane_.w / Distance;
-	*/
+	
 	return Result;
 }

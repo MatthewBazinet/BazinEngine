@@ -73,9 +73,9 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vect
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(instances_[i]));
 			glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
 		}
-		else {
-			std::cout << "Not Rendered\n";
-		}
+		//else {
+			//std::cout << "Not Rendered\n";
+		//}
 	}
 
 	glBindVertexArray(0);

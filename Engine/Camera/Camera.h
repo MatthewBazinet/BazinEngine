@@ -24,6 +24,7 @@ public:
 	glm::vec3 GetRotation() const;
 	float GetNearPlane() const;
 	float GetFarPlane() const;
+	glm::vec3 GetForward() const;
 
 	float GetZoomSpeed();
 	float GetMouseSensitivity();
