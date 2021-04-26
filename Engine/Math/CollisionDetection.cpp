@@ -158,3 +158,41 @@ bool CollisionDetection::RayObbIntersection(Ray* ray_, BoundingBox* box_)
 	ray_->intersectionDist = tMin;
 	return true;
 }
+
+bool CollisionDetection::RayAABBIntersection(Ray* ray_, BoundingBox* box_)
+{
+	float tMin = (box_->minVert.x - ray_->origin.x) / ray_->direction.x;
+	float tMax = (box_->maxVert.x - ray_->origin.x) / ray_->direction.x;
+
+	if (tMin > tMax) std::swap(tMin, tMax);
+
+	float tyMin = (box_->minVert.y - ray_->origin.y) / ray_->direction.y;
+	float tyMax = (box_->maxVert.y - ray_->origin.y) / ray_->direction.y;
+
+	if (tyMin > tyMax) std::swap(tyMin, tyMax);
+
+	if ((tMin > tyMax) || (tyMin > tMax))
+		return false;
+
+	if (tyMin > tMin)
+		tMin = tyMin;
+
+	if (tyMax < tMax)
+		tMax = tyMax;
+
+	float tzMin = (box_->minVert.z - ray_->origin.z) / ray_->direction.z;
+	float tzMax = (box_->maxVert.z - ray_->origin.z) / ray_->direction.z;
+
+	if (tzMin > tzMax) std::swap(tzMin, tzMax);
+
+	if ((tMin > tzMax) || (tzMin > tMax))
+		return false;
+
+	if (tzMin > tMin)
+		tMin = tzMin;
+
+	if (tzMax < tMax)
+		tMax = tzMax;
+
+	return true;
+}

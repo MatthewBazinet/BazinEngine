@@ -206,7 +206,7 @@ void OctSpacialPartition::PrepareCollisionQuery(OctNode* cell_, Ray ray_)
 {
 	if (cell_ != nullptr)
 	{
-		if (ray_.IsColliding(cell_->octBounds))
+		if (CollisionDetection::RayAABBIntersection(&ray_, cell_->octBounds))
 		{
 			if (cell_->IsLeaf())
 			{
