@@ -83,8 +83,8 @@ bool CollisionDetection::RayObbIntersection(Ray* ray_, BoundingBox* box_)
 	dotDir = glm::dot(rayDirection, yAxis);
 	if (fabs(dotDir) > 0.001f)
 	{
-		float t1 = (dotDelta + boxMin.x) / dotDir;
-		float t2 = (dotDelta + boxMax.x) / dotDir;
+		float t1 = (dotDelta + boxMin.y) / dotDir;
+		float t2 = (dotDelta + boxMax.y) / dotDir;
 
 		if (t1 > t2)
 		{
@@ -121,8 +121,8 @@ bool CollisionDetection::RayObbIntersection(Ray* ray_, BoundingBox* box_)
 	dotDir = glm::dot(rayDirection, zAxis);
 	if (fabs(dotDir) > 0.001f)
 	{
-		float t1 = (dotDelta + boxMin.x) / dotDir;
-		float t2 = (dotDelta + boxMax.x) / dotDir;
+		float t1 = (dotDelta + boxMin.z) / dotDir;
+		float t2 = (dotDelta + boxMax.z) / dotDir;
 
 		if (t1 > t2)
 		{
