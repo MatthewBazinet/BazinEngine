@@ -118,30 +118,27 @@ void LoadOBJModel::LoadModel(const std::string& objFilePath_)
 		//FACE DATA
 		else if (line.substr(0, 2) == "f ")
 		{
-			std::string vert;
-			std::string num;
-			unsigned int v, vn, vt;
-			int count = 0;
-			std::stringstream f(line.substr(2));
-			while (std::getline(f, vert, ' ')) {
-				std::stringstream f2(vert);
-				while(std::getline(f2, num, '/')){
-					std::stringstream f3(num);
-					if (count % 3 == 0) {
-						f3 >> v;
-						indices.push_back(v - 1);
-					}
-					else if (count % 3 == 1) {
-						f3 >> vt;
-						textureIndices.push_back(vt - 1);
-					}
-					else {
-						f3 >> vn;
-						normalIndices.push_back(vn - 1);
-					}
-					count++;
-				}
-			}
+			std::stringstream vn(line.substr(2));
+			char dummy;
+			unsigned int a, b, c, aT, bT, cT, aN, bN, cN;
+			vn >> a >> dummy >> aT >> dummy >> aN >> b >> dummy >> bT >> dummy >> bN
+				>> c >> dummy >> cT >> dummy >> cN;
+
+			a--; b--; c--;
+			aT--; bT--; cT--;
+			aN--; bN--; cN--;
+
+			indices.push_back(a);
+			indices.push_back(b);
+			indices.push_back(c);
+
+			normalIndices.push_back(aN);
+			normalIndices.push_back(bN);
+			normalIndices.push_back(cN);
+
+			textureIndices.push_back(aT);
+			textureIndices.push_back(bT);
+			textureIndices.push_back(cT);
 		}
 
 		//NEW MESH

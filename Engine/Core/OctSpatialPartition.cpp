@@ -162,7 +162,8 @@ GameObject* OctSpacialPartition::GetCollision(Ray ray_)
 	{
 		for (auto obj : cell->objectList)
 		{
-			if (ray_.IsColliding(&obj->GetBoundingBox())) 
+			BoundingBox temp = obj->GetBoundingBox();
+			if (ray_.IsColliding(&temp))
 			{
 				if (ray_.intersectionDist < shortestDistance)
 				{
