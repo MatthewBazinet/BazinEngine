@@ -1,15 +1,16 @@
 #include "GameObject.h"
 #include "../../Core/CoreEngine.h"
 
-GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_)
+GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_)
 {
 	model = model_;
 	position = position_;
 	angle = angle_;
 	rotation = rotation_;
 	scale = scale_;
+	vel = vel_;
 	hit = false;
-
+	mass = 10.0f;
 	if (model)
 	{
 		modelInstance = model->CreateInstance(position, angle, rotation, scale);
@@ -27,11 +28,17 @@ GameObject::~GameObject()
 
 void GameObject::Update(const float deltaTime_)
 {
+	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
+	vel = vel + accel * deltaTime_;
+	ApplyForce(glm::vec3(0.0f, 0.0f, 0.0f));
+	SetPosition(position);
 	SetAngle(angle + 1.0f * deltaTime_);
 	CheckVisible();
-	
 }
-
+void GameObject::ApplyForce(glm::vec3 force_)
+{
+	accel = force_ / mass;
+}
 void GameObject::Render(Camera* camera_)
 {
 	if (model) {
@@ -73,6 +80,8 @@ bool GameObject::GetHit() const
 {
 	return hit;
 }
+
+
 
 void GameObject::SetPosition(glm::vec3 position_)
 {
