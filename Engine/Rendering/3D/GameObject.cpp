@@ -9,7 +9,8 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	rotation = rotation_;
 	scale = scale_;
 	hit = false;
-
+	intersects = false;
+	mass = 10.0f;
 	if (model)
 	{
 		modelInstance = model->CreateInstance(position, angle, rotation, scale);
@@ -27,9 +28,30 @@ GameObject::~GameObject()
 
 void GameObject::Update(const float deltaTime_)
 {
+	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
+	vel = vel + accel * deltaTime_;
+
+	BoundingBox temp1 = SceneGraph::GetInstance()->GetGameObject("apple")->GetBoundingBox();
+	BoundingBox temp2 = SceneGraph::GetInstance()->GetGameObject("dice")->GetBoundingBox();
+	intersects = temp2.Intersects(&temp1);
+	if (intersects) {
+		SceneGraph::GetInstance()->GetGameObject("apple")->ApplyVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
+	}
+	else {
+		SceneGraph::GetInstance()->GetGameObject("apple")->ApplyVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
+	}
 	SetAngle(angle + 1.0f * deltaTime_);
 	CheckVisible();
 	
+}
+
+void GameObject::ApplyVelocity(glm::vec3 vel_)
+{
+	vel = vel_;
+}
+void GameObject::ApplyForce(glm::vec3 force_)
+{
+	accel = force_ / mass;
 }
 
 void GameObject::Render(Camera* camera_)

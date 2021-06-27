@@ -18,6 +18,8 @@ public:
 	BoundingBox GetBoundingBox() const;
 	bool GetHit() const;
 
+	void ApplyVelocity(glm::vec3 vel_);
+	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
 	void SetAngle(float angle_);
 	void SetRotation(glm::vec3 rotation_);
@@ -28,7 +30,10 @@ public:
 private:
 	Model* model;
 	unsigned int modelInstance;
-
+	glm::vec3 vel;
+	glm::vec3 accel;
+	glm::vec3 force;
+	float mass;
 	glm::vec3 position;
 	float angle;
 	glm::vec3 rotation;
@@ -38,6 +43,7 @@ private:
 	BoundingBox boundingBox;
 
 	bool hit;
+	bool intersects;
 
 	void CheckVisible();
 };
