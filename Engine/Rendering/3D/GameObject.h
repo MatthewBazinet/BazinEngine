@@ -18,12 +18,10 @@ public:
 	BoundingBox GetBoundingBox() const;
 	bool GetHit() const;
 
-<<<<<<< HEAD
-	void ApplyVelocity(glm::vec3 vel_);
-=======
->>>>>>> 2397a4628003dbfd82d9db0c412fc00c58c4f436
+
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
+	void SetVelocity(glm::vec3 vel_);
 	void SetAngle(float angle_);
 	void SetRotation(glm::vec3 rotation_);
 	void SetScale(glm::vec3 scale_);
@@ -33,10 +31,7 @@ public:
 private:
 	Model* model;
 	unsigned int modelInstance;
-	glm::vec3 vel;
-	glm::vec3 accel;
-	glm::vec3 force;
-	float mass;
+
 	glm::vec3 position;
 	glm::vec3 vel;
 	glm::vec3 accel;
