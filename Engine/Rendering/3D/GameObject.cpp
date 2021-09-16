@@ -1,15 +1,19 @@
 #include "GameObject.h"
 #include "../../Core/CoreEngine.h"
 
-GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_)
+GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_)
 {
 	model = model_;
 	position = position_;
 	angle = angle_;
 	rotation = rotation_;
 	scale = scale_;
+	vel = vel_;
 	hit = false;
+<<<<<<< HEAD
 	intersects = false;
+=======
+>>>>>>> 2397a4628003dbfd82d9db0c412fc00c58c4f436
 	mass = 10.0f;
 	if (model)
 	{
@@ -30,6 +34,7 @@ void GameObject::Update(const float deltaTime_)
 {
 	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
 	vel = vel + accel * deltaTime_;
+<<<<<<< HEAD
 
 	BoundingBox temp1 = SceneGraph::GetInstance()->GetGameObject("apple")->GetBoundingBox();
 	BoundingBox temp2 = SceneGraph::GetInstance()->GetGameObject("dice")->GetBoundingBox();
@@ -40,20 +45,29 @@ void GameObject::Update(const float deltaTime_)
 	else {
 		SceneGraph::GetInstance()->GetGameObject("apple")->ApplyVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
 	}
+=======
+	ApplyForce(glm::vec3(0.0f, 0.0f, 0.0f));
+	SetPosition(position);
+>>>>>>> 2397a4628003dbfd82d9db0c412fc00c58c4f436
 	SetAngle(angle + 1.0f * deltaTime_);
 	CheckVisible();
-	
 }
+<<<<<<< HEAD
 
 void GameObject::ApplyVelocity(glm::vec3 vel_)
 {
 	vel = vel_;
 }
+=======
+>>>>>>> 2397a4628003dbfd82d9db0c412fc00c58c4f436
 void GameObject::ApplyForce(glm::vec3 force_)
 {
 	accel = force_ / mass;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2397a4628003dbfd82d9db0c412fc00c58c4f436
 void GameObject::Render(Camera* camera_)
 {
 	if (model) {
@@ -95,6 +109,8 @@ bool GameObject::GetHit() const
 {
 	return hit;
 }
+
+
 
 void GameObject::SetPosition(glm::vec3 position_)
 {
