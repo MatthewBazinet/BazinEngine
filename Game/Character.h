@@ -1,17 +1,10 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 3ad7d5ecbea8ba3bbda71d840ebb5785ac9e210f
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
 #include "../Engine/Rendering/3D/GameObject.h"
-<<<<<<< HEAD
 
-=======
-enum class 
->>>>>>> 3ad7d5ecbea8ba3bbda71d840ebb5785ac9e210f
-class Character : GameObject
+	class Character : GameObject
 {
 public:
 	void QCF(int strength, bool simpleInput);
@@ -20,13 +13,10 @@ public:
 	void Light();
 	void Medium();
 	void Heavy();
-	void Run(bool isBegin);
+	void Run(bool isRunning);
 
-<<<<<<< HEAD
 	void Move(glm::vec2 input);
-=======
-	void Move(glm:vec2 input);
->>>>>>> 3ad7d5ecbea8ba3bbda71d840ebb5785ac9e210f
+
 
 private:
 	void AirQCF(int strength, bool simpleInput);
@@ -36,10 +26,11 @@ private:
 	void AirMedium();
 	void AirHeavy();
 
-
-
 	float health;
 	float meter;
+	
+	bool isRunning;
+	bool isAirborne;
 };
 
 #endif
