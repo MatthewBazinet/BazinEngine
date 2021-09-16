@@ -3,8 +3,8 @@
 #define CHARACTER_H
 
 #include "../Engine/Rendering/3D/GameObject.h"
-enum class 
-class Character : GameObject
+
+	class Character : GameObject
 {
 public:
 	void QCF(int strength, bool simpleInput);
@@ -13,9 +13,10 @@ public:
 	void Light();
 	void Medium();
 	void Heavy();
-	void Run(bool isBegin);
+	void Run(bool isRunning);
 
-	void Move(glm:vec2 input);
+	void Move(glm::vec2 input);
+
 
 private:
 	void AirQCF(int strength, bool simpleInput);
@@ -25,10 +26,11 @@ private:
 	void AirMedium();
 	void AirHeavy();
 
-
-
 	float health;
 	float meter;
+	
+	bool isRunning;
+	bool isAirborne;
 };
 
 #endif
