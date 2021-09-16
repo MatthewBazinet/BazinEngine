@@ -176,6 +176,9 @@
     <ClInclude Include="Engine\Core\OctSpatialPartition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />
