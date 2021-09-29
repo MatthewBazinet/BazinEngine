@@ -4,13 +4,14 @@
 #include "Model.h"
 class GameObject {
 public:
-	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0.0f, 0.0f, 0.0f), float angle_ = 0, glm::vec3 rotation_ = glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3 scale_ = glm::vec3(1.0f,1.0f,1.0f), glm::vec3 vel_ = glm::vec3(0.0f,0.0f,0.0f));
+	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0.0f, 0.0f, 0.0f), float angle_ = 0, glm::vec3 rotation_ = glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3 scale_ = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 vel_ = glm::vec3(0.0f, 0.0f, 0.0f));
 	~GameObject();
 
 	void Update(const float deltaTime_);
 	void Render(Camera* camera_);
 
 	glm::vec3 GetPosition() const;
+	glm::vec3 GetAccel() const;
 	float GetAngle() const;
 	glm::vec3 GetRotation() const;
 	glm::vec3 GetScale() const;
@@ -22,6 +23,7 @@ public:
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
 	void SetVelocity(glm::vec3 vel_);
+	void SetAccel(glm::vec3 accel_);
 	void SetAngle(float angle_);
 	void SetRotation(glm::vec3 rotation_);
 	void SetScale(glm::vec3 scale_);

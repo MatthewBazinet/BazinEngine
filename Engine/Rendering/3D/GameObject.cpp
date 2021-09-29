@@ -44,7 +44,7 @@ void GameObject::Update(const float deltaTime_)
 		SceneGraph::GetInstance()->GetGameObject("apple")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
 	}
 
-	ApplyForce(glm::vec3(0.0f, 0.0f, 0.0f));
+	//ApplyForce(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetPosition(position);
 
 	SetAngle(angle + 1.0f * deltaTime_);
@@ -67,6 +67,11 @@ void GameObject::Render(Camera* camera_)
 glm::vec3 GameObject::GetPosition() const
 {
 	return position;
+}
+
+glm::vec3 GameObject::GetAccel() const
+{
+	return accel;
 }
 
 float GameObject::GetAngle() const
@@ -99,8 +104,6 @@ bool GameObject::GetHit() const
 	return hit;
 }
 
-
-
 void GameObject::SetPosition(glm::vec3 position_)
 {
 	position = position_;
@@ -116,6 +119,10 @@ void GameObject::SetVelocity(glm::vec3 vel_)
 	vel = vel_;
 }
 
+void GameObject::SetAccel(glm::vec3 accel_)
+{
+	accel = accel_;
+}
 
 void GameObject::SetAngle(float angle_)
 {
@@ -169,7 +176,7 @@ void GameObject::CheckVisible()
 		model->SetInstanceVisiblity(modelInstance, true);
 		return;
 	}
-	
+
 	glm::mat4 transform;
 	transform = glm::translate(transform, position);
 	transform = glm::rotate(transform, angle, rotation);
@@ -178,12 +185,12 @@ void GameObject::CheckVisible()
 		model->SetInstanceVisiblity(modelInstance, true);
 		return;
 	}
-	
+
 	else if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(boundingBox.maxVert, transform)) {
 		model->SetInstanceVisiblity(modelInstance, true);
 		return;
 	}
-	
+
 	else {
 
 		model->SetInstanceVisiblity(modelInstance, false);
