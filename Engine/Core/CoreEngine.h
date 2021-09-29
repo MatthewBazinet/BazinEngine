@@ -50,6 +50,7 @@ public:
 	void NotifyOfMouseMove(glm::ivec2 mouse_);
 	void NotifyOfMouseScroll(int y_);
 	void NotifyOfKeyDown(SDL_Scancode key_);
+	void NotifyOfKeyRelease(SDL_Scancode key_);
 
 private:
 	CoreEngine();

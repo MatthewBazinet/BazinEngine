@@ -37,6 +37,6 @@ void KeyboardEventListener::NotifyOfKeyPressed(SDL_Scancode key)
 
 void KeyboardEventListener::NotifyOfKeyReleased(SDL_Scancode key)
 {
-
+	engineInstance->NotifyOfKeyRelease(key);
 }
 

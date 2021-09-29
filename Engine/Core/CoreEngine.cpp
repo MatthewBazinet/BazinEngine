@@ -63,7 +63,7 @@ void CoreEngine::Run()
 	}
 	//if (!isRunning)
 	//{
-		OnDestroy();
+	OnDestroy();
 	//}
 }
 
@@ -152,7 +152,8 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
 		break;
 	case SDL_SCANCODE_D:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, 0.0f, 0.0f));
 		break;
 	case SDL_SCANCODE_SPACE:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));
@@ -183,9 +184,57 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	}
 }
 
+void CoreEngine::NotifyOfKeyRelease(SDL_Scancode key_)
+{
+	switch (key_)
+	{
+		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
+	case SDL_SCANCODE_W:
+
+		break;
+	case SDL_SCANCODE_A:
+
+		break;
+	case SDL_SCANCODE_S:
+
+		break;
+	case SDL_SCANCODE_D:
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, 0.0f, 0.0f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
+		std::cout << SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().x << std::endl;
+		break;
+	case SDL_SCANCODE_SPACE:
+
+		break;
+	case SDL_SCANCODE_LCTRL:
+
+		break;
+	case SDL_SCANCODE_Q:
+
+		break;
+	case SDL_SCANCODE_E:
+
+		break;
+	case SDL_SCANCODE_RIGHT:
+
+		break;
+	case SDL_SCANCODE_LEFT:
+
+		break;
+	case SDL_SCANCODE_UP:
+
+		break;
+	case SDL_SCANCODE_DOWN:
+
+		break;
+	default:
+		break;
+	}
+}
+
 void CoreEngine::Update(const float deltaTime_)
 {
-	if(gameInterface)
+	if (gameInterface)
 	{
 		gameInterface->Update(deltaTime_);
 		//std::cout << deltaTime_ << std::endl;
