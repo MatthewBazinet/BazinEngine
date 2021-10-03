@@ -1,10 +1,12 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 #include "Model.h"
 class GameObject {
 public:
-	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0.0f, 0.0f, 0.0f), float angle_ = 0, glm::vec3 rotation_ = glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3 scale_ = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 vel_ = glm::vec3(0.0f, 0.0f, 0.0f));
+	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0.0f, 0.0f, 0.0f), float angle_ = 0, glm::vec3 rotation_ = glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3 scale_ = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 vel_ = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat orientation_ = glm::quat(0.0f,5.0f,5.0f,5.0f), glm::quat angularVelocity_ = glm::quat());
 	~GameObject();
 
 	void Update(const float deltaTime_);
@@ -26,6 +28,8 @@ public:
 	void SetAccel(glm::vec3 accel_);
 	void SetAngle(float angle_);
 	void SetRotation(glm::vec3 rotation_);
+	void SetOrientation(glm::quat orientation_);
+	void SetAngularVelocity(glm::quat angularVelocity_);
 	void SetScale(glm::vec3 scale_);
 	void SetTag(std::string tag_);
 	void SetHit(bool hit_, int buttonType_);
@@ -40,6 +44,8 @@ private:
 	float mass;
 	float angle;
 	glm::vec3 rotation;
+	glm::quat orientation;
+	glm::quat angularVelocity;
 	glm::vec3 scale;
 	std::string tag;
 

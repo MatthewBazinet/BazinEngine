@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "../../Core/CoreEngine.h"
 
-GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_)
+GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_)
 {
 	model = model_;
 	position = position_;
@@ -9,6 +9,8 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	rotation = rotation_;
 	scale = scale_;
 	vel = vel_;
+	orientation = orientation_;
+	angularVelocity = angularVelocity_;
 	hit = false;
 
 	intersects = false;
@@ -34,7 +36,7 @@ void GameObject::Update(const float deltaTime_)
 	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
 	vel = vel + accel * deltaTime_;
 
-	BoundingBox temp1 = SceneGraph::GetInstance()->GetGameObject("apple")->GetBoundingBox();
+	/*BoundingBox temp1 = SceneGraph::GetInstance()->GetGameObject("apple")->GetBoundingBox();
 	BoundingBox temp2 = SceneGraph::GetInstance()->GetGameObject("dice")->GetBoundingBox();
 	intersects = temp2.Intersects(&temp1);
 	if (intersects) {
@@ -42,12 +44,20 @@ void GameObject::Update(const float deltaTime_)
 	}
 	else {
 		SceneGraph::GetInstance()->GetGameObject("apple")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
-	}
-
+	}*/
+	
 	//ApplyForce(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetPosition(position);
-
-	SetAngle(angle + 1.0f * deltaTime_);
+	if (orientation == glm::quat(0.0f, 5.0f, 5.0f, 5.0f))
+	{
+		//SetAngle(angle + 1.0f * deltaTime_);
+	}
+	else
+	{
+		orientation += orientation * angularVelocity * (deltaTime_ / 2);
+		model->UpdateInstance(modelInstance, position, orientation, scale);
+		boundingBox.transform = model->GetTransform(modelInstance);
+	}
 	CheckVisible();
 }
 
@@ -109,7 +119,15 @@ void GameObject::SetPosition(glm::vec3 position_)
 	position = position_;
 	if (model)
 	{
-		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		if (orientation == glm::quat(0.0f, 5.0f, 5.0f, 5.0f))
+		{
+			model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		}
+		else
+		{
+			model->UpdateInstance(modelInstance, position, orientation, scale);
+
+		}
 		boundingBox.transform = model->GetTransform(modelInstance);
 	}
 }
@@ -144,12 +162,35 @@ void GameObject::SetRotation(glm::vec3 rotation_)
 	}
 }
 
+void GameObject::SetOrientation(glm::quat orientation_)
+{
+	orientation = orientation_;
+	if (model)
+	{
+		model->UpdateInstance(modelInstance, position, orientation, scale);
+		boundingBox.transform = model->GetTransform(modelInstance);
+	}
+}
+
+void GameObject::SetAngularVelocity(glm::quat angularVelocity_)
+{
+	angularVelocity = angularVelocity_;
+}
+
 void GameObject::SetScale(glm::vec3 scale_)
 {
 	scale = scale_;
 	if (model)
 	{
-		model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		if (orientation == glm::quat(0.0f, 5.0f, 5.0f, 5.0f)) 
+		{
+			model->UpdateInstance(modelInstance, position, angle, rotation, scale);
+		}
+		else 
+		{
+			model->UpdateInstance(modelInstance, position, orientation, scale);
+
+		}
 		boundingBox.transform = model->GetTransform(modelInstance);
 		boundingBox.minVert = scale.x > 1.0f ? scale : (scale / 2.0f);
 		boundingBox.maxVert = scale.x > 1.0f ? scale : (scale / 2.0f);
@@ -179,7 +220,15 @@ void GameObject::CheckVisible()
 
 	glm::mat4 transform;
 	transform = glm::translate(transform, position);
-	transform = glm::rotate(transform, angle, rotation);
+	if (orientation == glm::quat(0.0f, 5.0f, 5.0f, 5.0f))
+	{
+
+		transform = glm::rotate(transform, angle, rotation);
+	}
+	else
+	{
+		transform = glm::rotate(transform, orientation.w, glm::vec3(orientation.x, orientation.y, orientation.z));
+	}
 
 	if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(boundingBox.minVert, transform)) {
 		model->SetInstanceVisiblity(modelInstance, true);

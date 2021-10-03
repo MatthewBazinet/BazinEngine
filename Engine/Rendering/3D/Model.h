@@ -3,6 +3,7 @@
 
 #include "Mesh.h"
 #include<glm/gtc/matrix_transform.hpp>
+
 #include <string>
 #include "LoadOBJModel.h"
 
@@ -16,6 +17,7 @@ public:
 
 	unsigned int CreateInstance(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
 	void UpdateInstance(unsigned int index_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
+	void UpdateInstance(unsigned int index_, glm::vec3 position_, glm::quat orientation_, glm::vec3 scale_);
 	void SetInstanceVisiblity(unsigned int index_, bool visible_);
 
 	glm::mat4 GetTransform(unsigned int index_) const;
@@ -23,6 +25,7 @@ public:
 	BoundingBox GetBoundingBox() const;
 private:
 	glm::mat4 CreateTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const;
+	glm::mat4 CreateTransform(glm::vec3 position_, glm::quat orientation_, glm::vec3 scale_) const;
 	void LoadModel();
 
 	LoadOBJModel* obj;

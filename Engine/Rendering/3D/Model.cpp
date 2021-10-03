@@ -1,5 +1,7 @@
 #include "Model.h"
 
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 Model::Model(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_) : meshes(std::vector<Mesh*>()), shaderProgram(0), modelInstances(std::vector<glm::mat4>()), obj(nullptr)
 {
@@ -56,6 +58,11 @@ void Model::UpdateInstance(unsigned int index_, glm::vec3 position_, float angle
 	modelInstances[index_] = CreateTransform(position_, angle_, rotation_, scale_);
 }
 
+void Model::UpdateInstance(unsigned int index_, glm::vec3 position_, glm::quat orientation_, glm::vec3 scale_)
+{
+	modelInstances[index_] = CreateTransform(position_, orientation_, scale_);
+}
+
 void Model::SetInstanceVisiblity(unsigned int index_, bool visible_)
 {
 	modelInstancesVisable[index_] = visible_;
@@ -79,9 +86,22 @@ BoundingBox Model::GetBoundingBox() const
 glm::mat4 Model::CreateTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const
 {
 	glm::mat4 model;
+	model = glm::scale(model, scale_);
 	model = glm::translate(model, position_);
 	model = glm::rotate(model, angle_, rotation_);
-	model = glm::scale(model, scale_);
+
+
+	return model;
+}
+
+glm::mat4 Model::CreateTransform(glm::vec3 position_, glm::quat orientation_, glm::vec3 scale_) const
+{
+	orientation_ = glm::normalize(orientation_);
+	glm::mat4 model;
+	glm::mat4 translate = glm::translate(model, position_);
+	glm::mat4 rotate = glm::toMat4(orientation_);
+	glm::mat4 scale = glm::scale(model, scale_);
+	model = translate * rotate * scale;
 	return model;
 }
 
