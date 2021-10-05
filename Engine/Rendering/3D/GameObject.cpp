@@ -46,7 +46,6 @@ void GameObject::Update(const float deltaTime_)
 		SceneGraph::GetInstance()->GetGameObject("apple")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
 	}*/
 	
-	//ApplyForce(glm::vec3(0.0f, 0.0f, 0.0f));
 	SetPosition(position);
 	if (orientation == glm::quat(0.0f, 5.0f, 5.0f, 5.0f))
 	{
@@ -60,7 +59,6 @@ void GameObject::Update(const float deltaTime_)
 	}
 	CheckVisible();
 }
-
 
 void GameObject::ApplyForce(glm::vec3 force_)
 {
@@ -77,6 +75,11 @@ void GameObject::Render(Camera* camera_)
 glm::vec3 GameObject::GetPosition() const
 {
 	return position;
+}
+
+glm::vec3 GameObject::GetVelocity() const
+{
+	return vel;
 }
 
 glm::vec3 GameObject::GetAccel() const
@@ -112,6 +115,11 @@ BoundingBox GameObject::GetBoundingBox() const
 bool GameObject::GetHit() const
 {
 	return hit;
+}
+
+float GameObject::GetMass() const
+{
+	return mass;
 }
 
 void GameObject::SetPosition(glm::vec3 position_)
@@ -209,6 +217,11 @@ void GameObject::SetHit(bool hit_, int buttonType_)
 	{
 		std::cout << tag << " was hit" << std::endl;
 	}
+}
+
+void GameObject::SetMass(float mass_)
+{
+	mass = mass_;
 }
 
 void GameObject::CheckVisible()

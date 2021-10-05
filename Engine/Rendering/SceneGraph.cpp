@@ -91,6 +91,7 @@ void SceneGraph::Update(const float deltaTime)
 	for (auto go : sceneGameObjects)
 	{
 		go.second->Update(deltaTime);
+		go.second->ApplyForce(glm::vec3(go.second->GetAccel().x, -1.0f * go.second->GetMass(), go.second->GetAccel().z));
 	}
 }
 

@@ -143,17 +143,19 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
 	case SDL_SCANCODE_W:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, 50.0f, 0.0f));
 		break;
 	case SDL_SCANCODE_A:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(-5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
 		break;
 	case SDL_SCANCODE_S:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
 		break;
 	case SDL_SCANCODE_D:
 		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, 0.0f, 0.0f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
 		break;
 	case SDL_SCANCODE_SPACE:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));
@@ -190,18 +192,18 @@ void CoreEngine::NotifyOfKeyRelease(SDL_Scancode key_)
 	{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
 	case SDL_SCANCODE_W:
-
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().x, 0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().z));
 		break;
 	case SDL_SCANCODE_A:
-
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetVelocity(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
 		break;
 	case SDL_SCANCODE_S:
 
 		break;
 	case SDL_SCANCODE_D:
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, 0.0f, 0.0f));
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
-		std::cout << SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().x << std::endl;
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
+		SceneGraph::GetInstance()->GetGameObject("dice")->SetVelocity(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
 		break;
 	case SDL_SCANCODE_SPACE:
 
@@ -237,7 +239,6 @@ void CoreEngine::Update(const float deltaTime_)
 	if (gameInterface)
 	{
 		gameInterface->Update(deltaTime_);
-		//std::cout << deltaTime_ << std::endl;
 	}
 
 }
