@@ -42,6 +42,16 @@ void Game1::HandleEvents(const SDL_Event& sdlEvent)
 	currentScene->HandleEvents(sdlEvent);
 }
 
+void Game1::NotifyOfKeyDown(const SDL_Scancode key_)
+{
+	currentScene->NotifyOfKeyDown(key_);
+}
+
+void Game1::NotifyOfKeyUp(const SDL_Scancode key_)
+{
+	currentScene->NotifyOfKeyUp(key_);
+}
+
 void Game1::BuildScene()
 {
 	delete currentScene;
