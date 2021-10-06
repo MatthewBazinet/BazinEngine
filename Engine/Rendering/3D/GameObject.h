@@ -14,13 +14,19 @@ public:
 
 	glm::vec3 GetPosition() const;
 	glm::vec3 GetAccel() const;
+	glm::vec3 GetVelocity() const;
 	float GetAngle() const;
 	glm::vec3 GetRotation() const;
 	glm::vec3 GetScale() const;
 	std::string GetTag() const;
 	BoundingBox GetBoundingBox() const;
 	bool GetHit() const;
+<<<<<<< HEAD
 	float GetMaxSpeed()const;
+=======
+	float GetMass() const;
+
+>>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
@@ -33,7 +39,11 @@ public:
 	void SetScale(glm::vec3 scale_);
 	void SetTag(std::string tag_);
 	void SetHit(bool hit_, int buttonType_);
+<<<<<<< HEAD
 	void SetMaxSpeed(float maxSpeed_);
+=======
+	void SetMass(float mass_);
+>>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
 
 private:
 	Model* model;

@@ -2,6 +2,7 @@
 #define GAMESCENE_H
 
 #include "../../Engine/Core/CoreEngine.h"
+#include "../Character.h"
 
 class GameScene : public Scene
 {
@@ -13,7 +14,7 @@ public:
 	void Render() override;
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 private:
-
+	Character* char1;
 };
 
 #endif // !GAMESCENE_H
