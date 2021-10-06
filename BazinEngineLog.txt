@@ -5,3 +5,4 @@
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 48
 [INFO]: Game Scene initiated in: GameScene.cpp on line: 15
 [ERROR]: Cannot open OBJ file: Resources/Models/tetrahedron.obj in: LoadOBJModel.cpp on line: 73
+[ERROR]: Trying to add a GameObject with a tag apple that already exists in: SceneGraph.cpp on line: 72

@@ -26,3 +26,11 @@ void StartScene::Render()
 void StartScene::HandleEvents(const SDL_Event& sdlEvent)
 {
 }
+
+void StartScene::NotifyOfKeyDown(const SDL_Scancode key_)
+{
+}
+
+void StartScene::NotifyOfKeyUp(const SDL_Scancode key_)
+{
+}

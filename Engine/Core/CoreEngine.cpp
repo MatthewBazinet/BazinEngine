@@ -142,26 +142,8 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	switch (key_)
 	{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
-	case SDL_SCANCODE_W:
-		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, 50.0f, 0.0f));
-		break;
-	case SDL_SCANCODE_A:
-		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
 
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(-5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
-
-		break;
-	case SDL_SCANCODE_S:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
-		break;
-	case SDL_SCANCODE_D:
-		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
-
-		//SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, 0.0f, 0.0f));
-
-		//SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
-		break;
+/*
 	case SDL_SCANCODE_SPACE:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));
 		break;
@@ -186,7 +168,9 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	case SDL_SCANCODE_DOWN:
 		GetCamera()->SetRotation(GetCamera()->GetRotation() - glm::vec3(0.0f, 0.1f, 0.0f));
 		break;
+		*/
 	default:
+		gameInterface->NotifyOfKeyDown(key_);
 		break;
 	}
 }
@@ -196,45 +180,9 @@ void CoreEngine::NotifyOfKeyRelease(SDL_Scancode key_)
 	switch (key_)
 	{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
-	case SDL_SCANCODE_W:
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().x, 0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().z));
-		break;
-	case SDL_SCANCODE_A:
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetVelocity(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
-		break;
-	case SDL_SCANCODE_S:
-
-		break;
-	case SDL_SCANCODE_D:
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetVelocity(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
-		break;
-	case SDL_SCANCODE_SPACE:
-
-		break;
-	case SDL_SCANCODE_LCTRL:
-
-		break;
-	case SDL_SCANCODE_Q:
-
-		break;
-	case SDL_SCANCODE_E:
-
-		break;
-	case SDL_SCANCODE_RIGHT:
-
-		break;
-	case SDL_SCANCODE_LEFT:
-
-		break;
-	case SDL_SCANCODE_UP:
-
-		break;
-	case SDL_SCANCODE_DOWN:
-
-		break;
+		
 	default:
+		gameInterface->NotifyOfKeyUp(key_);
 		break;
 	}
 }
