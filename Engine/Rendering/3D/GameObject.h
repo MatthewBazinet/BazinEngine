@@ -20,7 +20,7 @@ public:
 	std::string GetTag() const;
 	BoundingBox GetBoundingBox() const;
 	bool GetHit() const;
-
+	float GetMaxSpeed()const;
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
@@ -33,6 +33,7 @@ public:
 	void SetScale(glm::vec3 scale_);
 	void SetTag(std::string tag_);
 	void SetHit(bool hit_, int buttonType_);
+	void SetMaxSpeed(float maxSpeed_);
 
 private:
 	Model* model;
@@ -41,6 +42,7 @@ private:
 	glm::vec3 position;
 	glm::vec3 vel;
 	glm::vec3 accel;
+	float maxSpeed;
 	float mass;
 	float angle;
 	glm::vec3 rotation;

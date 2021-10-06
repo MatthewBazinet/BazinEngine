@@ -7,3 +7,7 @@ HitBox::HitBox()
 HitBox::~HitBox()
 {
 }
+
+void HitBox::SpawnBoundingBox()
+{
+}

@@ -1,5 +1,5 @@
 #include "CoreEngine.h"
-
+#include "../../Character.h"
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
 CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0)
@@ -146,14 +146,15 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
 		break;
 	case SDL_SCANCODE_A:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
 		break;
 	case SDL_SCANCODE_S:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
 		break;
 	case SDL_SCANCODE_D:
+		character.
 		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, 0.0f, 0.0f));
+		//SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, 0.0f, 0.0f));
 		break;
 	case SDL_SCANCODE_SPACE:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));

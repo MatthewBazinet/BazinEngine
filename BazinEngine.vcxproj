@@ -155,9 +155,13 @@
     <ClCompile Include="Game\Game1.cpp" />
     <ClCompile Include="Game\Scene\GameScene.cpp" />
     <ClCompile Include="Game\Scene\StartScene.cpp" />
+    <ClCompile Include="HitBox.cpp" />
+    <ClCompile Include="KinematicSeek.cpp" />
+    <ClCompile Include="KinematicSteeringOutput.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\Core\Timer.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
+    <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
@@ -189,6 +193,10 @@
     <ClInclude Include="Game\Scene\StartScene.h" />
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\Math\Ray.h" />
+    <ClInclude Include="HitBox.h" />
+    <ClInclude Include="KinematicSeek.h" />
+    <ClInclude Include="KinematicSteeringOutput.h" />
+    <ClInclude Include="Projectile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />

@@ -39,7 +39,7 @@ public:
 	float GetScreenWidth() const;
 	float GetScreenHeight() const;
 	Camera* GetCamera() const;
-	
+	Character character;
 
 	void SetGameInterface(GameInterface* gameInterface_);
 	void SetCurrentScene(int sceneNum_);

@@ -21,7 +21,7 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 		modelInstance = model->CreateInstance(position, angle, rotation, scale);
 		boundingBox = model->GetBoundingBox();
 		boundingBox.transform = model->GetTransform(modelInstance);
-
+		
 		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
 }
@@ -112,6 +112,11 @@ BoundingBox GameObject::GetBoundingBox() const
 bool GameObject::GetHit() const
 {
 	return hit;
+}
+
+float GameObject::GetMaxSpeed() const
+{
+	return maxSpeed;
 }
 
 void GameObject::SetPosition(glm::vec3 position_)
@@ -209,6 +214,11 @@ void GameObject::SetHit(bool hit_, int buttonType_)
 	{
 		std::cout << tag << " was hit" << std::endl;
 	}
+}
+
+void GameObject::SetMaxSpeed(float maxSpeed_)
+{
+	maxSpeed = maxSpeed_;
 }
 
 void GameObject::CheckVisible()

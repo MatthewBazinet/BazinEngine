@@ -18,6 +18,8 @@ void Character::QCB(int strength, bool simpleInput)
 
 void Character::Unique()
 {
+
+	
 	if (isAirborne)
 	{
 		AirUnique();

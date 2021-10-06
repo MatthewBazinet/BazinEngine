@@ -3,7 +3,7 @@
 #define CHARACTER_H
 
 #include "../Engine/Rendering/3D/GameObject.h"
-
+#include "../Projectile.h"
 	class Character : GameObject
 {
 public:
@@ -14,9 +14,7 @@ public:
 	void Medium();
 	void Heavy();
 	void Run(bool isRunning);
-
 	void Move(glm::vec2 input);
-
 
 private:
 	void AirQCF(int strength, bool simpleInput);

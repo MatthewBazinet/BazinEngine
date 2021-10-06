@@ -4,6 +4,7 @@
 #include <sstream>
 #include "Mesh.h"
 #include "../../FX/MaterialLoader.h"
+#include "../../../HitBox.h"
 #include "..//..//Math/BoundingBox.h"
 
 class LoadOBJModel {
@@ -30,7 +31,7 @@ private:
 	std::vector<SubMesh> subMeshes;
 
 	Material currentMaterial;
-
+	HitBox hb;
 	BoundingBox bb;
 };
 

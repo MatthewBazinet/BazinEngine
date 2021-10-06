@@ -323,10 +323,10 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(appleModel);
 	SceneGraph::GetInstance()->AddModel(rachidaShape);
 
-//	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
-//	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(-4.0f, 0.0f, 0.0f)), "model1");
+	/*SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(-4.0f, 0.0f, 0.0f)), "model1");
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(4.0f, 0.0f, 0.0f)), "model2");
 
 	SceneGraph::GetInstance()->GetGameObject("model1")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
@@ -334,7 +334,7 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->GetGameObject("model1")->SetVelocity(glm::vec3(1.0f,0.0f,0.0f));
 	SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 	SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
-	SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
+	SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));*/
 
 	diceModel = nullptr;
 	appleModel = nullptr;
