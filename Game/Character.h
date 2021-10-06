@@ -3,13 +3,9 @@
 #define CHARACTER_H
 
 #include "../Engine/Rendering/3D/GameObject.h"
-<<<<<<< HEAD
-#include "../Projectile.h"
-	class Character : GameObject
-=======
 
+#include "../Projectile.h"
 	class Character : public GameObject
->>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
 {
 public:
 	using GameObject::GameObject;
@@ -26,12 +22,10 @@ public:
 	void Run(bool isRunning);
 	void Move(glm::vec2 input);
 
-<<<<<<< HEAD
-=======
 	bool getIsRunning() const { return isRunning; };
 	bool getIsAirborne() const { return isAirborne; };
 
->>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
+
 private:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);

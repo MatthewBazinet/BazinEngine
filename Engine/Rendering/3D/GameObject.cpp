@@ -117,15 +117,15 @@ bool GameObject::GetHit() const
 	return hit;
 }
 
-<<<<<<< HEAD
+
 float GameObject::GetMaxSpeed() const
 {
 	return maxSpeed;
-=======
+}
 float GameObject::GetMass() const
 {
 	return mass;
->>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
+
 }
 
 void GameObject::SetPosition(glm::vec3 position_)
@@ -225,15 +225,14 @@ void GameObject::SetHit(bool hit_, int buttonType_)
 	}
 }
 
-<<<<<<< HEAD
+
 void GameObject::SetMaxSpeed(float maxSpeed_)
 {
 	maxSpeed = maxSpeed_;
-=======
+}
 void GameObject::SetMass(float mass_)
 {
 	mass = mass_;
->>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
 }
 
 void GameObject::CheckVisible()
@@ -269,4 +268,4 @@ void GameObject::CheckVisible()
 
 		model->SetInstanceVisiblity(modelInstance, false);
 	}
-}
+};

@@ -1,5 +1,4 @@
 #include "CoreEngine.h"
-#include "../../Character.h"
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
 CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0)
@@ -148,22 +147,19 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 		break;
 	case SDL_SCANCODE_A:
 		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
-<<<<<<< HEAD
-=======
+
 		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(-5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
->>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
+
 		break;
 	case SDL_SCANCODE_S:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
 		break;
 	case SDL_SCANCODE_D:
-		character.
 		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
-<<<<<<< HEAD
+
 		//SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, 0.0f, 0.0f));
-=======
-		SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
->>>>>>> 6a6268eabfc0efe993d67520a2708d0aea0c2ac8
+
+		//SceneGraph::GetInstance()->GetGameObject("dice")->SetAccel(glm::vec3(5.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().y, 0.0f));
 		break;
 	case SDL_SCANCODE_SPACE:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));
