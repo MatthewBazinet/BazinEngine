@@ -18,6 +18,22 @@ Character::~Character() {
 	}
 }
 
+void Character::Update(const float deltaTime_)
+{
+	if (position.y >= 0.1f)
+	{
+		isAirborne = true;
+	}
+	if (position.y <= -0.1f)
+	{
+		position.y = 0.0f;
+		vel.y = 0.0f;
+		accel.y = 0.0f;
+		isAirborne = false;
+	}
+	GameObject::Update(deltaTime_);
+}
+
 void Character::QCF(int strength, bool simpleInput)
 {
 	if (isAirborne)
@@ -70,6 +86,7 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning)
 {
+	this->isRunning = isRunning;
 }
 
 void Character::Move(glm::vec2 input)
