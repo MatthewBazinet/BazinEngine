@@ -169,6 +169,7 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 		break;
 		*/
 	default:
+		gameInterface->NotifyOfKeyDown(key_);
 		break;
 	}
 }
@@ -178,8 +179,9 @@ void CoreEngine::NotifyOfKeyRelease(SDL_Scancode key_)
 	switch (key_)
 	{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
-	
+		
 	default:
+		gameInterface->NotifyOfKeyUp(key_);
 		break;
 	}
 }
