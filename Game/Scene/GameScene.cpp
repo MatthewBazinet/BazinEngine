@@ -2,6 +2,7 @@
 
 GameScene::GameScene()
 {
+
 }
 
 GameScene::~GameScene()
@@ -338,9 +339,8 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));*/
 
 	char1 = new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f));
-
 	SceneGraph::GetInstance()->AddGameObject(char1, "char1");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(-4.0f, 0.0f, 0.0f)), "model1");
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(4.0f, 0.0f, 0.0f)), "model2");
@@ -351,8 +351,9 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
+	 SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 
-
+	
 	diceModel = nullptr;
 	appleModel = nullptr;
 	rachidaShape = nullptr;
@@ -379,7 +380,7 @@ void GameScene::HandleEvents(const SDL_Event& sdlEvent)
 		{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
 		case SDL_SCANCODE_W:
-			
+
 			CoreEngine::GetInstance()->GetCamera()->SetPosition(CoreEngine::GetInstance()->GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
 			break;
 		case SDL_SCANCODE_A:

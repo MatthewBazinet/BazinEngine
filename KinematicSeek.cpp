@@ -1,30 +1,24 @@
 #include "KinematicSeek.h"
 
-KinematicSeek::KinematicSeek(Projectile* character_, glm::vec3 target_)
+KinematicSteeringOutput KinematicSeek::getSteering(GameObject* character_, glm::vec3 target_)
 {
-	character = character_;
-	target = target_;
-}
-
-KinematicSeek::~KinematicSeek()
-{
-	if (result) { delete result; }
-}
-
-KinematicSteeringOutput KinematicSeek::getSteering()
-{
-    result = new KinematicSteeringOutput();
+    KinematicSteeringOutput result = KinematicSteeringOutput();
 
     // Get direction to the target, as a new vector
-    result->velocity = target - character->GetPosition();
-    
+    result.velocity = target_ - character_->GetPosition();
+    result.velocity.y = 0.0f;
     // velocity is along this direction, at full speed
-    result->velocity = glm::normalize(result->velocity);
-    result->velocity = character->GetMaxSpeed() * result->velocity;
-
+    result.velocity = glm::normalize(result.velocity);
+    result.velocity = character_->GetMaxSpeed() * result.velocity;
+    
     // face in direction we want to move
-    character->LookAt(result->velocity);
+   
+    result.rotation = LookAt(result.velocity);
+    return result;
+}
 
-    result->rotation = 0;
-    return *result;
+
+float KinematicSeek::LookAt(glm::vec3 velocity)
+{
+    return  atan2(velocity.x, velocity.z);
 }

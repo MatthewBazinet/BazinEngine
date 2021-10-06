@@ -6,9 +6,17 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	meter = meter_;
 	isRunning = isRunning_;
 	isAirborne = isAirborne_;
+	model = model_;
+
+	proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
 }
 
-Character::~Character() {}
+Character::~Character() {
+	if (proj) {
+		delete proj;
+		proj = nullptr;
+	}
+}
 
 void Character::QCF(int strength, bool simpleInput)
 {
@@ -28,7 +36,6 @@ void Character::QCB(int strength, bool simpleInput)
 
 void Character::Unique()
 {
-
 	
 	if (isAirborne)
 	{

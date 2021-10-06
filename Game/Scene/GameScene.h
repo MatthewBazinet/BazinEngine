@@ -3,6 +3,7 @@
 
 #include "../../Engine/Core/CoreEngine.h"
 #include "../Character.h"
+#include "../../Projectile.h"
 class GameScene : public Scene
 {
 public:
