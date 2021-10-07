@@ -138,6 +138,7 @@ void Character::Update(const float deltaTime_)
 		accel.y = 0.0f;
 		isAirborne = false;
 	}
+	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
 	GameObject::Update(deltaTime_);
 }
 

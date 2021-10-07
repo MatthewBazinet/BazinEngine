@@ -1,4 +1,6 @@
-#pragma once
+#ifndef KINEMATICSEEK_H
+#define KINEMATICSEEK_H
+
 #include "Projectile.h"
 #include "KinematicSteeringOutput.h"
 class KinematicSeek
@@ -9,3 +11,4 @@ public:
 };
 
 
+#endif

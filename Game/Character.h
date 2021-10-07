@@ -16,7 +16,7 @@ public:
 	void NotifyOnKeyDown(SDL_Scancode key_);
 	void NotifyOnKeyUp(SDL_Scancode key_);
 
-	void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_);
 
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);

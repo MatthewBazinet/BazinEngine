@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "..//../AICharacter.h"
 
 GameScene::GameScene()
 {
@@ -359,6 +360,8 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
 	 SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 	 
+	 SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+
 	
 	diceModel = nullptr;
 	appleModel = nullptr;

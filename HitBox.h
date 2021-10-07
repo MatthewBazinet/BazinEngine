@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HITBOX_H
+#define HITBOX_H
 #include "Engine/Math/BoundingBox.h"
 class HitBox
 {
@@ -12,3 +13,4 @@ public:
 private:
 };
 
+#endif

@@ -1,5 +1,6 @@
-#pragma once
-//fix
+#ifndef KINEMATICSTEERINGOUTPUT_H
+#define KINEMATICSTEERINGOUTPUT_H
+
 #include<glm/glm.hpp>
 class KinematicSteeringOutput
 {
@@ -13,3 +14,4 @@ public:
 
 };
 
+#endif
