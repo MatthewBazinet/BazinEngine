@@ -22,9 +22,12 @@ void AICharacter::Update(const float deltaTime_)
 		target += glm::cross(ray.direction, glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
-	
+	if (CollisionDetection::RayObbIntersection(&ray, &opponent->GetBoundingBox()))
+	{
+		printf("Colliede");
+	}
 
-	KinematicSteeringOutput steering = KinematicSeek::getSteering(this, target);
+	KinematicSteeringOutput steering = KinematicSeek::getSteering(this, glm::vec3(-10.0f, 0.0f, 0.0f));
 	vel = steering.velocity;
 	angle = steering.rotation;
 	Character::Update(deltaTime_);
