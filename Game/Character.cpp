@@ -18,6 +18,113 @@ Character::~Character() {
 	}
 }
 
+void Character::NotifyOnKeyDown(SDL_Scancode key_)
+{
+	switch (key_)
+	{
+
+	case SDL_SCANCODE_W:
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+		if (isRunning)
+		{
+			vel = glm::vec3(vel.x, vel.y, -5.0f);
+
+		}
+		else
+		{
+			if (!isAirborne)
+			{
+				vel = glm::vec3(vel.x, 11.0f, vel.z);
+			}
+			ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
+		}
+		break;
+	case SDL_SCANCODE_A:
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+
+		vel = glm::vec3(-5.0f, vel.y, vel.z);
+
+		break;
+	case SDL_SCANCODE_S:
+		if (isRunning)
+		{
+			vel = glm::vec3(vel.x, vel.y, 5.0f);
+
+		}
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
+		break;
+	case SDL_SCANCODE_D:
+		vel = glm::vec3(5.0f, vel.y, vel.z);
+		break;
+	case SDL_SCANCODE_LSHIFT:
+		Run(true);
+	case SDL_SCANCODE_U:
+		Light();
+		break;
+	case SDL_SCANCODE_I:
+		Medium();
+		break;
+	case SDL_SCANCODE_O:
+		Heavy();
+		break;
+	case SDL_SCANCODE_P:
+		Unique();
+		break;
+	default:
+		break;
+	}
+}
+
+void Character::NotifyOnKeyUp(SDL_Scancode key_)
+{
+	switch (key_)
+	{
+	case SDL_SCANCODE_W:
+		if(vel.z < 0.0f)
+		vel =glm::vec3(vel.x, vel.y, 0.0f);
+
+		break;
+	case SDL_SCANCODE_A:
+		if(vel.x < 0.0f)
+		vel =glm::vec3(0.0f, vel.y, vel.z);
+
+		break;
+	case SDL_SCANCODE_S:
+		if(vel.z > 0.0f)
+		vel =glm::vec3(vel.x, vel.y, 0.0f);
+		break;
+	case SDL_SCANCODE_D:
+		if(vel.x > 0.0f)
+		vel =glm::vec3(0.0f, vel.y, vel.z);
+		break;
+	case SDL_SCANCODE_U:
+		
+		break;
+	case SDL_SCANCODE_I:
+
+		break;
+	case SDL_SCANCODE_O:
+
+		break;
+	case SDL_SCANCODE_P:
+
+		break;
+	case SDL_SCANCODE_Q:
+
+		break;
+	case SDL_SCANCODE_E:
+
+		break;
+	case SDL_SCANCODE_SPACE:
+
+		break;
+	case SDL_SCANCODE_LSHIFT:
+		Run(false);
+	default:
+		break;
+	}
+}
+
 void Character::Update(const float deltaTime_)
 {
 	if (position.y >= 0.1f)

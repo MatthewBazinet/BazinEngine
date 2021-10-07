@@ -432,104 +432,25 @@ void GameScene::HandleEvents(const SDL_Event& sdlEvent)
 
 void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 {
-	GameObject* character = SceneGraph::GetInstance()->GetGameObject("char1");
-	Character* characterC = static_cast<Character*>(character);
 	switch (key_)
 	{
-		
-	case SDL_SCANCODE_W:
-		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
-		if (characterC->getIsRunning())
-		{
-			character->SetVelocity(glm::vec3(character->GetVelocity().x, character->GetVelocity().y, -5.0f));
 
-		}
-		else
-		{
-		if (!characterC->getIsAirborne())
-		{
-			character->SetVelocity(glm::vec3(character->GetVelocity().x, 11.0f, character->GetVelocity().z));
-		}
-		character->ApplyForce(glm::vec3(character->GetAccel().x, -9.81f * character->GetMass(), character->GetAccel().z));
-		}
-		break;
-	case SDL_SCANCODE_A:
-		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
-
-		character->SetVelocity(glm::vec3(-5.0f, character->GetVelocity().y, character->GetVelocity().z));
-
-		break;
-	case SDL_SCANCODE_S:
-		if (characterC->getIsRunning())
-		{
-			character->SetVelocity(glm::vec3(character->GetVelocity().x, character->GetVelocity().y, 5.0f));
-
-		}
-		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
-		break;
-	case SDL_SCANCODE_D:
-		character->SetVelocity(glm::vec3(5.0f, character->GetVelocity().y, character->GetVelocity().z));
-		break;
-	case SDL_SCANCODE_LSHIFT:
-		characterC->Run(true);
 	default:
+		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
+		char1->NotifyOnKeyDown(key_);
+		char1 = nullptr;
 		break;
 	}
-
-	character = nullptr;
-	characterC = nullptr;
 }
 
 void GameScene::NotifyOfKeyUp(const SDL_Scancode key_)
 {
-	GameObject* character = SceneGraph::GetInstance()->GetGameObject("char1");
-	Character* characterC = static_cast<Character*>(character);
 	switch (key_)
 	{
-	case SDL_SCANCODE_W:
-			character->SetVelocity(glm::vec3(character->GetVelocity().x, character->GetVelocity().y, 0.0f));
-
-	//	SceneGraph::GetInstance()->GetGameObject("char1")->SetAccel(glm::vec3(SceneGraph::GetInstance()->GetGameObject("char1")->GetAccel().x, 0.0f, SceneGraph::GetInstance()->GetGameObject("dice")->GetAccel().z));
-		break;
-	case SDL_SCANCODE_A:
-	//	SceneGraph::GetInstance()->GetGameObject("char1")->SetAccel(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("char1")->GetAccel().y, 0.0f));
-		character->SetVelocity(glm::vec3(0.0f, character->GetVelocity().y, character->GetVelocity().z));
-
-		break;
-	case SDL_SCANCODE_S:
-		character->SetVelocity(glm::vec3(character->GetVelocity().x, character->GetVelocity().y, 0.0f));
-		break;
-	case SDL_SCANCODE_D:
-	//	SceneGraph::GetInstance()->GetGameObject("char1")->SetAccel(glm::vec3(0.0f, SceneGraph::GetInstance()->GetGameObject("char1")->GetAccel().y, 0.0f));
-		character->SetVelocity(glm::vec3(0.0f, character->GetVelocity().y, character->GetVelocity().z));
-		break;
-	case SDL_SCANCODE_SPACE:
-
-		break;
-	case SDL_SCANCODE_LCTRL:
-
-		break;
-	case SDL_SCANCODE_Q:
-
-		break;
-	case SDL_SCANCODE_E:
-
-		break;
-	case SDL_SCANCODE_RIGHT:
-
-		break;
-	case SDL_SCANCODE_LEFT:
-
-		break;
-	case SDL_SCANCODE_UP:
-
-		break;
-	case SDL_SCANCODE_DOWN:
-
-		break;
-	case SDL_SCANCODE_LSHIFT:
-		characterC->Run(false);
 	default:
+		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
+		char1->NotifyOnKeyUp(key_);
+		char1 = nullptr;
 		break;
 	}
 }
