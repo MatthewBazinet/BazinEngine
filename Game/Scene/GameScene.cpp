@@ -363,6 +363,11 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 	
+	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
+
+	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+
+
 	diceModel = nullptr;
 	appleModel = nullptr;
 	rachidaShape = nullptr;
@@ -373,7 +378,10 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
+<<<<<<< HEAD
 	static_cast<Flocking*>(SceneGraph::GetInstance()->GetGameObject("flock"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
+=======
+>>>>>>> 586b8b4c1ee8e2c7f63e489ba155bb0c0ed7bfc2
 	SceneGraph::GetInstance()->Update(deltaTime_);
 }
 
@@ -437,6 +445,11 @@ void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 {
 	switch (key_)
 	{
+	case SDL_SCANCODE_P:
+		static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
+		break;
+
 
 	default:
 		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));

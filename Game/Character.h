@@ -31,7 +31,7 @@ public:
 	bool getIsAirborne() const { return isAirborne; };
 
 
-private:
+protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);
 	void AirUnique();
