@@ -19,7 +19,6 @@ void AICharacter::Update(const float deltaTime_)
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}
 
-<<<<<<< HEAD
 	target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	Ray ray = Ray();
@@ -28,13 +27,11 @@ void AICharacter::Update(const float deltaTime_)
 	BoundingBox tmp = opponent->GetBoundingBox();
 	CollisionDetection::RayObbIntersection(&ray, &tmp);
 	
-	
+	KinematicSteeringOutput steering;
 	if (ray.intersectionDist < maxSpeed / deltaTime_)
-=======
 	if (isRunning)
->>>>>>> c9c41df8b44d133f98c034b75cd2fb27be7c9f29
 	{
-		KinematicSteeringOutput steering;
+		
 
 		
 
@@ -43,7 +40,8 @@ void AICharacter::Update(const float deltaTime_)
 		Ray ray = Ray();
 		ray.direction = vel;
 		ray.origin = position;
-		CollisionDetection::RayObbIntersection(&ray, &(opponent->GetBoundingBox()));
+		BoundingBox tmp = opponent->GetBoundingBox();
+		CollisionDetection::RayObbIntersection(&ray, &tmp);
 		if (ray.intersectionDist < maxSpeed / deltaTime_)
 		{
 			target += glm::cross(ray.direction, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -107,13 +105,9 @@ void AICharacter::Update(const float deltaTime_)
 				isAirborne = true;
 			}
 		}
-
-<<<<<<< HEAD
-	
 	angle = steering.rotation;
-=======
+
 	}
->>>>>>> c9c41df8b44d133f98c034b75cd2fb27be7c9f29
 	Character::Update(deltaTime_);
 }
 

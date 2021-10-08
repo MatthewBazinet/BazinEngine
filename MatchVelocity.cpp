@@ -23,7 +23,6 @@ SteeringOutput MatchVelocity::getSteering(GameObject* character_, GameObject* ta
         result.linear = maxAccel_ * result.linear;
     }
     result.angular = 0;
-    std::cout << result.linear.x << std::endl;
    
     return result;
 }
