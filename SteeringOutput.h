@@ -1,4 +1,6 @@
-#pragma once
+#ifndef STEERINGOUTPUT_H
+#define STEERINGOUTPUT_H
+
 #include<glm/glm.hpp>
 class SteeringOutput 
 {
@@ -18,3 +20,4 @@ public:
 	}
 
 };
+#endif // !1

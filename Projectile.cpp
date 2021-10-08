@@ -15,11 +15,12 @@ Projectile::~Projectile()
 
 void Projectile::Update(const float deltaTime_)
 {
-	KinematicSteeringOutput kin = KinematicSeek::getSteering(this, target->GetPosition());
-	kin.velocity.y = 0.0f;
-	SetVelocity(kin.velocity);
-	SetAngle(kin.rotation);
-	
+	if (target) {
+		KinematicSteeringOutput kin = KinematicSeek::getSteering(this, target->GetPosition());
+		kin.velocity.y = 0.0f;
+		SetVelocity(kin.velocity);
+		SetAngle(kin.rotation);
+	}
 	GameObject::Update(deltaTime_);
 }
 

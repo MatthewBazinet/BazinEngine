@@ -167,6 +167,7 @@
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="SteeringOutput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />

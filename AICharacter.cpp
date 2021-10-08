@@ -24,7 +24,10 @@ void AICharacter::Update(const float deltaTime_)
 	Ray ray = Ray();
 	ray.direction = vel;
 	ray.origin = position;
-	CollisionDetection::RayObbIntersection(&ray, &opponent->GetBoundingBox());
+	BoundingBox tmp = opponent->GetBoundingBox();
+	CollisionDetection::RayObbIntersection(&ray, &tmp);
+	
+	
 	if (ray.intersectionDist < maxSpeed / deltaTime_)
 	{
 		target += glm::cross(ray.direction, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -60,7 +63,7 @@ void AICharacter::Update(const float deltaTime_)
 	}
 
 
-
+	
 	angle = steering.rotation;
 	Character::Update(deltaTime_);
 }

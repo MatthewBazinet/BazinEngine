@@ -6,10 +6,14 @@ Flocking::Flocking(Model* model_, glm::vec3 position_, float angle_, glm::vec3 r
 }
 void Flocking::Update(const float deltaTime_)
 {
-	SteeringOutput kin = MatchVelocity::getSteering(this, target,0.5f,5.0f);
-	kin.linear.y = 0.0f;
-	SetVelocity(kin.linear);
-	SetAngle(kin.angular);
+
+	if (target) {
+		SteeringOutput kin = MatchVelocity::getSteering(this, target, 2.0f, glm::vec3(8.0f));
+		SetVelocity(kin.linear);
+		SetAngle(kin.angular);
+		
+	}
+
 }
 Flocking::~Flocking()
 {

@@ -1,14 +1,29 @@
 #include "MatchVelocity.h"
 
-SteeringOutput MatchVelocity::getSteering(GameObject* character_, GameObject* target_, float timeToTarget_, float maxAccel_)
+SteeringOutput MatchVelocity::getSteering(GameObject* character_, GameObject* target_, float timeToTarget_, glm::vec3 maxAccel_)
 {
     SteeringOutput result = SteeringOutput();
-    result.linear = target_->GetVelocity() - character_->GetVelocity();
-    result.linear /= timeToTarget_;
 
-    if (result.linear.length() > maxAccel_) {
+    glm::vec3 tmp1 = character_->GetVelocity();
+    glm::vec3 tmp2 = target_->GetVelocity();
+
+    result.linear = tmp1 - tmp2;
+   
+    result.linear /= timeToTarget_;
+    if (result.linear.x > maxAccel_.x || result.linear.x < maxAccel_.x * -1) {
         result.linear = glm::normalize(result.linear);
-        result.linear *= maxAccel_;
+        result.linear = maxAccel_ * result.linear;
     }
-    return SteeringOutput();
+    if (result.linear.y > maxAccel_.y || result.linear.y < maxAccel_.y * -1) {
+        result.linear = glm::normalize(result.linear);
+        result.linear = maxAccel_ * result.linear;
+    }
+    if (result.linear.z > maxAccel_.z || result.linear.z < maxAccel_.z * -1) {
+        result.linear = glm::normalize(result.linear);
+        result.linear = maxAccel_ * result.linear;
+    }
+    result.angular = 0;
+    std::cout << result.linear.x << std::endl;
+   
+    return result;
 }
