@@ -17,12 +17,15 @@ public:
 
 	glm::vec3 GetTarget() { return target; };
 	void SetTarget(glm::vec3 target_) { target = target_; };
+	void SetDir2D(float dir_);
 
 private:
 	glm::vec3 target;
 	Character* opponent;
 	Projectile* projectile;
 	bool targetShifted;
+	glm::vec3 axisOf2DMovement;
+	float dir2D;
 };
 
 #endif

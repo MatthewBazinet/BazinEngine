@@ -8,59 +8,112 @@ AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool
 	SetMaxSpeed(7.0f);
 	targetShifted = false;
 	projectile = nullptr;
+	dir2D = 1.0f;
 }
 
 void AICharacter::Update(const float deltaTime_)
 {
-	KinematicSteeringOutput steering;
 
 	if (getIsAirborne())
 	{
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}
 
-	target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
-
-	Ray ray = Ray();
-	ray.direction = vel;
-	ray.origin = position;
-	CollisionDetection::RayObbIntersection(&ray, &opponent->GetBoundingBox());
-	if (ray.intersectionDist < maxSpeed / deltaTime_)
+	if (isRunning)
 	{
-		target += glm::cross(ray.direction, glm::vec3(0.0f, 1.0f, 0.0f));
-	}
+		KinematicSteeringOutput steering;
 
-	steering = KinematicArrive::getSteering(this, target, 1.5f);
-	float preserveY = vel.y;
-	vel = steering.velocity;
-	vel.y = preserveY;
+		
 
-	if (projectile != nullptr)
-	{
-		target = projectile->GetPosition();
+		target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 
-
-		if (glm::distance(position, projectile->GetPosition()) < 3.0f)
+		Ray ray = Ray();
+		ray.direction = vel;
+		ray.origin = position;
+		CollisionDetection::RayObbIntersection(&ray, &(opponent->GetBoundingBox()));
+		if (ray.intersectionDist < maxSpeed / deltaTime_)
 		{
-			steering = KinematicFlee::getSteering(this, projectile->GetPosition());
-			float preserveY = vel.y;
-			vel = steering.velocity;
-			vel.y = preserveY;
-
+			target += glm::cross(ray.direction, glm::vec3(0.0f, 1.0f, 0.0f));
 		}
 
-		if (glm::distance(position, projectile->GetPosition()) < 5.0f)
+		steering = KinematicArrive::getSteering(this, target, 1.5f);
+		float preserveY = vel.y;
+		vel = steering.velocity;
+		vel.y = preserveY;
+
+		if (projectile != nullptr)
+		{
+			target = projectile->GetPosition();
+
+
+			if (glm::distance(position, projectile->GetPosition()) < 3.0f)
+			{
+				steering = KinematicFlee::getSteering(this, projectile->GetPosition());
+				float preserveY = vel.y;
+				vel = steering.velocity;
+				vel.y = preserveY;
+
+			}
+
+			if (glm::distance(position, projectile->GetPosition()) < 5.0f)
+			{
+				if (getIsAirborne() == false)
+				{
+					SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
+				}
+			}
+
+		}
+		angle = steering.rotation;
+	}
+	else
+	{
+		if (!opponent->getIsRunning() && getIsAirborne() == false)
+		{
+			axisOf2DMovement = glm::abs(glm::normalize(opponent->GetPosition() - position));
+		}
+		float preserveY = vel.y;
+		vel = axisOf2DMovement * maxSpeed * dir2D;
+		vel.y = preserveY;
+		if (projectile) {
+			if (glm::distance(position, projectile->GetPosition()) < 5.0f)
+			{
+				if (getIsAirborne() == false)
+				{
+					SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
+					isAirborne = true;
+				}
+			}
+		}
+
+		if (glm::distance(position, opponent->GetPosition()) < 5.0f)
 		{
 			if (getIsAirborne() == false)
 			{
 				SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
+				isAirborne = true;
 			}
 		}
-		
+
 	}
-
-
-
-	angle = steering.rotation;
 	Character::Update(deltaTime_);
+}
+
+void AICharacter::SetDir2D(float dir_)
+{
+	if (abs(dir_) > 0.0f || abs(dir_) < 1.0f)
+	{
+		if (dir_ == 0.0f)
+		{
+			dir2D = 0.0f;
+		}
+		else
+		{
+			dir2D = (dir_ > 0.0f) ? 1.0f : -1.0f;
+		}
+	}
+	else
+	{
+		dir2D = dir_;
+	}
 }

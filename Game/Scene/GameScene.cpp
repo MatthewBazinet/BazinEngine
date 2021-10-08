@@ -360,7 +360,7 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
 	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 	 
-	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, true, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 	
 	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 
@@ -444,8 +444,24 @@ void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 		static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
 		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
 		break;
-
-
+	case SDL_SCANCODE_R:
+		if (static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->getIsRunning()) {
+			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(false);
+		}
+		else
+		{
+			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(true);
+		}
+		break;
+	case SDL_SCANCODE_LEFT:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetDir2D(-1.0f);
+		break;
+	case SDL_SCANCODE_RIGHT:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetDir2D(1.0f);
+		break;
+	case SDL_SCANCODE_DOWN:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetDir2D(0.0f);
+		break;
 	default:
 		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
 		char1->NotifyOnKeyDown(key_);
