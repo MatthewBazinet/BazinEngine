@@ -358,8 +358,9 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
-	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
-	 
+	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
+	SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "Flock");
+
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 	
 	diceModel = nullptr;
@@ -372,7 +373,7 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
-	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition());
+	static_cast<Flocking*>(SceneGraph::GetInstance()->GetGameObject("flock"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	SceneGraph::GetInstance()->Update(deltaTime_);
 }
 

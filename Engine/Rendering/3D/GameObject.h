@@ -15,6 +15,7 @@ public:
 	glm::vec3 GetPosition() const;
 	glm::vec3 GetAccel() const;
 	glm::vec3 GetVelocity() const;
+	
 	float GetAngle() const;
 	glm::vec3 GetRotation() const;
 	glm::vec3 GetScale() const;
@@ -23,7 +24,7 @@ public:
 	bool GetHit() const;
 
 	float GetMaxSpeed()const;
-
+	//float GetMaxAcceleration()const;
 	float GetMass() const;
 
 
@@ -52,6 +53,7 @@ protected:
 	glm::vec3 vel;
 	glm::vec3 accel;
 	float maxSpeed;
+	float maxAcceleration;
 	float mass;
 	float angle;
 	glm::vec3 rotation;

@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
     <ClCompile Include="Engine\Core\OctSpatialPartition.cpp" />
     <ClCompile Include="Engine\Math\CollisionDetection.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\Core\Timer.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
+    <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +193,7 @@
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
+    <ClInclude Include="Flocking.h" />
     <ClInclude Include="Game\Character.h" />
     <ClInclude Include="Game\Game1.h" />
     <ClInclude Include="Game\Scene\GameScene.h" />
@@ -202,7 +205,9 @@
     <ClInclude Include="KinematicFlee.h" />
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
+    <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="SteeringOutput.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />

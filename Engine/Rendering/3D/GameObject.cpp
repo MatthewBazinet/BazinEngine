@@ -122,6 +122,10 @@ float GameObject::GetMaxSpeed() const
 {
 	return maxSpeed;
 }
+/*float GameObject::GetMaxAcceleration() const
+{
+	return maxAcceleration;
+}*/
 float GameObject::GetMass() const
 {
 	return mass;
