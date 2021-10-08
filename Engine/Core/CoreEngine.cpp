@@ -1,5 +1,5 @@
 #include "CoreEngine.h"
-#include "../../Game/Character.h"
+#include "../../Character.h"
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
 CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0)

@@ -6,7 +6,7 @@ KinematicSteeringOutput KinematicSeek::getSteering(GameObject* character_, glm::
 
     // Get direction to the target, as a new vector
     result.velocity = target_ - character_->GetPosition();
-    result.velocity.y = 0.0f;
+    //result.velocity.y = 0.0f;
     // velocity is along this direction, at full speed
     result.velocity = glm::normalize(result.velocity);
     result.velocity = character_->GetMaxSpeed() * result.velocity;

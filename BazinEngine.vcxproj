@@ -157,6 +157,7 @@
     <ClCompile Include="Game\Scene\GameScene.cpp" />
     <ClCompile Include="Game\Scene\StartScene.cpp" />
     <ClCompile Include="HitBox.cpp" />
+    <ClCompile Include="KinematicArrive.cpp" />
     <ClCompile Include="KinematicFlee.cpp" />
     <ClCompile Include="KinematicSeek.cpp" />
     <ClCompile Include="KinematicSteeringOutput.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\Math\Ray.h" />
     <ClInclude Include="HitBox.h" />
+    <ClInclude Include="KinematicArrive.h" />
     <ClInclude Include="KinematicFlee.h" />
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
