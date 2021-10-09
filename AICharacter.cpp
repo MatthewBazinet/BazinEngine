@@ -81,7 +81,7 @@ void AICharacter::Update(const float deltaTime_)
 	{
 		if (!opponent->getIsRunning() && getIsAirborne() == false)
 		{
-			axisOf2DMovement = glm::abs(glm::normalize(opponent->GetPosition() - position));
+			axisOf2DMovement = glm::normalize(opponent->GetPosition() - position);
 		}
 		float preserveY = vel.y;
 		vel = axisOf2DMovement * maxSpeed * dir2D;
