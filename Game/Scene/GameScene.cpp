@@ -462,13 +462,13 @@ void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 		}
 		break;
 	case SDL_SCANCODE_LEFT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetDir2D(-1.0f);
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
 		break;
 	case SDL_SCANCODE_RIGHT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetDir2D(1.0f);
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
 		break;
 	case SDL_SCANCODE_DOWN:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetDir2D(0.0f);
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
 		break;
 	default:
 		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));

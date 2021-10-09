@@ -5,6 +5,8 @@
 #include "KinematicFlee.h"
 #include "KinematicArrive.h"
 
+enum TargetType {CROSSUP, INFRONTCLOSE, INFRONTFAR};
+
 class AICharacter :
 	public Character
 {
@@ -14,18 +16,20 @@ public:
 	void SetProjectile(Projectile* projectile_) { projectile = projectile_; };
 
 	void Update(const float deltaTime);
-
+	void SetTargetType(TargetType targetType_) { targetType = targetType_; };
 	glm::vec3 GetTarget() { return target; };
-	void SetTarget(glm::vec3 target_) { target = target_; };
 	void SetDir2D(float dir_);
 
 private:
+	void SetTarget(glm::vec3 target_) { target = target_; };
+
 	glm::vec3 target;
 	Character* opponent;
 	Projectile* projectile;
 	bool targetShifted;
 	glm::vec3 axisOf2DMovement;
 	float dir2D;
+	TargetType targetType;
 };
 
 #endif
