@@ -19,8 +19,23 @@ void AICharacter::Update(const float deltaTime_)
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}
 
-	target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+	switch (targetType) {
+	case TargetType::CROSSUP:
+		target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+		break;
+	case TargetType::INFRONTCLOSE:
+		target = opponent->GetPosition() + maxSpeed * 0.75f * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 
+		break;
+
+	case TargetType::INFRONTFAR:
+		target = opponent->GetPosition() + maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		break;
+	default:
+		target = position;
+		break;
+	}
 	Ray ray = Ray();
 	ray.direction = vel;
 	ray.origin = position;
@@ -35,7 +50,7 @@ void AICharacter::Update(const float deltaTime_)
 
 		
 
-		target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 
 		Ray ray = Ray();
 		ray.direction = vel;
@@ -79,9 +94,30 @@ void AICharacter::Update(const float deltaTime_)
 	}
 	else
 	{
+		
+		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		glm::vec3 projection = glm::dot(position - target, axisOf2DMovement) * axisOf2DMovement;
+		glm::vec3 axisMagProj = glm::length(projection) * axisOf2DMovement;
+
+		if (glm::equal(axisMagProj - projection, glm::vec3(0.0f,0.0f,0.0f)).b) {
+			SetDir2D(-1.0f);
+		}
+		else
+		{
+			SetDir2D(1.0f);
+		}
+		
+		projection = glm::dot(target, axisOf2DMovement) * axisOf2DMovement;
+
+		if (glm::distance(projection, position) < 1.0f) {
+			SetDir2D(0.0f);
+		}
+
+
 		if (!opponent->getIsRunning() && getIsAirborne() == false)
 		{
-			axisOf2DMovement = glm::abs(glm::normalize(opponent->GetPosition() - position));
+			axisOf2DMovement = glm::normalize(opponent->GetPosition() - position);
 		}
 		float preserveY = vel.y;
 		vel = axisOf2DMovement * maxSpeed * dir2D;
