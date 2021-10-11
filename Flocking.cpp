@@ -8,7 +8,7 @@ void Flocking::Update(const float deltaTime_)
 {
 
 	if (target) {
-		SteeringOutput kin = MatchVelocity::getSteering(this, target, 2.0f, glm::vec3(8.0f));
+		SteeringOutput kin = MatchVelocity::getSteering(this, target, 0.5f, glm::vec3(5.0f));
 		SetVelocity(kin.linear);
 		SetAngle(kin.angular);
 		

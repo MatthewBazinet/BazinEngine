@@ -60,6 +60,7 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		Run(true);
 	case SDL_SCANCODE_U:
 		Light();
+		
 		break;
 	case SDL_SCANCODE_I:
 		Medium();

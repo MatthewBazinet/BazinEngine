@@ -6,6 +6,7 @@ class MatchVelocity
 {
 public:
 	static SteeringOutput getSteering(GameObject* character_, GameObject* target_, float timeToTarget_, glm::vec3 maxAccel_);
+
 	MatchVelocity();
 private:
 	

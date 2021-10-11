@@ -16,6 +16,7 @@ public:
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
+	std::vector<GameObject*> proj;
 };
 
 #endif // !GAMESCENE_H

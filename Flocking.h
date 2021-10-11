@@ -1,5 +1,5 @@
 #ifndef FLOCKING_H
-#define  FLOCKING_H
+#define FLOCKING_H
 #include "Engine/Rendering/3D/GameObject.h"
 #include "MatchVelocity.h"
 class Flocking : public GameObject
