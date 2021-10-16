@@ -169,6 +169,9 @@
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
+    <ClCompile Include="test_common.cpp" />
+    <ClCompile Include="test_p2p.cpp" />
+    <ClCompile Include="trivial_signaling_client.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -211,6 +214,8 @@
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="SteeringOutput.h" />
+    <ClInclude Include="test_common.h" />
+    <ClInclude Include="trivial_signaling_client.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />
