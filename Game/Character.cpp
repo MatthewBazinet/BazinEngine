@@ -7,8 +7,9 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	isRunning = isRunning_;
 	isAirborne = isAirborne_;
 	model = model_;
-
+	maxSpeed = 5.0f;
 	proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
+	target = glm::vec3();
 }
 
 Character::~Character() {
@@ -34,15 +35,21 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		{
 			if (!isAirborne)
 			{
-				vel = glm::vec3(vel.x, 11.0f, vel.z);
+				vel = glm::vec3(vel.x, 22.0f, vel.z);
 			}
 			ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 		}
 		break;
 	case SDL_SCANCODE_A:
 		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
-
-		vel = glm::vec3(-5.0f, vel.y, vel.z);
+		if (isRunning) {
+			vel = glm::vec3(-5.0f, vel.y, vel.z);
+		}
+		else
+		{
+			MovingLeft = true;
+			MovingRight = false;
+		}
 
 		break;
 	case SDL_SCANCODE_S:
@@ -54,7 +61,15 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		//GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
 		break;
 	case SDL_SCANCODE_D:
-		vel = glm::vec3(5.0f, vel.y, vel.z);
+		if (isRunning) 
+		{
+			vel = glm::vec3(5.0f, vel.y, vel.z);
+		}
+		else
+		{
+			MovingRight = true;
+			MovingLeft = false;
+		}
 		break;
 	case SDL_SCANCODE_LSHIFT:
 		Run(true);
@@ -80,22 +95,45 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 	switch (key_)
 	{
 	case SDL_SCANCODE_W:
-		if(vel.z < 0.0f)
-		vel =glm::vec3(vel.x, vel.y, 0.0f);
+		if (vel.z < 0.0f && isRunning)
+		{
+			vel = glm::vec3(vel.x, vel.y, 0.0f);
+		}
 
 		break;
 	case SDL_SCANCODE_A:
-		if(vel.x < 0.0f)
-		vel =glm::vec3(0.0f, vel.y, vel.z);
-
+		if (vel.x < 0.0f && isRunning)
+		{
+			vel = glm::vec3(0.0f, vel.y, vel.z);
+		}
+		else
+		{
+			if (MovingLeft)
+			{
+				dir2D = 0.0f;
+			}
+		}
+		MovingLeft = false;
 		break;
 	case SDL_SCANCODE_S:
-		if(vel.z > 0.0f)
-		vel =glm::vec3(vel.x, vel.y, 0.0f);
+		if (vel.z > 0.0f && isRunning)
+		{
+			vel = glm::vec3(vel.x, vel.y, 0.0f);
+		}
 		break;
 	case SDL_SCANCODE_D:
-		if(vel.x > 0.0f)
-		vel =glm::vec3(0.0f, vel.y, vel.z);
+		if (vel.x > 0.0f && isRunning)
+		{
+			vel = glm::vec3(0.0f, vel.y, vel.z);
+		}
+		else
+		{
+			if (MovingRight)
+			{
+				dir2D = 0.0f;
+			}
+		}
+		MovingRight = false;
 		break;
 	case SDL_SCANCODE_U:
 		
@@ -127,10 +165,12 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
+
 	if (position.y >= 0.1f)
 	{
 		isAirborne = true;
 	}
+
 	if (position.y <= -0.1f)
 	{
 		position.y = 0.0f;
@@ -138,8 +178,61 @@ void Character::Update(const float deltaTime_)
 		accel.y = 0.0f;
 		isAirborne = false;
 	}
-	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
+
+	if (getIsAirborne())
+	{
+		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
+	}
+
 	GameObject::Update(deltaTime_);
+
+	if (!isRunning) {
+		if (!opponent->getIsRunning() && getIsAirborne() == false)
+		{
+			axisOf2DMovement = glm::normalize(opponent->GetPosition() - position);
+			target = opponent->GetPosition();
+		}
+
+		glm::vec3 projection = glm::dot(position - target, axisOf2DMovement) * axisOf2DMovement;
+		glm::vec3 axisMagProj = glm::length(projection) * axisOf2DMovement;
+
+		if (glm::equal(axisMagProj - projection, glm::vec3(0.0f, 0.0f, 0.0f)).b) {
+			if (MovingLeft) {
+				dir2D = 1.0f;
+			}
+			else if (MovingRight)
+			{
+				dir2D = -1.0f;
+			}
+			else
+			{
+				dir2D = 0.0f;
+			}
+		}
+		else
+		{
+			if (MovingLeft) {
+				dir2D = -1.0f;
+			}
+			else if (MovingRight)
+			{
+				dir2D = 1.0f;
+			}
+			else
+			{
+				dir2D = 0.0f;
+			}
+		}
+
+		float preserveY = vel.y;
+		vel = axisOf2DMovement * maxSpeed * dir2D;
+		vel.y = preserveY;
+	}
+
+	
+	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
+
+
 }
 
 void Character::QCF(int strength, bool simpleInput)

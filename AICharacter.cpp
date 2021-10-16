@@ -14,6 +14,18 @@ AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool
 void AICharacter::Update(const float deltaTime_)
 {
 
+	if (position.y >= 0.1f)
+	{
+		isAirborne = true;
+	}
+	if (position.y <= -0.1f)
+	{
+		position.y = 0.0f;
+		vel.y = 0.0f;
+		accel.y = 0.0f;
+		isAirborne = false;
+	}
+
 	if (getIsAirborne())
 	{
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
@@ -31,6 +43,10 @@ void AICharacter::Update(const float deltaTime_)
 	case TargetType::INFRONTFAR:
 		target = opponent->GetPosition() + maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 
+		break;
+
+	case TargetType::SELF:
+		target = position;
 		break;
 	default:
 		target = position;
@@ -133,7 +149,7 @@ void AICharacter::Update(const float deltaTime_)
 			}
 		}
 
-		if (glm::distance(position, opponent->GetPosition()) < 5.0f)
+		if (glm::distance(position, opponent->GetPosition()) < 5.0f && targetType != TargetType::SELF)
 		{
 			if (getIsAirborne() == false)
 			{

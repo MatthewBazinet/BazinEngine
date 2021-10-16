@@ -30,6 +30,7 @@ public:
 	bool getIsRunning() const { return isRunning; };
 	bool getIsAirborne() const { return isAirborne; };
 
+	void SetOpponent(Character* opponent_) { opponent = opponent_; };
 
 protected:
 	void AirQCF(int strength, bool simpleInput);
@@ -46,6 +47,14 @@ protected:
 	bool isAirborne;
 	Model* model;
 	Projectile* proj;
+	Character* opponent;
+
+	glm::vec3 axisOf2DMovement;
+	float dir2D;
+	bool MovingLeft;
+	bool MovingRight;
+	glm::vec3 target;
+
 };
 
 #endif
