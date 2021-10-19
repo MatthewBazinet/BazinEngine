@@ -14,35 +14,39 @@
 #include <GameNetworkingSockets/steam/isteamnetworkingutils.h>
 #include <GameNetworkingSockets/steam/steamnetworkingcustomsignaling.h>
 
-#ifdef POSIX
-#include <unistd.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <sys/ioctl.h>
-typedef int SOCKET;
-constexpr SOCKET INVALID_SOCKET = -1;
-inline void closesocket(SOCKET s) { close(s); }
-inline int GetSocketError() { return errno; }
-inline bool IgnoreSocketError(int e)
-{
-	return e == EAGAIN || e == ENOTCONN || e == EWOULDBLOCK;
-}
-#ifndef ioctlsocket
-#define ioctlsocket ioctl
-#endif
-#endif
-#ifdef _WIN32
-#include <winsock2.h>
-#include <ws2tcpip.h>
+//#ifdef POSIX
+//#include <unistd.h>
+//#include <sys/socket.h>
+//#include <sys/types.h>
+//#include <netinet/in.h>
+//#include <netdb.h>
+//#include <sys/ioctl.h>
+//typedef int SOCKET;
+//constexpr SOCKET INVALID_SOCKET = -1;
+//inline void closesocket(SOCKET s) { close(s); }
+//inline int GetSocketError() { return errno; }
+//inline bool IgnoreSocketError(int e)
+//{
+//	return e == EAGAIN || e == ENOTCONN || e == EWOULDBLOCK;
+//}
+//#ifndef ioctlsocket
+//#define ioctlsocket ioctl
+//#endif
+//#endif
+
+//#ifdef _WIN32
+#include <WinSock2.h>
+#include <WS2tcpip.h>
+
+#pragma comment (lib, "Ws2_32.lib")
+
 typedef int socklen_t;
-inline int GetSocketError() { return WSAGetLastError(); }
+inline int GetSocketError() { return WSAGetLastError(); };
 inline bool IgnoreSocketError(int e)
 {
 	return e == WSAEWOULDBLOCK || e == WSAENOTCONN;
 }
-#endif
+//#endif
 
 inline int HexDigitVal(char c)
 {
