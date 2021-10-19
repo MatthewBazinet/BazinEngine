@@ -22,7 +22,7 @@ enum ETestRole
 	k_ETestRole_Client,
 	k_ETestRole_Symmetric,
 };
-ETestRole g_eTestRole = k_ETestRole_Undefined;
+ETestRole g_eTestRole = k_ETestRole_Client;
 
 int g_nVirtualPortLocal = 0; // Used when listening, and when connecting
 int g_nVirtualPortRemote = 0; // Only used when connecting
@@ -149,12 +149,12 @@ void OnSteamNetConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t
 
 int main(int argc, const char** argv)
 {
-	SteamNetworkingIdentity identityLocal; identityLocal.Clear();
+	SteamNetworkingIdentity identityLocal; /*identityLocal.Clear();*/
 	SteamNetworkingIdentity identityRemote; identityRemote.Clear();
 	const char* pszTrivialSignalingService = "localhost:10000";
 
 	// Parse the command line
-	for (int idxArg = 1; idxArg < argc; ++idxArg)
+	for(int idxArg = 1; idxArg < argc; ++idxArg)
 	{
 		const char* pszSwitch = argv[idxArg];
 
