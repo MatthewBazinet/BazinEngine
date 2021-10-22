@@ -81,6 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,13 +133,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\imgui.cpp" />
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="Engine\Core\GameInterface.cpp" />
     <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
     <ClCompile Include="Engine\Core\OctSpatialPartition.cpp" />
     <ClCompile Include="Engine\Math\CollisionDetection.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
-    <ClCompile Include="Engine\Core\CoreEngine.cpp" />
+    <ClCompile Include="Engine\Core\CoreEngine.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ImGui</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Core\Log.cpp" />
     <ClCompile Include="Engine\Events\EventListener.cpp" />
@@ -171,6 +182,15 @@
     <ClCompile Include="SteeringOutput.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_sdl.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\imconfig.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\imgui.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\imgui_internal.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\imstb_rectpack.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\imstb_textedit.h" />
+    <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\imstb_truetype.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Math\CollisionDetection.h" />
@@ -209,6 +229,7 @@
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="NetworkingBase.h" />
+    <ClInclude Include="nuklear.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="SteeringOutput.h" />
   </ItemGroup>
