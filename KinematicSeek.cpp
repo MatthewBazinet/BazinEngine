@@ -4,17 +4,31 @@ KinematicSteeringOutput KinematicSeek::getSteering(GameObject* character_, glm::
 {
     KinematicSteeringOutput result = KinematicSteeringOutput();
 
-    // Get direction to the target, as a new vector
     result.velocity = target_ - character_->GetPosition();
-    //result.velocity.y = 0.0f;
-    // velocity is along this direction, at full speed
     result.velocity = glm::normalize(result.velocity);
     result.velocity = character_->GetMaxSpeed() * result.velocity;
-    
-    // face in direction we want to move
-   
+
     result.rotation = LookAt(result.velocity);
     return result;
+}
+
+KinematicSteeringOutput KinematicSeek::PersueTarget(GameObject* character_, GameObject* target_)
+{
+    float maxPrediction = 100.0f;
+    float prediction;
+    glm::vec3 direction = target_->GetPosition() - character_->GetPosition();
+    float distance = glm::distance(target_->GetPosition(), character_->GetPosition());
+    float speed = std::sqrt(character_->GetVelocity().x * character_->GetVelocity().x + character_->GetVelocity().y * character_->GetVelocity().y + character_->GetVelocity().z * character_->GetVelocity().z);
+   
+   if (speed <= (distance / maxPrediction)) {
+       prediction = maxPrediction;
+   }
+   else {
+       prediction = distance / speed;
+   }
+   target_->GetPosition() += target_->GetVelocity() * prediction;
+   std::cout << prediction << std::endl;
+    return getSteering(character_, target_->GetPosition());
 }
 
 
