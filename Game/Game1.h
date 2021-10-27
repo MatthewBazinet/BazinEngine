@@ -24,7 +24,6 @@ private:
 	int currentSceneNum;
 	Scene* currentScene;
 	void BuildScene();
-	Window* window;
 	CoreEngine* core;
 };
 
