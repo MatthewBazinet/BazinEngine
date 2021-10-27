@@ -1,11 +1,15 @@
 #ifndef GAME1_H
 #define GAME1_H
 
+
+#include "imgui.h"
+#include "imgui_impl_opengl3.h"
+#include "imgui_impl_sdl.h"
 #include "..//Engine/Core/CoreEngine.h"
 #include "Scene/StartScene.h"
 #include "Scene/GameScene.h"
 
-class Game1 : public GameInterface 
+class Game1 : public GameInterface
 {
 public:
 	Game1();
@@ -20,7 +24,8 @@ private:
 	int currentSceneNum;
 	Scene* currentScene;
 	void BuildScene();
-
+	Window* window;
+	CoreEngine* core;
 };
 
 #endif // !GAME1_H

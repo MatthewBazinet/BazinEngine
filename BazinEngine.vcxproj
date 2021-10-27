@@ -183,6 +183,7 @@
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="test_p2p.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_opengl3.h" />
@@ -237,6 +238,7 @@
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
     <ClInclude Include="trivial_signaling_client.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />

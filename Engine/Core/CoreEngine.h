@@ -1,12 +1,17 @@
 #ifndef COREENGINE_H
 #define COREENGINE_H
 
+
 #include <memory>
 #include "Window.h"
 #include "Timer.h"
 #include "Log.h"
 #include "GameInterface.h"
 #include "Scene.h"
+
+//#include "../../ImGui/imgui.h"
+//#include "../../ImGui/imgui_impl_opengl3.h"
+//#include "../../ImGui/imgui_impl_sdl.h"
 
 #include "..//Rendering/SceneGraph.h"
 #include "..//Rendering/3D/GameObject.h"
@@ -15,6 +20,8 @@
 #include "..//Graphics/MaterialHandler.h"
 #include "..//Camera/Camera.h"
 #include "..//Events/EventListener.h"
+
+
 
 class CoreEngine
 {
@@ -39,6 +46,7 @@ public:
 	float GetScreenWidth() const;
 	float GetScreenHeight() const;
 	Camera* GetCamera() const;
+	SDL_Window* GetWindow()const;
 	
 
 	void SetGameInterface(GameInterface* gameInterface_);
@@ -72,7 +80,6 @@ private:
 	GameInterface* gameInterface;
 
 	int currentSceneNum;
-
 	Camera* camera;
 
 };
