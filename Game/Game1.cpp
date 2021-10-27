@@ -2,7 +2,6 @@
 
 Game1::Game1() : GameInterface(), currentScene(nullptr), currentSceneNum(0)
 {
-	window = nullptr;
 }
 
 Game1::~Game1() 
@@ -10,8 +9,6 @@ Game1::~Game1()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-	delete window;
-	window = nullptr;
 	delete currentScene;
 	currentScene = nullptr;
 }
