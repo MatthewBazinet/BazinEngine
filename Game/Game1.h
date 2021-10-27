@@ -24,7 +24,6 @@ private:
 	int currentSceneNum;
 	Scene* currentScene;
 	void BuildScene();
-	CoreEngine* core;
 };
 
 #endif // !GAME1_H

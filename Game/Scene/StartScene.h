@@ -1,6 +1,7 @@
 #ifndef STARTSCENE_H
 #define STARTSCENE_H
 #include "../../Engine/Core/CoreEngine.h"
+#include "../UserInterface.h"
 class StartScene : public Scene
 {
 public:
@@ -14,7 +15,7 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 private:
-	GameInterface* gui;
+	UserInterface* ui;
 
 };
 
