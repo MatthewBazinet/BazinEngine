@@ -132,9 +132,6 @@
     <ClCompile Include="NetworkingBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Core\GameInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test_common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
