@@ -1,10 +1,6 @@
 #ifndef STARTSCENE_H
 #define STARTSCENE_H
-
-
 #include "../../Engine/Core/CoreEngine.h"
-
-
 class StartScene : public Scene
 {
 public:
@@ -16,6 +12,9 @@ public:
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
+
+private:
+	GameInterface* gui;
 
 };
 

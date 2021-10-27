@@ -23,6 +23,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 {
 	Log::OnCreate();
 	window = new Window();
+	
 	if (!window->OnCreate(name_, width_, height_)) {
 		Log::FatalError("Window failed to initialize", "CoreEngine.cpp", __LINE__);
 		OnDestroy();
@@ -31,7 +32,6 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	Log::Info("Window Created Succesfully", "CoreEngine.cpp", __LINE__);
 
 	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
-
 	MouseEventListener::RegisterEngineObject(this);
 	KeyboardEventListener::RegisterEngineObject(this);
 
@@ -45,6 +45,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 			return isRunning = false;
 		}
 	}
+	
 	Log::Info("Game Created Succesfully", "CoreEngine.cpp", __LINE__);
 	timer = new Timer();
 	timer->Start();
@@ -95,6 +96,11 @@ float CoreEngine::GetScreenHeight() const
 Camera* CoreEngine::GetCamera() const
 {
 	return camera;
+}
+
+SDL_Window* CoreEngine::GetWindow() const
+{
+	return window->GetWindow();;
 }
 
 void CoreEngine::SetGameInterface(GameInterface* gameInterface_)

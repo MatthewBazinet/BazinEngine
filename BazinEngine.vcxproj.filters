@@ -155,7 +155,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Downloads\imgui-master\imgui-master\imgui_widgets.cpp">
       <Filter>Source Files\imgui</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="test_common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -163,6 +163,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="trivial_signaling_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -316,11 +319,14 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Downloads\imgui-master\imgui-master\backends\imgui_impl_sdl.h">
       <Filter>Header Files\imgui</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="test_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="trivial_signaling_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
