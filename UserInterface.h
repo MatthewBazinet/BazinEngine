@@ -12,6 +12,12 @@ public:
 	UserInterface();
 	~UserInterface();
 	void CreateUI();
+	void DestroyUI();
+
+	bool OnCreate();
+	void Update(const float deltaTime_);
+	void Render();
+
 private:
 
 

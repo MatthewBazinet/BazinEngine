@@ -6,34 +6,18 @@ Game1::Game1() : GameInterface(), currentScene(nullptr), currentSceneNum(0)
 
 Game1::~Game1() 
 {
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
 	delete currentScene;
 	currentScene = nullptr;
 }
 
 bool Game1::OnCreate() 
 {
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		ImGui::StyleColorsDark();
-		ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow() , &io);
-		ImGui_ImplOpenGL3_Init("#version 450");
-
-
-
 	if (CoreEngine::GetInstance()->GetCurrentScene() == 0)
 	{
 		currentScene = new StartScene();
 		currentSceneNum = 0;
 		return currentScene->OnCreate();
 	}
-
-
-
-
 	Log::Error("Engine's scene is not initialized to 0", "Game1.cpp", __LINE__);
 	return false;
 }
@@ -44,24 +28,11 @@ void Game1::Update(const float deltaTime_)
 	{
 		BuildScene();
 	}
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-
-
-	ImGui::Begin("hello");
-	ImGui::Text("well then");
-	ImGui::End();
 	currentScene->Update(deltaTime_);
-
 }
 
 void Game1::Render()
 {
-
-
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	currentScene->Render();
 }
 
