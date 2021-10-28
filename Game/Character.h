@@ -57,6 +57,8 @@ protected:
 	bool MovingRight;
 	glm::vec3 target;
 
+	glm::vec3 relativeVel;
+
 };
 
 #endif
