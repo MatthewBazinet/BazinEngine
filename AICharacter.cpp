@@ -129,7 +129,10 @@ void AICharacter::Update(const float deltaTime_)
 		if (glm::distance(projection, position) < 1.0f) {
 			SetDir2D(0.0f);
 		}
-
+		if (targetType == TargetType::SELF)
+		{
+			SetDir2D(0.0f);
+		}
 
 		if (!opponent->getIsRunning() && getIsAirborne() == false)
 		{

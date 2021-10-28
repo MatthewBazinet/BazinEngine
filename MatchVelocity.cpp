@@ -8,7 +8,7 @@ SteeringOutput MatchVelocity::getSteering(GameObject* character_, GameObject* ta
     glm::vec3 tmp2 = target_->GetVelocity();
 
     result.linear = tmp2 - tmp1;
-    std::cout << tmp2.y << std::endl;
+  //  std::cout << tmp2.y << std::endl;
     result.linear /= timeToTarget_;
     if (result.linear.x > maxAccel_.x || result.linear.x < maxAccel_.x * -1) {
         result.linear.x = glm::normalize(result.linear.x);

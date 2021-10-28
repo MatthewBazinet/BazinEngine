@@ -27,7 +27,7 @@ KinematicSteeringOutput KinematicSeek::PersueTarget(GameObject* character_, Game
        prediction = distance / speed;
    }
    target_->GetPosition() += target_->GetVelocity() * prediction;
-   std::cout << prediction << std::endl;
+  // std::cout << prediction << std::endl;
     return getSteering(character_, target_->GetPosition());
 }
 

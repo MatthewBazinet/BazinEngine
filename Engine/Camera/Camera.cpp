@@ -107,6 +107,26 @@ glm::vec3 Camera::GetForward() const
 	return forward;
 }
 
+glm::vec3 Camera::GetRight() const
+{
+	return right;
+}
+
+void Camera::SetForward(glm::vec3 forward_)
+{
+	forward = forward_;
+
+	pitch = glm::degrees(asin(forward.y));
+	yaw = glm::degrees(acos(forward.x / cos(glm::radians(pitch))));
+
+	UpdateCameraVectors();
+
+	//	forward.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	//forward.y = sin(glm::radians(pitch));
+	//forward.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+}
+
 float Camera::GetZoomSpeed()
 {
 	return zoomSpeed;

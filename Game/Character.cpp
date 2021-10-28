@@ -35,7 +35,7 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		{
 			if (!isAirborne)
 			{
-				vel = glm::vec3(vel.x, 22.0f, vel.z);
+				vel = glm::vec3(vel.x, 10.0f, vel.z);
 			}
 			ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 		}
@@ -190,40 +190,13 @@ void Character::Update(const float deltaTime_)
 	if (!isRunning) {
 		if (!opponent->getIsRunning() && getIsAirborne() == false)
 		{
-			axisOf2DMovement = glm::normalize(opponent->GetPosition() - position);
-			target = opponent->GetPosition();
+			axisOf2DMovement = camera->GetRight();
 		}
 
-		glm::vec3 projection = glm::dot(position - target, axisOf2DMovement) * axisOf2DMovement;
-		glm::vec3 axisMagProj = glm::length(projection) * axisOf2DMovement;
+		dir2D = 0.0f;
+		if (MovingLeft) dir2D = -1.0f;
+		if (MovingRight) dir2D = 1.0f;
 
-		if (glm::equal(axisMagProj - projection, glm::vec3(0.0f, 0.0f, 0.0f)).b) {
-			if (MovingLeft) {
-				dir2D = 1.0f;
-			}
-			else if (MovingRight)
-			{
-				dir2D = -1.0f;
-			}
-			else
-			{
-				dir2D = 0.0f;
-			}
-		}
-		else
-		{
-			if (MovingLeft) {
-				dir2D = -1.0f;
-			}
-			else if (MovingRight)
-			{
-				dir2D = 1.0f;
-			}
-			else
-			{
-				dir2D = 0.0f;
-			}
-		}
 
 		float preserveY = vel.y;
 		vel = axisOf2DMovement * maxSpeed * dir2D;

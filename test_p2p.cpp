@@ -147,7 +147,7 @@ void OnSteamNetConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t
 #pragma warning( disable: 4702 ) /* unreachable code */
 #endif
 
-int main(int argc, const char** argv)
+int main1(int argc, const char** argv)
 {
 	SteamNetworkingIdentity identityLocal; /*identityLocal.Clear();*/
 	SteamNetworkingIdentity identityRemote; identityRemote.Clear();
