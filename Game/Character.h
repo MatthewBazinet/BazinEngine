@@ -3,7 +3,7 @@
 #define CHARACTER_H
 
 #include "../Engine/Rendering/3D/GameObject.h"
-
+#include "..//Engine/Camera/BattleCamera.h"
 #include "../Projectile.h"
 	class Character : public GameObject
 {
@@ -30,6 +30,8 @@ public:
 	bool getIsRunning() const { return isRunning; };
 	bool getIsAirborne() const { return isAirborne; };
 
+	void SetOpponent(Character* opponent_) { opponent = opponent_; };
+	void SetCamera(BattleCamera* camera_) { camera = camera_; };
 
 protected:
 	void AirQCF(int strength, bool simpleInput);
@@ -46,6 +48,17 @@ protected:
 	bool isAirborne;
 	Model* model;
 	Projectile* proj;
+	Character* opponent;
+
+	BattleCamera* camera;
+	glm::vec3 axisOf2DMovement;
+	float dir2D;
+	bool MovingLeft;
+	bool MovingRight;
+	glm::vec3 target;
+
+	glm::vec3 relativeVel;
+
 };
 
 #endif
