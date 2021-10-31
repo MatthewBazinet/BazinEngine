@@ -175,6 +175,12 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 		GetCamera()->SetRotation(GetCamera()->GetRotation() - glm::vec3(0.0f, 0.1f, 0.0f));
 		break;
 		*/
+	case SDL_SCANCODE_1:
+		CoreEngine::GetInstance()->SetCurrentScene(1);
+		break;
+	case SDL_SCANCODE_2:
+		CoreEngine::GetInstance()->SetCurrentScene(2);
+		break;
 	default:
 		gameInterface->NotifyOfKeyDown(key_);
 		break;

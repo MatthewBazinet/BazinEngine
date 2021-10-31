@@ -61,6 +61,9 @@ void Game1::BuildScene()
 	case 1:
 		currentScene = new GameScene();
 		break;
+	case 2:
+		currentScene = new Scene2();
+			break;
 	default: //case 0:
 		currentScene = new StartScene();
 		break;

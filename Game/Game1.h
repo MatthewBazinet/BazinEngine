@@ -8,6 +8,7 @@
 #include "..//Engine/Core/CoreEngine.h"
 #include "Scene/StartScene.h"
 #include "Scene/GameScene.h"
+#include "Scene/Scene2.h"
 
 class Game1 : public GameInterface
 {
