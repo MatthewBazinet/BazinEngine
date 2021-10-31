@@ -36,7 +36,10 @@ void UserInterface::Update(const float deltaTime_)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-	ImGui::Begin(" ");
+	
+	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() / 2, CoreEngine::GetInstance()->GetScreenHeight() / 2));
+	flags = ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground;
+	ImGui::Begin("here ", NULL, flags);
 	if (ImGui::Button("Play", ImVec2(300,100))) {
 		CoreEngine::GetInstance()->SetCurrentScene(1);
 	}
