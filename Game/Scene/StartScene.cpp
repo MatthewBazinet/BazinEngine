@@ -1,4 +1,5 @@
 #include "StartScene.h"
+#include <thread>
 
 StartScene::StartScene()
 {
@@ -45,7 +46,7 @@ void StartScene::HandleEvents(const SDL_Event& sdlEvent)
 void StartScene::NotifyOfKeyDown(const SDL_Scancode key_)
 {
 	switch (key_)
-	{
+	{	
 		case SDL_SCANCODE_O:
 			network->Run(true);
 			break;
