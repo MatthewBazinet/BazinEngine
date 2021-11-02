@@ -20,7 +20,7 @@ public:
 
 private:
 
-
+	ImGuiBackendFlags flags;
 };
 
 #endif // !USERINTERFACE_H

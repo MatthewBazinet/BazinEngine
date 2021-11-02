@@ -1,5 +1,12 @@
-[INFO]: OpenGL Version: 4.5.0 NVIDIA 471.68 in: Window.cpp on line: 46
+[INFO]: OpenGL Version: 4.5.0 NVIDIA 471.96 in: Window.cpp on line: 46
 [INFO]: Graphics Card Vendor: NVIDIA Corporation in: Window.cpp on line: 47
 [INFO]: Window Created Succesfully in: CoreEngine.cpp on line: 32
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 18
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 49
+<<<<<<< HEAD
+=======
+[INFO]: Game Scene initiated in: GameScene.cpp on line: 17
+[ERROR]: Cannot open OBJ file: Resources/Models/tetrahedron.obj in: LoadOBJModel.cpp on line: 73
+[ERROR]: Surface for texture Material failed to be created in: TextureHandler.cpp on line: 47
+[ERROR]: Cannot open OBJ file: Resources/Models/basecharactermodel.obj in: LoadOBJModel.cpp on line: 73
+>>>>>>> 37d74ff40a2abeadaba132569217dab263062426

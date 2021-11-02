@@ -180,6 +180,7 @@
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Game\Scene\Scene2.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Game\Scene\Scene2.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
     <ClInclude Include="trivial_signaling_client.h" />
