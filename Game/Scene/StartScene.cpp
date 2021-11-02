@@ -3,6 +3,7 @@
 StartScene::StartScene()
 {
 	ui = new UserInterface();
+	network = new NetworkingBase();
 }
 
 StartScene::~StartScene()
@@ -39,6 +40,15 @@ void StartScene::HandleEvents(const SDL_Event& sdlEvent)
 
 void StartScene::NotifyOfKeyDown(const SDL_Scancode key_)
 {
+	switch (key_)
+	{
+		case SDL_SCANCODE_O:
+			network->Run(true);
+			break;
+		case SDL_SCANCODE_L:
+			network->Run(false);
+			break;
+	}
 }
 
 void StartScene::NotifyOfKeyUp(const SDL_Scancode key_)

@@ -422,6 +422,7 @@ void GameScene::Render()
 
 void GameScene::HandleEvents(const SDL_Event& sdlEvent)
 {
+	/*
 	if (sdlEvent.type == SDL_KEYDOWN) 
 	{
 		switch (sdlEvent.key.keysym.scancode) 
@@ -468,6 +469,7 @@ void GameScene::HandleEvents(const SDL_Event& sdlEvent)
 			break;
 		}
 	}
+	*/
 }
 
 void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)

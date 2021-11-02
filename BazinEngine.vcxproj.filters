@@ -135,9 +135,6 @@
     <ClCompile Include="test_common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_p2p.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="trivial_signaling_client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -288,9 +285,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NetworkingBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nuklear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_common.h">

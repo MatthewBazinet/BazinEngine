@@ -147,7 +147,7 @@ void OnSteamNetConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t
 #pragma warning( disable: 4702 ) /* unreachable code */
 #endif
 
-int main1(int argc, const char** argv)
+int main(int argc, const char** argv)
 {
 	SteamNetworkingIdentity identityLocal; /*identityLocal.Clear();*/
 	SteamNetworkingIdentity identityRemote; identityRemote.Clear();
@@ -189,6 +189,7 @@ int main1(int argc, const char** argv)
 		TEST_Fatal("Must specify test role (--server, --client, or --symmetric");
 	if (identityLocal.IsInvalid())
 		TEST_Fatal("Must specify local identity using --identity-local");
+
 	if (identityRemote.IsInvalid() && g_eTestRole != k_ETestRole_Server)
 		TEST_Fatal("Must specify remote identity using --identity-remote");
 

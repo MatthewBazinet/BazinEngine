@@ -2,6 +2,8 @@
 #define STARTSCENE_H
 #include "../../Engine/Core/CoreEngine.h"
 #include "../UserInterface.h"
+#include "..//NetworkingBase.h"
+
 class StartScene : public Scene
 {
 public:
@@ -16,6 +18,7 @@ public:
 
 private:
 	UserInterface* ui;
+	NetworkingBase* network;
 
 };
 
