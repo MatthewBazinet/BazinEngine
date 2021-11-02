@@ -14,6 +14,8 @@ public:
 
 	int Run(bool isServer);
 
+	~NetworkingBase();
+
 };
 
 #endif

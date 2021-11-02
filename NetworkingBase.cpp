@@ -133,3 +133,12 @@ int NetworkingBase::Run(bool isServer)
 		return 0;
 	}
 }
+
+NetworkingBase::~NetworkingBase()
+{
+	delete client;
+	client = nullptr;
+
+	delete peer;
+	peer = nullptr;
+}

@@ -169,6 +169,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SoundEffects.cpp">
+    <ClCompile Include="Pathfinding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -336,6 +337,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SoundEffects.h">
+    <ClInclude Include="Pathfinding.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

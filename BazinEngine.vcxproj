@@ -179,6 +179,7 @@
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Game\Scene\Scene2.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="NetworkingBase.h" />
+    <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Game\Scene\Scene2.h" />
     <ClInclude Include="SoundEffects.h" />
