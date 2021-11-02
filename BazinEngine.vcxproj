@@ -70,7 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\GameDev\SDL\include;C:\GameDev\OpenGL\include;C:\GameDev\gamenetworkingsockets_x86-windows\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\GameDev\SDL\include;C:\GameDev\OpenGL\include;C:\GameDev\gamenetworkingsockets_x86-windows\include;$(ProjectDir)\enet-1.3.17\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\enet-1.3.17;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\GameDev\SDL\include;C:\GameDev\OpenGL\include;$(IncludePath)</IncludePath>
@@ -85,8 +86,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\GameDev\OpenGL\lib;C:\GameDev\SDL\lib;C:\GameDev\gamenetworkingsockets_x86-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;glew32.lib;glew32s.lib;opengl32.lib;GameNetworkingSockets_s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\GameDev\OpenGL\lib;C:\GameDev\SDL\lib;C:\GameDev\gamenetworkingsockets_x86-windows\lib;$(ProjectDir)\enet-1.3.17;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;glew32.lib;glew32s.lib;opengl32.lib;GameNetworkingSockets_s.lib;enet.lib; ws2_32.lib; winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -182,7 +183,6 @@
     <ClCompile Include="Game\Scene\Scene2.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
-    <ClCompile Include="test_p2p.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
@@ -235,7 +235,6 @@
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="NetworkingBase.h" />
-    <ClInclude Include="nuklear.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Game\Scene\Scene2.h" />
     <ClInclude Include="SteeringOutput.h" />
