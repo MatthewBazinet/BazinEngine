@@ -11,16 +11,20 @@ class UserInterface
 public:
 	UserInterface();
 	~UserInterface();
-	void CreateUI();
+	void CreateUI(float health = 100.0f);
 	void DestroyUI();
 
 	bool OnCreate();
 	void Update(const float deltaTime_);
 	void Render();
+	void StartTimer();
 
 private:
 
 	ImGuiBackendFlags flags;
+	float progress;
+	float damage;
+	int time = 60;
 };
 
 #endif // !USERINTERFACE_H

@@ -7,9 +7,10 @@ StartScene::StartScene()
 
 StartScene::~StartScene()
 {
+	ui->DestroyUI();
 	delete ui;
 	ui = nullptr;
-	ui->DestroyUI();
+	
 }
 
 bool StartScene::OnCreate()
