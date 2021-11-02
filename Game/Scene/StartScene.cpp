@@ -12,6 +12,9 @@ StartScene::~StartScene()
 	delete ui;
 	ui = nullptr;
 	
+	delete network;
+	network = nullptr;
+	
 }
 
 bool StartScene::OnCreate()
