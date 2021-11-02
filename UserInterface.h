@@ -6,6 +6,7 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl.h"
 #include "Engine/Core/CoreEngine.h"
+#include "SoundEffects.h"
 class UserInterface
 {
 public:
@@ -25,6 +26,7 @@ private:
 	float progress;
 	float damage;
 	int time = 60;
+	SoundEffects se;
 };
 
 #endif // !USERINTERFACE_H

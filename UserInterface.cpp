@@ -5,7 +5,7 @@
 
 UserInterface::UserInterface()
 {
-
+	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
 }
 
 UserInterface::~UserInterface()
@@ -51,6 +51,7 @@ void UserInterface::Update(const float deltaTime_)
 	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() / 2, CoreEngine::GetInstance()->GetScreenHeight() / 2));
 	ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 	if (ImGui::Button("Play", ImVec2(300,100))) {
+		se.playSoundEffect(0);
 		CoreEngine::GetInstance()->SetCurrentScene(1);
 	}
 	ImGui::End();
