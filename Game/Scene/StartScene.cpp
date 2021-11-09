@@ -5,11 +5,13 @@ StartScene::StartScene()
 {
 	ui = new UserInterface();
 	network = new NetworkingBase();
+	music.addMusicTrack("Resources/Audio/Dee Yan-Key - Postludio.mp3");
 }
 
 StartScene::~StartScene()
 {
 	ui->DestroyUI();
+	music.Play_Pause();
 	delete ui;
 	ui = nullptr;
 	
@@ -24,7 +26,7 @@ bool StartScene::OnCreate()
 	ui->OnCreate();
 	CoreEngine::GetInstance()->SetCamera(new Camera());
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
-	
+	music.playMusicTrack(0);
 	return true;
 }
 

@@ -3,6 +3,7 @@
 #include "../../Engine/Core/CoreEngine.h"
 #include "../UserInterface.h"
 #include "..//NetworkingBase.h"
+#include "../SDLMusic.h"
 
 class StartScene : public Scene
 {
@@ -19,7 +20,7 @@ public:
 private:
 	UserInterface* ui;
 	NetworkingBase* network;
-
+	SDLMusic music;
 };
 
 #endif // !STARTSCENE_H
