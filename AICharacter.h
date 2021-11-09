@@ -4,6 +4,7 @@
 #include "Game/Character.h"
 #include "KinematicFlee.h"
 #include "KinematicArrive.h"
+#include "KinematicChainArrive.h"
 
 enum TargetType {CROSSUP, INFRONTCLOSE, INFRONTFAR, SELF};
 

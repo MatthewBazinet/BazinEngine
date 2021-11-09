@@ -27,6 +27,7 @@ public:
 	//float GetMaxAcceleration()const;
 	float GetMass() const;
 
+	int GetTargetNumber() const { return targetNumber; };
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
@@ -43,6 +44,8 @@ public:
 	void SetMaxSpeed(float maxSpeed_);
 
 	void SetMass(float mass_);
+
+	void SetTargetNumber(int targetNumber_) { targetNumber = targetNumber_; };
 
 
 protected:
@@ -61,6 +64,8 @@ protected:
 	glm::quat angularVelocity;
 	glm::vec3 scale;
 	std::string tag;
+
+	int targetNumber;
 
 	BoundingBox boundingBox;
 

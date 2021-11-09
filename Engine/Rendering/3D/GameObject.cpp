@@ -12,6 +12,7 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	orientation = orientation_;
 	angularVelocity = angularVelocity_;
 	hit = false;
+	targetNumber = 0;
 
 	intersects = false;
 

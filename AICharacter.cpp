@@ -13,7 +13,6 @@ AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool
 
 void AICharacter::Update(const float deltaTime_)
 {
-
 	if (position.y >= 0.1f)
 	{
 		isAirborne = true;
@@ -31,18 +30,20 @@ void AICharacter::Update(const float deltaTime_)
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}
 
+	std::vector<glm::vec3> targets;
+	targets.push_back(glm::vec3(2.0f, 0.0f, 5.0f));
+	targets.push_back(glm::vec3(7.0f, 0.0f, 7.0f));
+	
 	switch (targetType) {
 	case TargetType::CROSSUP:
 		target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 		break;
 	case TargetType::INFRONTCLOSE:
 		target = opponent->GetPosition() + maxSpeed * 0.75f * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
-
 		break;
 
 	case TargetType::INFRONTFAR:
 		target = opponent->GetPosition() + maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
-
 		break;
 
 	case TargetType::SELF:
@@ -62,12 +63,7 @@ void AICharacter::Update(const float deltaTime_)
 	if (ray.intersectionDist < maxSpeed / deltaTime_)
 	if (isRunning)
 	{
-		
-
-		
-
 		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
-
 		Ray ray = Ray();
 		ray.direction = vel;
 		ray.origin = position;
@@ -110,13 +106,16 @@ void AICharacter::Update(const float deltaTime_)
 	}
 	else
 	{
-		
 		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+		steering = KinematicChainArrive::getSteering(this, targets, 1.0f);
+		float preserveY = vel.y;
+		vel = steering.velocity;
+		vel.y = preserveY;
 
 		glm::vec3 projection = glm::dot(position - target, axisOf2DMovement) * axisOf2DMovement;
 		glm::vec3 axisMagProj = glm::length(projection) * axisOf2DMovement;
 
-		if (glm::equal(axisMagProj - projection, glm::vec3(0.0f,0.0f,0.0f)).b) {
+		/*if (glm::equal(axisMagProj - projection, glm::vec3(0.0f,0.0f,0.0f)).b) {
 			SetDir2D(-1.0f);
 		}
 		else
@@ -159,7 +158,7 @@ void AICharacter::Update(const float deltaTime_)
 				SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
 				isAirborne = true;
 			}
-		}
+		}*/
 	angle = steering.rotation;
 
 	}

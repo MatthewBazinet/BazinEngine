@@ -171,6 +171,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="KinematicArrive.cpp" />
+    <ClCompile Include="KinematicChainArrive.cpp" />
     <ClCompile Include="KinematicFlee.cpp" />
     <ClCompile Include="KinematicSeek.cpp" />
     <ClCompile Include="KinematicSteeringOutput.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="KinematicArrive.h" />
+    <ClInclude Include="KinematicChainArrive.h" />
     <ClInclude Include="KinematicFlee.h" />
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
