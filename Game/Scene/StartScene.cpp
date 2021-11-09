@@ -11,12 +11,13 @@ StartScene::StartScene()
 StartScene::~StartScene()
 {
 	ui->DestroyUI();
-	music.Play_Pause();
+	
 	delete ui;
 	ui = nullptr;
 	
 	delete network;
 	network = nullptr;
+	music.Play_Pause();
 	
 }
 
