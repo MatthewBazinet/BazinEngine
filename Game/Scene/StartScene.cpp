@@ -1,11 +1,12 @@
 #include "StartScene.h"
-#include <thread>
+
 
 StartScene::StartScene()
 {
 	ui = new UserInterface();
 	network = new NetworkingBase();
 	music.addMusicTrack("Resources/Audio/Dee Yan-Key - Postludio.mp3");
+	
 }
 
 StartScene::~StartScene()
@@ -51,10 +52,11 @@ void StartScene::NotifyOfKeyDown(const SDL_Scancode key_)
 	switch (key_)
 	{	
 		case SDL_SCANCODE_O:
-			network->Run(true);
+			//network->CallRun(true);
 			break;
 		case SDL_SCANCODE_L:
-			network->Run(false);
+			std::thread net(&NetworkingBase::Run, false);
+			net.detach();
 			break;
 	}
 }

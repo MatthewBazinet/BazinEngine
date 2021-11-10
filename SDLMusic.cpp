@@ -5,6 +5,7 @@
 SDLMusic::SDLMusic()
 {
     SDLInit::initSDLSound();
+   
 }
 
 void SDLMusic::addMusicTrack(const char* path)

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <enet/enet.h>
+#include <thread>
 
 class NetworkingBase
 {
@@ -11,9 +12,7 @@ public:
 	ENetAddress address;
 	ENetEvent event;
 	ENetPeer* peer;
-
-	int Run(bool isServer);
-
+	static int Run(bool isServer);
 	~NetworkingBase();
 
 };
