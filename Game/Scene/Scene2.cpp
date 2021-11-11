@@ -1,6 +1,8 @@
 #include "Scene2.h"
 #include "..//Engine/Camera/BattleCamera.h"
 #include "..//../AICharacter.h"
+#include "..//Pawn.h"
+#include "..//Pathfinding.h"
 
 Scene2::Scene2()
 {
@@ -364,6 +366,11 @@ bool Scene2::OnCreate()
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 
+
+	SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(1.5f, 0.0f, 0.0f)), "Pawn");
+
+	SceneGraph::GetInstance()->GetGameObject("Pawn")->SetTargetNumber(0);
+	dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(glm::vec3(-10.0f,0.0f, 0.0f));
 
 	diceModel = nullptr;
 	appleModel = nullptr;

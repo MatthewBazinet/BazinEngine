@@ -381,13 +381,6 @@ bool GameScene::OnCreate()
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	
 
-
-	SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(1.5f, 0.0f, 0.0f)), "Pawn");
-
-	//SceneGraph::GetInstance()->GetGameObject("Pawn")->SetTargetNumber(0);
-
-	
-
 	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	
 
@@ -417,7 +410,7 @@ bool GameScene::OnCreate()
 void GameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
-	dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition());
+
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 }
 

@@ -5,7 +5,9 @@ KinematicSteeringOutput KinematicChainArrive::getSteering(GameObject* character_
 	KinematicSteeringOutput result = KinematicSteeringOutput();
 
     //std::cout << round(character_->GetPosition().x) << " " << targets_[counter].x << std::endl;
-    if (round(character_->GetPosition().x) == targets_[character_->GetTargetNumber()].x && round(character_->GetPosition().z) == targets_[character_->GetTargetNumber()].z && character_->GetTargetNumber() < targets_.size() - 1)
+    if (abs(character_->GetPosition().x - targets_[character_->GetTargetNumber()].x) < 0.1 
+		&& abs(character_->GetPosition().z -targets_[character_->GetTargetNumber()].z) < 0.1 
+		&& character_->GetTargetNumber() < targets_.size() - 1)
     {
         //std::cout << "moving to " << targets_[character_->GetTargetNumber()].x << " " << targets_[character_->GetTargetNumber()].z << std::endl;
         character_->SetTargetNumber(character_->GetTargetNumber() + 1);
