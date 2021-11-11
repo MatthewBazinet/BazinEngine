@@ -183,6 +183,8 @@
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Game\Scene\Scene2.cpp" />
+    <ClCompile Include="SDLInit.cpp" />
+    <ClCompile Include="SDLMusic.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
@@ -242,6 +244,8 @@
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Game\Scene\Scene2.h" />
+    <ClInclude Include="SDLInit.h" />
+    <ClInclude Include="SDLMusic.h" />
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />

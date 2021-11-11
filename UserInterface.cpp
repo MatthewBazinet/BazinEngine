@@ -22,6 +22,7 @@ void UserInterface::DestroyUI()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
+	se.~SoundEffects();
 }
 
 bool UserInterface::OnCreate()

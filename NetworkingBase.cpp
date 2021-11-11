@@ -2,6 +2,8 @@
 
 int NetworkingBase::Run(bool isServer)
 {
+	NetworkingBase tmp;
+
 	if (enet_initialize() != 0)
 	{
 		fprintf(stderr, "An error occured while initializing ENet.\n");
@@ -9,9 +11,9 @@ int NetworkingBase::Run(bool isServer)
 	}
 	atexit(enet_deinitialize);
 
-	client = enet_host_create(NULL, 1, 1, 0, 0);
+	tmp.client = enet_host_create(NULL, 1, 1, 0, 0);
 
-	if (client == NULL)
+	if (tmp.client == NULL)
 	{
 		fprintf(stderr, "An error occured creating the client.\n");
 	}
@@ -19,50 +21,51 @@ int NetworkingBase::Run(bool isServer)
 	if (!isServer)
 	{
 
-		enet_address_set_host(&address, "127.0.0.1");
-		address.port = 7777;
+		enet_address_set_host(&tmp.address, "70.53.231.252");
+		tmp.address.port = 7777;
 
-		peer = enet_host_connect(client, &address, 1, 0);
-		if (peer == NULL)
+		tmp.peer = enet_host_connect(tmp.client, &tmp.address, 1, 0);
+		if (tmp.peer == NULL)
 		{
 			fprintf(stderr, "No available peers for initiating a connection.");
 			return EXIT_FAILURE;
 		}
 
-		if (enet_host_service(client, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
+		if (enet_host_service(tmp.client, &tmp.event, 5000) > 0 && tmp.event.type == ENET_EVENT_TYPE_CONNECT)
 		{
 			puts("Connection to 127.0.0.1:7777 succeded.");
 		}
 		else
 		{
-			enet_peer_reset(peer);
+			enet_peer_reset(tmp.peer);
 			puts("Connection failed.");
+			std::cout << "done" << std::endl;
 			return EXIT_FAILURE;
 		}
 
-		while (enet_host_service(client, &event, 1000) > 0)
+		while (enet_host_service(tmp.client, &tmp.event, 1000) > 0)
 		{
-			switch (event.type)
+			switch (tmp.event.type)
 			{
 			case ENET_EVENT_TYPE_RECEIVE:
 				printf("A packet of length %u containing %s was received from %x:%u on channel %u.\n",
-					event.packet->dataLength,
-					event.packet->data,
-					event.peer->address.host,
-					event.peer->address.port,
-					event.channelID);
+					tmp.event.packet->dataLength,
+					tmp.event.packet->data,
+					tmp.event.peer->address.host,
+					tmp.event.peer->address.port,
+					tmp.event.channelID);
 				break;
 			}
 		}
 
-		enet_peer_disconnect(peer, 0);
+		enet_peer_disconnect(tmp.peer, 0);
 
-		while (enet_host_service(client, &event, 3000) > 0)
+		while (enet_host_service(tmp.client, &tmp.event, 3000) > 0)
 		{
-			switch (event.type)
+			switch (tmp.event.type)
 			{
 			case ENET_EVENT_TYPE_RECEIVE:
-				enet_packet_destroy(event.packet);
+				enet_packet_destroy(tmp.event.packet);
 				break;
 			case ENET_EVENT_TYPE_DISCONNECT:
 				puts("Disconnection succeeded.");
@@ -77,19 +80,19 @@ int NetworkingBase::Run(bool isServer)
 		/* Bind the server to the default localhost.     */
 /* A specific host address can be specified by   */
 /* enet_address_set_host (& address, "x.x.x.x"); */
-		address.host = ENET_HOST_ANY; // This allows
+		tmp.address.host = ENET_HOST_ANY; // This allows
 		/* Bind the server to port 7777. */
-		address.port = 7777;
+		tmp.address.port = 7777;
 
 
 
-		client = enet_host_create(&address	/* the address to bind the server host to */,
+		tmp.client = enet_host_create(&tmp.address	/* the address to bind the server host to */,
 			32	/* allow up to 32 clients and/or outgoing connections */,
 			1	/* allow up to 1 channel to be used, 0. */,
 			0	/* assume any amount of incoming bandwidth */,
 			0	/* assume any amount of outgoing bandwidth */);
 
-		if (client == NULL)
+		if (tmp.client == NULL)
 		{
 			printf("An error occurred while trying to create an ENet server host.");
 			return 1;
@@ -100,7 +103,7 @@ int NetworkingBase::Run(bool isServer)
 		{
 			ENetEvent event;
 			/* Wait up to 1000 milliseconds for an event. */
-			while (enet_host_service(client, &event, 1000) > 0)
+			while (enet_host_service(tmp.client, &event, 1000) > 0)
 			{
 				switch (event.type)
 				{
@@ -128,8 +131,8 @@ int NetworkingBase::Run(bool isServer)
 			}
 		}
 
-		enet_host_destroy(client);
-
+		enet_host_destroy(tmp.client);
+		
 		return 0;
 	}
 }
