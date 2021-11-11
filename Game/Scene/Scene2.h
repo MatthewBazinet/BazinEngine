@@ -5,6 +5,7 @@
 #include "../Character.h"
 #include "../../Projectile.h"
 #include "../../Flocking.h"
+#include "..//Pathfinding.h"
 class Scene2 : public Scene
 {
 public:
@@ -16,7 +17,8 @@ public:
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
-	std::vector<GameObject*> proj;
+	
+	GridWithWeights navgrid;
 };
 
 #endif // !GAMESCENE_H

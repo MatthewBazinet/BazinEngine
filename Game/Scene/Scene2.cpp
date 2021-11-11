@@ -2,11 +2,9 @@
 #include "..//Engine/Camera/BattleCamera.h"
 #include "..//../AICharacter.h"
 #include "..//Pawn.h"
-#include "..//Pathfinding.h"
 
-Scene2::Scene2()
+Scene2::Scene2() : navgrid(GridWithWeights(100, 100))
 {
-
 }
 
 Scene2::~Scene2()
@@ -367,10 +365,14 @@ bool Scene2::OnCreate()
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 
 
-	SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(1.5f, 0.0f, 0.0f)), "Pawn");
+	SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "Pawn");
 
 	SceneGraph::GetInstance()->GetGameObject("Pawn")->SetTargetNumber(0);
-	dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(glm::vec3(-10.0f,0.0f, 0.0f));
+	
+	navgrid = GridWithWeights(100, 100);
+	navgrid.addRect(5, 5, 10, 10);
+
+	dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(glm::vec3(20.0f,0.0f, 20.0f), navgrid);
 
 	diceModel = nullptr;
 	appleModel = nullptr;

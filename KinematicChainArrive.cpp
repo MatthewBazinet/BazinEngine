@@ -5,8 +5,8 @@ KinematicSteeringOutput KinematicChainArrive::getSteering(GameObject* character_
 	KinematicSteeringOutput result = KinematicSteeringOutput();
 
     //std::cout << round(character_->GetPosition().x) << " " << targets_[counter].x << std::endl;
-    if (abs(character_->GetPosition().x - targets_[character_->GetTargetNumber()].x) < 0.1 
-		&& abs(character_->GetPosition().z -targets_[character_->GetTargetNumber()].z) < 0.1 
+    if (abs(character_->GetPosition().x - targets_[character_->GetTargetNumber()].x) < 0.2f 
+		&& abs(character_->GetPosition().z -targets_[character_->GetTargetNumber()].z) < 0.2f 
 		&& character_->GetTargetNumber() < targets_.size() - 1)
     {
         //std::cout << "moving to " << targets_[character_->GetTargetNumber()].x << " " << targets_[character_->GetTargetNumber()].z << std::endl;
@@ -18,7 +18,7 @@ KinematicSteeringOutput KinematicChainArrive::getSteering(GameObject* character_
         //result.velocity.y = 0.0f;
         // velocity is along this direction, at full speed
         result.velocity /= timeToTarget_;
-        if (result.velocity.length() > character_->GetMaxSpeed())
+        if (result.velocity.length() != character_->GetMaxSpeed())
         {
             result.velocity = glm::normalize(result.velocity);
             result.velocity = character_->GetMaxSpeed() * result.velocity;
