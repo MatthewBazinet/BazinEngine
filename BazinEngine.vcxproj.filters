@@ -55,6 +55,7 @@
     <ClCompile Include="KinematicChainArrive.cpp" />
     <ClCompile Include="SDLInit.cpp" />
     <ClCompile Include="SDLMusic.cpp" />
+    <ClCompile Include="Pawn.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -116,6 +117,7 @@
     <ClInclude Include="KinematicChainArrive.h" />
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
+    <ClInclude Include="Pawn.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Apple_Body.png" />

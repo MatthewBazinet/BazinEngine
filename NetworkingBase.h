@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <enet/enet.h>
-#include <thread>
-
 class NetworkingBase
 {
 public:

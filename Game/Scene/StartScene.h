@@ -4,8 +4,6 @@
 #include "../UserInterface.h"
 #include "..//NetworkingBase.h"
 #include "../SDLMusic.h"
-#include <iostream>
-#include <chrono>
 #include <thread>
 class StartScene : public Scene
 {
@@ -23,7 +21,6 @@ private:
 	UserInterface* ui;
 	NetworkingBase* network;
 	SDLMusic music;
-	std::thread net;
 };
 
 #endif // !STARTSCENE_H

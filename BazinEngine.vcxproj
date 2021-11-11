@@ -181,6 +181,7 @@
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Game\Scene\Scene2.cpp" />
     <ClCompile Include="SDLInit.cpp" />
@@ -242,6 +243,7 @@
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="Pawn.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Game\Scene\Scene2.h" />
     <ClInclude Include="SDLInit.h" />

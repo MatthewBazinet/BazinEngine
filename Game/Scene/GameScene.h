@@ -5,6 +5,7 @@
 #include "../Character.h"
 #include "../../Projectile.h"
 #include "../../Flocking.h"
+#include "../Pawn.h"
 class GameScene : public Scene
 {
 public:
