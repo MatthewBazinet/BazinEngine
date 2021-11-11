@@ -39,7 +39,6 @@ int NetworkingBase::Run(bool isServer)
 		{
 			enet_peer_reset(tmp.peer);
 			puts("Connection failed.");
-			std::cout << "done" << std::endl;
 			return EXIT_FAILURE;
 		}
 

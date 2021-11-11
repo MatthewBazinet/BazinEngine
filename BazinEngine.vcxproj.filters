@@ -55,8 +55,12 @@
     <ClCompile Include="KinematicChainArrive.cpp" />
     <ClCompile Include="SDLInit.cpp" />
     <ClCompile Include="SDLMusic.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Randomizer.cpp" />
+=======
+    <ClCompile Include="Pawn.cpp" />
+>>>>>>> 4584794f17e93f3851d7e5277f07b49830b4e49c
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -118,9 +122,13 @@
     <ClInclude Include="KinematicChainArrive.h" />
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
+<<<<<<< HEAD
     <ClInclude Include="resource.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Randomizer.h" />
+=======
+    <ClInclude Include="Pawn.h" />
+>>>>>>> 4584794f17e93f3851d7e5277f07b49830b4e49c
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Apple_Body.png" />

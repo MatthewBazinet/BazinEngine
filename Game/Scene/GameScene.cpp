@@ -324,6 +324,8 @@ bool GameScene::OnCreate()
 
 	Model* man = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
+	//Model* pawn = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+
 	SceneGraph::GetInstance()->AddModel(diceModel);
 	SceneGraph::GetInstance()->AddModel(appleModel);
 	SceneGraph::GetInstance()->AddModel(rachidaShape);
@@ -351,6 +353,9 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 	
 	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+
+	
+
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 	//static_cast<Flocking*>(SceneGraph::GetInstance()->GetGameObject("rop"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 
@@ -371,15 +376,16 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 	 
 	
-	 
-
-
-
-	
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile1"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile2"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	
+
+
+	SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(1.5f, 0.0f, 0.0f)), "Pawn");
+	SceneGraph::GetInstance()->GetGameObject("char1")->SetTargetNumber(1);
+
+	dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition());
 
 	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	
