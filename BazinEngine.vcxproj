@@ -180,9 +180,11 @@
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Game\Scene\Scene2.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SDLInit.cpp" />
     <ClCompile Include="SDLMusic.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
@@ -241,9 +243,12 @@
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="NetworkingBase.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Game\Scene\Scene2.h" />
+    <ClInclude Include="Randomizer.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
     <ClInclude Include="SoundEffects.h" />
@@ -256,6 +261,8 @@
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />
     <None Include="Engine\Shader\ColourVertexShader.glsl" />
     <None Include="Engine\Shader\FragmentShader.glsl" />
+    <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
+    <None Include="Engine\Shader\ParticleVertexShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +270,9 @@
     <Image Include="Resources\Textures\Apple_Stem.png" />
     <Image Include="Resources\Textures\CheckerboardTexture.png" />
     <Image Include="Resources\Textures\diceTexture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BazinEngine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

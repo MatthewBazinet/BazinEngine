@@ -55,6 +55,8 @@
     <ClCompile Include="KinematicChainArrive.cpp" />
     <ClCompile Include="SDLInit.cpp" />
     <ClCompile Include="SDLMusic.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -116,6 +118,9 @@
     <ClInclude Include="KinematicChainArrive.h" />
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Randomizer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Apple_Body.png" />
@@ -128,5 +133,10 @@
     <None Include="Engine\Shader\ColourVertexShader.glsl" />
     <None Include="Engine\Shader\FragmentShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
+    <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
+    <None Include="Engine\Shader\ParticleVertexShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BazinEngine.rc" />
   </ItemGroup>
 </Project>
