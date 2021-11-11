@@ -30,9 +30,9 @@ void AICharacter::Update(const float deltaTime_)
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}
 
-	std::vector<glm::vec3> targets;
-	targets.push_back(glm::vec3(2.0f, 0.0f, 5.0f));
-	targets.push_back(glm::vec3(7.0f, 0.0f, 7.0f));
+	//std::vector<glm::vec3> targets;
+	//targets.push_back(glm::vec3(2.0f, 0.0f, 5.0f));
+	//targets.push_back(glm::vec3(7.0f, 0.0f, 7.0f));
 	
 	switch (targetType) {
 	case TargetType::CROSSUP:
@@ -107,10 +107,10 @@ void AICharacter::Update(const float deltaTime_)
 	else
 	{
 		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
-		steering = KinematicChainArrive::getSteering(this, targets, 1.0f);
-		float preserveY = vel.y;
-		vel = steering.velocity;
-		vel.y = preserveY;
+		//steering = KinematicChainArrive::getSteering(this, targets, 1.0f);
+		//float preserveY = vel.y;
+		//vel = steering.velocity;
+		//vel.y = preserveY;
 
 		glm::vec3 projection = glm::dot(position - target, axisOf2DMovement) * axisOf2DMovement;
 		glm::vec3 axisMagProj = glm::length(projection) * axisOf2DMovement;
@@ -158,8 +158,8 @@ void AICharacter::Update(const float deltaTime_)
 				SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
 				isAirborne = true;
 			}
-		}*/
-	angle = steering.rotation;
+		}
+	angle = steering.rotation;*/
 
 	}
 	Character::Update(deltaTime_);

@@ -17,7 +17,7 @@ bool Scene2::OnCreate()
 	Log::Info("Game Scene initiated", "GameScene.cpp", __LINE__);
 
 	CoreEngine::GetInstance()->SetCamera(new BattleCamera());
-	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
+	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 10.0f, 20.0f));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 1.0f, 0.0f)));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 0.0f, 1.0f)));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 0.0f, 0.0f)));
@@ -327,7 +327,30 @@ bool Scene2::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 
-	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
+	// Add Walls
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-5.0f, 0.0f, 0.0f)), "wall1");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-5.0f, 0.0f, -2.0f)), "wall2");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-5.0f, 0.0f, -4.0f)), "wall3");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-7.0f, 0.0f, -4.0f)), "wall4");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-9.0f, 0.0f, -4.0f)), "wall5");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-11.0f, 0.0f, -4.0f)), "wall6");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-11.0f, 0.0f, -2.0f)), "wall7");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-11.0f, 0.0f, 0.0f)), "wall8");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-7.0f, 0.0f, 0.0f)), "wall9");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-7.0f, 0.0f, 2.0f)), "wall10");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-11.0f, 0.0f, 4.0f)), "wall11");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-11.0f, 0.0f, 6.0f)), "wall12");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-13.0f, 0.0f, 4.0f)), "wall13");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-13.0f, 0.0f, 0.0f)), "wall14");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-9.0f, 0.0f, 6.0f)), "wall12");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-7.0f, 0.0f, 6.0f)), "wall12");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-7.0f, 0.0f, 2.0f)), "wall12");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-3.0f, 0.0f, 0.0f)), "wall1");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-3.0f, 0.0f, 4.0f)), "wall1");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-3.0f, 0.0f, 6.0f)), "wall1");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-5.0f, 0.0f, 6.0f)), "wall1");
+
+	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 
@@ -354,7 +377,7 @@ bool Scene2::OnCreate()
 void Scene2::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
-	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
+	//static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 
 }
 

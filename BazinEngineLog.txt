@@ -7,3 +7,10 @@
 [ERROR]: Cannot open OBJ file: Resources/Models/tetrahedron.obj in: LoadOBJModel.cpp on line: 73
 [ERROR]: Surface for texture Material failed to be created in: TextureHandler.cpp on line: 47
 [ERROR]: Cannot open OBJ file: Resources/Models/basecharactermodel.obj in: LoadOBJModel.cpp on line: 73
+[ERROR]: Trying to add a GameObject with a tag wall12 that already exists in: SceneGraph.cpp on line: 72
+[ERROR]: Trying to add a GameObject with a tag wall12 that already exists in: SceneGraph.cpp on line: 72
+[ERROR]: Trying to add a GameObject with a tag wall12 that already exists in: SceneGraph.cpp on line: 72
+[ERROR]: Trying to add a GameObject with a tag wall1 that already exists in: SceneGraph.cpp on line: 72
+[ERROR]: Trying to add a GameObject with a tag wall1 that already exists in: SceneGraph.cpp on line: 72
+[ERROR]: Trying to add a GameObject with a tag wall1 that already exists in: SceneGraph.cpp on line: 72
+[ERROR]: Trying to add a GameObject with a tag wall1 that already exists in: SceneGraph.cpp on line: 72
