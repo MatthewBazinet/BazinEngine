@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <cstdlib>
 
-//Essentially a Vec2 but with different operator overloads and less functions
+//Essentially an integer Vec2 but with different operator overloads and less functions
 struct GridVec {
 	int x, y;
 };
@@ -29,7 +29,7 @@ bool operator != (GridVec a, GridVec b);
 bool operator < (GridVec a, GridVec b);
 
 namespace std {
-	//implement hash function so we can put GridVec into an unordered_set
+	//implement hash function so we can check if a GridVec is in an unordered_set
 	template <> struct hash<GridVec> {
 		typedef GridVec argument_type;
 		typedef std::size_t result_type;
@@ -56,10 +56,13 @@ struct Grid {
 			&& 0 <= id.y && id.y < height;
 	}
 
+	//returns true if id is not in walls
 	bool passable(GridVec id) const {
 		return walls.find(id) == walls.end();
 	}
 
+	//finds neihboring nodes via the  DIRS array which allows for a more dynamic method of changing which directions are valid (diagonals for example)
+	//Also only returns passable nodes (non-walls)
 	std::vector<GridVec> neighbors(GridVec id) const {
 		std::vector<GridVec> results;
 
@@ -72,6 +75,7 @@ struct Grid {
 
 		return results;
 	}
+	//Helper function that adds a rectangle to the set of walls
 	void addRect(int x1, int y1, int x2, int y2);
 };
 
@@ -80,12 +84,17 @@ struct Grid {
 struct GridWithWeights : Grid {
 	std::unordered_set<GridVec> roughTerrain;
 	GridWithWeights(int w, int h) : Grid(w, h) {}
+
+	//Helper function to more easily add rough terrain
+	void addRoughTerrain(int x1, int y1, int x2, int y2);
+
+	//if a node is rough terrain its cost is 5 otherwise 1
 	inline double cost(GridVec from_node, GridVec to_node) const {
 		return roughTerrain.find(to_node) != roughTerrain.end() ? 5 : 1;
 	}
 };
 
-//A wrapper around std::priority_queue that reverses the order
+//A wrapper around std::priority_queue that reverses the order and ensures ease of use
 template<typename T, typename priority_t>
 struct PriorityQueue {
 	typedef std::pair<priority_t, T> PQElement;
@@ -113,10 +122,12 @@ struct PriorityQueue {
 //Contains the aStar algorithm
 struct Pathfinding {
 public:
+	//Call to fill cameFrom unordered map which is used by makePath
 	static void aStarSearch(GridWithWeights graph, GridVec start, GridVec goal, std::unordered_map<GridVec, GridVec>& cameFrom, std::unordered_map<GridVec, double>& costSoFar);
 	static inline double heuristic(GridVec a, GridVec b) {
 		return std::abs(a.x - b.x) + std::abs(a.y - b.y);
 	}
+	//returns a vector of GridVecs in the order the pawn needs to traverse them in, uses cameFrom as an input
 	static std::vector<GridVec> makePath(GridVec start, GridVec goal, std::unordered_map<GridVec, GridVec> cameFrom);
 };
 #endif

@@ -18,6 +18,7 @@ bool operator<(GridVec a, GridVec b)
 
 }
 
+
 void Grid::addRect(int x1, int y1, int x2, int y2)
 {
 		for (int x = x1; x < x2; x++) {
@@ -25,6 +26,16 @@ void Grid::addRect(int x1, int y1, int x2, int y2)
 				walls.insert(GridVec{ x, y });
 			}
 		}
+}
+
+
+void GridWithWeights::addRoughTerrain(int x1, int y1, int x2, int y2)
+{
+	for (int x = x1; x < x2; x++) {
+		for (int y = y1; y < y2; y++) {
+			roughTerrain.insert(GridVec{ x, y });
+		}
+	}
 }
 
 void Pathfinding::aStarSearch(GridWithWeights graph, GridVec start, GridVec goal, std::unordered_map<GridVec, GridVec>& cameFrom, std::unordered_map<GridVec, double>& costSoFar)

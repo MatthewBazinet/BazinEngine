@@ -6,30 +6,3 @@
 [INFO]: Game Scene initiated in: GameScene.cpp on line: 17
 [ERROR]: Surface for texture Material failed to be created in: TextureHandler.cpp on line: 47
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall8 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag wall3 that already exists in: SceneGraph.cpp on line: 72
