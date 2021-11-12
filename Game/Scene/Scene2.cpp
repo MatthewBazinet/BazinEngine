@@ -492,6 +492,9 @@ void Scene2::NotifyOfKeyDown(const SDL_Scancode key_)
 		static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
 		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
 		break;
+	case SDL_SCANCODE_U:
+		dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition(), navgrid);
+		break;
 	case SDL_SCANCODE_R:
 		if (static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->getIsRunning()) {
 			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(false);

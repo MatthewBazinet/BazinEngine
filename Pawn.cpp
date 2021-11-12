@@ -11,6 +11,7 @@ Pawn::~Pawn()
 
 void Pawn::SetTarget(glm::vec3 target_, GridWithWeights navgrid_)
 {
+	SetTargetNumber(0);
 	GridVec start;
 	start.x = position.x;
 	start.y = position.z;
