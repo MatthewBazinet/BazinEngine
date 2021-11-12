@@ -43,6 +43,7 @@ void Pathfinding::aStarSearch(GridWithWeights graph, GridVec start, GridVec goal
 	PriorityQueue<GridVec, double> frontier;
 	frontier.put(start, 0);
 
+	//start at start with no cost
 	cameFrom[start] = start;
 	costSoFar[start] = 0;
 
@@ -53,13 +54,13 @@ void Pathfinding::aStarSearch(GridWithWeights graph, GridVec start, GridVec goal
 			break;
 		}
 
-		for (GridVec next : graph.neighbors(current)) {
+		for (GridVec next : graph.neighbors(current)) { //checks for each non-wall in-bounds neighboring node (determined by the DIRS array)
 			double new_cost = costSoFar[current] + graph.cost(current, next);
-			if (costSoFar.find(next) == costSoFar.end() || new_cost < costSoFar[next]) {
+			if (costSoFar.find(next) == costSoFar.end() || new_cost < costSoFar[next]) { //checks which neighboring node adds the least cost and adds them to the frontier based on cost and the heuristic
 				costSoFar[next] = new_cost;
 				double priority = new_cost + heuristic(next, goal);
 				frontier.put(next, priority);
-				cameFrom[next] = current;
+				cameFrom[next] = current; //sets the map up so the path can be reversed by using the next node as the key for the current one
 			}
 		}
 	}
@@ -73,7 +74,7 @@ std::vector<GridVec> Pathfinding::makePath(
 	GridVec current = goal;
 	while (current != start) {
 		path.push_back(current);
-		current = cameFrom[current];
+		current = cameFrom[current]; //uses current as key to retrieve the previous node from the map
 	}
 	path.push_back(start);
 	std::reverse(path.begin(), path.end());
