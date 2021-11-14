@@ -74,28 +74,28 @@ void UserInterface::StartTimer()
 		}
 	}
 }
-
+//Menu Ui
 void UserInterface::ShowMenu()
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 	
-
+	//Single Player Button
 	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 	ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 	if (ImGui::Button("Single Player", ImVec2(300, 100))) {
 		se.playSoundEffect(0);
 		CoreEngine::GetInstance()->SetCurrentScene(1);
 	}
-
+	//Online Button
 	if (ImGui::Button("Online", ImVec2(300, 100))) {
 		se.playSoundEffect(0);
 		std::thread net(&NetworkingBase::Run, false);
 		net.detach();
 	}
 	ImGui::End();
-
+	//Quit Button
 	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 	ImGui::Begin("quit ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 	if (ImGui::Button("Quit", ImVec2(250, 90))) {
@@ -104,21 +104,36 @@ void UserInterface::ShowMenu()
 	ImGui::End();
 }
 
+//Ui for in game
 void UserInterface::ShowGameUi()
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::Begin(" ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-	ImGui::ProgressBar(progress,ImVec2(400,40));
+	//Player 1 Health Bar
+	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+	ImGui::Begin("Player 2", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+	ImGui::ProgressBar(progress,ImVec2(400,35));
+	ImGui::End();
+
+	//Player 2 Health Bar
+	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.25f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+	ImGui::Begin("Player 1", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+	ImGui::ProgressBar(progress, ImVec2(400, 35));
+	ImGui::End();
+
+	//Timer
+	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+	ImGui::Begin("Timer", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
 	ImGui::Text("%i", time);
-	
+	ImGui::End();
+
+	//gonna remove once we can damage characters
 	progress -= damage;
 	if (progress <= 0.0f) {
 		progress = 1.0f;
 	}
-	ImGui::End();
 }
 
 
