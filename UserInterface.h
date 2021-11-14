@@ -5,8 +5,9 @@
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl.h"
-#include "Engine/Core/CoreEngine.h"
+
 #include "SoundEffects.h"
+#include "NetworkingBase.h"
 class UserInterface
 {
 public:
@@ -19,8 +20,10 @@ public:
 	void Update(const float deltaTime_);
 	void Render();
 	void StartTimer();
-
+	void ShowMenu();
+	void ShowGameUi();
 private:
+
 
 	ImGuiBackendFlags flags;
 	float progress;

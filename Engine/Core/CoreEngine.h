@@ -21,7 +21,7 @@
 #include "..//Camera/Camera.h"
 #include "..//Events/EventListener.h"
 
-
+#include "../UserInterface.h"
 
 class CoreEngine
 {
@@ -78,7 +78,7 @@ private:
 	Timer* timer;
 	unsigned int fps;
 	GameInterface* gameInterface;
-
+	UserInterface* userInterface;
 	int currentSceneNum;
 	Camera* camera;
 

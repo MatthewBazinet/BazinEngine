@@ -1,4 +1,5 @@
 #include "UserInterface.h"
+#include "Engine/Core/CoreEngine.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -36,8 +37,6 @@ bool UserInterface::OnCreate()
 	progress = 200.0f;
 	damage = 0.01f;
 	progress = glm::normalize(progress);
-	std::thread thread1(&UserInterface::StartTimer, this);
-	thread1.detach();
 
 
 	return true;
@@ -45,26 +44,18 @@ bool UserInterface::OnCreate()
 
 void UserInterface::Update(const float deltaTime_)
 {
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-	
-	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() / 2, CoreEngine::GetInstance()->GetScreenHeight() / 2));
-	ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
-	if (ImGui::Button("Play", ImVec2(300,100))) {
-		se.playSoundEffect(0);
-		CoreEngine::GetInstance()->SetCurrentScene(1);
+	switch (CoreEngine::GetInstance()->GetCurrentScene())
+	{
+	case 1:
+		ShowGameUi();
+		break;
+	case 2:
+		
+		break;
+	default: //case 0:
+		ShowMenu();
+		break;
 	}
-	ImGui::End();
-
-	ImGui::Begin(" ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-	ImGui::ProgressBar(progress,ImVec2(400,40));
-	ImGui::Text("%i", time);
-	progress -= damage;
-	if (progress <= 0.0f) {
-		progress = 1.0f;
-	}
-	ImGui::End();
 }
 
 void UserInterface::Render()
@@ -83,3 +74,51 @@ void UserInterface::StartTimer()
 		}
 	}
 }
+
+void UserInterface::ShowMenu()
+{
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+	
+
+	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+	ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+	if (ImGui::Button("Single Player", ImVec2(300, 100))) {
+		se.playSoundEffect(0);
+		CoreEngine::GetInstance()->SetCurrentScene(1);
+	}
+
+	if (ImGui::Button("Online", ImVec2(300, 100))) {
+		se.playSoundEffect(0);
+		std::thread net(&NetworkingBase::Run, false);
+		net.detach();
+	}
+	ImGui::End();
+
+	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+	ImGui::Begin("quit ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+	if (ImGui::Button("Quit", ImVec2(250, 90))) {
+		CoreEngine::GetInstance()->Exit();
+	}
+	ImGui::End();
+}
+
+void UserInterface::ShowGameUi()
+{
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+
+	ImGui::Begin(" ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+	ImGui::ProgressBar(progress,ImVec2(400,40));
+	ImGui::Text("%i", time);
+	
+	progress -= damage;
+	if (progress <= 0.0f) {
+		progress = 1.0f;
+	}
+	ImGui::End();
+}
+
+

@@ -18,7 +18,6 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 private:
-	UserInterface* ui;
 	NetworkingBase* network;
 	SDLMusic music;
 };

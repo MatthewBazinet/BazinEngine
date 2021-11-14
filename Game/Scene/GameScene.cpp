@@ -15,7 +15,7 @@ GameScene::~GameScene()
 bool GameScene::OnCreate()
 {
 	Log::Info("Game Scene initiated", "GameScene.cpp", __LINE__);
-
+	
 	CoreEngine::GetInstance()->SetCamera(new BattleCamera());
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 1.0f, 0.0f)));
