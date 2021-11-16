@@ -8,6 +8,9 @@
 
 #include "SoundEffects.h"
 #include "NetworkingBase.h"
+
+
+
 class UserInterface
 {
 public:
@@ -22,14 +25,17 @@ public:
 	void StartTimer();
 	void ShowMenu();
 	void ShowGameUi();
+	bool TextBox();
 private:
-
-
+	enum State {Menu, Settings, Online, SinglePlayer};
+	State state;
+	bool menu;
 	ImGuiBackendFlags flags;
 	float progress;
 	float damage;
 	int time = 60;
 	SoundEffects se;
+	char str0[256] = { 0 };
 };
 
 #endif // !USERINTERFACE_H

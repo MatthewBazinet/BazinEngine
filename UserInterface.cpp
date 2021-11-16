@@ -7,6 +7,8 @@
 UserInterface::UserInterface()
 {
 	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
+	menu = true;
+	state = Menu;
 }
 
 UserInterface::~UserInterface()
@@ -15,7 +17,6 @@ UserInterface::~UserInterface()
 
 void UserInterface::CreateUI(float health)
 {
-
 }
 
 void UserInterface::DestroyUI()
@@ -31,6 +32,7 @@ bool UserInterface::OnCreate()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	
 	ImGui::StyleColorsDark();
 	ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
 	ImGui_ImplOpenGL3_Init("#version 450");
@@ -80,28 +82,60 @@ void UserInterface::ShowMenu()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
+	if (state == Menu) {
+
+
+		//Single Player Button
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+		if (ImGui::Button("Single Player", ImVec2(300, 100))) {
+			se.playSoundEffect(0);
+			CoreEngine::GetInstance()->SetCurrentScene(1);
+		}
+		//Online Button
+		if (ImGui::Button("Online", ImVec2(300, 100))) {
+			se.playSoundEffect(0);
+			state = Online;
+
+		}
+
+
+
+		ImGui::End();
+		//Quit Button
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("quit ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+		if (ImGui::Button("Quit", ImVec2(250, 90))) {
+			CoreEngine::GetInstance()->Exit();
+		}
+		ImGui::End();
+	}
+
+	if(state == Online){
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+		if (ImGui::Button("Host", ImVec2(250, 90))) {
+			
+		}
+		if (ImGui::Button("Join", ImVec2(250, 90))) {
+			std::thread net(&NetworkingBase::Run, false, str0);
+			net.detach();
+		}
+		if (ImGui::InputText("Host IP", str0, IM_ARRAYSIZE(str0))) {
+			
+ 		}
+		ImGui::End();
+
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.15f, CoreEngine::GetInstance()->GetScreenHeight() * 0.1f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("Menu Button", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+		if (ImGui::Button("Back", ImVec2(250, 90))) {
+			se.playSoundEffect(0);
+			state = Menu;
+		}
+		ImGui::End();
+	}
+
 	
-	//Single Player Button
-	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-	ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
-	if (ImGui::Button("Single Player", ImVec2(300, 100))) {
-		se.playSoundEffect(0);
-		CoreEngine::GetInstance()->SetCurrentScene(1);
-	}
-	//Online Button
-	if (ImGui::Button("Online", ImVec2(300, 100))) {
-		se.playSoundEffect(0);
-		std::thread net(&NetworkingBase::Run, false);
-		net.detach();
-	}
-	ImGui::End();
-	//Quit Button
-	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-	ImGui::Begin("quit ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
-	if (ImGui::Button("Quit", ImVec2(250, 90))) {
-		CoreEngine::GetInstance()->Exit();
-	}
-	ImGui::End();
 }
 
 //Ui for in game
@@ -134,6 +168,11 @@ void UserInterface::ShowGameUi()
 	if (progress <= 0.0f) {
 		progress = 1.0f;
 	}
+}
+
+bool UserInterface::TextBox()
+{
+	return false;
 }
 
 

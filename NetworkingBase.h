@@ -10,7 +10,7 @@ public:
 	ENetAddress address;
 	ENetEvent event;
 	ENetPeer* peer;
-	static int Run(bool isServer);
+	static int Run(bool isServer, char* hostIP);
 	~NetworkingBase();
 
 };

@@ -1,6 +1,6 @@
 #include "NetworkingBase.h"
 
-int NetworkingBase::Run(bool isServer)
+int NetworkingBase::Run(bool isServer,char* hostIP)
 {
 	NetworkingBase tmp;
 
@@ -21,7 +21,7 @@ int NetworkingBase::Run(bool isServer)
 	if (!isServer)
 	{
 
-		enet_address_set_host(&tmp.address, "70.53.231.252");
+		enet_address_set_host(&tmp.address,hostIP);
 		tmp.address.port = 7777;
 
 		tmp.peer = enet_host_connect(tmp.client, &tmp.address, 1, 0);
