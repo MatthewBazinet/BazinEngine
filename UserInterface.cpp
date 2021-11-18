@@ -116,7 +116,7 @@ void UserInterface::ShowMenu()
 		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Host", ImVec2(250, 90))) {
 			std::thread net(&NetworkingBase::Run, true, str0);
-			net.join();
+			net.detach();
 		}
 		if (ImGui::Button("Join", ImVec2(250, 90))) {
 			std::thread net(&NetworkingBase::Run, false, str0);
