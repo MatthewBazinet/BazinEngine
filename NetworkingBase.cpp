@@ -1,4 +1,31 @@
 #include "NetworkingBase.h"
+#include <thread>
+
+void* MsgLoop(ENetHost* client, ENetEvent event) {
+	while (true) {
+		;
+		while (enet_host_service(client, &event, 1000) > 0)
+		{
+			switch (event.type)
+			{
+			case ENET_EVENT_TYPE_RECEIVE:
+				printf("A packet of length %u containing %s was received from %x:%u on channel %u.\n",
+					event.packet->dataLength,
+					event.packet->data,
+					event.peer->address.host,
+					event.peer->address.port,
+					event.channelID);
+				break;
+			}
+		}
+	}
+}
+void NetworkingBase::SendPacket(ENetPeer* peer, const char* data)
+{
+	
+	ENetPacket* packet = enet_packet_create(data, strlen(data) + 1, ENET_PACKET_FLAG_RELIABLE);
+	enet_peer_send(peer, 0, packet);
+}
 
 int NetworkingBase::Run(bool isServer,char* hostIP)
 {
@@ -42,6 +69,7 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 			return EXIT_FAILURE;
 		}
 
+		/*
 		while (enet_host_service(tmp.client, &tmp.event, 1000) > 0)
 		{
 			switch (tmp.event.type)
@@ -55,7 +83,14 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 					tmp.event.channelID);
 				break;
 			}
-		}
+		}*/
+		SendPacket(tmp.peer, "this is a packet");
+
+
+		std::thread thread1(MsgLoop, tmp.client,tmp.event);
+		thread1.join();
+
+
 
 		enet_peer_disconnect(tmp.peer, 0);
 
