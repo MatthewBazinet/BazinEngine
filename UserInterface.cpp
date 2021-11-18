@@ -115,14 +115,15 @@ void UserInterface::ShowMenu()
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Host", ImVec2(250, 90))) {
-			
+			std::thread net(&NetworkingBase::Run, true, str0);
+			net.join();
 		}
 		if (ImGui::Button("Join", ImVec2(250, 90))) {
 			std::thread net(&NetworkingBase::Run, false, str0);
 			net.detach();
 		}
-		if (ImGui::InputText("Host IP", str0, IM_ARRAYSIZE(str0))) {
-			
+		if (ImGui::InputText("Host IP", str0, IM_ARRAYSIZE(str0),ImGuiInputTextFlags_EnterReturnsTrue)) {
+			std::cout << str0 << std::endl;
  		}
 		ImGui::End();
 
