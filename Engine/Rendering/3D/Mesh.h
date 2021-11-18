@@ -27,7 +27,7 @@ public:
 	~Mesh();
 
 	void Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vector<bool>& instancesVisible_);
-
+	std::vector<Vertex> GetVertices();
 private:
 	void GenerateBuffers();
 	SubMesh subMesh;

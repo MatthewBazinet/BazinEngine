@@ -81,6 +81,11 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vect
 	glBindVertexArray(0);
 }
 
+std::vector<Vertex> Mesh::GetVertices()
+{
+	return subMesh.vertexList;
+}
+
 
 void Mesh::GenerateBuffers()
 {

@@ -1,5 +1,7 @@
 #include "Pathfinding.h"
 
+//Created with the tutorial here:
+//https://www.redblobgames.com/pathfinding/a-star/implementation.html
 
 bool operator==(GridVec a, GridVec b)
 {

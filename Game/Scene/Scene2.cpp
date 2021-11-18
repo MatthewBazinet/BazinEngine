@@ -389,7 +389,7 @@ bool Scene2::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(21.0f, 0.0f, 15.0f)), "wall3");
 	navgrid.addRect(17, 17, 23, 18);
 
-	//navgrid.addRoughTerrain(20, 20, 30, 30);
+	navgrid.addRoughTerrain(20, 20, 30, 30);
 
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 

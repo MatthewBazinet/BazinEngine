@@ -1,4 +1,4 @@
-#include "CollisionDetection.h"
+﻿#include "CollisionDetection.h"
 #include "Ray.h"
 #include "../Core/CoreEngine.h"
 
@@ -196,3 +196,55 @@ bool CollisionDetection::RayAABBIntersection(Ray* ray_, BoundingBox* box_)
 
 	return true;
 }
+
+bool CollisionDetection::HandleSimplex(Simplex s, glm::vec3 d)
+{
+	if (s.length == 2)
+	{
+		return false;//LineCase(s, d);
+	}
+}
+
+#define ORIGIN glm::vec3(0.0f,0.0f,0.0f)
+template<typename Shape_a, typename SupportMapping_a, typename Shape_b, typename SupportMapping_b>
+bool CollisionDetection::GJKIntersection(Shape_a a, SupportMapping_a aS, Shape_b b, SupportMapping_b bS)
+{
+	/*
+	function GJK_intersection(shape p, shape q, vector initial_axis):
+    vector  A = Support(p, initial_axis) − Support(q, −initial_axis)
+    simplex s = {A}
+    vector  D = −A
+
+    loop:
+        A = Support(p, D) − Support(q, −D)
+        if dot(A, D) < 0:
+            reject
+        s = s ∪ A
+        s, D, contains_origin := NearestSimplex(s)
+        if contains_origin:
+            accept
+	*/
+	glm::vec3 d = glm::normalize(b.center - a.center);
+	glm::vec3 A;
+	Simplex s;
+	s.Add(aS.support(a, d) - bS.support(b, -d));
+
+	d = ORIGIN - s.a;
+	while (true)
+	{
+		A = support(a, b, d);
+		if (glm::dot(A, d) < 0)
+		{
+			return false;
+		}
+		s.Add(A);
+		//if (handleSimplex(s, d))
+		//{
+		//	return true;
+		//}
+	}
+
+	
+	return false;
+}
+#undef ORIGIN

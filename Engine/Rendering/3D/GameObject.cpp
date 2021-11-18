@@ -133,6 +133,11 @@ float GameObject::GetMass() const
 
 }
 
+std::vector<Mesh*> GameObject::GetMeshes()
+{
+	return model->GetMeshes();
+}
+
 void GameObject::SetPosition(glm::vec3 position_)
 {
 	position = position_;

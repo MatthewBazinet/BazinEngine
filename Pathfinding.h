@@ -1,6 +1,7 @@
 #ifndef PATHFINDING_H
 #define PATHFINDING_H
 
+//Created with the tutorial here:
 //https://www.redblobgames.com/pathfinding/a-star/implementation.html
 
 #include <iostream>

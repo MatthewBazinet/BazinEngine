@@ -27,6 +27,8 @@ public:
 	//float GetMaxAcceleration()const;
 	float GetMass() const;
 
+	std::vector<Mesh*> GetMeshes();
+
 	int GetTargetNumber() const { return targetNumber; };
 
 	void ApplyForce(glm::vec3 force_);
