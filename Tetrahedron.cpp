@@ -4,15 +4,16 @@ void Tetrahedron::Update()
 {
 	for (int i = 0; i < NUM_OF_TETRAHEDRON_POINTS; i++)
 	{
-		transformedPoints[i] = (points[i] * rotation) + centre;
+		transformedPoints[i] = (points[i] * rotation) + centre; //rotate then translate all the points
 	}
 }
 
+//Gets the point furthest in the given direction
 glm::vec3 Tetrahedron::Support(glm::vec3 direction)
 {
-	float dotMax = FLT_MIN;
-	glm::vec3 result;
-	for (int i = 0; i < NUM_OF_TETRAHEDRON_POINTS; i++)
+	float dotMax = glm::dot(transformedPoints[0], direction);
+	glm::vec3 result = transformedPoints[0];
+	for (int i = 1; i < NUM_OF_TETRAHEDRON_POINTS; i++)
 	{
 		float dot = glm::dot(transformedPoints[i], direction);
 		

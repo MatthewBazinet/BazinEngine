@@ -54,6 +54,8 @@ void UserInterface::Update(const float deltaTime_)
 	case 2:
 		
 		break;
+	case 3:
+		break;
 	default: //case 0:
 		ShowMenu();
 		break;

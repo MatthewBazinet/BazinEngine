@@ -63,7 +63,10 @@ void Game1::BuildScene()
 		break;
 	case 2:
 		currentScene = new Scene2();
-			break;
+		break;
+	case 3:
+		currentScene = new GJKTestScene();
+		break;
 	default: //case 0:
 		currentScene = new StartScene();
 		break;

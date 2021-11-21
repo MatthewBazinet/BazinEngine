@@ -4,9 +4,11 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include "Model.h"
+#include "..//Tetrahedron.h"
 class GameObject {
 public:
-	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0.0f, 0.0f, 0.0f), float angle_ = 0, glm::vec3 rotation_ = glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3 scale_ = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 vel_ = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat orientation_ = glm::quat(0.0f,5.0f,5.0f,5.0f), glm::quat angularVelocity_ = glm::quat());
+	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0.0f, 0.0f, 0.0f), float angle_ = 0, glm::vec3 rotation_ = glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3 scale_ = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 vel_ = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat orientation_ = glm::quat(0.0f, 5.0f, 5.0f, 5.0f), glm::quat angularVelocity_ = glm::quat(), Tetrahedron shape = Tetrahedron());
+
 	~GameObject();
 
 	virtual void Update(const float deltaTime_);
@@ -49,6 +51,8 @@ public:
 
 	void SetTargetNumber(int targetNumber_) { targetNumber = targetNumber_; };
 
+	Tetrahedron GetShape();
+	void SetShape(Tetrahedron shape_);
 
 protected:
 	Model* model;
@@ -75,6 +79,8 @@ protected:
 	bool intersects;
 
 	void CheckVisible();
+
+	Tetrahedron shape;
 };
 
 #endif //!GAMEOBJECT_H

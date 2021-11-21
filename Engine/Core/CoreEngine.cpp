@@ -190,6 +190,8 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	case SDL_SCANCODE_2:
 		CoreEngine::GetInstance()->SetCurrentScene(2);
 		break;
+	case SDL_SCANCODE_3:
+		CoreEngine::GetInstance()->SetCurrentScene(3);
 	default:
 		gameInterface->NotifyOfKeyDown(key_);
 		break;

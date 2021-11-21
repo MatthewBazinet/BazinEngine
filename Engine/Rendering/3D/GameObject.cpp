@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "../../Core/CoreEngine.h"
 
-GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_)
+GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_, Tetrahedron shape_)
 {
 	model = model_;
 	position = position_;
@@ -16,6 +16,8 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 
 	intersects = false;
 
+	shape = shape_;
+
 	mass = 10.0f;
 	if (model)
 	{
@@ -25,6 +27,7 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 		
 		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
+
 }
 
 GameObject::~GameObject()
@@ -147,7 +150,7 @@ void GameObject::SetPosition(glm::vec3 position_)
 		{
 			model->UpdateInstance(modelInstance, position, angle, rotation, scale);
 		}
-		else
+	else
 		{
 			model->UpdateInstance(modelInstance, position, orientation, scale);
 
@@ -243,6 +246,19 @@ void GameObject::SetMaxSpeed(float maxSpeed_)
 void GameObject::SetMass(float mass_)
 {
 	mass = mass_;
+}
+
+Tetrahedron GameObject::GetShape()
+{
+	shape.centre = position;
+	shape.rotation = orientation;
+	shape.Update();
+	return shape;
+}
+
+void GameObject::SetShape(Tetrahedron shape_)
+{
+	shape = shape_;
 }
 
 void GameObject::CheckVisible()

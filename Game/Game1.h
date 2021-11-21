@@ -9,6 +9,7 @@
 #include "Scene/StartScene.h"
 #include "Scene/GameScene.h"
 #include "Scene/Scene2.h"
+#include "..//GJKTestScene.h"
 
 class Game1 : public GameInterface
 {
