@@ -147,7 +147,7 @@ void UserInterface::ShowMenu()
 //Ui for in game
 void UserInterface::ShowGameUi()
 {
-	if (state = SinglePlayer) {
+	if (state == SinglePlayer) {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
@@ -175,6 +175,9 @@ void UserInterface::ShowGameUi()
 		if (progress <= 0.0f) {
 			progress = 1.0f;
 		}
+	}
+	else {
+		state = Empty;
 	}
 }
 
