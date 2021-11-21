@@ -191,6 +191,7 @@
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
+    <ClCompile Include="Tetrahedron.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
@@ -256,6 +257,7 @@
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
+    <ClInclude Include="Tetrahedron.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
