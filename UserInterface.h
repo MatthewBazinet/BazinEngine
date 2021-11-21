@@ -27,7 +27,7 @@ public:
 	void ShowGameUi();
 	bool TextBox();
 private:
-	enum State {Menu, Settings, Online, SinglePlayer};
+	enum State {Menu, Settings, Online, SinglePlayer,Empty};
 	State state;
 	bool menu;
 	ImGuiBackendFlags flags;

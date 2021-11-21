@@ -52,11 +52,12 @@ void UserInterface::Update(const float deltaTime_)
 		ShowGameUi();
 		break;
 	case 2:
-		
+		state = Empty;
 		break;
 	case 3:
 		break;
 	default: //case 0:
+		state = Menu;
 		ShowMenu();
 		break;
 	}
@@ -64,8 +65,10 @@ void UserInterface::Update(const float deltaTime_)
 
 void UserInterface::Render()
 {
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	if (state != Empty) {
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	}
 }
 
 void UserInterface::StartTimer()
@@ -144,32 +147,34 @@ void UserInterface::ShowMenu()
 //Ui for in game
 void UserInterface::ShowGameUi()
 {
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
+	if (state = SinglePlayer) {
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplSDL2_NewFrame();
+		ImGui::NewFrame();
 
-	//Player 1 Health Bar
-	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-	ImGui::Begin("Player 2", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-	ImGui::ProgressBar(progress,ImVec2(400,35));
-	ImGui::End();
+		//Player 1 Health Bar
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("Player 2", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+		ImGui::ProgressBar(progress, ImVec2(400, 35));
+		ImGui::End();
 
-	//Player 2 Health Bar
-	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.25f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-	ImGui::Begin("Player 1", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-	ImGui::ProgressBar(progress, ImVec2(400, 35));
-	ImGui::End();
+		//Player 2 Health Bar
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.25f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("Player 1", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+		ImGui::ProgressBar(progress, ImVec2(400, 35));
+		ImGui::End();
 
-	//Timer
-	ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-	ImGui::Begin("Timer", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-	ImGui::Text("%i", time);
-	ImGui::End();
+		//Timer
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("Timer", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+		ImGui::Text("%i", time);
+		ImGui::End();
 
-	//gonna remove once we can damage characters
-	progress -= damage;
-	if (progress <= 0.0f) {
-		progress = 1.0f;
+		//gonna remove once we can damage characters
+		progress -= damage;
+		if (progress <= 0.0f) {
+			progress = 1.0f;
+		}
 	}
 }
 
