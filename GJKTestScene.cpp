@@ -85,8 +85,11 @@ void GJKTestScene::Update(const float deltaTime_)
 
 void GJKTestScene::Render()
 {
-
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	if (lineMode)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
 }
 
@@ -146,6 +149,8 @@ void GJKTestScene::NotifyOfKeyDown(const SDL_Scancode key_)
 {
 	switch (key_)
 	{
+	case SDL_SCANCODE_G:
+		lineMode = (lineMode) ? false : true;
 	}
 }
 

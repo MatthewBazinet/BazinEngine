@@ -53,7 +53,8 @@ public:
 
 
 
-
+//The following functions are in the header because the compiler got upset not knowing the resolution to the template right away
+//TLDR: Template in header makes linker errors go away
 
 template<typename Shape_a, typename Shape_b>
 bool CollisionDetection::GJK<Shape_a, Shape_b>::HandleSimplex()
@@ -68,14 +69,14 @@ bool CollisionDetection::GJK<Shape_a, Shape_b>::HandleSimplex()
 	glm::vec3 d0;
 
 	switch (simplex.length) {
-	case 0:
+	case 0: //nothing case
 		d = b.centre - a.centre;
 		break;
-	case 1:
+	case 1: //point case
 		// flip the direction to get a different arbitary second point
 		d *= -1.0f;
 		break;
-	case 2:
+	case 2: //line case
 		//vector between a and b
 		ab = simplex.b - simplex.a;
 		//vector from ab to origin
@@ -86,7 +87,7 @@ bool CollisionDetection::GJK<Shape_a, Shape_b>::HandleSimplex()
 		//d = glm::cross(tmp, ab);
 		d = VectorTripleProduct(ab, a0, ab);
 		break;
-	case 3:
+	case 3: //triangle case
 		ac = simplex.c - simplex.a;
 		ab = simplex.b - simplex.a;
 		d = glm::cross(ac, ab);
@@ -95,7 +96,7 @@ bool CollisionDetection::GJK<Shape_a, Shape_b>::HandleSimplex()
 		a0 = simplex.a * -1.0f;
 		if (glm::dot(d, a0) < 0) d *= -1.0f;
 		break;
-	case 4:
+	case 4: //tetrahedron case
 		// calculate edges of interest and the direction to the origin
 		da = simplex.d - simplex.a;
 		db = simplex.d - simplex.b;

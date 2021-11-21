@@ -16,6 +16,7 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 	bool colliding = false;
+	bool lineMode = false;
 };
 
 #endif // !GJKTESTSCENE_H

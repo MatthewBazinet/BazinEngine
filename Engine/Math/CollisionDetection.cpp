@@ -200,7 +200,7 @@ bool CollisionDetection::RayAABBIntersection(Ray* ray_, BoundingBox* box_)
 glm::vec3 CollisionDetection::VectorTripleProduct(glm::vec3 a, glm::vec3 b, glm::vec3 c)
 {
 	return glm::cross(a, glm::cross(b, c));
-	return (glm::dot(a, c) * b) - (glm::dot(a, b) * c);
+	//return (glm::dot(a, c) * b) - (glm::dot(a, b) * c);
 }
 
 /*
