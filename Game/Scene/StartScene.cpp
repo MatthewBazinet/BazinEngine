@@ -5,7 +5,7 @@ StartScene::StartScene()
 {
 	network = new NetworkingBase();
 	music.addMusicTrack("Resources/Audio/Dee Yan-Key - Postludio.mp3");
-	particle = new ParticleSystem(100000, ShaderHandler::GetInstance()->GetShader("particleShader"));
+	particle = new ParticleSystem(1000, ShaderHandler::GetInstance()->GetShader("particleShader"));
 }
 
 StartScene::~StartScene()
