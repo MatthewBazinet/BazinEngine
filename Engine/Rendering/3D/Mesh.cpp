@@ -56,6 +56,7 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vect
 	glUniform3fv(colourLoc, numOfLights, glm::value_ptr(colours[0]));
 	
     (diffuseMapMatLoc, 1, subMesh.material);
+	
 	glUniform1f(shininessMatLoc, subMesh.material.shininess);
 	glUniform1f(transparencyMatLoc, subMesh.material.transparency);
 	glUniform3fv(ambientMatLoc, 1, (GLfloat*)& subMesh.material.ambient[0]);
@@ -107,6 +108,7 @@ void Mesh::GenerateBuffers()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+	
 
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	viewLoc = glGetUniformLocation(shaderProgram, "view");

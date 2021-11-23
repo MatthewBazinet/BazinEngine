@@ -31,6 +31,7 @@ public:
 private:
 	void GenerateBuffers();
 	SubMesh subMesh;
+	GLuint timeLoc;
 	GLuint VAO, VBO;
 	GLuint shaderProgram;
 	GLuint modelLoc, viewLoc, projectionLoc;

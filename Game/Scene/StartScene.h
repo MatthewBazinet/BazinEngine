@@ -5,6 +5,7 @@
 #include "..//NetworkingBase.h"
 #include "../SDLMusic.h"
 #include <thread>
+#include "../ParticleSystem.h"
 class StartScene : public Scene
 {
 public:
@@ -20,6 +21,7 @@ public:
 private:
 	NetworkingBase* network;
 	SDLMusic music;
+	ParticleSystem* particle;
 };
 
 #endif // !STARTSCENE_H
