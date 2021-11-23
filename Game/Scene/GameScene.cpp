@@ -4,7 +4,7 @@
 
 GameScene::GameScene()
 {
-
+	
 }
 
 GameScene::~GameScene()
@@ -23,7 +23,6 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 0.0f, 0.0f)));
 
 	CollisionHandler::GetInstance()->OnCreate(100.0f);
-
 	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "Resources/Textures/CheckerboardTexture.png");
 
 	Vertex v;
@@ -324,12 +323,14 @@ bool GameScene::OnCreate()
 
 	Model* man = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
+
 	//Model* pawn = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	SceneGraph::GetInstance()->AddModel(diceModel);
 	SceneGraph::GetInstance()->AddModel(appleModel);
 	SceneGraph::GetInstance()->AddModel(rachidaShape);
 	SceneGraph::GetInstance()->AddModel(man);
+
 
 
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
@@ -351,10 +352,11 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 
 	//SceneGraph::GetInstance()->AddGameObject(new Flocking(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "rop");
+
+
 	SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 	
 	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
-
 	
 
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
@@ -403,7 +405,6 @@ bool GameScene::OnCreate()
 	appleModel = nullptr;
 	rachidaShape = nullptr;
 	man = nullptr;
-	
 
 	return true;
 }
@@ -420,6 +421,7 @@ void GameScene::Render()
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
+
 }
 
 void GameScene::HandleEvents(const SDL_Event& sdlEvent)

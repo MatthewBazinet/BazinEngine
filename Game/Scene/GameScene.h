@@ -6,6 +6,7 @@
 #include "../../Projectile.h"
 #include "../../Flocking.h"
 #include "../Pawn.h"
+#include "../ParticleSystem.h"
 class GameScene : public Scene
 {
 public:
