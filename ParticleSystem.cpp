@@ -9,8 +9,8 @@ ParticleSystem::ParticleSystem(int numberOfParticles, GLuint shaderProgram_)
 	for (int i = 0; i < numberOfParticles; i++)
 	{
 		pos.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
-		//vel.push_back(glm::vec3(r.box_muller(0.0f, 1.0f), r.box_muller(0.0f, 1.0f), r.box_muller(0.0f, 1.0f)));
-		vel.push_back(glm::vec3(0.0f,0.0f, 0.0f));
+		vel.push_back(glm::vec3(r.box_muller(0.0f, 1.0f), r.box_muller(0.0f, 1.0f), r.box_muller(0.0f, 1.0f)));
+		//vel.push_back(glm::vec3(0.0f,0.0f, 0.0f));
 		colour.push_back(glm::vec4(r.rand(0.5f, 1.0f), r.rand(0.5f, 1.0f), r.rand(0.5f, 1.0f), 0.0f));
 		//colour.push_back(glm::vec4(1.0f, 0.0f, 0.0f, 0.0f));
 	}
@@ -71,10 +71,10 @@ void ParticleSystem::setupParticles()
 	glVertexAttribPointer(posID, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(0));
 	
 	glEnableVertexAttribArray(velID);
-	glVertexAttribPointer(velID, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(POS_LENGTH + VEL_LENGTH));
+	glVertexAttribPointer(velID, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(POS_LENGTH));
 
 	glEnableVertexAttribArray(colourID);
-	glVertexAttribPointer(colourID, 4, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(POS_LENGTH + VEL_LENGTH + COLOUR_LENGTH));
+	glVertexAttribPointer(colourID, 4, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void*>(POS_LENGTH + VEL_LENGTH));
 
 
 	timeLoc = glGetUniformLocation(shaderProgram, "totalTime");
