@@ -29,7 +29,6 @@ public:
 private:
 	enum State {Menu, Settings, Online, SinglePlayer,Empty};
 	State state;
-	bool menu;
 	ImGuiBackendFlags flags;
 	float progress;
 	float damage;

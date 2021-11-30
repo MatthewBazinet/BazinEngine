@@ -4,11 +4,9 @@
 #include <chrono>
 #include <thread>
 
-UserInterface::UserInterface()
+UserInterface::UserInterface() : state(Menu)
 {
 	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
-	menu = true;
-	state = Menu;
 }
 
 UserInterface::~UserInterface()
@@ -29,17 +27,16 @@ void UserInterface::DestroyUI()
 
 bool UserInterface::OnCreate()
 {
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	
-	ImGui::StyleColorsDark();
-	ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
-	ImGui_ImplOpenGL3_Init("#version 450");
-	progress = 200.0f;
-	damage = 0.01f;
-	progress = glm::normalize(progress);
 
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGui::StyleColorsDark();
+		ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
+		ImGui_ImplOpenGL3_Init("#version 450");
+		progress = 200.0f;
+		damage = 0.01f;
+		progress = glm::normalize(progress);
 
 	return true;
 }
@@ -48,6 +45,9 @@ void UserInterface::Update(const float deltaTime_)
 {
 	switch (CoreEngine::GetInstance()->GetCurrentScene())
 	{
+	case 0:
+		ShowMenu();
+		break;
 	case 1:
 		ShowGameUi();
 		break;
@@ -56,8 +56,9 @@ void UserInterface::Update(const float deltaTime_)
 		break;
 	case 3:
 		break;
-	default: //case 0:
-		ShowMenu();
+		state = Empty;
+	default:
+		state = Empty;
 		break;
 	}
 }
@@ -68,6 +69,7 @@ void UserInterface::Render()
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
+	ImGui::EndFrame();
 }
 
 void UserInterface::StartTimer()
@@ -83,12 +85,11 @@ void UserInterface::StartTimer()
 //Menu Ui
 void UserInterface::ShowMenu()
 {
+
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 	if (state == Menu) {
-
-
 		//Single Player Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
@@ -102,9 +103,6 @@ void UserInterface::ShowMenu()
 			state = Online;
 
 		}
-
-
-
 		ImGui::End();
 		//Quit Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
@@ -114,7 +112,6 @@ void UserInterface::ShowMenu()
 		}
 		ImGui::End();
 	}
-
 	if(state == Online){
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
@@ -139,8 +136,6 @@ void UserInterface::ShowMenu()
 		}
 		ImGui::End();
 	}
-
-	
 }
 
 //Ui for in game
