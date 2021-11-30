@@ -69,7 +69,7 @@ void UserInterface::Render()
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
-	ImGui::EndFrame();
+	ImGui_ImplOpenGL3_DestroyDeviceObjects();
 }
 
 void UserInterface::StartTimer()
