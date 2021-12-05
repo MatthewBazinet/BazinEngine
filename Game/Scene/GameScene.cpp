@@ -352,7 +352,7 @@ bool GameScene::OnCreate()
 
 
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(2.0f, 4.0f, 0.0f)), "apple");
-	SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(1000, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
+	SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(100, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
 	ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
 
 	//SceneGraph::GetInstance()->AddGameObject(new Flocking(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "rop");

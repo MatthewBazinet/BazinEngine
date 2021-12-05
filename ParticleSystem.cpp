@@ -25,7 +25,8 @@ ParticleSystem::~ParticleSystem()
 
 bool ParticleSystem::OnCreate(GameObject* parent_)
 {
-	return false;
+
+	return true;
 }
 
 void ParticleSystem::OnDestroy()
