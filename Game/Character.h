@@ -33,6 +33,8 @@ public:
 	void SetOpponent(Character* opponent_) { opponent = opponent_; };
 	void SetCamera(BattleCamera* camera_) { camera = camera_; };
 
+	float GetHealth() { return health; };
+
 protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);

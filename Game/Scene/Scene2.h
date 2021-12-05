@@ -6,6 +6,10 @@
 #include "../../Projectile.h"
 #include "../../Flocking.h"
 #include "..//Pathfinding.h"
+#include "../Decision Tree/FloatDecision.h"
+#include "../Decision Tree/Action.h"
+#include "../Game/TestChar.h"
+
 class Scene2 : public Scene
 {
 public:
