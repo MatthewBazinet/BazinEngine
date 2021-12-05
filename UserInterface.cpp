@@ -27,7 +27,6 @@ void UserInterface::DestroyUI()
 
 bool UserInterface::OnCreate()
 {
-
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -37,7 +36,6 @@ bool UserInterface::OnCreate()
 		progress = 200.0f;
 		damage = 0.01f;
 		progress = glm::normalize(progress);
-
 	return true;
 }
 
@@ -85,7 +83,6 @@ void UserInterface::StartTimer()
 //Menu Ui
 void UserInterface::ShowMenu()
 {
-
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
@@ -127,7 +124,6 @@ void UserInterface::ShowMenu()
 			std::cout << str0 << std::endl;
  		}
 		ImGui::End();
-
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.15f, CoreEngine::GetInstance()->GetScreenHeight() * 0.1f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Menu Button", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Back", ImVec2(250, 90))) {

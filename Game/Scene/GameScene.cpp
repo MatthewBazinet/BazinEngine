@@ -1,6 +1,8 @@
 #include "GameScene.h"
 #include "..//Engine/Camera/BattleCamera.h"
 #include "..//../AICharacter.h"
+#include "../ParticleSystem.h"
+#include "../Component.h"
 
 GameScene::GameScene()
 {
@@ -349,7 +351,9 @@ bool GameScene::OnCreate()
 
 
 
-	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(2.0f, 4.0f, 0.0f)), "apple");
+	SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(1000, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
+	ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
 
 	//SceneGraph::GetInstance()->AddGameObject(new Flocking(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "rop");
 
@@ -412,7 +416,7 @@ bool GameScene::OnCreate()
 void GameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
-
+	ptr->Update(deltaTime_);
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 }
 
@@ -420,6 +424,7 @@ void GameScene::Render()
 {
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	ptr->Render(CoreEngine::GetInstance()->GetCamera());
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
 
 }

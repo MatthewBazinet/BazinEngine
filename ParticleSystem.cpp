@@ -1,14 +1,14 @@
 #include "ParticleSystem.h"
 #include "Randomizer.h"
 
-ParticleSystem::ParticleSystem(int numberOfParticles, GLuint shaderProgram_)
+ParticleSystem::ParticleSystem(int numberOfParticles, GLuint shaderProgram_, glm::vec3 pos_)
 {
 	MATH::Randomizer r;
 	totalTime = 0.0f;
 	shaderProgram = shaderProgram_;
 	for (int i = 0; i < numberOfParticles; i++)
 	{
-		pos.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
+		pos.push_back(pos_);
 		vel.push_back(glm::vec3(r.box_muller(0.0f, 1.0f), r.box_muller(0.0f, 1.0f), r.box_muller(0.0f, 1.0f)));
 		//vel.push_back(glm::vec3(0.0f,0.0f, 0.0f));
 		colour.push_back(glm::vec4(r.rand(0.5f, 1.0f), r.rand(0.5f, 1.0f), r.rand(0.5f, 1.0f), 0.0f));
@@ -23,6 +23,15 @@ ParticleSystem::~ParticleSystem()
 	glDeleteVertexArrays(1, &vao);
 }
 
+bool ParticleSystem::OnCreate(GameObject* parent_)
+{
+	return false;
+}
+
+void ParticleSystem::OnDestroy()
+{
+}
+
 void ParticleSystem::Render(Camera* camera_) const
 {
 	glUseProgram(shaderProgram);
@@ -34,7 +43,6 @@ void ParticleSystem::Render(Camera* camera_) const
 	glDrawArrays(GL_POINTS, 0, pos.size());
 	glBindVertexArray(0);
 	glDisable(GL_PROGRAM_POINT_SIZE);
-	
 }
 
 void ParticleSystem::Update(const float deltaTime_)

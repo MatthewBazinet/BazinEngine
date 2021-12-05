@@ -129,6 +129,7 @@
     <ClInclude Include="Tetrahedron.h" />
     <ClInclude Include="GJKTestScene.h" />
     <ClInclude Include="NetworkingPackets.h" />
+    <ClInclude Include="Component.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
