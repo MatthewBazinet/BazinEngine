@@ -2,7 +2,7 @@
 #define TESTCHAR_H
 
 #include "../Game/Decision Tree/Action.h"
-
+class FloatDecision;
 class TestChar
 {
 private:

@@ -4,8 +4,9 @@
 #include <chrono>
 #include <thread>
 
-UserInterface::UserInterface() : state(Menu)
+UserInterface::UserInterface():state(State::Menu)
 {
+	
 	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
 }
 
@@ -50,20 +51,20 @@ void UserInterface::Update(const float deltaTime_)
 		ShowGameUi();
 		break;
 	case 2:
-		state = Empty;
+		state = State::Empty;
 		break;
 	case 3:
 		break;
-		state = Empty;
+		state = State::Empty;
 	default:
-		state = Empty;
+		state = State::Empty;
 		break;
 	}
 }
 
 void UserInterface::Render()
 {
-	if (state != Empty) {
+	if (state != State::Empty) {
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
@@ -86,7 +87,7 @@ void UserInterface::ShowMenu()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-	if (state == Menu) {
+	if (state == State::Menu) {
 		//Single Player Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
@@ -97,7 +98,7 @@ void UserInterface::ShowMenu()
 		//Online Button
 		if (ImGui::Button("Online", ImVec2(300, 100))) {
 			se.playSoundEffect(0);
-			state = Online;
+			state = State::Online;
 
 		}
 		ImGui::End();
@@ -109,7 +110,7 @@ void UserInterface::ShowMenu()
 		}
 		ImGui::End();
 	}
-	if(state == Online){
+	if(state == State::Online){
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Host", ImVec2(250, 90))) {
@@ -128,7 +129,7 @@ void UserInterface::ShowMenu()
 		ImGui::Begin("Menu Button", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Back", ImVec2(250, 90))) {
 			se.playSoundEffect(0);
-			state = Menu;
+			state = State::Menu;
 		}
 		ImGui::End();
 	}
@@ -137,7 +138,7 @@ void UserInterface::ShowMenu()
 //Ui for in game
 void UserInterface::ShowGameUi()
 {
-	if (state == SinglePlayer) {
+	if (state == State::SinglePlayer) {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
@@ -167,7 +168,7 @@ void UserInterface::ShowGameUi()
 		}
 	}
 	else {
-		state = Empty;
+		state = State::Empty;
 	}
 }
 

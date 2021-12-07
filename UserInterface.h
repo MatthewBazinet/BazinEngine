@@ -9,7 +9,7 @@
 #include "SoundEffects.h"
 #include "NetworkingBase.h"
 
-
+enum class State {Menu,Settings,Online,SinglePlayer,Empty };
 
 class UserInterface
 {
@@ -27,7 +27,6 @@ public:
 	void ShowGameUi();
 	bool TextBox();
 private:
-	enum State {Menu, Settings, Online, SinglePlayer,Empty};
 	State state;
 	ImGuiBackendFlags flags;
 	float progress;
