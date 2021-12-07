@@ -61,6 +61,7 @@
     <ClCompile Include="Tetrahedron.cpp" />
     <ClCompile Include="GJKTestScene.cpp" />
     <ClCompile Include="NetworkingPackets.cpp" />
+    <ClCompile Include="OnlineGameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Tetrahedron.h" />
     <ClInclude Include="GJKTestScene.h" />
     <ClInclude Include="NetworkingPackets.h" />
+    <ClInclude Include="OnlineGameScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

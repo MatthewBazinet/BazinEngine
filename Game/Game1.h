@@ -6,10 +6,7 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl.h"
 #include "..//Engine/Core/CoreEngine.h"
-#include "Scene/StartScene.h"
-#include "Scene/GameScene.h"
-#include "Scene/Scene2.h"
-#include "..//GJKTestScene.h"
+
 
 class Game1 : public GameInterface
 {

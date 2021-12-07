@@ -1,5 +1,6 @@
 #include "NetworkingBase.h"
 #include <thread>
+#include "Engine/Core/CoreEngine.h"
 
 void* MsgLoop(ENetHost* client, ENetEvent event) {
 	while (true) {
@@ -61,6 +62,7 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 		if (enet_host_service(tmp.client, &tmp.event, 5000) > 0 && tmp.event.type == ENET_EVENT_TYPE_CONNECT)
 		{
 			puts("Connection to 127.0.0.1:7777 succeded.");
+			CoreEngine::GetInstance()->SetCurrentScene(4);
 		}
 		else
 		{
@@ -145,6 +147,7 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 					printf("A new client connected from %x:%u.\n",
 						event.peer->address.host,
 						event.peer->address.port);
+					CoreEngine::GetInstance()->SetCurrentScene(4);
 					break;
 
 				case ENET_EVENT_TYPE_RECEIVE:

@@ -4,7 +4,12 @@
 #include <glm/gtx/quaternion.hpp>
 #include <string>
 
-struct NetworkingMatchStartPacket
+struct Packet
+{
+
+};
+
+struct NetworkingMatchStartPacket : public Packet
 {
 	int character;
 	int skin;
@@ -12,7 +17,7 @@ struct NetworkingMatchStartPacket
 	std::string name;
 };
 
-struct NetworkingGameplayPacket
+struct NetworkingGameplayPacket : public Packet
 {
 	glm::vec3 pos;
 	glm::vec3 rotation;
