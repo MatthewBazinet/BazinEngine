@@ -5,8 +5,11 @@
 #include "KinematicFlee.h"
 #include "KinematicArrive.h"
 #include "KinematicChainArrive.h"
+//#include "Game/Decision Tree/FloatDecision.h"
 
 enum TargetType {CROSSUP, INFRONTCLOSE, INFRONTFAR, SELF};
+
+//class FloatDecision;
 
 class AICharacter :
 	public Character
@@ -20,6 +23,8 @@ public:
 	void SetTargetType(TargetType targetType_) { targetType = targetType_; };
 	glm::vec3 GetTarget() { return target; };
 	void SetDir2D(float dir_);
+	//FloatDecision* GetDecision() { return decisionTree; };
+	//FloatDecision* decisionTree;
 
 private:
 	void SetTarget(glm::vec3 target_) { target = target_; };

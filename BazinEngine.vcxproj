@@ -159,9 +159,14 @@
     <ClCompile Include="Engine\Rendering\3D\Mesh.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
     <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
+    <ClCompile Include="Game\Decision Tree\Action.cpp" />
+    <ClCompile Include="Game\Decision Tree\Decision.cpp" />
+    <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
+    <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
     <ClCompile Include="Game\Game1.cpp" />
     <ClCompile Include="Game\Scene\GameScene.cpp" />
     <ClCompile Include="Game\Scene\StartScene.cpp" />
+    <ClCompile Include="Game\TestChar.cpp" />
     <ClCompile Include="GJKTestScene.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -200,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Math\CollisionDetection.h" />
@@ -226,11 +232,16 @@
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
     <ClInclude Include="Flocking.h" />
     <ClInclude Include="Game\Character.h" />
+    <ClInclude Include="Game\Decision Tree\Action.h" />
+    <ClInclude Include="Game\Decision Tree\Decision.h" />
+    <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
+    <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
     <ClInclude Include="Game\Game1.h" />
     <ClInclude Include="Game\Scene\GameScene.h" />
     <ClInclude Include="Game\Scene\StartScene.h" />
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\Math\Ray.h" />
+    <ClInclude Include="Game\TestChar.h" />
     <ClInclude Include="GJKTestScene.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="imgui\imconfig.h" />

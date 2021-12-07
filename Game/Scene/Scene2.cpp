@@ -328,71 +328,71 @@ bool Scene2::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(-10.0f, 0.0f, 0.0f)), "ai1");
 
 	// Add Walls
-	navgrid = GridWithWeights(100, 100);
-
-	// Top Side
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 0.0f)), "wall1");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(7.0f, 0.0f, 0.0f)), "wall2");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(9.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(11.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(14.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(16.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(18.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(20.0f, 0.0f, 0.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 0.0f)), "wall3");
-	navgrid.addRect(5, 0, 22, 2);
-
-	// Right Wall + Gap
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 2.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 7.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 8.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 10.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 12.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 14.0f)), "wall3");
-	navgrid.addRect(20, 0, 24, 4);
-	navgrid.addRect(20, 5, 24, 16);
-
-	// First Wall branching from the top
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 2.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 4.0f)), "wall3");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 5.0f)), "wall3");
-	navgrid.addRect(10, 0, 14, 7);
-
-	// Single Block
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 5.0f)), "wall3");
-	navgrid.addRect(15, 3, 19, 7);
-
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 5.0f)), "wall4");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 7.0f)), "wall6");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 9.0f)), "wall7");
-	navgrid.addRect(3, 3, 7, 11);
-
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(7.0f, 0.0f, 5.0f)), "wall5");
-	navgrid.addRect(5, 3, 9, 7);
-
-	// Bottom Side
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(7.0f, 0.0f, 11.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(9.0f, 0.0f, 11.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(11.0f, 0.0f, 11.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(13.0f, 0.0f, 11.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(15.0f, 0.0f, 11.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 11.0f)), "wall8");
-	navgrid.addRect(0, 12, 20, 15);
-
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 13.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 15.0f)), "wall8");
-	navgrid.addRect(15, 11, 19, 17);
-
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(19.0f, 0.0f, 15.0f)), "wall8");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(21.0f, 0.0f, 15.0f)), "wall3");
-	navgrid.addRect(17, 17, 23, 18);
-
-	navgrid.addRoughTerrain(20, 20, 30, 30);
-
+	//navgrid = GridWithWeights(100, 100);
+	//
+	//// Top Side
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 0.0f)), "wall1");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(7.0f, 0.0f, 0.0f)), "wall2");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(9.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(11.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(14.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(16.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(18.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(20.0f, 0.0f, 0.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 0.0f)), "wall3");
+	//navgrid.addRect(5, 0, 22, 2);
+	//
+	//// Right Wall + Gap
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 2.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 7.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 8.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 10.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 12.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(22.0f, 0.0f, 14.0f)), "wall3");
+	//navgrid.addRect(20, 0, 24, 4);
+	//navgrid.addRect(20, 5, 24, 16);
+	//
+	//// First Wall branching from the top
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 2.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 4.0f)), "wall3");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(12.0f, 0.0f, 5.0f)), "wall3");
+	//navgrid.addRect(10, 0, 14, 7);
+	//
+	//// Single Block
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 5.0f)), "wall3");
+	//navgrid.addRect(15, 3, 19, 7);
+	//
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 5.0f)), "wall4");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 7.0f)), "wall6");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(5.0f, 0.0f, 9.0f)), "wall7");
+	//navgrid.addRect(3, 3, 7, 11);
+	//
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(7.0f, 0.0f, 5.0f)), "wall5");
+	//navgrid.addRect(5, 3, 9, 7);
+	//
+	//// Bottom Side
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(7.0f, 0.0f, 11.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(9.0f, 0.0f, 11.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(11.0f, 0.0f, 11.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(13.0f, 0.0f, 11.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(15.0f, 0.0f, 11.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 11.0f)), "wall8");
+	//navgrid.addRect(0, 12, 20, 15);
+	//
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 13.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(17.0f, 0.0f, 15.0f)), "wall8");
+	//navgrid.addRect(15, 11, 19, 17);
+	//
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(19.0f, 0.0f, 15.0f)), "wall8");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(21.0f, 0.0f, 15.0f)), "wall3");
+	//navgrid.addRect(17, 17, 23, 18);
+	//
+	//navgrid.addRoughTerrain(20, 20, 30, 30);
+	//
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
-
+	//
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 
 	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
@@ -405,12 +405,14 @@ bool Scene2::OnCreate()
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 
+	TestChar* newChar = new TestChar(2.0f);
+	newChar->runDecisionTree();
 
-	SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "Pawn");
+	//SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "Pawn");
 
-	SceneGraph::GetInstance()->GetGameObject("Pawn")->SetTargetNumber(0);
+	//SceneGraph::GetInstance()->GetGameObject("Pawn")->SetTargetNumber(0);
 	
-	dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(glm::vec3(30.0f, 0.0f, 0.0f), navgrid);
+	//dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(glm::vec3(30.0f, 0.0f, 0.0f), navgrid);
 
 	diceModel = nullptr;
 	appleModel = nullptr;

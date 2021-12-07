@@ -62,6 +62,11 @@
     <ClCompile Include="GJKTestScene.cpp" />
     <ClCompile Include="NetworkingPackets.cpp" />
     <ClCompile Include="OnlineGameScene.cpp" />
+    <ClCompile Include="Game\Decision Tree\Action.cpp" />
+    <ClCompile Include="Game\Decision Tree\Decision.cpp" />
+    <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
+    <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
+    <ClCompile Include="Game\TestChar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -131,6 +136,12 @@
     <ClInclude Include="GJKTestScene.h" />
     <ClInclude Include="NetworkingPackets.h" />
     <ClInclude Include="OnlineGameScene.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Game\Decision Tree\Action.h" />
+    <ClInclude Include="Game\Decision Tree\Decision.h" />
+    <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
+    <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
+    <ClInclude Include="Game\TestChar.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

@@ -5,13 +5,11 @@ StartScene::StartScene()
 {
 	network = new NetworkingBase();
 	music.addMusicTrack("Resources/Audio/Dee Yan-Key - Postludio.mp3");
-	particle = new ParticleSystem(1000, ShaderHandler::GetInstance()->GetShader("particleShader"));
 }
 
 StartScene::~StartScene()
 {
-	delete particle;
-	particle = nullptr;
+	
 	delete network;
 	network = nullptr;
 	music.Play_Pause();
@@ -31,12 +29,10 @@ bool StartScene::OnCreate()
 void StartScene::Update(const float deltaTime_)
 {
 	//CoreEngine::GetInstance()->SetCurrentScene(1);
-	particle->Update(deltaTime_);
 }
 
 void StartScene::Render()
 {
-	particle->Render(CoreEngine::GetInstance()->GetCamera());
 }
 
 void StartScene::HandleEvents(const SDL_Event& sdlEvent)

@@ -8,14 +8,16 @@
 #include<glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
 #include "Engine/Camera/Camera.h"
-
-class ParticleSystem
+#include "Component.h"
+class ParticleSystem : public Component
 {
 public:
-	ParticleSystem(int numberOfParticles, GLuint shaderProgram_);
+	ParticleSystem(int numberOfParticles, GLuint shaderProgram_, glm::vec3 pos_);
 	~ParticleSystem();
+	virtual bool OnCreate(GameObject* parent_);
+	virtual void OnDestroy();
 	void Render(Camera* camera_) const;
-	void Update(const float deltaTime_);
+	virtual void Update(const float deltaTime_);
 private:
 	GLuint vao, vbo;
 	void setupParticles();

@@ -4,11 +4,10 @@
 #include <chrono>
 #include <thread>
 
-UserInterface::UserInterface()
+UserInterface::UserInterface():state(State::Menu)
 {
+	
 	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
-	menu = true;
-	state = Menu;
 }
 
 UserInterface::~UserInterface()
@@ -29,18 +28,15 @@ void UserInterface::DestroyUI()
 
 bool UserInterface::OnCreate()
 {
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	
-	ImGui::StyleColorsDark();
-	ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
-	ImGui_ImplOpenGL3_Init("#version 450");
-	progress = 200.0f;
-	damage = 0.01f;
-	progress = glm::normalize(progress);
-
-
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		ImGui::StyleColorsDark();
+		ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
+		ImGui_ImplOpenGL3_Init("#version 450");
+		progress = 200.0f;
+		damage = 0.01f;
+		progress = glm::normalize(progress);
 	return true;
 }
 
@@ -48,30 +44,34 @@ void UserInterface::Update(const float deltaTime_)
 {
 	switch (CoreEngine::GetInstance()->GetCurrentScene())
 	{
+	case 0:
+		ShowMenu();
+		break;
 	case 1:
 		ShowGameUi();
 		break;
 	case 2:
-		state = Empty;
+		state = State::Empty;
 		break;
 	case 3:
 		break;
 	case 4:
-		state = SinglePlayer;
+		state = State::SinglePlayer;
 		ShowGameUi();
 		break;
-	default: //case 0:
-		ShowMenu();
+	default:
+		state = State::Empty;
 		break;
 	}
 }
 
 void UserInterface::Render()
 {
-	if (state != Empty) {
+	if (state != State::Empty) {
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
+	ImGui_ImplOpenGL3_DestroyDeviceObjects();
 }
 
 void UserInterface::StartTimer()
@@ -90,9 +90,7 @@ void UserInterface::ShowMenu()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-	if (state == Menu) {
-
-
+	if (state == State::Menu) {
 		//Single Player Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
@@ -103,12 +101,9 @@ void UserInterface::ShowMenu()
 		//Online Button
 		if (ImGui::Button("Online", ImVec2(300, 100))) {
 			se.playSoundEffect(0);
-			state = Online;
+			state = State::Online;
 
 		}
-
-
-
 		ImGui::End();
 		//Quit Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
@@ -118,8 +113,7 @@ void UserInterface::ShowMenu()
 		}
 		ImGui::End();
 	}
-
-	if(state == Online){
+	if(state == State::Online){
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Host", ImVec2(250, 90))) {
@@ -134,23 +128,20 @@ void UserInterface::ShowMenu()
 			std::cout << str0 << std::endl;
  		}
 		ImGui::End();
-
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.15f, CoreEngine::GetInstance()->GetScreenHeight() * 0.1f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Menu Button", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Back", ImVec2(250, 90))) {
 			se.playSoundEffect(0);
-			state = Menu;
+			state = State::Menu;
 		}
 		ImGui::End();
 	}
-
-	
 }
 
 //Ui for in game
 void UserInterface::ShowGameUi()
 {
-	if (state == SinglePlayer) {
+	if (state == State::SinglePlayer) {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
@@ -180,7 +171,7 @@ void UserInterface::ShowGameUi()
 		}
 	}
 	else {
-		state = Empty;
+		state = State::Empty;
 	}
 }
 
