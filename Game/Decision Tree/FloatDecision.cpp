@@ -1,5 +1,7 @@
 #include "FloatDecision.h"
 #include "Action.h"
+#include "../TestChar.h"
+#include "../Engine/Core/CoreEngine.h"
 
 FloatDecision::FloatDecision(float minValue_, float maxValue_)
 {

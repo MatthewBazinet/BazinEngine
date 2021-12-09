@@ -3,6 +3,7 @@
 #include "Engine/Rendering/3D/GameObject.h"
 #include "KinematicSeek.h"
 #include "MatchVelocity.h"
+
 class Projectile : public GameObject
 {
 private:

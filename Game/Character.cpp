@@ -75,7 +75,6 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		Run(true);
 	case SDL_SCANCODE_U:
 		Light();
-		
 		break;
 	case SDL_SCANCODE_I:
 		Medium();
@@ -85,6 +84,10 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		break;
 	case SDL_SCANCODE_P:
 		Unique();
+		break;
+	case SDL_SCANCODE_G:
+		proj->SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
+		proj->SetPosition(this->GetPosition());
 		break;
 	default:
 		break;
@@ -167,6 +170,8 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
+	proj->Update(deltaTime_);
+
 	if(isRunning)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
 	
 	if (position.y >= 0.1f)

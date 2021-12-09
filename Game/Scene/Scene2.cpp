@@ -327,6 +327,8 @@ bool Scene2::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(-10.0f, 0.0f, 0.0f)), "ai1");
 
+	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
+
 	// Add Walls
 	//navgrid = GridWithWeights(100, 100);
 	//
@@ -395,6 +397,8 @@ bool Scene2::OnCreate()
 	//
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
+
 	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
@@ -405,8 +409,13 @@ bool Scene2::OnCreate()
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 
-	TestChar* newChar = new TestChar(2.0f);
-	newChar->runDecisionTree();
+	//dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
+
+	//TestChar* newChar = new TestChar(2.0f);
+	//newChar->runDecisionTree();
+
+	//newChar = nullptr;
+	//delete newChar;
 
 	//SceneGraph::GetInstance()->AddGameObject(new Pawn(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "Pawn");
 
@@ -419,13 +428,13 @@ bool Scene2::OnCreate()
 	rachidaShape = nullptr;
 	man = nullptr;
 
-
 	return true;
 }
 
 void Scene2::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
+	//SceneGraph::GetInstance()->GetGameObject("projectile")->SetPosition(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition());
 	//static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 
 }

@@ -8,13 +8,10 @@ class TestChar
 private:
 	float health;
 	FloatDecision* decision;
-	DecisionTreeNode* greater;
-	DecisionTreeNode* lesser;
 
 public:
-	TestChar();
 	TestChar(float health_);
-	~TestChar() {};
+	~TestChar();
 	float GetHealth() { return health; };
 	void SetHealth(float health_) { health = health_; };
 

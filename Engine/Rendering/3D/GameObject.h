@@ -31,6 +31,7 @@ public:
 	float GetMass() const;
 	std::vector<Mesh*> GetMeshes();
 	int GetTargetNumber() const { return targetNumber; };
+	glm::quat GetOrientation() const { return orientation; };
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);

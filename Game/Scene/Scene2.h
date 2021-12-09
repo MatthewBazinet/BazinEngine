@@ -23,6 +23,8 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 	
 	GridWithWeights navgrid;
+
+	
 };
 
 #endif // !GAMESCENE_H

@@ -2,7 +2,6 @@
 #define FLOATDECISION_H
 
 #include "Decision.h"
-#include "../TestChar.h"
 
 class TestChar;
 
@@ -22,7 +21,6 @@ public:
 
 	void SetMinValue(float minValue_) { minValue = minValue_; };
 	void SetMaxValue(float maxValue_) { maxValue = maxValue_; };
-	
 	void SetChar(TestChar* testChar_) { testChar = testChar_; };
 	TestChar* GetChar() { return testChar; };
 };
