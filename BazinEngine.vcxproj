@@ -200,6 +200,7 @@
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="Tetrahedron.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
@@ -275,6 +276,7 @@
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
     <ClInclude Include="Tetrahedron.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>

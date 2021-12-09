@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="AICharacter.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
@@ -47,6 +48,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Game\Scene\Scene2.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SDLInit.cpp" />
@@ -65,10 +67,10 @@
     <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
     <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
     <ClCompile Include="Game\TestChar.cpp" />
-    <ClCompile Include="AICharacter.cpp" />
-    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AICharacter.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Math\CollisionDetection.h" />
@@ -120,6 +122,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Game\Scene\Scene2.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="resource.h" />
@@ -140,8 +143,7 @@
     <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
     <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
     <ClInclude Include="Game\TestChar.h" />
-    <ClInclude Include="AICharacter.h" />
-    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
