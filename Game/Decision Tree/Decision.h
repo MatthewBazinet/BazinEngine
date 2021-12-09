@@ -2,6 +2,8 @@
 #define DECISION_H
 
 #include "DecisionTreeNode.h"
+#include "../tinyxml2.h"
+using namespace tinyxml2;
 
 class Decision : public DecisionTreeNode
 {
@@ -9,6 +11,7 @@ protected:
 	DecisionTreeNode* trueNode;
 	DecisionTreeNode* falseNode;
 	bool decision;
+	
 
 public:
 	Decision();
@@ -18,6 +21,8 @@ public:
 	virtual DecisionTreeNode* GetBranch();
 	void SetTrueNode(DecisionTreeNode* node_) { trueNode = node_; };
 	void SetFalseNode(DecisionTreeNode* node_) { falseNode = node_; };
+
+	
 };
 
 #endif;
