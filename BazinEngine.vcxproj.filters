@@ -68,6 +68,7 @@
     <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
     <ClCompile Include="Game\TestChar.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="XMLDecisionTreeReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
     <ClInclude Include="Game\TestChar.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="XMLDecisionTreeReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

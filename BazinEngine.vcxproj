@@ -203,6 +203,7 @@
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="XMLDecisionTreeReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -279,6 +280,7 @@
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="XMLDecisionTreeReader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ColourFragmentShader.glsl" />

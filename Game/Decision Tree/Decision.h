@@ -2,8 +2,7 @@
 #define DECISION_H
 
 #include "DecisionTreeNode.h"
-#include "../tinyxml2.h"
-using namespace tinyxml2;
+
 
 class Decision : public DecisionTreeNode
 {
