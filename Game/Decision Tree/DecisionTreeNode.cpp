@@ -7,5 +7,5 @@ DecisionTreeNode::DecisionTreeNode()
 
 DecisionTreeNode* DecisionTreeNode::MakeDecision()
 {
-	return whatToDo;
+	return whatToDo->MakeDecision();
 }

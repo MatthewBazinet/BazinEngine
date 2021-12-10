@@ -6,14 +6,15 @@
 using namespace tinyxml2;
 class Action : public DecisionTreeNode
 {
-private:
+protected:
 	std::string word;
 
 public:
+	Action();
 	Action(std::string word_);
 	Action(XMLElement* element);
 	virtual ~Action() {};
-	DecisionTreeNode* MakeDecision();
+	virtual DecisionTreeNode* MakeDecision();
 };
 
 #endif;

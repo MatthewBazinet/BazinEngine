@@ -1,5 +1,10 @@
 #include "Action.h"
 
+Action::Action()
+{
+	word = "";
+}
+
 Action::Action(std::string word_)
 {
 	word = word_;

@@ -44,7 +44,7 @@ protected:
 	void AirHeavy();
 
 	float health;
-	float meter;
+	float overclock;
 	
 	bool isRunning;
 	bool isAirborne;
