@@ -67,8 +67,8 @@
     <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
     <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
     <ClCompile Include="Game\TestChar.cpp" />
-    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -144,8 +144,8 @@
     <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
     <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
     <ClInclude Include="Game\TestChar.h" />
-    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
+    <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
@@ -163,5 +163,8 @@
     <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
     <None Include="Engine\Shader\ParticleVertexShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Tree.xml" />
   </ItemGroup>
 </Project>
