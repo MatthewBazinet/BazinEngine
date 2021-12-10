@@ -3,7 +3,7 @@
 Character::Character(float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
 	health = health_;
-	meter = meter_;
+	overclock = meter_;
 	isRunning = isRunning_;
 	isAirborne = isAirborne_;
 	model = model_;
@@ -222,6 +222,18 @@ void Character::QCF(int strength, bool simpleInput)
 	{
 		AirQCF(strength, simpleInput);
 	}
+	if (strength < 3)
+	{
+		proj->SetTarget(nullptr);
+		proj->SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
+		proj->SetPosition(this->GetPosition());
+	}
+	else
+	{
+		proj->SetTarget(opponent);
+		proj->SetPosition(this->GetPosition());
+		overclock -= 50.0f;
+	}
 }
 
 void Character::QCB(int strength, bool simpleInput)
@@ -268,7 +280,7 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning)
 {
-	this->isRunning = isRunning;
+	isRunning = isRunning;
 }
 
 void Character::Move(glm::vec2 input)

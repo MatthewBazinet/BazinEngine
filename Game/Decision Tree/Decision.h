@@ -16,7 +16,7 @@ public:
 	Decision();
 	virtual ~Decision() {};
 
-	virtual DecisionTreeNode* MakeDecision();
+	virtual DecisionTreeNode* MakeDecision() override;
 	virtual DecisionTreeNode* GetBranch();
 	void SetTrueNode(DecisionTreeNode* node_) { trueNode = node_; };
 	void SetFalseNode(DecisionTreeNode* node_) { falseNode = node_; };

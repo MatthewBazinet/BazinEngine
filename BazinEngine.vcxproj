@@ -134,6 +134,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionBackAway.cpp" />
+    <ClCompile Include="ActionEXFireball.cpp" />
+    <ClCompile Include="ActionFireball.cpp" />
+    <ClCompile Include="ActionMeteredCrossUp.cpp" />
+    <ClCompile Include="ActionMeterlessCrossUp.cpp" />
+    <ClCompile Include="ActionMoveTowards.cpp" />
+    <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Flocking.cpp" />
@@ -203,9 +210,22 @@
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="WantToAttack.cpp" />
+    <ClCompile Include="WantToBackAway.cpp" />
+    <ClCompile Include="WantToEXFireball.cpp" />
+    <ClCompile Include="WantToMeteredCrossUp.cpp" />
+    <ClCompile Include="WantToMeterlessCrossUp.cpp" />
+    <ClCompile Include="wantToSpendMeter.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionBackAway.h" />
+    <ClInclude Include="ActionEXFireball.h" />
+    <ClInclude Include="ActionFireball.h" />
+    <ClInclude Include="ActionMeteredCrossUp.h" />
+    <ClInclude Include="ActionMeterlessCrossUp.h" />
+    <ClInclude Include="ActionMoveTowards.h" />
+    <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
@@ -280,6 +300,12 @@
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="WantToAttack.h" />
+    <ClInclude Include="WantToBackAway.h" />
+    <ClInclude Include="WantToEXFireball.h" />
+    <ClInclude Include="WantToMeteredCrossUp.h" />
+    <ClInclude Include="WantToMeterlessCrossUp.h" />
+    <ClInclude Include="wantToSpendMeter.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
   </ItemGroup>
   <ItemGroup>

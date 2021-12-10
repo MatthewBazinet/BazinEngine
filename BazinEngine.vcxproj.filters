@@ -69,6 +69,19 @@
     <ClCompile Include="Game\TestChar.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
+    <ClCompile Include="wantToSpendMeter.cpp" />
+    <ClCompile Include="WantToEXFireball.cpp" />
+    <ClCompile Include="WantToMeteredCrossUp.cpp" />
+    <ClCompile Include="WantToMeterlessCrossUp.cpp" />
+    <ClCompile Include="WantToAttack.cpp" />
+    <ClCompile Include="WantToBackAway.cpp" />
+    <ClCompile Include="ActionEXFireball.cpp" />
+    <ClCompile Include="ActionFireball.cpp" />
+    <ClCompile Include="ActionMeteredCrossUp.cpp" />
+    <ClCompile Include="ActionMeterlessCrossUp.cpp" />
+    <ClCompile Include="ActionBackAway.cpp" />
+    <ClCompile Include="ActionMoveTowards.cpp" />
+    <ClCompile Include="ActionRunTowards.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -146,6 +159,19 @@
     <ClInclude Include="Game\TestChar.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
+    <ClInclude Include="wantToSpendMeter.h" />
+    <ClInclude Include="WantToEXFireball.h" />
+    <ClInclude Include="WantToMeteredCrossUp.h" />
+    <ClInclude Include="WantToMeterlessCrossUp.h" />
+    <ClInclude Include="WantToAttack.h" />
+    <ClInclude Include="WantToBackAway.h" />
+    <ClInclude Include="ActionEXFireball.h" />
+    <ClInclude Include="ActionFireball.h" />
+    <ClInclude Include="ActionMeteredCrossUp.h" />
+    <ClInclude Include="ActionMeterlessCrossUp.h" />
+    <ClInclude Include="ActionBackAway.h" />
+    <ClInclude Include="ActionMoveTowards.h" />
+    <ClInclude Include="ActionRunTowards.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

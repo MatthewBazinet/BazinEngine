@@ -498,18 +498,6 @@ void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(true);
 		}
 		break;
-	case SDL_SCANCODE_LEFT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
-		break;
-	case SDL_SCANCODE_RIGHT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
-		break;
-	case SDL_SCANCODE_UP:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::SELF);
-		break;
-	case SDL_SCANCODE_DOWN:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
-		break;
 	default:
 		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
 		char1->NotifyOnKeyDown(key_);
@@ -522,6 +510,18 @@ void GameScene::NotifyOfKeyUp(const SDL_Scancode key_)
 {
 	switch (key_)
 	{
+	case SDL_SCANCODE_LEFT:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
+		break;
+	case SDL_SCANCODE_RIGHT:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
+		break;
+	case SDL_SCANCODE_UP:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::SELF);
+		break;
+	case SDL_SCANCODE_DOWN:
+		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
+		break;
 	default:
 		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
 		char1->NotifyOnKeyUp(key_);
