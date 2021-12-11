@@ -82,6 +82,7 @@
     <ClCompile Include="ActionBackAway.cpp" />
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
+    <ClCompile Include="XMLDecision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="ActionBackAway.h" />
     <ClInclude Include="ActionMoveTowards.h" />
     <ClInclude Include="ActionRunTowards.h" />
+    <ClInclude Include="XMLDecision.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

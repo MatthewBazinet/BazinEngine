@@ -71,7 +71,7 @@ void UserInterface::Render()
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
-	ImGui_ImplOpenGL3_DestroyDeviceObjects();
+	//ImGui_ImplOpenGL3_DestroyDeviceObjects();
 }
 
 void UserInterface::StartTimer()
@@ -141,11 +141,10 @@ void UserInterface::ShowMenu()
 //Ui for in game
 void UserInterface::ShowGameUi()
 {
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
 	if (state == State::SinglePlayer) {
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplSDL2_NewFrame();
-		ImGui::NewFrame();
-
 		//Player 1 Health Bar
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 2", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);

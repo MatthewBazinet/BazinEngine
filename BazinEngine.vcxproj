@@ -216,6 +216,7 @@
     <ClCompile Include="WantToMeteredCrossUp.cpp" />
     <ClCompile Include="WantToMeterlessCrossUp.cpp" />
     <ClCompile Include="wantToSpendMeter.cpp" />
+    <ClCompile Include="XMLDecision.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +307,7 @@
     <ClInclude Include="WantToMeteredCrossUp.h" />
     <ClInclude Include="WantToMeterlessCrossUp.h" />
     <ClInclude Include="wantToSpendMeter.h" />
+    <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
   </ItemGroup>
   <ItemGroup>
