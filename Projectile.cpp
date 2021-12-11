@@ -40,7 +40,7 @@ void Projectile::Update(const float deltaTime_)
 	}
 	else
 	{
-		//SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
+		SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
 	}
 	GameObject::Update(deltaTime_);
 }

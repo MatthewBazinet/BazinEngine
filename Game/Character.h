@@ -23,7 +23,7 @@ public:
 	void Light();
 	void Medium();
 	void Heavy();
-	void Run(bool isRunning);
+	void Run(bool isRunning_);
 	void Move(glm::vec2 input);
 
 	bool getIsRunning() const { return isRunning; };

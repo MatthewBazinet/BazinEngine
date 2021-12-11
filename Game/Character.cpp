@@ -225,7 +225,7 @@ void Character::QCF(int strength, bool simpleInput)
 	if (strength < 3)
 	{
 		proj->SetTarget(nullptr);
-		proj->SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
+		proj->SetVelocity(glm::vec3(10.0f, 0.0f, 0.0f));
 		proj->SetPosition(this->GetPosition());
 	}
 	else
@@ -278,9 +278,9 @@ void Character::Heavy()
 
 }
 
-void Character::Run(bool isRunning)
+void Character::Run(bool isRunning_)
 {
-	isRunning = isRunning;
+	isRunning = isRunning_;
 }
 
 void Character::Move(glm::vec2 input)
