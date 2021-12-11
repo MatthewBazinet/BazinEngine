@@ -12,7 +12,7 @@ private:
 
 public:
 	DecisionTreeNode();
-	virtual ~DecisionTreeNode() {};
+	virtual ~DecisionTreeNode() { delete whatToDo; whatToDo = nullptr; };
 	virtual DecisionTreeNode* MakeDecision();
 };
 

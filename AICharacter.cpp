@@ -17,6 +17,7 @@
 #include "ActionBackAway.h"
 #include "ActionMoveTowards.h"
 #include "ActionRunTowards.h"
+#include <thread>
 
 AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : Character(health_, meter_, isRunning_, isAirborne_, model_,  position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_) {
 	opponent = opponent_;
@@ -33,19 +34,32 @@ AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool
 	wantToMeterlessCrossUp = 0.0f;
 	wantToAttack = 0.0f;
 	wantToBackAway = 0.0f;
+	isExisting = true;
+	decisionTreeThread = new std::thread(&AICharacter::RunDecisionTree, this);
+}
+
+AICharacter::~AICharacter()
+{
+	delete projectile;
+	projectile = nullptr;
+	delete decisionTree;
+	decisionTree = nullptr;
+	isExisting = false;
+	decisionTreeThread->join();
+	delete decisionTreeThread;
+
 }
 
 void AICharacter::Update(const float deltaTime_)
 {
-	decisionTree->MakeDecision();
+	overclock += deltaTime_ * 1;
+	wantToSpendMeter += deltaTime_* RandBetween(0.1, 0.3);
+	wantToEXFireball += deltaTime_ * RandBetween(0.1, 0.3);
+	wantToMeteredCrossUp += deltaTime_ * RandBetween(0.1, 0.3);
 
-	wantToSpendMeter += RandBetween(0.001, 0.01);
-	wantToEXFireball += RandBetween(0.001, 0.01);
-	wantToMeteredCrossUp += RandBetween(0.001, 0.01);
-
-	wantToMeterlessCrossUp += RandBetween(0.001, 0.01);
-	wantToAttack += RandBetween(0.001, 0.01);
-	wantToBackAway += RandBetween(0.001, 0.01);
+	wantToMeterlessCrossUp += deltaTime_ * RandBetween(0.1, 0.3);
+	wantToAttack += deltaTime_ * RandBetween(0.1, 0.3);
+	wantToBackAway += deltaTime_ * RandBetween(0.1, 0.3);
 
 	if (position.y >= 0.1f)
 	{
@@ -185,7 +199,7 @@ void AICharacter::Update(const float deltaTime_)
 			}
 		}
 
-		if (glm::distance(position, opponent->GetPosition()) < 5.0f && targetType != TargetType::SELF)
+		if (glm::distance(position, opponent->GetPosition()) < 2.0f && targetType != TargetType::SELF)
 		{
 			if (getIsAirborne() == false)
 			{
@@ -235,7 +249,7 @@ void AICharacter::Update(const float deltaTime_)
 
 	if (vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
 
-
+	proj->Update(deltaTime_);
 }
 
 void AICharacter::SetDir2D(float dir_)
@@ -259,15 +273,18 @@ void AICharacter::SetDir2D(float dir_)
 
 void AICharacter::UseEXFireball()
 {
-	Character::QCF(3, true);
+	QCF(3, true);
 	wantToEXFireball = 0.0f;
+	wantToSpendMeter = 0.0f;
+	printf("EX Fireball used\n");
 
 }
 
 void AICharacter::UseFireball()
 {
-	Character::QCF(1, true);
+	QCF(1, true);
 	wantToAttack = 0.0f;
+	printf("Fireball used\n");
 }
 
 void AICharacter::MeteredCrossUp()
@@ -275,6 +292,8 @@ void AICharacter::MeteredCrossUp()
 	Run(true);
 	targetType = TargetType::CROSSUP;
 	wantToMeteredCrossUp = 0.0f;
+	wantToSpendMeter = 0.0f;
+	printf("Metered Crossup\n");
 }
 
 void AICharacter::MeterlessCrossUp()
@@ -282,24 +301,29 @@ void AICharacter::MeterlessCrossUp()
 	Run(false);
 	targetType = TargetType::CROSSUP;
 	wantToMeterlessCrossUp = 0.0f;
+	printf("Meterless Crossup\n");
 }
 
 void AICharacter::BackAway()
 {
 	Run(false);
 	targetType = TargetType::INFRONTFAR;
+	printf("Back Away\n");
 }
 
 void AICharacter::MoveTowards()
 {
 	Run(false);
 	targetType = TargetType::INFRONTCLOSE;
+	printf("Move Towards\n");
 }
 
 void AICharacter::RunTowards()
 {
 	Run(true);
 	targetType = TargetType::INFRONTCLOSE;
+	wantToSpendMeter = 0.0f;
+	printf("Run Towards\n");
 }
 
 
@@ -346,4 +370,16 @@ DecisionTreeNode* AICharacter::CreateTree()
 	wantToBackAway->SetFalseNode(moveTowards);
 
 	return wantToSpendMeter;
+}
+
+void AICharacter::RunDecisionTree()
+{
+	while (isExisting)
+	{
+		if (this && decisionTree != nullptr) 
+		{
+			decisionTree->MakeDecision();
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+		}
+	}
 }
