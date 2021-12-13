@@ -85,7 +85,6 @@ private:
 	Camera* camera;
 
 	enum class RendererType rendererType;
-	Window* renderer;
 };
 
 #endif
