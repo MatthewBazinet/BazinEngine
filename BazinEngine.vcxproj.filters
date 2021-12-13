@@ -172,6 +172,7 @@
     <ClInclude Include="ActionBackAway.h" />
     <ClInclude Include="ActionMoveTowards.h" />
     <ClInclude Include="ActionRunTowards.h" />
+    <ClInclude Include="Engine\Core\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
