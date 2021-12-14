@@ -80,10 +80,12 @@ void SceneGraph::AddGameObject(GameObject* go_, std::string tag_)
 GameObject* SceneGraph::GetGameObject(std::string tag_)
 {
 	if (!this) return nullptr;
-	if (sceneGameObjects.size() > 0) {
+	if (sceneGameObjects.size() > 0)
+	{
 		if (sceneGameObjects.find(tag_) != sceneGameObjects.end())
 		{
-			if (sceneGameObjects[tag_]) {
+			if (sceneGameObjects[tag_])
+			{
 				return sceneGameObjects[tag_];
 			}
 		}
