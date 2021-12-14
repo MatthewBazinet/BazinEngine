@@ -89,6 +89,9 @@
       <AdditionalLibraryDirectories>C:\GameDev\OpenGL\lib;C:\GameDev\gamenetworkingsockets_x86-windows\lib;$(ProjectDir)\enet-1.3.17;C:\GameDev\SDL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2test.lib;SDL2_mixer.lib;glew32.lib;glew32s.lib;opengl32.lib;GameNetworkingSockets_s.lib;enet.lib;ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Xdcmake>
+      <DocumentLibraryDependencies>true</DocumentLibraryDependencies>
+    </Xdcmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -216,6 +219,7 @@
     <ClCompile Include="WantToMeteredCrossUp.cpp" />
     <ClCompile Include="WantToMeterlessCrossUp.cpp" />
     <ClCompile Include="wantToSpendMeter.cpp" />
+    <ClCompile Include="XMLDecision.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +255,7 @@
     <ClInclude Include="Engine\Rendering\3D\LoadOBJModel.h" />
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
+    <ClInclude Include="Engine\Core\Renderer.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
     <ClInclude Include="Flocking.h" />
     <ClInclude Include="Game\Character.h" />
@@ -306,6 +311,7 @@
     <ClInclude Include="WantToMeteredCrossUp.h" />
     <ClInclude Include="WantToMeterlessCrossUp.h" />
     <ClInclude Include="wantToSpendMeter.h" />
+    <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -324,6 +330,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Tree.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

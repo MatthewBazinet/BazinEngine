@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "GameInterface.h"
 #include "Scene.h"
+#include "Renderer.h"
 
 //#include "../../ImGui/imgui.h"
 //#include "../../ImGui/imgui_impl_opengl3.h"
@@ -37,6 +38,7 @@ public:
 
 	//Setup a Window
 	bool OnCreate(std::string name_, int width_, int height_);
+	bool Initiallize(std::string name_, int width_, int height_);
 	
 	//Calls Update and Render
 	void Run();
@@ -82,6 +84,7 @@ private:
 	int currentSceneNum;
 	Camera* camera;
 
+	enum class RendererType rendererType;
 };
 
 #endif

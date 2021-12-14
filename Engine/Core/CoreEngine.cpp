@@ -2,7 +2,7 @@
 #include "../../Character.h"
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
-CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0),userInterface(nullptr)
+CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0),userInterface(nullptr), rendererType(RendererType::OPENGL)
 {
 }
 
@@ -25,7 +25,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	window = new Window();
 	userInterface = new UserInterface();
 
-	if (!window->OnCreate(name_, width_, height_)) {
+	if (!window->CreatesWindow(name_, width_, height_)) {
 		Log::FatalError("Window failed to initialize", "CoreEngine.cpp", __LINE__);
 		OnDestroy();
 		return isRunning = false;
@@ -47,19 +47,37 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 			return isRunning = false;
 		}
 	}
+
 	if (userInterface) {
 		if (!userInterface->OnCreate()) {
 			Log::FatalError("UserInterface failed tp initialize", "CoreEngine.cpp", __LINE__);
 			OnDestroy();
 			return isRunning = false;
 		}
-
 	}
 	
 	Log::Info("Game Created Succesfully", "CoreEngine.cpp", __LINE__);
 	timer = new Timer();
 	timer->Start();
 	return isRunning = true;
+}
+
+bool CoreEngine::Initiallize(std::string name_, int width_, int height_)
+{
+	switch (rendererType) {
+	case RendererType::OPENGL:
+		OnCreate(name_, width_, height_);
+
+		break;
+
+	case RendererType::VULKAN:
+	case RendererType::DIRECTX11:
+	case RendererType::DIRECTX12:
+		return false;
+		break;
+	}
+
+	return true;
 }
 
 void CoreEngine::Run()

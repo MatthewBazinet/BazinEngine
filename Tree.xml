@@ -1,0 +1,39 @@
+<decisionTree>
+<test> wantToSpendMeter </test>
+	<true>
+		<test> wantToEXFireball</test>
+			<true>
+				<action> EXFireball </action>
+			</true>
+			<false>
+				<test> wantToCrossUp </test>
+					<true>
+						<action> runningCrossUp </action> 
+					</true>
+					<false>
+						<action> runTowards </action>
+					</false>
+			</false>
+	</true>
+	<false>
+		<test> wantToCrossUp </test>
+			<true>
+				<action> crossUp </action>
+			</true>
+			<false>
+				<test> wantToAttack </test>
+					<true> 
+						<action> Fireball </action>
+					</true>
+					<false>
+						<test> wantToGetFurther </test>
+							<true>
+								<action> backAway </action>
+							</true>
+							<false>
+								<action> moveTowards </action>
+							</false>
+					</false>
+			</false>
+	</false>
+</decisionTree>

@@ -7,15 +7,18 @@
 #include<string>
 #include<iostream>
 #include "Log.h"
+#include "Renderer.h"
 
-class Window
+class Window : public Renderer
 {
 public:
 	Window();
 	~Window();
 
-	bool OnCreate(std::string name_, int width_, int height_);
-	void OnDestroy();
+	virtual SDL_Window* CreatesWindow(std::string name_, int width_, int height_);
+	virtual bool OnCreate();
+	virtual void OnDestroy();
+	virtual void Render() {};
 	int GetWidth() const;
 	int GetHeight() const;
 	SDL_Window* GetWindow() const;

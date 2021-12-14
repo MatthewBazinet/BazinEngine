@@ -67,8 +67,8 @@
     <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
     <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
     <ClCompile Include="Game\TestChar.cpp" />
-    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="wantToSpendMeter.cpp" />
     <ClCompile Include="WantToEXFireball.cpp" />
     <ClCompile Include="WantToMeteredCrossUp.cpp" />
@@ -82,6 +82,7 @@
     <ClCompile Include="ActionBackAway.cpp" />
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
+    <ClCompile Include="XMLDecision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -157,8 +158,8 @@
     <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
     <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
     <ClInclude Include="Game\TestChar.h" />
-    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="wantToSpendMeter.h" />
     <ClInclude Include="WantToEXFireball.h" />
     <ClInclude Include="WantToMeteredCrossUp.h" />
@@ -172,6 +173,8 @@
     <ClInclude Include="ActionBackAway.h" />
     <ClInclude Include="ActionMoveTowards.h" />
     <ClInclude Include="ActionRunTowards.h" />
+    <ClInclude Include="XMLDecision.h" />
+    <ClInclude Include="Engine\Core\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
@@ -189,5 +192,8 @@
     <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
     <None Include="Engine\Shader\ParticleVertexShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Tree.xml" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,6 @@ Action::Action(std::string word_)
 {
 	word = word_;
 }
-
 DecisionTreeNode* Action::MakeDecision()
 {
 	std::cout << word << std::endl;
