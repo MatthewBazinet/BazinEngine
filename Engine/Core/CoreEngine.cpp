@@ -141,6 +141,7 @@ void CoreEngine::NotifyOfMouseMove(glm::ivec2 mouse_)
 {
 	if (camera)
 	{
+		if(currentSceneNum != 4)
 		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset());
 	}
 }
@@ -244,6 +245,7 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	NetworkingBase::isRunning = false;
 	ShaderHandler::GetInstance()->OnDestroy();
 	TextureHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();

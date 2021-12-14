@@ -4,7 +4,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include "Model.h"
-#include "..//Tetrahedron.h"
+#include "../../../Tetrahedron.h"
 #include "../Component.h"
 class GameObject {
 private:

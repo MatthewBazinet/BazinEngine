@@ -39,7 +39,7 @@ bool OnlineGameScene::OnCreate()
 
 
 
-	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(1.0f, 0.0f, 0.0f)), "char1");
 
 
 	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
@@ -71,7 +71,7 @@ void OnlineGameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
 
-	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
+	//static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 }
 
 void OnlineGameScene::Render()
@@ -140,9 +140,18 @@ void OnlineGameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 	{
 
 	default:
-		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
-		char1->NotifyOnKeyDown(key_);
-		char1 = nullptr;
+		const char* characterName;
+		if (NetworkingBase::isServer)
+		{
+			characterName = "char1";
+		}
+		else
+		{
+			characterName = "char2";
+		}
+		Character* character = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(characterName));
+		character->NotifyOnKeyDown(key_);
+		character = nullptr;
 		break;
 	}
 }
@@ -152,9 +161,18 @@ void OnlineGameScene::NotifyOfKeyUp(const SDL_Scancode key_)
 	switch (key_)
 	{
 	default:
-		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
-		char1->NotifyOnKeyUp(key_);
-		char1 = nullptr;
+		const char* characterName;
+		if (NetworkingBase::isServer)
+		{
+			characterName = "char1";
+		}
+		else
+		{
+			characterName = "char2";
+		}
+		Character* character = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(characterName));
+		character->NotifyOnKeyUp(key_);
+		character = nullptr;
 		break;
 	}
 }

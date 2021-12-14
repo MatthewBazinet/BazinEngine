@@ -1,12 +1,24 @@
 #include "NetworkingBase.h"
 #include <thread>
 #include "Engine/Core/CoreEngine.h"
+#include "Game/Character.h"
+#include <string>
+#include <sstream>
 
-void* MsgLoop(ENetHost* client, ENetEvent event) {
-	while (true) {
-		;
+bool NetworkingBase::isRunning = false;
+bool NetworkingBase::connected = false;
+bool NetworkingBase::isServer = false;
+//ENetHost* NetworkingBase::client = nullptr;
+//ENetPeer* NetworkingBase::peer = nullptr;
+
+void NetworkingBase::MsgLoop(ENetHost* client, ENetEvent event, const char* name_) {
+	while (isRunning) {
 		while (enet_host_service(client, &event, 1000) > 0)
 		{
+			std::string packet;
+			std::string second;
+			std::string third;
+			NetworkingGameplayPacket packetData = NetworkingGameplayPacket();
 			switch (event.type)
 			{
 			case ENET_EVENT_TYPE_RECEIVE:
@@ -16,21 +28,70 @@ void* MsgLoop(ENetHost* client, ENetEvent event) {
 					event.peer->address.host,
 					event.peer->address.port,
 					event.channelID);
+				packet = (char*)(event.packet->data);
+				packetData = NetworkingGameplayPacket();
+				packetData.x = std::stof(packet.substr(0, packet.find(' ')));
+				second = packet.substr(packet.find(' ') + 1);
+				packetData.y = std::stof(second.substr(0, second.find(' ')));
+				third = second.substr(second.find(' ') + 1);
+				packetData.z = std::stof(third.substr(0, third.find(' ')));
+				dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(name_))->SetPosition(glm::vec3(packetData.x, packetData.y, packetData.z));
+
+				//dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(name_))->SetRotation((*packet).rotation);
+
+
+				/* Clean up the packet now that we're done using it. */
+				//enet_packet_destroy(event.packet);
+				//if(packet) delete packet;
+				break;
+
+			case ENET_EVENT_TYPE_DISCONNECT:
+				printf("%s disconnected.\n", event.peer->data);
+				/* Reset the peer's client information. */
+				event.peer->data = NULL;
 				break;
 			}
 		}
 	}
 }
+
+void NetworkingBase::SendLoop(const char* name_)
+{
+	while (isRunning)
+	{
+		if (connected) {
+			NetworkingGameplayPacket packet = NetworkingGameplayPacket();
+			if (dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(name_))) {
+				glm::vec3 pos = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(name_))->GetPosition();
+				packet.x = pos.x;
+				packet.y = pos.y;
+				packet.z = pos.z;
+				//packet.rotation = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject(name_))->GetRotation();
+				char serializedPacket[64 * 4];
+				snprintf(serializedPacket, sizeof(serializedPacket), "%f %f %f", packet.x, packet.y, packet.z);
+				if (peer) 
+				{
+					SendPacket(peer, serializedPacket);
+					printf("Sent a packet\n");
+				}
+			}
+		}
+		//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+	}
+}
 void NetworkingBase::SendPacket(ENetPeer* peer, const char* data)
 {
 	
-	ENetPacket* packet = enet_packet_create(data, strlen(data) + 1, ENET_PACKET_FLAG_RELIABLE);
+	ENetPacket* packet = enet_packet_create(data, strlen(data) + 1, 0);
 	enet_peer_send(peer, 0, packet);
 }
 
 int NetworkingBase::Run(bool isServer,char* hostIP)
 {
 	NetworkingBase tmp;
+	isRunning = true;
+	NetworkingBase::isServer = isServer;
 
 	if (enet_initialize() != 0)
 	{
@@ -63,6 +124,7 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 		{
 			puts("Connection to 127.0.0.1:7777 succeded.");
 			CoreEngine::GetInstance()->SetCurrentScene(4);
+			connected = true;
 		}
 		else
 		{
@@ -86,16 +148,15 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 				break;
 			}
 		}*/
-		SendPacket(tmp.peer, "this is a packet");
+		
 
-
-		std::thread thread1(MsgLoop, tmp.client,tmp.event);
+		std::thread sendThread(&NetworkingBase::SendLoop, tmp, "char2");
+		sendThread.detach();
+		std::thread thread1(&NetworkingBase::MsgLoop, tmp, tmp.client,tmp.event, "char1");
 		thread1.join();
 
-
-
+	
 		enet_peer_disconnect(tmp.peer, 0);
-
 		while (enet_host_service(tmp.client, &tmp.event, 3000) > 0)
 		{
 			switch (tmp.event.type)
@@ -104,6 +165,7 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 				enet_packet_destroy(tmp.event.packet);
 				break;
 			case ENET_EVENT_TYPE_DISCONNECT:
+
 				puts("Disconnection succeeded.");
 				break;
 			}
@@ -134,20 +196,30 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 			return 1;
 		}
 
+
+		std::thread sendThread(&NetworkingBase::SendLoop, tmp, "char1");
+		sendThread.detach();
+
 		// gameloop
-		while (true)
+		while (isRunning)
 		{
 			ENetEvent event;
 			/* Wait up to 1000 milliseconds for an event. */
 			while (enet_host_service(tmp.client, &event, 1000) > 0)
 			{
+				std::string packet;
+				std::string second;
+				std::string third;
+				NetworkingGameplayPacket packetData = NetworkingGameplayPacket();
 				switch (event.type)
 				{
 				case ENET_EVENT_TYPE_CONNECT:
 					printf("A new client connected from %x:%u.\n",
 						event.peer->address.host,
 						event.peer->address.port);
+					tmp.peer = event.peer;
 					CoreEngine::GetInstance()->SetCurrentScene(4);
+					connected = true;
 					break;
 
 				case ENET_EVENT_TYPE_RECEIVE:
@@ -156,14 +228,25 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 						event.packet->data,
 						event.peer->data,
 						event.channelID);
+					packet = (char*)(event.packet->data);
+					packetData = NetworkingGameplayPacket();
+					packetData.x = std::stof(packet.substr(0, packet.find(' ')));
+					second = packet.substr(packet.find(' ') + 1);
+					packetData.y = std::stof(second.substr(0, second.find(' ')));
+					third = second.substr(second.find(' ') + 1);
+					packetData.z = std::stof(third.substr(0, third.find(' ')));
+					dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetPosition(glm::vec3(packetData.x, packetData.y, packetData.z));
 					/* Clean up the packet now that we're done using it. */
-					enet_packet_destroy(event.packet);
+					//enet_packet_destroy(event.packet);
+					//if (packet) delete packet;
+					/* Clean up the packet now that we're done using it. */
 					break;
 
 				case ENET_EVENT_TYPE_DISCONNECT:
 					printf("%s disconnected.\n", event.peer->data);
 					/* Reset the peer's client information. */
 					event.peer->data = NULL;
+					break;
 				}
 			}
 		}

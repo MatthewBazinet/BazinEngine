@@ -52,7 +52,7 @@ AICharacter::~AICharacter()
 
 void AICharacter::Update(const float deltaTime_)
 {
-	overclock += deltaTime_ * 1;
+	overclock += deltaTime_ * 10;
 	wantToSpendMeter += deltaTime_* RandBetween(0.1, 0.3);
 	wantToEXFireball += deltaTime_ * RandBetween(0.1, 0.3);
 	wantToMeteredCrossUp += deltaTime_ * RandBetween(0.1, 0.3);

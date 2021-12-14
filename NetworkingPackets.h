@@ -19,9 +19,14 @@ struct NetworkingMatchStartPacket : public Packet
 
 struct NetworkingGameplayPacket : public Packet
 {
-	glm::vec3 pos;
-	glm::vec3 rotation;
-	glm::quat orientation;
+	NetworkingGameplayPacket();
+	~NetworkingGameplayPacket();
+	float x;
+	float y;
+	float z;
+	float pitch;
+	float yaw;
+	float roll;
 	bool isRunning;
 	bool isAirborne;
 };
