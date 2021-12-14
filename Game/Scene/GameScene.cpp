@@ -3,6 +3,7 @@
 #include "..//../AICharacter.h"
 #include "../ParticleSystem.h"
 #include "../Component.h"
+//#include "../XMLDecisionTreeReader.h"
 
 GameScene::GameScene()
 {
@@ -333,8 +334,8 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(rachidaShape);
 	SceneGraph::GetInstance()->AddModel(man);
 
-
-
+	//XMLDecisionTreeReader read;
+	//read.ReadFile("Tree.xml");
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 	//Model* rachidaShape = new Model("Resources/Models/tetrahedron.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));

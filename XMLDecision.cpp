@@ -13,6 +13,8 @@ DecisionTreeNode* XMLDecision::MakeDecision()
     return nullptr;
 }
 
+
+
 void XMLDecision::SetDecision(std::vector<std::string> decision_)
 {
     root = decision_.front();
