@@ -48,6 +48,7 @@ void UserInterface::Update(const float deltaTime_)
 		ShowMenu();
 		break;
 	case 1:
+		state = State::SinglePlayer;
 		ShowGameUi();
 		break;
 	case 2:
