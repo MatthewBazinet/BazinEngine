@@ -143,6 +143,7 @@ std::vector<Mesh*> GameObject::GetMeshes()
 
 void GameObject::SetPosition(glm::vec3 position_)
 {
+	if (!this) return;
 	position = position_;
 	if (model)
 	{

@@ -272,9 +272,9 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 
 NetworkingBase::~NetworkingBase()
 {
-	delete client;
+	//delete client;
 	client = nullptr;
 
-	delete peer;
+	//delete peer;
 	peer = nullptr;
 }
