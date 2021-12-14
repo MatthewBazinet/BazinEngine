@@ -74,6 +74,14 @@ void NetworkingBase::SendLoop(const char* name_)
 					SendPacket(peer, serializedPacket);
 					printf("Sent a packet\n");
 				}
+				else
+				{
+					if (client)
+					{
+						BroadcastPacket(client, serializedPacket);
+						printf("Sent a packet\n");
+					}
+				}
 			}
 		}
 		//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -85,6 +93,12 @@ void NetworkingBase::SendPacket(ENetPeer* peer, const char* data)
 	
 	ENetPacket* packet = enet_packet_create(data, strlen(data) + 1, 0);
 	enet_peer_send(peer, 0, packet);
+}
+
+void NetworkingBase::BroadcastPacket(ENetHost* server, const char* data)
+{
+	ENetPacket* packet = enet_packet_create(data, strlen(data) + 1, 0);
+	enet_host_broadcast(server, 0, packet);
 }
 
 int NetworkingBase::Run(bool isServer,char* hostIP)
@@ -217,7 +231,6 @@ int NetworkingBase::Run(bool isServer,char* hostIP)
 					printf("A new client connected from %x:%u.\n",
 						event.peer->address.host,
 						event.peer->address.port);
-					tmp.peer = event.peer;
 					CoreEngine::GetInstance()->SetCurrentScene(4);
 					connected = true;
 					break;
