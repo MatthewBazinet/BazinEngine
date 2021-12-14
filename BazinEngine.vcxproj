@@ -255,6 +255,7 @@
     <ClInclude Include="Engine\Rendering\3D\LoadOBJModel.h" />
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
+    <ClInclude Include="Engine\Core\Renderer.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
     <ClInclude Include="Flocking.h" />
     <ClInclude Include="Game\Character.h" />
