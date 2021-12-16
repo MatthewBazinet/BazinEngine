@@ -71,7 +71,7 @@ void OnlineGameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
 
-	//static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
+	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 }
 
 void OnlineGameScene::Render()

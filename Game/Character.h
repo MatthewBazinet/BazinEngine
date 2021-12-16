@@ -30,7 +30,7 @@ public:
 	bool getIsAirborne() const { return isAirborne; };
 
 	void SetOpponent(Character* opponent_) { opponent = opponent_; };
-	void SetCamera(BattleCamera* camera_) { camera = camera_; };
+	void SetCamera(Camera* camera_) { camera = camera_; };
 	void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
 	float GetHealth() const { return health; };
@@ -52,7 +52,7 @@ protected:
 	Projectile* proj;
 	Character* opponent;
 
-	BattleCamera* camera;
+	Camera* camera;
 	glm::vec3 axisOf2DMovement;
 	float dir2D;
 	bool MovingLeft;

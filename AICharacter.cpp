@@ -101,14 +101,10 @@ void AICharacter::Update(const float deltaTime_)
 		target = position;
 		break;
 	}
-	Ray ray = Ray();
-	ray.direction = vel;
-	ray.origin = position;
-	BoundingBox tmp = opponent->GetBoundingBox();
-	CollisionDetection::RayObbIntersection(&ray, &tmp);
+
 	
 	KinematicSteeringOutput steering;
-	if (ray.intersectionDist < maxSpeed / deltaTime_)
+
 	if (isRunning)
 	{
 		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
