@@ -2,6 +2,7 @@
 
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include "../../Core/CoreEngine.h"
 
 Model::Model(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_) : meshes(std::vector<Mesh*>()), shaderProgram(0), modelInstances(std::vector<glm::mat4>()), obj(nullptr)
 {
@@ -34,7 +35,19 @@ Model::~Model()
 
 void Model::Render(Camera* camera_)
 {
-	glUseProgram(shaderProgram);
+	switch (CoreEngine::GetInstance()->GetRendererType())
+	{
+	case RendererType::OPENGL:
+		glUseProgram(shaderProgram);
+		
+		break;
+	case RendererType::VULKAN:
+		break;
+	case RendererType::DIRECTX11:
+		break;
+	case RendererType::DIRECTX12:
+		break;
+	}
 	for (auto m : meshes)
 	{
 		m->Render(camera_, modelInstances, modelInstancesVisable);

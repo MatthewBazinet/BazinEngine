@@ -49,6 +49,7 @@ public:
 	float GetScreenHeight() const;
 	Camera* GetCamera() const;
 	SDL_Window* GetWindow()const;
+	RendererType GetRendererType()const;
 	
 
 	void SetGameInterface(GameInterface* gameInterface_);

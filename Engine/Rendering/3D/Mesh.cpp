@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include <iostream>
+#include "../../Core/CoreEngine.h"
 
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0), shaderProgram(0), modelLoc(0), viewLoc(0), projectionLoc(0), viewPosLoc(0), lightPosLoc(0), ambientLoc(0), diffuseLoc(0), specularLoc(0), colourLoc(0), diffuseMapMatLoc(0), shininessMatLoc(0), transparencyMatLoc(0), ambientMatLoc(0), diffuseMatLoc(0), specularMatLoc(0)
@@ -27,59 +28,71 @@ Mesh::~Mesh()
 
 void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vector<bool>& instancesVisible_)
 {
-
-	glUniform1i(diffuseMapMatLoc, 0);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
-	const int numOfLights = 10;
-	glm::vec3 lightPositions[numOfLights];
-	float ambients[numOfLights];
-	float diffuses[numOfLights];
-	float speculars[numOfLights];
-	glm::vec3 colours[numOfLights];
-
-	for (int i = 0; i < camera_->GetLightSources().size(); i++) {
-		lightPositions[i] = camera_->GetLightSources()[i]->GetPosition();
-		ambients[i] = camera_->GetLightSources()[i]->GetAmbient();
-		diffuses[i] = camera_->GetLightSources()[i]->GetDiffuse();
-		speculars[i] = camera_->GetLightSources()[i]->GetSpecular();
-		colours[i] = camera_->GetLightSources()[i]->GetColour();
-	}
-
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetView()));
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetPerspective()));
-	glUniform3fv(viewPosLoc, 1, glm::value_ptr(camera_->GetPosition()));
-	glUniform3fv(lightPosLoc, numOfLights, glm::value_ptr(lightPositions[0]));
-	glUniform1fv(ambientLoc, numOfLights, (GLfloat*)& ambients[0]);
-	glUniform1fv(diffuseLoc, numOfLights, (GLfloat*)& diffuses[0]);
-	glUniform1fv(specularLoc, numOfLights, (GLfloat*)& speculars[0]);
-	glUniform3fv(colourLoc, numOfLights, glm::value_ptr(colours[0]));
-	
-    (diffuseMapMatLoc, 1, subMesh.material);
-	
-	glUniform1f(shininessMatLoc, subMesh.material.shininess);
-	glUniform1f(transparencyMatLoc, subMesh.material.transparency);
-	glUniform3fv(ambientMatLoc, 1, (GLfloat*)& subMesh.material.ambient[0]);
-	glUniform3fv(diffuseMatLoc, 1, (GLfloat*)& subMesh.material.diffuse[0]);
-	glUniform3fv(specularMatLoc, 1, (GLfloat*)& subMesh.material.specular[0]);
-
-	glBindVertexArray(VAO);
-
-	glEnable(GL_DEPTH_TEST);
-
-	for (int i = 0; i < instances_.size(); i++)
+	switch (CoreEngine::GetInstance()->GetRendererType())
 	{
-		if (instancesVisible_[i]) {
-			//std::cout << "Rendered\n";
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(instances_[i]));
-			glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
-		}
-		//else {
-			//std::cout << "Not Rendered\n";
-		//}
-	}
+	case RendererType::OPENGL:	
+	{
+		glUniform1i(diffuseMapMatLoc, 0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
+		const int numOfLights = 10;
+		glm::vec3 lightPositions[numOfLights];
+		float ambients[numOfLights];
+		float diffuses[numOfLights];
+		float speculars[numOfLights];
+		glm::vec3 colours[numOfLights];
 
-	glBindVertexArray(0);
+		for (int i = 0; i < camera_->GetLightSources().size(); i++) {
+			lightPositions[i] = camera_->GetLightSources()[i]->GetPosition();
+			ambients[i] = camera_->GetLightSources()[i]->GetAmbient();
+			diffuses[i] = camera_->GetLightSources()[i]->GetDiffuse();
+			speculars[i] = camera_->GetLightSources()[i]->GetSpecular();
+			colours[i] = camera_->GetLightSources()[i]->GetColour();
+		}
+
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetView()));
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetPerspective()));
+		glUniform3fv(viewPosLoc, 1, glm::value_ptr(camera_->GetPosition()));
+		glUniform3fv(lightPosLoc, numOfLights, glm::value_ptr(lightPositions[0]));
+		glUniform1fv(ambientLoc, numOfLights, (GLfloat*)& ambients[0]);
+		glUniform1fv(diffuseLoc, numOfLights, (GLfloat*)& diffuses[0]);
+		glUniform1fv(specularLoc, numOfLights, (GLfloat*)& speculars[0]);
+		glUniform3fv(colourLoc, numOfLights, glm::value_ptr(colours[0]));
+
+		(diffuseMapMatLoc, 1, subMesh.material);
+
+		glUniform1f(shininessMatLoc, subMesh.material.shininess);
+		glUniform1f(transparencyMatLoc, subMesh.material.transparency);
+		glUniform3fv(ambientMatLoc, 1, (GLfloat*)& subMesh.material.ambient[0]);
+		glUniform3fv(diffuseMatLoc, 1, (GLfloat*)& subMesh.material.diffuse[0]);
+		glUniform3fv(specularMatLoc, 1, (GLfloat*)& subMesh.material.specular[0]);
+
+		glBindVertexArray(VAO);
+
+		glEnable(GL_DEPTH_TEST);
+
+		for (int i = 0; i < instances_.size(); i++)
+		{
+			if (instancesVisible_[i]) {
+				//std::cout << "Rendered\n";
+				glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(instances_[i]));
+				glDrawArrays(GL_TRIANGLES, 0, subMesh.vertexList.size());
+			}
+			//else {
+				//std::cout << "Not Rendered\n";
+			//}
+		}
+
+		glBindVertexArray(0);
+	}
+	break;
+	case RendererType::VULKAN:
+		break;
+	case RendererType::DIRECTX11:
+		break;
+	case RendererType::DIRECTX12:
+		break;
+	}
 }
 
 std::vector<Vertex> Mesh::GetVertices()

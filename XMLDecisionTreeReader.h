@@ -11,7 +11,7 @@ using namespace tinyxml2;
 class XMLDecisionTreeReader
 {
 public:
-	DecisionTreeNode ReadFile(const char* filepath_);
+	static DecisionTreeNode ReadFile(const char* filepath_);
 private:
 	//std::vector<XMLDecision*> decision;
 };

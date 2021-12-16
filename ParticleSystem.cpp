@@ -1,5 +1,6 @@
 #include "ParticleSystem.h"
 #include "Randomizer.h"
+#include "Engine/Core/CoreEngine.h"
 
 ParticleSystem::ParticleSystem(int numberOfParticles, GLuint shaderProgram_, glm::vec3 pos_)
 {
@@ -35,6 +36,11 @@ void ParticleSystem::OnDestroy()
 
 void ParticleSystem::Render(Camera* camera_) const
 {
+	switch (CoreEngine::GetInstance()->GetRendererType())
+	{
+	case RendererType::OPENGL:
+
+	
 	glUseProgram(shaderProgram);
 	glEnable(GL_PROGRAM_POINT_SIZE);
 	glBindVertexArray(vao);
@@ -44,6 +50,14 @@ void ParticleSystem::Render(Camera* camera_) const
 	glDrawArrays(GL_POINTS, 0, pos.size());
 	glBindVertexArray(0);
 	glDisable(GL_PROGRAM_POINT_SIZE);
+	break;
+	case RendererType::VULKAN:
+		break;
+	case RendererType::DIRECTX11:
+		break;
+	case RendererType::DIRECTX12:
+		break;
+	}
 }
 
 void ParticleSystem::Update(const float deltaTime_)

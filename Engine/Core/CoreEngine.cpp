@@ -128,7 +128,12 @@ Camera* CoreEngine::GetCamera() const
 
 SDL_Window* CoreEngine::GetWindow() const
 {
-	return window->GetWindow();;
+	return window->GetWindow();
+}
+
+RendererType CoreEngine::GetRendererType() const
+{
+	return rendererType;
 }
 
 void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
@@ -247,17 +252,29 @@ void CoreEngine::Update(const float deltaTime_)
 
 void CoreEngine::Render()
 {
-	//Paints the backround colour
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (gameInterface)
+	switch (rendererType) 
 	{
-		gameInterface->Render();
+	case RendererType::OPENGL:
+		//Paints the backround colour
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		if (gameInterface)
+		{
+			gameInterface->Render();
+		}
+		if (userInterface) 
+		{
+			userInterface->Render();
+		}
+		SDL_GL_SwapWindow(window->GetWindow());
+
+		break;
+	case RendererType::VULKAN:
+	case RendererType::DIRECTX11:
+	case RendererType::DIRECTX12:
+		break;
 	}
-	if (userInterface) {
-		userInterface->Render();
-	}
-	SDL_GL_SwapWindow(window->GetWindow());
+	
 }
 
 
