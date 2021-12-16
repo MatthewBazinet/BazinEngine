@@ -30,7 +30,7 @@ void SDLMusic::playMusicTrack(const int which)
     {
         return;
     }
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 10);
+    Mix_VolumeMusic(0);
     Mix_PlayMusic(m_Musics.at(which), -1);
 
     m_Playing = true;
