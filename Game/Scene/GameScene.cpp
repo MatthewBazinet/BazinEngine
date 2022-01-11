@@ -3,7 +3,7 @@
 #include "..//../AICharacter.h"
 #include "../ParticleSystem.h"
 #include "../Component.h"
-//#include "../XMLDecisionTreeReader.h"
+#include "../XMLDecisionTreeReader.h"
 
 GameScene::GameScene()
 {
@@ -21,9 +21,9 @@ bool GameScene::OnCreate()
 	
 	CoreEngine::GetInstance()->SetCamera(new BattleCamera());
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 1.0f, 0.0f)));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 0.0f, 1.0f)));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 0.0f, 0.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 1.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 1.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 0.0f)));
 
 	CollisionHandler::GetInstance()->OnCreate(100.0f);
 	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "Resources/Textures/CheckerboardTexture.png");
@@ -320,6 +320,8 @@ bool GameScene::OnCreate()
 
 	Model* diceModel = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
+	Model* player = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+
 	Model* appleModel = new Model("Resources/Models/Apple.obj","Resources/Materials/Apple.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	Model* rachidaShape = new Model("Resources/Models/tetrahedron.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
@@ -327,15 +329,19 @@ bool GameScene::OnCreate()
 	Model* man = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 
+
+
 	//Model* pawn = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	SceneGraph::GetInstance()->AddModel(diceModel);
+	SceneGraph::GetInstance()->AddModel(player);
 	SceneGraph::GetInstance()->AddModel(appleModel);
 	SceneGraph::GetInstance()->AddModel(rachidaShape);
 	SceneGraph::GetInstance()->AddModel(man);
 
-	//XMLDecisionTreeReader read;
-	//read.ReadFile("Tree.xml");
+	XMLDecisionTreeReader read;
+	read.ReadFile("Tree.xml");
+	
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 	//Model* rachidaShape = new Model("Resources/Models/tetrahedron.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
@@ -352,7 +358,7 @@ bool GameScene::OnCreate()
 
 
 
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(2.0f, 4.0f, 0.0f)), "apple");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(player, glm::vec3(4.0f,3.0f, 0.0f)), "apple");
 	SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(100, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
 	ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
 
@@ -407,6 +413,7 @@ bool GameScene::OnCreate()
 
 
 	diceModel = nullptr;
+	player = nullptr;
 	appleModel = nullptr;
 	rachidaShape = nullptr;
 	man = nullptr;
