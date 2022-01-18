@@ -83,6 +83,9 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
+    <ClCompile Include="MorphTarget.cpp" />
+    <ClCompile Include="MorphTargetAnimatedModel.cpp" />
+    <ClCompile Include="AnimationTestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -175,6 +178,9 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="Engine\Core\Renderer.h" />
+    <ClInclude Include="MorphTarget.h" />
+    <ClInclude Include="MorphTargetAnimatedModel.h" />
+    <ClInclude Include="AnimationTestScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

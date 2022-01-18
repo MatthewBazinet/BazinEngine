@@ -19,9 +19,30 @@ struct SubMesh
 	std::vector<Vertex> vertexList;
 	std::vector<unsigned int> meshIndices;
 	Material material;
+	static Vertex Lerp(Vertex vertex, Vertex otherVertex, float factor)
+	{
+		Vertex result;
+		result.position = vertex.position + (otherVertex.position - vertex.position) * factor;
+		result.normal = vertex.normal + (otherVertex.normal - vertex.normal) * factor;
+		result.textureCoordinates = vertex.textureCoordinates + (otherVertex.textureCoordinates - vertex.textureCoordinates) * factor;
+		return result;
+	}
+	static std::vector<Vertex> Lerp(std::vector<Vertex> vertexList, std::vector<Vertex> otherVertexList, float factor)
+	{
+		std::vector<Vertex> result;
+		if (vertexList.size() == otherVertexList.size())
+		{
+			for(int i = 0; i < vertexList.size(); i++)
+			{
+				result.push_back(Lerp(vertexList[i], otherVertexList[i], factor));
+			}
+		}
+		return result;
+	}
 };
 
 class Mesh {
+	friend class MorphTargetAnimatedModel;
 public:
 	Mesh(SubMesh& subMesh_, GLuint shaderProgram_);
 	~Mesh();

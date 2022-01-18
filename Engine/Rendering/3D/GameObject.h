@@ -29,6 +29,7 @@ public:
 	float GetMaxSpeed()const;
 	//float GetMaxAcceleration()const;
 	float GetMass() const;
+	Model* GetModel() const;
 	std::vector<Mesh*> GetMeshes();
 	int GetTargetNumber() const { return targetNumber; };
 	glm::quat GetOrientation() const { return orientation; };

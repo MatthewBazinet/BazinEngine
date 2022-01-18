@@ -32,6 +32,7 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vect
 	{
 	case RendererType::OPENGL:	
 	{
+		glNamedBufferSubData(VBO, 0, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0]);
 		glUniform1i(diffuseMapMatLoc, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
@@ -107,7 +108,7 @@ void Mesh::GenerateBuffers()
 	glGenBuffers(1, &VBO);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0], GL_DYNAMIC_DRAW);
 	//POSITION
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
