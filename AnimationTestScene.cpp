@@ -130,6 +130,10 @@ void AnimationTestScene::NotifyOfKeyDown(const SDL_Scancode key_)
 	case SDL_SCANCODE_Y:
 		static_cast<MorphTargetAnimatedModel*>(SceneGraph::GetInstance()->GetGameObject("model1")->GetModel())->SetCurrentMorphTarget("Target1", 5.0f);
 		break;
+	case SDL_SCANCODE_U:
+		static_cast<MorphTargetAnimatedModel*>(SceneGraph::GetInstance()->GetGameObject("model1")->GetModel())->SetCurrentMorphTarget("Target2", 5.0f);
+
+		break;
 	default:
 		break;
 	}

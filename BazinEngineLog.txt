@@ -4,5 +4,3 @@
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 21
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 59
 [INFO]: Game Scene initiated in: AnimationTestScene.cpp on line: 20
-[INFO]: Game Scene initiated in: GJKTestScene.cpp on line: 20
-[INFO]: Game Scene initiated in: AnimationTestScene.cpp on line: 20

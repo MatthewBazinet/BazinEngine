@@ -17,6 +17,7 @@ private:
 	std::unordered_map<std::string, MorphTarget> animationMorphTargets;
 	std::string currentMorphTarget;
 	std::string previousMorphTarget;
+	std::vector<std::vector<Vertex>> prevVertexLists;
 	float timeToMorphComplete;
 	float animationTime;
 
