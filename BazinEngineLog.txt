@@ -1,8 +1,6 @@
-[INFO]: OpenGL Version: 4.6.0 NVIDIA 497.09 in: Window.cpp on line: 39
+[INFO]: OpenGL Version: 4.6.0 NVIDIA 471.96 in: Window.cpp on line: 39
 [INFO]: Graphics Card Vendor: NVIDIA Corporation in: Window.cpp on line: 40
 [INFO]: Window Created Succesfully in: CoreEngine.cpp on line: 33
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 21
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 59
-[INFO]: Game Scene initiated in: GameScene.cpp on line: 20
-[ERROR]: Surface for texture Material failed to be created in: TextureHandler.cpp on line: 47
-[ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
+[INFO]: Game Scene initiated in: OnlineGameScene.cpp on line: 16

@@ -211,6 +211,7 @@
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="Tetrahedron.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="WantToAttack.cpp" />
@@ -303,6 +304,7 @@
     <ClInclude Include="test_common.h" />
     <ClInclude Include="Tetrahedron.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="WantToAttack.h" />

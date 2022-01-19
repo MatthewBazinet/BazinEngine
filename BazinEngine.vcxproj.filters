@@ -83,6 +83,7 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="Engine\Core\Renderer.h" />
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
