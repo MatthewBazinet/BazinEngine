@@ -5,6 +5,9 @@
 #include "../Engine/Rendering/3D/GameObject.h"
 #include "..//Engine/Camera/BattleCamera.h"
 #include "../Projectile.h"
+#include <unordered_map>
+#include "..//MorphTarget.h"
+#include "..//MorphTargetAnimatedModel.h"
 class Character : public GameObject
 {
 public:
@@ -36,6 +39,7 @@ public:
 	float GetHealth() const { return health; };
 
 protected:
+
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);
 	void AirUnique();

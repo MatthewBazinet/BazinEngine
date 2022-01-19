@@ -26,7 +26,7 @@ public:
 
 	std::vector<Mesh*> GetMeshes();
 
-private:
+protected:
 	glm::mat4 CreateTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const;
 	glm::mat4 CreateTransform(glm::vec3 position_, glm::quat orientation_, glm::vec3 scale_) const;
 	void LoadModel();

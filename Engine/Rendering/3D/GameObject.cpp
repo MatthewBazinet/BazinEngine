@@ -141,6 +141,11 @@ float GameObject::GetMass() const
 
 }
 
+Model* GameObject::GetModel() const
+{
+	return model;
+}
+
 std::vector<Mesh*> GameObject::GetMeshes()
 {
 	return model->GetMeshes();
