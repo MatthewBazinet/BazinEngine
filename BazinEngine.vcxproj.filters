@@ -83,9 +83,13 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
+=======
     <ClCompile Include="MorphTarget.cpp" />
     <ClCompile Include="MorphTargetAnimatedModel.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
+>>>>>>> 596b169a3e14f7c0fbee01dd85c03aad9b4f8ce2
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -178,9 +182,13 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="Engine\Core\Renderer.h" />
+<<<<<<< HEAD
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
+=======
     <ClInclude Include="MorphTarget.h" />
     <ClInclude Include="MorphTargetAnimatedModel.h" />
     <ClInclude Include="AnimationTestScene.h" />
+>>>>>>> 596b169a3e14f7c0fbee01dd85c03aad9b4f8ce2
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

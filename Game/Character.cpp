@@ -171,6 +171,7 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
+
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
