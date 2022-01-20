@@ -21,6 +21,7 @@ Character::~Character() {
 
 void Character::NotifyOnKeyDown(SDL_Scancode key_)
 {
+	if (nextActionable > 0.0f) return;
 	switch (key_)
 	{
 
@@ -170,6 +171,11 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
+	if (nextActionable > 0.0f)
+	{
+		nextActionable -= deltaTime_;
+
+	}
 	proj->Update(deltaTime_);
 
 	if(isRunning)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
@@ -218,6 +224,8 @@ void Character::Update(const float deltaTime_)
 
 void Character::QCF(int strength, bool simpleInput)
 {
+	if (nextActionable > 0.0f) return;
+
 	if (isAirborne)
 	{
 		AirQCF(strength, simpleInput);
@@ -238,6 +246,8 @@ void Character::QCF(int strength, bool simpleInput)
 
 void Character::QCB(int strength, bool simpleInput)
 {
+	if (nextActionable > 0.0f) return;
+
 	if (isAirborne)
 	{
 		AirQCB(strength, simpleInput);
@@ -246,6 +256,8 @@ void Character::QCB(int strength, bool simpleInput)
 
 void Character::Unique()
 {
+	if (nextActionable > 0.0f) return;
+
 	
 	if (isAirborne)
 	{
@@ -255,6 +267,9 @@ void Character::Unique()
 
 void Character::Light()
 {
+	if (nextActionable > 0.0f) return;
+
+
 	if (isAirborne)
 	{
 		AirLight();
@@ -263,6 +278,9 @@ void Character::Light()
 
 void Character::Medium()
 {
+	if (nextActionable > 0.0f) return;
+
+
 	if (isAirborne)
 	{
 		AirMedium();
@@ -271,6 +289,9 @@ void Character::Medium()
 
 void Character::Heavy()
 {
+	if (nextActionable > 0.0f) return;
+
+
 	if (isAirborne)
 	{
 		AirHeavy();
@@ -280,33 +301,49 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning_)
 {
+	if (nextActionable > 0.0f) return;
+
 	isRunning = isRunning_;
 }
 
 void Character::Move(glm::vec2 input)
 {
+	if (nextActionable > 0.0f) return;
+
 }
 
 void Character::AirQCF(int strength, bool simpleInput)
 {
+	if (nextActionable > 0.0f) return;
+
 }
 
 void Character::AirQCB(int strength, bool simpleInput)
 {
+	if (nextActionable > 0.0f) return;
+
 }
 
 void Character::AirUnique()
 {
+	if (nextActionable > 0.0f) return;
+
 }
 
 void Character::AirLight()
 {
+	if (nextActionable > 0.0f) return;
+
 }
 
 void Character::AirMedium()
 {
+	if (nextActionable > 0.0f) return;
+
 }
 
 void Character::AirHeavy()
 {
+	if (nextActionable > 0.0f) return;
+
 }
