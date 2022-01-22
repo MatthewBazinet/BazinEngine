@@ -146,6 +146,7 @@
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
+    <ClCompile Include="AnimationTestScene.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
@@ -197,6 +198,8 @@
     <ClCompile Include="Engine\Core\Timer.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="MatchVelocity.cpp" />
+    <ClCompile Include="MorphTarget.cpp" />
+    <ClCompile Include="MorphTargetAnimatedModel.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="NetworkingPackets.cpp" />
     <ClCompile Include="OnlineGameScene.cpp" />
@@ -213,6 +216,7 @@
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="Tetrahedron.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="WantToAttack.cpp" />
@@ -233,6 +237,7 @@
     <ClInclude Include="ActionMoveTowards.h" />
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
+    <ClInclude Include="AnimationTestScene.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugSphere.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
@@ -290,6 +295,8 @@
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="MatchVelocity.h" />
+    <ClInclude Include="MorphTarget.h" />
+    <ClInclude Include="MorphTargetAnimatedModel.h" />
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="NetworkingPackets.h" />
     <ClInclude Include="OnlineGameScene.h" />
@@ -308,6 +315,7 @@
     <ClInclude Include="test_common.h" />
     <ClInclude Include="Tetrahedron.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="WantToAttack.h" />

@@ -98,7 +98,22 @@ void SceneGraph::Update(const float deltaTime)
 	for (auto go : sceneGameObjects)
 	{
 		go.second->Update(deltaTime);
-		//go.second->ApplyForce(glm::vec3(go.second->GetAccel().x, -1.0f * go.second->GetMass(), go.second->GetAccel().z));
+		for (auto gameObjects : sceneGameObjects)
+		{
+			if (gameObjects != go)
+			{
+				if (go.second->GetHitBox()->CheckCollision(gameObjects.second->GetHitBox()) && go.second->GetCollided() == false)
+				{
+					go.second->SetVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
+					go.second->SetCollided(true);
+					//this->SetPosition(this->GetPosition() - glm::vec3(0.25f, 0.0f, 0.0f));
+				}
+				else
+				{
+					go.second->SetCollided(false);
+				}
+			}
+		}
 	}
 }
 

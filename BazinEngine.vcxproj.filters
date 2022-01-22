@@ -85,6 +85,10 @@
     <ClCompile Include="XMLDecision.cpp" />
     <ClCompile Include="HurtBox.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
+    <ClCompile Include="MorphTarget.cpp" />
+    <ClCompile Include="MorphTargetAnimatedModel.cpp" />
+    <ClCompile Include="AnimationTestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -180,6 +184,10 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="HurtBox.h" />
     <ClInclude Include="DebugSphere.h" />
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
+    <ClInclude Include="MorphTarget.h" />
+    <ClInclude Include="MorphTargetAnimatedModel.h" />
+    <ClInclude Include="AnimationTestScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

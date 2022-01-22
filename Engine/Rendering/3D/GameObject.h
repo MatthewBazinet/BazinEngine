@@ -6,6 +6,8 @@
 #include "Model.h"
 #include "../../../Tetrahedron.h"
 #include "../Component.h"
+#include "../HitBox.h"
+
 class GameObject {
 private:
 	std::vector<Component*> components;
@@ -29,9 +31,14 @@ public:
 	float GetMaxSpeed()const;
 	//float GetMaxAcceleration()const;
 	float GetMass() const;
+	Model* GetModel() const;
 	std::vector<Mesh*> GetMeshes();
 	int GetTargetNumber() const { return targetNumber; };
 	glm::quat GetOrientation() const { return orientation; };
+
+	HitBox* GetHitBox() { return hitbox; };
+	bool GetCollided() { return collided; }
+	void SetCollided(bool collided_) { collided = collided_; }
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
@@ -95,6 +102,8 @@ public:
 
 protected:
 	Model* model;
+	HitBox* hitbox;
+	bool collided;
 	unsigned int modelInstance;
 
 	glm::vec3 position;

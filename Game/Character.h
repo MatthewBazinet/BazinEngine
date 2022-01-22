@@ -5,6 +5,9 @@
 #include "../Engine/Rendering/3D/GameObject.h"
 #include "..//Engine/Camera/BattleCamera.h"
 #include "../Projectile.h"
+#include <unordered_map>
+#include "..//MorphTarget.h"
+#include "..//MorphTargetAnimatedModel.h"
 class Character : public GameObject
 {
 public:
@@ -16,6 +19,8 @@ public:
 	void NotifyOnKeyUp(SDL_Scancode key_);
 
 	virtual void Update(const float deltaTime_);
+
+	void ReadInput();
 
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
@@ -36,6 +41,7 @@ public:
 	float GetHealth() const { return health; };
 
 protected:
+
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);
 	void AirUnique();
@@ -45,6 +51,7 @@ protected:
 
 	float health;
 	float overclock;
+	float nextActionable;
 	
 	bool isRunning;
 	bool isAirborne;
