@@ -145,6 +145,7 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="DebugSphere.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Game\TestChar.cpp" />
     <ClCompile Include="GJKTestScene.cpp" />
     <ClCompile Include="HitBox.cpp" />
+    <ClCompile Include="HurtBox.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -232,6 +234,7 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DebugSphere.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Math\CollisionDetection.h" />
@@ -271,6 +274,7 @@
     <ClInclude Include="Game\TestChar.h" />
     <ClInclude Include="GJKTestScene.h" />
     <ClInclude Include="HitBox.h" />
+    <ClInclude Include="HurtBox.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
@@ -299,6 +303,7 @@
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
     <ClInclude Include="SoundEffects.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
     <ClInclude Include="Tetrahedron.h" />

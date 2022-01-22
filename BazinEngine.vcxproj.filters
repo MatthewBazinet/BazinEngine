@@ -83,6 +83,8 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
+    <ClCompile Include="HurtBox.cpp" />
+    <ClCompile Include="DebugSphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AICharacter.h" />
@@ -175,6 +177,9 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="Engine\Core\Renderer.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="HurtBox.h" />
+    <ClInclude Include="DebugSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
