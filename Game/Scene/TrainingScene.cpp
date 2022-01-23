@@ -37,14 +37,14 @@ bool TrainingScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(diceModel);
 	//SceneGraph::GetInstance()->AddModel(appleModel);
 
-	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(15.0f, 0.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(30.0f, 0.0f, 0.0f)), "char1");
 	SceneGraph::GetInstance()->AddGameObject(new Character(50.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "char2");
 
 	//SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(-10.0f, 0.0f, 0.0f)), "ai1");
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 
 	leftPlane = glm::vec4(-2.0f, 0.0f, 0.0f, 1.0f);
-	rightPlane = glm::vec4(-20.0f, 0.0f, 0.0f, -1.0f);
+	rightPlane = glm::vec4(20.0f, 0.0f, 0.0f, -1.0f);
 
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
@@ -84,9 +84,10 @@ void TrainingScene::Update(const float deltaTime_)
 	//	//std::cout << "left plane collision" << std::endl;
 	//	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetVelocity(glm::vec3(leftPlane.w, 0.0f, 0.0f));
 	//}
+
 	if (EnvironmentalCollisionManager::GetInstance()->checkPlaneCollision(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHitBox()->getMaxVert(), rightPlane))
 	{
-		std::cout << "right plane collision" << std::endl;
+		//std::cout << "right plane collision" << std::endl;
 		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetVelocity(glm::vec3(rightPlane.w, dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetVelocity().y, dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetVelocity().z));
 	}
 
