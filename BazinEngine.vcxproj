@@ -147,6 +147,8 @@
     <ClCompile Include="AICharacter.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
+    <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
+    <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
     <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
     <ClCompile Include="Engine\Core\OctSpatialPartition.cpp" />
@@ -262,6 +264,8 @@
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
     <ClInclude Include="Engine\Core\Renderer.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
+    <ClInclude Include="Engine\Math\EnvironmentalCollisionManager.h" />
+    <ClInclude Include="Engine\Math\EnvironmentalHitBox.h" />
     <ClInclude Include="Flocking.h" />
     <ClInclude Include="Game\Character.h" />
     <ClInclude Include="Game\Decision Tree\Action.h" />

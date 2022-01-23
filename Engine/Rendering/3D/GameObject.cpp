@@ -27,9 +27,6 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 		
 		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
-
-	hitbox = new HitBox();
-	collided = false;
 }
 
 GameObject::~GameObject()
@@ -41,9 +38,6 @@ void GameObject::Update(const float deltaTime_)
 {
 	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
 	vel = vel + accel * deltaTime_;
-
-	hitbox->setMaxVert(glm::vec3(position.x + 1.0f, position.y + 1.0f, position.z + 1.0f));
-	hitbox->setMinVert(glm::vec3(position.x - 1.0f, position.y - 1.0f, position.z - 1.0f));
 
 	/*BoundingBox temp1 = SceneGraph::GetInstance()->GetGameObject("apple")->GetBoundingBox();
 	BoundingBox temp2 = SceneGraph::GetInstance()->GetGameObject("dice")->GetBoundingBox();

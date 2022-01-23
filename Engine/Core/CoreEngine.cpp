@@ -1,5 +1,5 @@
 #include "CoreEngine.h"
-#include "../../Character.h"
+
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
 CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0),userInterface(nullptr), rendererType(RendererType::OPENGL)
@@ -223,6 +223,9 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 		break;
 	case SDL_SCANCODE_5:
 		CoreEngine::GetInstance()->SetCurrentScene(5);
+		break;
+	case SDL_SCANCODE_6:
+		CoreEngine::GetInstance()->SetCurrentScene(6);
 		break;
 	default:
 		gameInterface->NotifyOfKeyDown(key_);
