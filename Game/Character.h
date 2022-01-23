@@ -22,6 +22,8 @@ public:
 
 	virtual void Update(const float deltaTime_);
 
+	void ReadInput();
+
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
 	void Unique();
@@ -52,6 +54,7 @@ protected:
 
 	float health;
 	float overclock;
+	float nextActionable;
 	
 	bool isRunning;
 	bool isAirborne;
