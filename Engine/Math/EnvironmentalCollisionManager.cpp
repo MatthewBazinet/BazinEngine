@@ -55,7 +55,7 @@ bool EnvironmentalCollisionManager::checkPlaneCollision(glm::vec3 point_, glm::v
 	glm::vec4 tmpleftPlane = NormalizePlane(plane_);
 	float test = tmpleftPlane.x * point_.x + tmpleftPlane.y * point_.y + tmpleftPlane.z * point_.z + tmpleftPlane.w;
 
-	//std::cout << test << std::endl;
+	std::cout << test << std::endl;
 
 	if (test < -0.05f) {
 		return false;
