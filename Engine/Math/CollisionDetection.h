@@ -5,6 +5,7 @@
 
 struct Ray;
 struct BoundingBox;
+struct Sphere;
 
 class CollisionDetection
 {
@@ -20,7 +21,7 @@ public:
 	static Ray MousePosToWorldRay(glm::vec2 mouseCoords_, glm::vec2 screenSize_, Camera* camera_);
 	static bool RayObbIntersection(Ray* ray_, BoundingBox* box_);
 	static bool RayAABBIntersection(Ray* ray_, BoundingBox* box_);
-
+	static bool SphereSphereCollision(const Sphere object1, const Sphere object2);
 	
 	struct Simplex
 	{

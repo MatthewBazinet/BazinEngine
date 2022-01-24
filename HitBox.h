@@ -25,7 +25,7 @@ public:
 	glm::vec3 getMinVert() { return minVert; };
 	glm::vec3 GetPosition() { return position; };
 	float GetRadius() { return radius; }
-	std::vector<Sphere*> GetSpheres() {return spheres;};
+	std::vector<Sphere> GetSpheres() {return spheres;};
 
 
 	void setMaxVert(glm::vec3 maxVert_) { maxVert = maxVert_; };
@@ -36,8 +36,8 @@ private:
 	glm::vec3 position;
 	float radius;
 	GameObject* parent;
-	std::vector<Sphere*> spheres;
-	std::vector<Sphere*> hitBoxes;
+	std::vector<Sphere> spheres;
+	std::vector<Sphere> hitBoxes;
 };
 
 #endif

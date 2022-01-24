@@ -7,6 +7,7 @@
 #include <vector>
 class HurtBox
 {
+	friend class HitBox;
 public:
 	HurtBox();
 	~HurtBox();
@@ -14,6 +15,7 @@ public:
 	void SpawnHurtBox(glm::vec3 startingPos_, glm::vec3 endingPos_, float width_, int numOfSpheres);
 	float GetRadius() { return radius; };
 	void SetPosition();
+	
 private:
 	float radius;
 	glm::vec3 position;

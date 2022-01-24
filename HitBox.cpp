@@ -1,5 +1,5 @@
 #include "HitBox.h"
-
+#include "Engine/Math/CollisionDetection.h"
 HitBox::HitBox()
 {
 
@@ -8,7 +8,6 @@ HitBox::HitBox()
 HitBox::HitBox(GameObject* parent_)
 {
 	parent = parent_;
-
 }
 
 HitBox::~HitBox()
@@ -32,11 +31,10 @@ bool HitBox::CheckCollision(HitBox* hitbox)
 bool HitBox::CheckCollision(std::vector<HurtBox*> hurtbox)
 {
 	for (auto tmp : hurtbox) {
-		for (int i = 0; i < hitBoxes.size(); i++) {
-			float distance = glm::sqrt((hitBoxes[i]->position.x - tmp->GetPosition().x) * (hitBoxes[i]->position.x - tmp->GetPosition().x) +
-				(hitBoxes[i]->position.y - tmp->GetPosition().y) * (hitBoxes[i]->position.y - tmp->GetPosition().y) +
-				(hitBoxes[i]->position.z - tmp->GetPosition().z) * (hitBoxes[i]->position.z - tmp->GetPosition().z));
-			return distance < (hitBoxes[i]->radius + tmp->GetRadius());
+		for (int i = 0; i < tmp->spheres.size(); i++) {
+			for (int j = 0; j < spheres.size(); j++) {
+				return CollisionDetection::SphereSphereCollision(tmp->spheres[i], spheres[i]);
+			}
 		}
 	}
 }
@@ -50,16 +48,16 @@ void HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endingPos_, float wi
 
 		for (int i = 0; i < spheres.size(); i++) {
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
-			spheres[i] = new Sphere(pos, width_);
+			spheres[i] = Sphere(pos, width_);
 			hitBoxes.push_back(spheres[i]);
-			std::cout << hitBoxes[i]->position.x<< "," << hitBoxes[i]->position.y <<","<< hitBoxes[i]->position.z << std::endl;
+			std::cout << hitBoxes[i].position.x<< "," << hitBoxes[i].position.y <<","<< hitBoxes[i].position.z << std::endl;
 		}
 	}
 	else {
 		spheres.resize(numOfSpheres);
-		spheres[0] = new Sphere(startingPos_, width_);
+		spheres[0] = Sphere(startingPos_, width_);
 		hitBoxes.push_back(spheres[0]);
-		std::cout << hitBoxes[0]->position.x << "," << hitBoxes[0]->position.y << "," << hitBoxes[0]->position.z << std::endl;
+		std::cout << hitBoxes[0].position.x << "," << hitBoxes[0].position.y << "," << hitBoxes[0].position.z << std::endl;
 	}
 
 
@@ -71,6 +69,6 @@ glm::vec3 HitBox::GetPointOnLine(glm::vec3 x, glm::vec3 y, float normalizedDista
 void HitBox::Update(float deltaTime_)
 {
 	for (auto tmp : hitBoxes) {
-		tmp->position = parent->GetPosition();
+		tmp.position = parent->GetPosition();
 	}
 }
