@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="ActionBackAway.cpp" />
+    <ClCompile Include="ActionEXFireball.cpp" />
+    <ClCompile Include="ActionFireball.cpp" />
+    <ClCompile Include="ActionMeteredCrossUp.cpp" />
+    <ClCompile Include="ActionMeterlessCrossUp.cpp" />
+    <ClCompile Include="ActionMoveTowards.cpp" />
+    <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="AnimationTestScene.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Flocking.cpp" />
     <ClCompile Include="Game\Character.cpp" />
@@ -24,9 +32,15 @@
     <ClCompile Include="Engine\Rendering\3D\Mesh.cpp" />
     <ClCompile Include="Engine\Rendering\3D\Model.cpp" />
     <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
+    <ClCompile Include="Game\Decision Tree\Action.cpp" />
+    <ClCompile Include="Game\Decision Tree\Decision.cpp" />
+    <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
+    <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
     <ClCompile Include="Game\Game1.cpp" />
     <ClCompile Include="Game\Scene\GameScene.cpp" />
     <ClCompile Include="Game\Scene\StartScene.cpp" />
+    <ClCompile Include="Game\TestChar.cpp" />
+    <ClCompile Include="GJKTestScene.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -44,7 +58,11 @@
     <ClCompile Include="Engine\Core\Timer.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
     <ClCompile Include="MatchVelocity.cpp" />
+    <ClCompile Include="MorphTarget.cpp" />
+    <ClCompile Include="MorphTargetAnimatedModel.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
+    <ClCompile Include="NetworkingPackets.cpp" />
+    <ClCompile Include="OnlineGameScene.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="Pawn.cpp" />
@@ -56,32 +74,17 @@
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
+    <ClCompile Include="Tetrahedron.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
     <ClCompile Include="trivial_signaling_client.cpp" />
     <ClCompile Include="UserInterface.cpp" />
-    <ClCompile Include="Tetrahedron.cpp" />
-    <ClCompile Include="GJKTestScene.cpp" />
-    <ClCompile Include="NetworkingPackets.cpp" />
-    <ClCompile Include="OnlineGameScene.cpp" />
-    <ClCompile Include="Game\Decision Tree\Action.cpp" />
-    <ClCompile Include="Game\Decision Tree\Decision.cpp" />
-    <ClCompile Include="Game\Decision Tree\DecisionTreeNode.cpp" />
-    <ClCompile Include="Game\Decision Tree\FloatDecision.cpp" />
-    <ClCompile Include="Game\TestChar.cpp" />
-    <ClCompile Include="XMLDecisionTreeReader.cpp" />
-    <ClCompile Include="tinyxml2.cpp" />
-    <ClCompile Include="wantToSpendMeter.cpp" />
+    <ClCompile Include="WantToAttack.cpp" />
+    <ClCompile Include="WantToBackAway.cpp" />
     <ClCompile Include="WantToEXFireball.cpp" />
     <ClCompile Include="WantToMeteredCrossUp.cpp" />
     <ClCompile Include="WantToMeterlessCrossUp.cpp" />
-    <ClCompile Include="WantToAttack.cpp" />
-    <ClCompile Include="WantToBackAway.cpp" />
-    <ClCompile Include="ActionEXFireball.cpp" />
-    <ClCompile Include="ActionFireball.cpp" />
-    <ClCompile Include="ActionMeteredCrossUp.cpp" />
-    <ClCompile Include="ActionMeterlessCrossUp.cpp" />
-    <ClCompile Include="ActionBackAway.cpp" />
-    <ClCompile Include="ActionMoveTowards.cpp" />
-    <ClCompile Include="ActionRunTowards.cpp" />
+    <ClCompile Include="wantToSpendMeter.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
     <ClCompile Include="HurtBox.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
@@ -89,9 +92,22 @@
     <ClCompile Include="MorphTarget.cpp" />
     <ClCompile Include="MorphTargetAnimatedModel.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
+    <ClCompile Include="XMLDecisionTreeReader.cpp" />
+    <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
+    <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
+    <ClCompile Include="Engine\Camera\SkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionBackAway.h" />
+    <ClInclude Include="ActionEXFireball.h" />
+    <ClInclude Include="ActionFireball.h" />
+    <ClInclude Include="ActionMeteredCrossUp.h" />
+    <ClInclude Include="ActionMeterlessCrossUp.h" />
+    <ClInclude Include="ActionMoveTowards.h" />
+    <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
+    <ClInclude Include="AnimationTestScene.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Math\CollisionDetection.h" />
@@ -115,14 +131,21 @@
     <ClInclude Include="Engine\Rendering\3D\LoadOBJModel.h" />
     <ClInclude Include="Engine\Rendering\3D\Mesh.h" />
     <ClInclude Include="Engine\Rendering\3D\Model.h" />
+    <ClInclude Include="Engine\Core\Renderer.h" />
     <ClInclude Include="Engine\Rendering\SceneGraph.h" />
     <ClInclude Include="Flocking.h" />
     <ClInclude Include="Game\Character.h" />
+    <ClInclude Include="Game\Decision Tree\Action.h" />
+    <ClInclude Include="Game\Decision Tree\Decision.h" />
+    <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
+    <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
     <ClInclude Include="Game\Game1.h" />
     <ClInclude Include="Game\Scene\GameScene.h" />
     <ClInclude Include="Game\Scene\StartScene.h" />
     <ClInclude Include="Engine\Graphics\TextureHandler.h" />
     <ClInclude Include="Engine\Math\Ray.h" />
+    <ClInclude Include="Game\TestChar.h" />
+    <ClInclude Include="GJKTestScene.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -139,7 +162,11 @@
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="MatchVelocity.h" />
+    <ClInclude Include="MorphTarget.h" />
+    <ClInclude Include="MorphTargetAnimatedModel.h" />
     <ClInclude Include="NetworkingBase.h" />
+    <ClInclude Include="NetworkingPackets.h" />
+    <ClInclude Include="OnlineGameScene.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="Pawn.h" />
@@ -152,33 +179,17 @@
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
+    <ClInclude Include="Tetrahedron.h" />
+    <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
     <ClInclude Include="trivial_signaling_client.h" />
     <ClInclude Include="UserInterface.h" />
-    <ClInclude Include="Tetrahedron.h" />
-    <ClInclude Include="GJKTestScene.h" />
-    <ClInclude Include="NetworkingPackets.h" />
-    <ClInclude Include="OnlineGameScene.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Game\Decision Tree\Action.h" />
-    <ClInclude Include="Game\Decision Tree\Decision.h" />
-    <ClInclude Include="Game\Decision Tree\DecisionTreeNode.h" />
-    <ClInclude Include="Game\Decision Tree\FloatDecision.h" />
-    <ClInclude Include="Game\TestChar.h" />
-    <ClInclude Include="XMLDecisionTreeReader.h" />
-    <ClInclude Include="tinyxml2.h" />
-    <ClInclude Include="wantToSpendMeter.h" />
+    <ClInclude Include="WantToAttack.h" />
+    <ClInclude Include="WantToBackAway.h" />
     <ClInclude Include="WantToEXFireball.h" />
     <ClInclude Include="WantToMeteredCrossUp.h" />
     <ClInclude Include="WantToMeterlessCrossUp.h" />
-    <ClInclude Include="WantToAttack.h" />
-    <ClInclude Include="WantToBackAway.h" />
-    <ClInclude Include="ActionEXFireball.h" />
-    <ClInclude Include="ActionFireball.h" />
-    <ClInclude Include="ActionMeteredCrossUp.h" />
-    <ClInclude Include="ActionMeterlessCrossUp.h" />
-    <ClInclude Include="ActionBackAway.h" />
-    <ClInclude Include="ActionMoveTowards.h" />
-    <ClInclude Include="ActionRunTowards.h" />
+    <ClInclude Include="wantToSpendMeter.h" />
     <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="Engine\Core\Renderer.h" />
     <ClInclude Include="Sphere.h" />
@@ -188,9 +199,16 @@
     <ClInclude Include="MorphTarget.h" />
     <ClInclude Include="MorphTargetAnimatedModel.h" />
     <ClInclude Include="AnimationTestScene.h" />
+    <ClInclude Include="XMLDecisionTreeReader.h" />
+    <ClInclude Include="Engine\Math\EnvironmentalCollisionManager.h" />
+    <ClInclude Include="Engine\Math\EnvironmentalHitBox.h" />
+    <ClInclude Include="Engine\Camera\SkyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Tree.xml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Apple_Body.png" />
@@ -205,8 +223,7 @@
     <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
     <None Include="Engine\Shader\ParticleVertexShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Tree.xml" />
+    <None Include="Engine\Shader\SkyBoxFrag.glsl" />
+    <None Include="Engine\Shader\SkyBoxVert.glsl" />
   </ItemGroup>
 </Project>

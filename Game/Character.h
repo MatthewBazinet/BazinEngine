@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include "..//MorphTarget.h"
 #include "..//MorphTargetAnimatedModel.h"
+#include "../Engine/Math/EnvironmentalHitBox.h"
+
 class Character : public GameObject
 {
 public:
@@ -39,6 +41,7 @@ public:
 	void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
 	float GetHealth() const { return health; };
+	EnvironmentalHitBox* GetHitBox() { return hitBox; };
 
 protected:
 
@@ -58,6 +61,7 @@ protected:
 	Model* model;
 	Projectile* proj;
 	Character* opponent;
+	EnvironmentalHitBox* hitBox;
 
 	Camera* camera;
 	glm::vec3 axisOf2DMovement;

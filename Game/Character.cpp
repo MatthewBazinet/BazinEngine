@@ -10,6 +10,8 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	maxSpeed = 5.0f;
 	proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
 	target = glm::vec3();
+
+	hitBox = new EnvironmentalHitBox();
 }
 
 Character::~Character() {
@@ -171,6 +173,8 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
+	hitBox->setMaxVert(position);
+	hitBox->setMinVert(position);
 
 	if (nextActionable > 0.0f)
 	{
