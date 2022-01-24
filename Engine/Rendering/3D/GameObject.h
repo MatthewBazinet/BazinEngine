@@ -6,6 +6,7 @@
 #include "Model.h"
 #include "../../../Tetrahedron.h"
 #include "../Component.h"
+#include "../Sphere.h"
 
 class GameObject {
 private:
@@ -34,6 +35,7 @@ public:
 	std::vector<Mesh*> GetMeshes();
 	int GetTargetNumber() const { return targetNumber; };
 	glm::quat GetOrientation() const { return orientation; };
+	
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
@@ -49,6 +51,7 @@ public:
 	void SetMaxSpeed(float maxSpeed_);
 	void SetMass(float mass_);
 	void SetTargetNumber(int targetNumber_) { targetNumber = targetNumber_; };
+	
 
 	Tetrahedron GetShape();
 	void SetShape(Tetrahedron shape_);

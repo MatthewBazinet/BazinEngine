@@ -8,6 +8,7 @@ HitBox::HitBox()
 HitBox::HitBox(GameObject* parent_)
 {
 	parent = parent_;
+	int j = 0;
 }
 
 HitBox::~HitBox()
@@ -28,13 +29,11 @@ bool HitBox::CheckCollision(HitBox* hitbox)
 	return false;
 }
 
-bool HitBox::CheckCollision(std::vector<HurtBox*> hurtbox)
+bool HitBox::CheckCollision(std::vector<Sphere> hurtbox)
 {
-	for (auto tmp : hurtbox) {
-		for (int i = 0; i < tmp->spheres.size(); i++) {
-			for (int j = 0; j < spheres.size(); j++) {
-				return CollisionDetection::SphereSphereCollision(tmp->spheres[i], spheres[i]);
-			}
+	for (int i = 0; i < hurtbox.size(); i++) {
+		for (int j = 0; j < hitBoxes.size(); j++) {
+				return CollisionDetection::SphereSphereCollision(hurtbox[i], hitBoxes[j]);
 		}
 	}
 }
@@ -68,7 +67,8 @@ glm::vec3 HitBox::GetPointOnLine(glm::vec3 x, glm::vec3 y, float normalizedDista
 }
 void HitBox::Update(float deltaTime_)
 {
-	for (auto tmp : hitBoxes) {
-		tmp.position = parent->GetPosition();
+	for (int i = 0; i < hitBoxes.size(); i++) {
+		hitBoxes[i].position = parent->GetPosition();
+		//std::cout << hitBoxes[i].position.x << "," << hitBoxes[i].position.y << "," << hitBoxes[i].position.z << std::endl;
 	}
 }

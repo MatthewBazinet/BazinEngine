@@ -388,7 +388,7 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 
 	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(12.5f, 0.0f, 0.0f)), "projectile");
-	 
+	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetCharacter(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
 	
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile1"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile2"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));

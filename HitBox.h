@@ -17,7 +17,7 @@ public:
 
 	void SpawnBoundingBox();
 	bool CheckCollision(HitBox* hitbox);
-	bool CheckCollision(std::vector<HurtBox*> hurtbox);
+	bool CheckCollision(std::vector<Sphere> hurtbox);
 	void spawnSpheres(glm::vec3 startingPos_, glm::vec3 endingPos_, float width_, int numOfSpheres);
 	glm::vec3 GetPointOnLine(glm::vec3 x, glm::vec3 y, float normalizedDistance);
 
