@@ -75,17 +75,13 @@ void TrainingScene::Update(const float deltaTime_)
 
 	if (EnvironmentalCollisionManager::GetInstance()->checkPlaneCollision(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHitBox()->getMaxVert(), leftPlane))
 	{
-		std::cout << "left plane collision" << std::endl;
 		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetVelocity(glm::vec3(-(leftPlane.x), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetVelocity().y, dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetVelocity().z));
 	}
 
 	if (EnvironmentalCollisionManager::GetInstance()->checkPlaneCollision(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHitBox()->getMaxVert(), rightPlane))
 	{
-		//std::cout << "right plane collision" << std::endl;
 		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetVelocity(glm::vec3(-(rightPlane.x), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetVelocity().y, dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetVelocity().z));
 	}
-
-	//std::cout << dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHitBox()->getMaxVert().x << std::endl;
 }
 
 void TrainingScene::Render()
