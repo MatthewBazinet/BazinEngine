@@ -7,6 +7,7 @@
 #include "../../Flocking.h"
 #include "../Pawn.h"
 #include "../ParticleSystem.h"
+#include <vector>
 class GameScene : public Scene
 {
 public:
@@ -20,6 +21,8 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 	Component* ptr;
+	float scale;
+	bool tmp = true;
 };
 
 #endif // !GAMESCENE_H

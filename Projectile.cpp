@@ -5,10 +5,14 @@ Projectile::Projectile(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	target = nullptr;//glm::vec3(0.0f, 0.0f, 0.0f);
 	
 	SetMaxSpeed(3.0f);
+	hitBox = new HitBox(this);
+	hitBox->spawnSpheres(this->GetPosition(), this->GetPosition(), 1.0f, 1);
 }
 
 Projectile::~Projectile()
 {
+	delete hitBox;
+	hitBox = nullptr;
 }
 
 void Projectile::Separate(std::vector<GameObject*> objects_)
@@ -42,6 +46,7 @@ void Projectile::Update(const float deltaTime_)
 	{
 		SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
 	}
+
 	GameObject::Update(deltaTime_);
 }
 

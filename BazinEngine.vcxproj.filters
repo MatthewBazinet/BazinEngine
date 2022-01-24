@@ -96,6 +96,7 @@
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
     <ClCompile Include="Engine\Camera\SkyBox.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
