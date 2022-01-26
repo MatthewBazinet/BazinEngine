@@ -4,10 +4,14 @@
 
 #include "../Engine/Rendering/3D/GameObject.h"
 #include "..//Engine/Camera/BattleCamera.h"
-#include "../Projectile.h"
+
 #include <unordered_map>
 #include "..//MorphTarget.h"
 #include "..//MorphTargetAnimatedModel.h"
+#include "../Engine/Math/EnvironmentalHitBox.h"
+#include "../HurtBox.h"
+
+class Projectile;
 class Character : public GameObject
 {
 public:
@@ -39,6 +43,8 @@ public:
 	void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
 	float GetHealth() const { return health; };
+	EnvironmentalHitBox* GetHitBox() { return hitBox; };
+	std::vector<Sphere> GetHurtBoxes()const;
 
 protected:
 
@@ -58,6 +64,7 @@ protected:
 	Model* model;
 	Projectile* proj;
 	Character* opponent;
+	EnvironmentalHitBox* hitBox;
 
 	Camera* camera;
 	glm::vec3 axisOf2DMovement;
@@ -67,7 +74,7 @@ protected:
 	glm::vec3 target;
 
 	glm::vec3 relativeVel;
-
+	HurtBox hurtBox;
 };
 
 #endif

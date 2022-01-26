@@ -1,5 +1,7 @@
 #include "Character.h"
 #include <glm/gtx/rotate_vector.hpp>
+#include "../Projectile.h"
+
 Character::Character(float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
 	health = health_;
@@ -10,6 +12,9 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	maxSpeed = 5.0f;
 	proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
 	target = glm::vec3();
+	hurtBox = HurtBox(this);
+	hitBox = new EnvironmentalHitBox();
+	hurtBox.SpawnHurtBox(this->position, this->position, 1.0f, 1);
 }
 
 Character::~Character() {
@@ -171,7 +176,9 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
-
+	hitBox->setMaxVert(position);
+	hitBox->setMinVert(position);
+	hurtBox.Update(deltaTime_);
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
@@ -311,6 +318,11 @@ void Character::Move(glm::vec2 input)
 {
 	if (nextActionable > 0.0f) return;
 
+}
+
+std::vector<Sphere> Character::GetHurtBoxes() const
+{
+	return hurtBox.GetHurtBoxes();
 }
 
 void Character::AirQCF(int strength, bool simpleInput)

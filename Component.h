@@ -3,6 +3,7 @@
 
 
 class GameObject;
+class Camera;
 class Component {
 public:
 	inline Component() : parent(nullptr) {}

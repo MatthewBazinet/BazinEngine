@@ -12,6 +12,7 @@
 
 class TrainingScene : public Scene
 {
+public:
 	TrainingScene();
 	~TrainingScene();
 	bool OnCreate() override;
@@ -22,6 +23,8 @@ class TrainingScene : public Scene
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 	GridWithWeights navgrid;
+	glm::vec4 leftPlane;
+	glm::vec4 rightPlane;
 };
 
 #endif;

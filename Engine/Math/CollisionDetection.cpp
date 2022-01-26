@@ -1,7 +1,7 @@
 ﻿#include "CollisionDetection.h"
 #include "Ray.h"
 #include "../Core/CoreEngine.h"
-
+#include "../Sphere.h"
 CollisionDetection::~CollisionDetection() 
 {
 
@@ -262,6 +262,17 @@ void CollisionDetection::Simplex::Add(glm::vec3 e)
 			break;
 		}
 }
+
+bool CollisionDetection::SphereSphereCollision(const Sphere object1, const Sphere object2) {
+	float distance = sqrt(pow(object2.position.x - object1.position.x, 2) + pow(object2.position.y - object1.position.y, 2) + pow(object2.position.z - object1.position.z, 2));
+	if (distance < object1.radius + object2.radius) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 
 void CollisionDetection::Simplex::Remove(int i)
 {

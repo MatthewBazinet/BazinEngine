@@ -6,6 +6,7 @@
 #include "../OnlineGameScene.h"
 #include "..//GJKTestScene.h"
 #include "..//AnimationTestScene.h"
+#include "Scene/TrainingScene.h"
 
 Game1::Game1() : GameInterface(), currentScene(nullptr), currentSceneNum(0)
 {
@@ -79,6 +80,9 @@ void Game1::BuildScene()
 		break;
 	case 5:
 		currentScene = new AnimationTestScene();
+		break;
+	case 6:
+		currentScene = new TrainingScene();
 		break;
 	default: //case 0:
 		currentScene = new StartScene();

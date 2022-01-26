@@ -6,7 +6,7 @@
 #include "Model.h"
 #include "../../../Tetrahedron.h"
 #include "../Component.h"
-#include "../HitBox.h"
+#include "../Sphere.h"
 
 class GameObject {
 private:
@@ -35,10 +35,7 @@ public:
 	std::vector<Mesh*> GetMeshes();
 	int GetTargetNumber() const { return targetNumber; };
 	glm::quat GetOrientation() const { return orientation; };
-
-	HitBox* GetHitBox() { return hitbox; };
-	bool GetCollided() { return collided; }
-	void SetCollided(bool collided_) { collided = collided_; }
+	
 
 	void ApplyForce(glm::vec3 force_);
 	void SetPosition(glm::vec3 position_);
@@ -54,6 +51,7 @@ public:
 	void SetMaxSpeed(float maxSpeed_);
 	void SetMass(float mass_);
 	void SetTargetNumber(int targetNumber_) { targetNumber = targetNumber_; };
+	
 
 	Tetrahedron GetShape();
 	void SetShape(Tetrahedron shape_);
@@ -102,8 +100,7 @@ public:
 
 protected:
 	Model* model;
-	HitBox* hitbox;
-	bool collided;
+	
 	unsigned int modelInstance;
 
 	glm::vec3 position;
