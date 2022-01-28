@@ -7,7 +7,7 @@
 
 GameScene::GameScene()
 {
-	
+	scale = 1.5f;
 }
 
 GameScene::~GameScene()
@@ -358,7 +358,7 @@ bool GameScene::OnCreate()
 
 
 
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(player, glm::vec3(4.0f,3.0f, 0.0f)), "apple");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(player, glm::vec3(4.0f,3.0f, 0.0f)),"apple");
 	SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(100, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
 	ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
 
@@ -367,7 +367,7 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 	
-	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 	
 
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
@@ -387,8 +387,8 @@ bool GameScene::OnCreate()
 	
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 
-	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
-	 
+	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(12.5f, 0.0f, 0.0f)), "projectile");
+	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetCharacter(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
 	
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile1"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile2"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
@@ -397,10 +397,6 @@ bool GameScene::OnCreate()
 
 	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	
-
-
-
-
 	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
@@ -410,6 +406,10 @@ bool GameScene::OnCreate()
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+	
+	glm::vec3 s(1.0f);
+	glm::vec3 e(6.0f);
+
 
 
 	diceModel = nullptr;
@@ -430,7 +430,6 @@ void GameScene::Update(const float deltaTime_)
 
 void GameScene::Render()
 {
-
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	ptr->Render(CoreEngine::GetInstance()->GetCamera());
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());

@@ -86,10 +86,17 @@
     <ClCompile Include="WantToMeterlessCrossUp.cpp" />
     <ClCompile Include="wantToSpendMeter.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
+    <ClCompile Include="HurtBox.cpp" />
+    <ClCompile Include="DebugSphere.cpp" />
+    <ClCompile Include="Game\Scene\TrainingScene.cpp" />
+    <ClCompile Include="MorphTarget.cpp" />
+    <ClCompile Include="MorphTargetAnimatedModel.cpp" />
+    <ClCompile Include="AnimationTestScene.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
     <ClCompile Include="Engine\Camera\SkyBox.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -185,6 +192,14 @@
     <ClInclude Include="WantToMeterlessCrossUp.h" />
     <ClInclude Include="wantToSpendMeter.h" />
     <ClInclude Include="XMLDecision.h" />
+    <ClInclude Include="Engine\Core\Renderer.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="HurtBox.h" />
+    <ClInclude Include="DebugSphere.h" />
+    <ClInclude Include="Game\Scene\TrainingScene.h" />
+    <ClInclude Include="MorphTarget.h" />
+    <ClInclude Include="MorphTargetAnimatedModel.h" />
+    <ClInclude Include="AnimationTestScene.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
     <ClInclude Include="Engine\Math\EnvironmentalCollisionManager.h" />
     <ClInclude Include="Engine\Math\EnvironmentalHitBox.h" />
