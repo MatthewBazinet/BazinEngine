@@ -50,6 +50,19 @@ void EnvironmentalCollisionManager::OnDestroy()
 	scenePartition = nullptr;
 }
 
+void EnvironmentalCollisionManager::Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_)
+{
+	if (checkPlaneCollision(dynamic_cast<Character*>(gameObject_)->GetHitBox()->getMaxVert(), leftPlane_))
+	{
+		gameObject_->SetVelocity(glm::vec3(-(leftPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+	}
+
+	if (checkPlaneCollision(dynamic_cast<Character*>(gameObject_)->GetHitBox()->getMaxVert(), rightPlane_))
+	{
+		gameObject_->SetVelocity(glm::vec3(-(rightPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+	}
+}
+
 bool EnvironmentalCollisionManager::checkPlaneCollision(glm::vec3 point_, glm::vec4 plane_)
 {
 	glm::vec4 tmpleftPlane = NormalizePlane(plane_);
