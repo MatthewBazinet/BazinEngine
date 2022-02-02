@@ -19,6 +19,7 @@ public:
 	void OnDestroy();
 	void Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_);
 
+	void checkObjectCollision(GameObject* gameObject_);
 	bool checkPlaneCollision(glm::vec3 point_, glm::vec4 plane_);
 	glm::vec4 NormalizePlane(glm::vec4 plane_);
 
@@ -29,7 +30,7 @@ private:
 	static std::unique_ptr<EnvironmentalCollisionManager> environmentalCollisionInstance;
 	friend std::default_delete<EnvironmentalCollisionManager>;
 
-	static std::vector<GameObject*> prevCollisions;
+	static std::vector<GameObject*> objects;
 	static OctSpacialPartition* scenePartition;
 };
 

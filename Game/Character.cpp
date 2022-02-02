@@ -13,7 +13,6 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
 	target = glm::vec3();
 	hurtBox = HurtBox(this);
-	hitBox = new EnvironmentalHitBox();
 	hurtBox.SpawnHurtBox(this->position, this->position, 1.0f, 1);
 }
 
@@ -176,8 +175,6 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
-	hitBox->setMaxVert(position);
-	hitBox->setMinVert(position);
 	hurtBox.Update(deltaTime_);
 	if (nextActionable > 0.0f)
 	{

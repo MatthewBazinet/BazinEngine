@@ -148,7 +148,6 @@
     <ClCompile Include="DebugSphere.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
-    <ClCompile Include="Engine\Camera\SkyBox.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
     <ClCompile Include="Flocking.cpp" />
@@ -245,7 +244,6 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugSphere.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
-    <ClInclude Include="Engine\Camera\SkyBox.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Math\CollisionDetection.h" />
     <ClInclude Include="Engine\Camera\Camera.h" />
@@ -340,8 +338,6 @@
     <None Include="Engine\Shader\FragmentShader.glsl" />
     <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
     <None Include="Engine\Shader\ParticleVertexShader.glsl" />
-    <None Include="Engine\Shader\SkyBoxFrag.glsl" />
-    <None Include="Engine\Shader\SkyBoxVert.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>

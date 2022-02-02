@@ -7,6 +7,7 @@
 #include "../../../Tetrahedron.h"
 #include "../Component.h"
 #include "../Sphere.h"
+#include "../Engine/Math/EnvironmentalHitBox.h"
 
 class GameObject {
 private:
@@ -52,6 +53,7 @@ public:
 	void SetMass(float mass_);
 	void SetTargetNumber(int targetNumber_) { targetNumber = targetNumber_; };
 	
+	EnvironmentalHitBox* GetHitBox() { return hitBox; };
 
 	Tetrahedron GetShape();
 	void SetShape(Tetrahedron shape_);
@@ -100,6 +102,7 @@ public:
 
 protected:
 	Model* model;
+	EnvironmentalHitBox* hitBox;
 	
 	unsigned int modelInstance;
 

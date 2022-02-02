@@ -3,12 +3,12 @@
 
 std::unique_ptr<EnvironmentalCollisionManager> EnvironmentalCollisionManager::environmentalCollisionInstance = nullptr;
 
-std::vector<GameObject*> EnvironmentalCollisionManager::prevCollisions = std::vector<GameObject*>();
+std::vector<GameObject*> EnvironmentalCollisionManager::objects = std::vector<GameObject*>();
 OctSpacialPartition* EnvironmentalCollisionManager::scenePartition = nullptr;
 
 EnvironmentalCollisionManager::EnvironmentalCollisionManager()
 {
-	prevCollisions.reserve(10);
+	objects.reserve(10);
 }
 
 EnvironmentalCollisionManager::~EnvironmentalCollisionManager()
@@ -27,7 +27,7 @@ EnvironmentalCollisionManager* EnvironmentalCollisionManager::GetInstance()
 
 void EnvironmentalCollisionManager::OnCreate(float worldSize_)
 {
-	prevCollisions.clear();
+	objects.clear();
 	scenePartition = new OctSpacialPartition(worldSize_);
 }
 
@@ -36,30 +36,71 @@ void EnvironmentalCollisionManager::AddObject(GameObject* go_)
 	if (scenePartition != nullptr)
 	{
 		scenePartition->AddObject(go_);
+		objects.push_back(go_);
 	}
 }
 
 void EnvironmentalCollisionManager::OnDestroy()
 {
-	for (auto entry : prevCollisions)
+	for (auto entry : objects)
 	{
 		entry = nullptr;
 	}
-	prevCollisions.clear();
+	objects.clear();
 	delete scenePartition;
 	scenePartition = nullptr;
 }
 
 void EnvironmentalCollisionManager::Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_)
 {
-	if (checkPlaneCollision(dynamic_cast<Character*>(gameObject_)->GetHitBox()->getMaxVert(), leftPlane_))
+	if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), leftPlane_))
 	{
 		gameObject_->SetVelocity(glm::vec3(-(leftPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
 	}
 
-	if (checkPlaneCollision(dynamic_cast<Character*>(gameObject_)->GetHitBox()->getMaxVert(), rightPlane_))
+	if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), rightPlane_))
 	{
 		gameObject_->SetVelocity(glm::vec3(-(rightPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+	}
+
+	checkObjectCollision(gameObject_);
+}
+
+void EnvironmentalCollisionManager::checkObjectCollision(GameObject* gameObject_)
+{
+	for (auto gameObjects : objects)
+	{
+		if (gameObjects != gameObject_)
+		{
+			if (gameObject_->GetHitBox()->getMinVert().x - 1.0f <= gameObjects->GetHitBox()->getMaxVert().x + 1.0f && gameObject_->GetHitBox()->getMaxVert().x + 1.0f >= gameObjects->GetHitBox()->getMinVert().x - 1.0f/*, gameObject_->GetHitBox()->getMinVert().y <= gameObjects->GetHitBox()->getMaxVert().y && gameObject_->GetHitBox()->getMaxVert().y <= gameObjects->GetHitBox()->getMinVert().y, gameObject_->GetHitBox()->getMinVert().z >= gameObjects->GetHitBox()->getMaxVert().z && gameObject_->GetHitBox()->getMaxVert().z >= gameObjects->GetHitBox()->getMinVert().z*/)
+			{
+				// x collision
+				if (gameObject_->GetHitBox()->getMinVert().x - 1.0f <= gameObjects->GetHitBox()->getMaxVert().x + 1.0f && gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
+				{
+					gameObject_->SetVelocity(glm::vec3(-(gameObject_->GetVelocity().x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+				}
+				else if(gameObject_->GetHitBox()->getMaxVert().x + 1.0f >= gameObjects->GetHitBox()->getMinVert().x - 1.0f && gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
+				{
+					gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+				}
+
+				// z collision - doesnt work with running
+				if (gameObject_->GetHitBox()->getMinVert().z - 1.0f <= gameObjects->GetHitBox()->getMaxVert().z + 1.0f && gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
+				{
+					gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, -gameObject_->GetVelocity().z));
+				}
+				else if (gameObject_->GetHitBox()->getMaxVert().z + 1.0f >= gameObjects->GetHitBox()->getMinVert().z - 1.0f && gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
+				{
+					gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+				}
+
+				// y collision - not sure is needed?
+				/*if (gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
+				{
+					gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, +2.0f, gameObject_->GetVelocity().z));
+				}*/
+			}
+		}
 	}
 }
 
@@ -67,8 +108,6 @@ bool EnvironmentalCollisionManager::checkPlaneCollision(glm::vec3 point_, glm::v
 {
 	glm::vec4 tmpleftPlane = NormalizePlane(plane_);
 	float test = tmpleftPlane.x * point_.x + tmpleftPlane.y * point_.y + tmpleftPlane.z * point_.z + tmpleftPlane.w;
-
-	std::cout << test << std::endl;
 
 	if (test < -0.05f) {
 		return false;

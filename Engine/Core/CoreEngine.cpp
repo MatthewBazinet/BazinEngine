@@ -39,6 +39,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	ShaderHandler::GetInstance()->CreateProgram("colourShader", "Engine/Shader/ColourVertexShader.glsl", "Engine/Shader/ColourFragmentShader.glsl");
 	ShaderHandler::GetInstance()->CreateProgram("basicShader", "Engine/Shader/VertexShader.glsl", "Engine/Shader/FragmentShader.glsl");
 	ShaderHandler::GetInstance()->CreateProgram("particleShader", "Engine/Shader/ParticleVertexShader.glsl", "Engine/Shader/ParticleFragmentShader.glsl");
+	ShaderHandler::GetInstance()->CreateProgram("skyboxShader", "Engine/Shader/SkyBoxVert.glsl", "Engine/Shader/SkyBoxFrag.glsl");
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {

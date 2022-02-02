@@ -95,7 +95,6 @@
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
-    <ClCompile Include="Engine\Camera\SkyBox.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -203,7 +202,6 @@
     <ClInclude Include="XMLDecisionTreeReader.h" />
     <ClInclude Include="Engine\Math\EnvironmentalCollisionManager.h" />
     <ClInclude Include="Engine\Math\EnvironmentalHitBox.h" />
-    <ClInclude Include="Engine\Camera\SkyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
@@ -224,7 +222,5 @@
     <None Include="Engine\Shader\ParticleFragmentShader.glsl" />
     <None Include="Engine\Shader\ParticleVertexShader.glsl" />
     <None Include="Engine\Shader\VertexShader.glsl" />
-    <None Include="Engine\Shader\SkyBoxFrag.glsl" />
-    <None Include="Engine\Shader\SkyBoxVert.glsl" />
   </ItemGroup>
 </Project>
