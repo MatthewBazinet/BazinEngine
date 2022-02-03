@@ -1,5 +1,16 @@
 #include "InputManager.h"
 
+InputManager::InputManager()
+{
+	time = 0.0f;
+}
+
+InputManager::~InputManager()
+{
+	player1 = nullptr;
+	player2 = nullptr;
+}
+
 void InputManager::SetPlayer1(Character* player1_)
 {
 	player1 = player1_;
@@ -269,7 +280,7 @@ void InputManager::CheckMotion(int strength, int character)
 		{
 			if(characterObject->FacingLeft())
 			{ 
-				if (input->timeRightHeld > 1.0f)
+				if (time - input->timeRightHeld > 1.0f || input->timeRightHeld > 0.0f)
 				{
 					characterObject->QCF(strength, true);
 					input->timeRightHeld = 0.0f;
@@ -294,7 +305,7 @@ void InputManager::CheckMotion(int strength, int character)
 			}
 			else 
 			{
-				if (input->timeLeftHeld > 1.0f)
+				if (time - input->timeLeftHeld > 1.0f || input->timeLeftHeld > 0.0f)
 				{
 					characterObject->QCF(strength, true);
 					input->timeLeftHeld = 0.0f;
@@ -327,7 +338,7 @@ void InputManager::CheckMotion(int strength, int character)
 	{
 		if (characterObject->IsCharge())
 		{
-			if (input->timeDownHeld > 1.0f) 
+			if (time - input->timeDownHeld > 1.0f || input->timeDownHeld > 0.0f)
 			{
 				characterObject->QCB(strength, true);
 				input->timeDownHeld = 0.0f;
