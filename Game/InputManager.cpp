@@ -26,21 +26,25 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 	if (key_ == player1Keybinds.up)
 	{
 		player1Inputs.directions.back().y = 1.0f;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.down)
 	{
 		player1Inputs.directions.back().y = -1.0f;
 		player1Inputs.timeDownHeld = time;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.left)
 	{
 		player1Inputs.directions.back().x = -1.0f;
 		player1Inputs.timeLeftHeld = time;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.right)
 	{
 		player1Inputs.directions.back().x = 1.0f;
 		player1Inputs.timeRightHeld = time;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.light)
 	{
@@ -82,21 +86,25 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 	else if (key_ == player2Keybinds.up)
 	{
 		player2Inputs.directions.back().y = 1.0f;
+		player2->Move(player2Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.down)
 	{
 		player2Inputs.directions.back().y = -1.0f;
 		player2Inputs.timeDownHeld = time;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.left)
 	{
 		player2Inputs.directions.back().x = -1.0f;
 		player2Inputs.timeLeftHeld = time;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.right)
 	{
 		player2Inputs.directions.back().x = 1.0f;
 		player2Inputs.timeRightHeld = time;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.light)
 	{
@@ -141,24 +149,38 @@ void InputManager::OnKeyUp(SDL_Scancode key_)
 {
 	if (key_ == player1Keybinds.up)
 	{
-		player1Inputs.directions.back().y = 1.0f;
-		
+		if (player1Inputs.directions.back().y == 1.0f)
+		{
+			player1Inputs.directions.back().y = 0.0f;
+		}
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.down)
 	{
-		player1Inputs.directions.back().y = -1.0f;
+		if (player1Inputs.directions.back().y == -1.0f)
+		{
+			player1Inputs.directions.back().y = 0.0f;
+		}
 		player1Inputs.timeDownGrace = chargeGracePeriod;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.left)
 	{
-		player1Inputs.directions.back().x = -1.0f;
+		if (player1Inputs.directions.back().x == -1.0f)
+		{
+			player1Inputs.directions.back().x = 0.0f;
+		}
 		player1Inputs.timeLeftGrace = chargeGracePeriod;
-
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.right)
 	{
-		player1Inputs.directions.back().x = 1.0f;
+		if (player1Inputs.directions.back().x == 1.0f)
+		{
+			player1Inputs.directions.back().x = 0.0f;
+		}
 		player1Inputs.timeRightGrace = chargeGracePeriod;
+		player1->Move(player1Inputs.directions.back());
 	}
 	else if (key_ == player1Keybinds.light)
 	{
@@ -195,24 +217,38 @@ void InputManager::OnKeyUp(SDL_Scancode key_)
 	}
 	else if (key_ == player2Keybinds.up)
 	{
-		player2Inputs.directions.back().y = 1.0f;
-
+		if (player2Inputs.directions.back().y == 1.0f)
+		{
+			player2Inputs.directions.back().y = 0.0f;
+		}
+		player2->Move(player2Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.down)
 	{
-		player2Inputs.directions.back().y = -1.0f;
+		if (player2Inputs.directions.back().y == -1.0f)
+		{
+			player2Inputs.directions.back().y = 0.0f;
+		}
 		player2Inputs.timeDownGrace = chargeGracePeriod;
+		player2->Move(player2Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.left)
 	{
-		player2Inputs.directions.back().x = -1.0f;
+		if (player2Inputs.directions.back().x == -1.0f)
+		{
+			player2Inputs.directions.back().x = 0.0f;
+		}
 		player2Inputs.timeLeftGrace = chargeGracePeriod;
-
+		player2->Move(player2Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.right)
 	{
-		player2Inputs.directions.back().x = 1.0f;
+		if (player2Inputs.directions.back().x == 1.0f)
+		{
+			player2Inputs.directions.back().x = 0.0f;
+		}
 		player2Inputs.timeRightGrace = chargeGracePeriod;
+		player2->Move(player2Inputs.directions.back());
 	}
 	else if (key_ == player2Keybinds.light)
 	{
@@ -254,7 +290,6 @@ void InputManager::Update(const float deltaTime_)
 	time += deltaTime_;
 	player1Inputs.Update(deltaTime_);
 	player2Inputs.Update(deltaTime_);
-	
 
 }
 
@@ -366,6 +401,88 @@ void InputManager::CheckMotion(int strength, int character)
 			characterObject->QCB(strength, true);
 		}
 	}
+	else if (!characterObject->IsCharge() && input->directions.back().y == -1.0f)
+		{
+		bool isChecking = true;
+		bool downForward = false;
+		bool downBack = false;
+		bool usedSpecial = false;
+		bool facingLeft = characterObject->FacingLeft();
+		int i = 1;
+				do {
+					
+					glm::vec2 dirs = input->directions[input->directions.size() - i];
+					if (dirs.y == -1.0f)
+					{
+						if ((dirs.x == 1.0f && !facingLeft) || (dirs.x == -1.0f && facingLeft))
+						{
+							if (downBack)
+							{
+								isChecking = false;
+							}
+							else
+							{
+								downForward == true;
+							}
+						}
+						if ((dirs.x == -1.0f && !facingLeft) || (dirs.x == 1.0f && facingLeft))
+						{
+							if (downForward)
+							{
+								isChecking = false;
+							}
+							else
+							{
+								downBack == true;
+							}
+						}
+					}
+					else if(dirs.y == 0.0f && (dirs.x == 1.0f && !facingLeft) || (dirs.x == -1.0f && facingLeft))
+					{
+						if (downForward)
+						{
+							characterObject->QCF(strength, false);
+							usedSpecial = true;
+							isChecking = false;
+						}
+					}
+					else if (dirs.y == 0.0f && (dirs.x == -1.0f && !facingLeft) || (dirs.x == 1.0f && facingLeft))
+					{
+						if (downBack)
+						{
+							characterObject->QCB(strength, false);
+							usedSpecial = true;
+							isChecking = false;
+						}
+					}
+					else
+					{
+						isChecking = false;
+					}
+					i++;
+					if (i >= input->directions.size())
+					{
+						isChecking = false;
+					}
+				} while (isChecking);
+				if (!usedSpecial)
+				{
+					switch (strength)
+					{
+					case 0:
+						characterObject->Light();
+						break;
+					case 1:
+						characterObject->Medium();
+						break;
+					case 2:
+						characterObject->Heavy();
+						break;
+					default:
+						break;
+					}
+				}
+	}
 	else
 	{
 		switch (strength)
@@ -391,7 +508,11 @@ void InputManager::CheckMotion(int strength, int character)
 
 void CharacterInput::Update(const float deltaTime_)
 {
-	directions.emplace(glm::vec2());
+	directions.push_back(glm::vec2());
+	if (directions.size() > 120)
+	{
+		directions.pop_front();
+	}
 	if (timeDownGrace > 0.0f)
 	{
 		timeDownGrace -= deltaTime_;
