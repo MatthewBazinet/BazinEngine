@@ -1,13 +1,13 @@
-#ifndef HOSHI_H
-#define HOSHI_H
+#ifndef ELDRIC_H
+#define ELDRIC_H
 
 #include "..//Character.h"
 
-class Hoshi : public Character
+class Eldric : public Character
 {
 public:
-	Hoshi();
-	~Hoshi();
+	Eldric();
+	~Eldric();
 
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
@@ -15,6 +15,7 @@ public:
 	void Light();
 	void Medium();
 	void Heavy();
+
 protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);
@@ -22,6 +23,7 @@ protected:
 	void AirLight();
 	void AirMedium();
 	void AirHeavy();
+
 };
 
 #endif

@@ -15,6 +15,13 @@ public:
 	void Light();
 	void Medium();
 	void Heavy();
+protected:
+	void AirQCF(int strength, bool simpleInput);
+	void AirQCB(int strength, bool simpleInput);
+	void AirUnique();
+	void AirLight();
+	void AirMedium();
+	void AirHeavy();
 };
 
 #endif

@@ -176,6 +176,7 @@
     <ClCompile Include="Engine\Rendering\SceneGraph.cpp" />
     <ClCompile Include="Game\Characters\AlexisBruce.cpp" />
     <ClCompile Include="Game\Characters\ClaytonBlue.cpp" />
+    <ClCompile Include="Game\Characters\Eldric.cpp" />
     <ClCompile Include="Game\Characters\Hoshi.cpp" />
     <ClCompile Include="Game\Characters\Vipin.cpp" />
     <ClCompile Include="Game\Characters\Wulfrun.cpp" />
@@ -282,6 +283,7 @@
     <ClInclude Include="Game\Character.h" />
     <ClInclude Include="Game\Characters\AlexisBruce.h" />
     <ClInclude Include="Game\Characters\ClaytonBlue.h" />
+    <ClInclude Include="Game\Characters\Eldric.h" />
     <ClInclude Include="Game\Characters\Hoshi.h" />
     <ClInclude Include="Game\Characters\Vipin.h" />
     <ClInclude Include="Game\Characters\Wulfrun.h" />

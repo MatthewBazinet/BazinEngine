@@ -103,6 +103,7 @@
     <ClCompile Include="Game\Characters\Vipin.cpp" />
     <ClCompile Include="Game\Characters\Wulfrun.cpp" />
     <ClCompile Include="Game\InputManager.cpp" />
+    <ClCompile Include="Game\Characters\Eldric.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Game\Characters\Vipin.h" />
     <ClInclude Include="Game\Characters\Wulfrun.h" />
     <ClInclude Include="Game\InputManager.h" />
+    <ClInclude Include="Game\Characters\Eldric.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
