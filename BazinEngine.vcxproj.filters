@@ -96,6 +96,13 @@
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalHitBox.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Engine\Events\ControllerEventListener.cpp" />
+    <ClCompile Include="Game\Characters\AlexisBruce.cpp" />
+    <ClCompile Include="Game\Characters\ClaytonBlue.cpp" />
+    <ClCompile Include="Game\Characters\Hoshi.cpp" />
+    <ClCompile Include="Game\Characters\Vipin.cpp" />
+    <ClCompile Include="Game\Characters\Wulfrun.cpp" />
+    <ClCompile Include="Game\InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -202,6 +209,13 @@
     <ClInclude Include="XMLDecisionTreeReader.h" />
     <ClInclude Include="Engine\Math\EnvironmentalCollisionManager.h" />
     <ClInclude Include="Engine\Math\EnvironmentalHitBox.h" />
+    <ClInclude Include="Engine\Events\ControllerEventListener.h" />
+    <ClInclude Include="Game\Characters\AlexisBruce.h" />
+    <ClInclude Include="Game\Characters\ClaytonBlue.h" />
+    <ClInclude Include="Game\Characters\Hoshi.h" />
+    <ClInclude Include="Game\Characters\Vipin.h" />
+    <ClInclude Include="Game\Characters\Wulfrun.h" />
+    <ClInclude Include="Game\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

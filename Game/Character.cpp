@@ -322,6 +322,16 @@ std::vector<Sphere> Character::GetHurtBoxes() const
 	return hurtBox.GetHurtBoxes();
 }
 
+bool Character::IsCharge()
+{
+	return isCharge;
+}
+
+bool Character::FacingLeft()
+{
+	return MovingLeft;
+}
+
 void Character::AirQCF(int strength, bool simpleInput)
 {
 	if (nextActionable > 0.0f) return;

@@ -23,8 +23,6 @@ public:
 
 	virtual void Update(const float deltaTime_);
 
-	void ReadInput();
-
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
 	void Unique();
@@ -43,6 +41,9 @@ public:
 
 	float GetHealth() const { return health; };
 	std::vector<Sphere> GetHurtBoxes()const;
+
+	bool IsCharge();
+	bool FacingLeft();
 
 protected:
 
@@ -72,6 +73,8 @@ protected:
 
 	glm::vec3 relativeVel;
 	HurtBox hurtBox;
+
+	bool isCharge;
 };
 
 #endif
