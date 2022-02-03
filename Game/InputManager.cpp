@@ -34,22 +34,27 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 	else if (key_ == player1Keybinds.light)
 	{
 		player1Inputs.lightPressed = true;
+		CheckMotion(0, 1);
 	}
 	else if (key_ == player1Keybinds.medium)
 	{
 		player1Inputs.mediumPressed = true;
+		CheckMotion(1, 1);
 	}
 	else if (key_ == player1Keybinds.heavy)
 	{
 		player1Inputs.heavyPressed = true;
+		CheckMotion(2, 1);
 	}
 	else if (key_ == player1Keybinds.unique)
 	{
 		player1Inputs.uniquePressed = true;
+		player1->Unique();
 	}
 	else if (key_ == player1Keybinds.run)
 	{
 		player1Inputs.runPressed = true;
+		player1->Run(true);
 	}
 	else if (key_ == player1Keybinds.super)
 	{
@@ -85,22 +90,27 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 	else if (key_ == player2Keybinds.light)
 	{
 		player2Inputs.lightPressed = true;
+		CheckMotion(0, 2);
 	}
 	else if (key_ == player2Keybinds.medium)
 	{
 		player2Inputs.mediumPressed = true;
+		CheckMotion(1, 2);
 	}
 	else if (key_ == player2Keybinds.heavy)
 	{
 		player2Inputs.heavyPressed = true;
+		CheckMotion(2, 2);
 	}
 	else if (key_ == player2Keybinds.unique)
 	{
 		player2Inputs.uniquePressed = true;
+		player2->Unique();
 	}
 	else if (key_ == player2Keybinds.run)
 	{
 		player2Inputs.runPressed = true;
+		player2->Run(true);
 	}
 	else if (key_ == player2Keybinds.super)
 	{
@@ -158,6 +168,7 @@ void InputManager::OnKeyUp(SDL_Scancode key_)
 	else if (key_ == player1Keybinds.run)
 	{
 		player1Inputs.runPressed = false;
+		player1->Run(false);
 	}
 	else if (key_ == player1Keybinds.super)
 	{
@@ -170,6 +181,60 @@ void InputManager::OnKeyUp(SDL_Scancode key_)
 	else if (key_ == player1Keybinds.shortcutBackward)
 	{
 		player1Inputs.shortcutBackwardPressed = false;
+	}
+	else if (key_ == player2Keybinds.up)
+	{
+		player2Inputs.directions.back().y = 1.0f;
+
+	}
+	else if (key_ == player2Keybinds.down)
+	{
+		player2Inputs.directions.back().y = -1.0f;
+		player2Inputs.timeDownGrace = chargeGracePeriod;
+	}
+	else if (key_ == player2Keybinds.left)
+	{
+		player2Inputs.directions.back().x = -1.0f;
+		player2Inputs.timeLeftGrace = chargeGracePeriod;
+
+	}
+	else if (key_ == player2Keybinds.right)
+	{
+		player2Inputs.directions.back().x = 1.0f;
+		player2Inputs.timeRightGrace = chargeGracePeriod;
+	}
+	else if (key_ == player2Keybinds.light)
+	{
+		player2Inputs.lightPressed = false;
+	}
+	else if (key_ == player2Keybinds.medium)
+	{
+		player2Inputs.mediumPressed = false;
+	}
+	else if (key_ == player2Keybinds.heavy)
+	{
+		player2Inputs.heavyPressed = false;
+	}
+	else if (key_ == player2Keybinds.unique)
+	{
+		player2Inputs.uniquePressed = false;
+	}
+	else if (key_ == player2Keybinds.run)
+	{
+		player2Inputs.runPressed = false;
+		player2->Run(false);
+	}
+	else if (key_ == player2Keybinds.super)
+	{
+		player2Inputs.superPressed = false;
+	}
+	else if (key_ == player2Keybinds.shortcutForward)
+	{
+		player2Inputs.shortcutForwardPressed = false;
+	}
+	else if (key_ == player2Keybinds.shortcutBackward)
+	{
+		player2Inputs.shortcutBackwardPressed = false;
 	}
 }
 
