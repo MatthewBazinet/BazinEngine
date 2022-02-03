@@ -2,6 +2,7 @@
 #define ENVIRONMENTALCOLLISIONMANAGER_H
 
 #include "../Engine/Rendering/3D/GameObject.h"
+#include "../Game/Character.h"
 #include "..//Core/OctSpatialPartition.h"
 
 class EnvironmentalCollisionManager
@@ -16,7 +17,9 @@ public:
 	void OnCreate(float worldSize_);
 	void AddObject(GameObject* go_);
 	void OnDestroy();
+	void Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_);
 
+	void checkObjectCollision(GameObject* gameObject_);
 	bool checkPlaneCollision(glm::vec3 point_, glm::vec4 plane_);
 	glm::vec4 NormalizePlane(glm::vec4 plane_);
 
@@ -27,7 +30,7 @@ private:
 	static std::unique_ptr<EnvironmentalCollisionManager> environmentalCollisionInstance;
 	friend std::default_delete<EnvironmentalCollisionManager>;
 
-	static std::vector<GameObject*> prevCollisions;
+	static std::vector<GameObject*> objects;
 	static OctSpacialPartition* scenePartition;
 };
 
