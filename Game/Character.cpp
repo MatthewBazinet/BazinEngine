@@ -329,7 +329,8 @@ bool Character::IsCharge()
 
 bool Character::FacingLeft()
 {
-	return MovingLeft;
+	glm::vec3 dir = position - opponent->position;
+	return glm::dot(glm::normalize(dir), camera->GetRight()) < 0;
 }
 
 void Character::AirQCF(int strength, bool simpleInput)
