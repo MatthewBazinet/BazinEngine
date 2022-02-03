@@ -9,7 +9,7 @@
 
 struct CharacterInput
 {
-	std::queue<glm::vec2> directions;
+	std::deque<glm::vec2> directions;
 	bool lightPressed;
 	bool mediumPressed;
 	bool heavyPressed;
