@@ -10,6 +10,8 @@
 #include "..//MorphTargetAnimatedModel.h"
 #include "../HurtBox.h"
 
+enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, HCB, CHARGEDOWNUP, CHARGEBACKFORWARD};
+
 class Projectile;
 class Character : public GameObject
 {
@@ -45,6 +47,9 @@ public:
 	bool IsCharge();
 	bool FacingLeft();
 
+	bool CheckMoveState(moveState move_);
+	bool CheckRunCancel(moveState move_);
+
 protected:
 
 	void AirQCF(int strength, bool simpleInput);
@@ -75,6 +80,7 @@ protected:
 	HurtBox hurtBox;
 
 	bool isCharge;
+	moveState currentMove;
 };
 
 #endif

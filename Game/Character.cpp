@@ -14,6 +14,7 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	target = glm::vec3();
 	hurtBox = HurtBox(this);
 	hurtBox.SpawnHurtBox(this->position, this->position, 1.0f, 1);
+	currentMove = moveState::NONE;
 }
 
 Character::~Character() {
@@ -227,8 +228,49 @@ void Character::Update(const float deltaTime_)
 
 }
 
+bool Character::CheckMoveState(moveState move_)
+{
+	// checks current move against the move that is inputted
+	switch (currentMove)
+	{
+	case moveState::NONE:
+		currentMove = move_;
+		return true;
+
+	case moveState::AIRLIGHT:
+	case moveState::AIRMEDIUM:
+	case moveState::AIRHEAVY:
+	case moveState::GROUNDLIGHT:
+	case moveState::GROUNDMEDIUM:
+	case moveState::GROUNDHEAVY:
+		if (move_ == moveState::QCF || move_ == moveState::QCB || move_ == moveState::HCB || move_ == moveState::CHARGEDOWNUP || move_ == moveState::CHARGEBACKFORWARD)
+		{
+			currentMove = move_;
+			return true;
+		}
+	default:
+		currentMove = moveState::NONE;
+		return false;
+	}
+}
+
+bool Character::CheckRunCancel()
+{
+	if (currentMove != moveState::NONE && currentMove != moveState::RUN)
+	{
+		if (overclock >= 50.0f)
+		{
+			return true;
+		}
+		return false;
+	}
+	return true;
+}
+
 void Character::QCF(int strength, bool simpleInput)
 {
+	if(!CheckMoveState(moveState::QCF)) return;
+
 	if (nextActionable > 0.0f) return;
 
 	if (isAirborne)
@@ -251,6 +293,8 @@ void Character::QCF(int strength, bool simpleInput)
 
 void Character::QCB(int strength, bool simpleInput)
 {
+	if(!CheckMoveState(moveState::QCB)) return;
+
 	if (nextActionable > 0.0f) return;
 
 	if (isAirborne)
@@ -306,6 +350,8 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning_)
 {
+	if (!CheckRunCancel()) return;;
+
 	if (nextActionable > 0.0f) return;
 
 	isRunning = isRunning_;
