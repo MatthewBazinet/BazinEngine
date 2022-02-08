@@ -145,6 +145,7 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="AnimationTestScene.h" />
+    <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugSphere.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />

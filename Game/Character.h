@@ -37,7 +37,7 @@ public:
 
 	void SetOpponent(Character* opponent_) { opponent = opponent_; };
 	void SetCamera(Camera* camera_) { camera = camera_; };
-	void SetProjectile(Projectile* projectile_) { proj = projectile_; };
+	//void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
 	float GetHealth() const { return health; };
 	std::vector<Sphere> GetHurtBoxes()const;
@@ -61,7 +61,7 @@ protected:
 	bool isRunning;
 	bool isAirborne;
 	Model* model;
-	Projectile* proj;
+	//Projectile* proj;
 	Character* opponent;
 
 	Camera* camera;

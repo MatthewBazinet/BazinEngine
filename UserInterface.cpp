@@ -31,6 +31,7 @@ bool UserInterface::OnCreate()
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		#define MAP_KEY(NAV_NO, KEY_NO) { if (io.KeysDown[KEY_NO]) io.NavInputs[NAV_NO] = 1.0f; }
 		ImGui::StyleColorsDark();
 		ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
 		ImGui_ImplOpenGL3_Init("#version 450");
@@ -59,6 +60,10 @@ void UserInterface::Update(const float deltaTime_)
 	case 4:
 		state = State::SinglePlayer;
 		ShowGameUi();
+		break;
+	case 7:
+		state = State::CharacterSelect;
+		ShowCharacterSelect();
 		break;
 	default:
 		state = State::Empty;
@@ -97,7 +102,7 @@ void UserInterface::ShowMenu()
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Single Player", ImVec2(300, 100))) {
 			se.playSoundEffect(0);
-			CoreEngine::GetInstance()->SetCurrentScene(1);
+			CoreEngine::GetInstance()->SetCurrentScene(7);
 		}
 		//Online Button
 		if (ImGui::Button("Online", ImVec2(300, 100))) {
@@ -173,6 +178,23 @@ void UserInterface::ShowGameUi()
 	else {
 		state = State::Empty;
 	}
+}
+
+void UserInterface::ShowCharacterSelect()
+{
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+	if (state == State::CharacterSelect) {
+		//Single Player Button
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.9f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+		if (ImGui::Button("Start Game", ImVec2(250, 80))) {
+			se.playSoundEffect(0);
+			CoreEngine::GetInstance()->SetCurrentScene(1);
+		}
+	}
+		ImGui::End();
 }
 
 bool UserInterface::TextBox()

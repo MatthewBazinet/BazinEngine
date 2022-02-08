@@ -10,17 +10,17 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	isAirborne = isAirborne_;
 	model = model_;
 	maxSpeed = 5.0f;
-	proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
+	//proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
 	target = glm::vec3();
 	hurtBox = HurtBox(this);
 	hurtBox.SpawnHurtBox(this->position, this->position, 1.0f, 1);
 }
 
 Character::~Character() {
-	if (proj) {
-		delete proj;
-		proj = nullptr;
-	}
+	//if (proj) {
+		//delete proj;
+		//proj = nullptr;
+	//}
 }
 
 void Character::NotifyOnKeyDown(SDL_Scancode key_)
@@ -91,8 +91,8 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		Unique();
 		break;
 	case SDL_SCANCODE_G:
-		proj->SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
-		proj->SetPosition(this->GetPosition());
+		//proj->SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
+		//proj->SetPosition(this->GetPosition());
 		break;
 	default:
 		break;
@@ -181,7 +181,7 @@ void Character::Update(const float deltaTime_)
 		nextActionable -= deltaTime_;
 
 	}
-	proj->Update(deltaTime_);
+	//proj->Update(deltaTime_);
 
 	if(isRunning)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
 	
@@ -237,14 +237,14 @@ void Character::QCF(int strength, bool simpleInput)
 	}
 	if (strength < 3)
 	{
-		proj->SetTarget(nullptr);
-		proj->SetVelocity(glm::vec3(10.0f, 0.0f, 0.0f));
-		proj->SetPosition(this->GetPosition());
+		//proj->SetTarget(nullptr);
+		//proj->SetVelocity(glm::vec3(10.0f, 0.0f, 0.0f));
+		//proj->SetPosition(this->GetPosition());
 	}
 	else
 	{
-		proj->SetTarget(opponent);
-		proj->SetPosition(this->GetPosition());
+		//proj->SetTarget(opponent);
+		//proj->SetPosition(this->GetPosition());
 		overclock -= 50.0f;
 	}
 }

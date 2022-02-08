@@ -6,7 +6,7 @@ Projectile::Projectile(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	character = nullptr;
 	SetMaxSpeed(3.0f);
 	hitBox = HitBox(this);
-	hitBox.spawnSpheres(this->GetPosition(), this->GetPosition(), 1.0f, 1);
+	hitBox.spawnSpheres(this->GetPosition(), this->GetPosition(), 5.0f, 1);
 }
 
 Projectile::~Projectile()
@@ -39,10 +39,7 @@ void Projectile::Update(const float deltaTime_)
 		SetVelocity(kin.velocity);
 		SetAngle(kin.rotation);
 	}
-	else
-	{
-		SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
-	}
+
 	hitBox.Update(deltaTime_);
 	if (character) {
 		if (hitBox.CheckCollision(character->GetHurtBoxes())) {
