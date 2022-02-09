@@ -18,11 +18,11 @@ public:
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
-	static std::vector<Character*> GetHurtBoxes() {return hurtBoxes;};
+	//static std::vector<Character*> GetHurtBoxes() {return hurtBoxes;};
 
-	static std::vector<Character*> SetHurtBoxes(std::vector<Character*> hurtBoxes_) { hurtBoxes = hurtBoxes_; };
+	//static std::vector<Character*> SetHurtBoxes(std::vector<Character*> hurtBoxes_) { hurtBoxes = hurtBoxes_; };
 
 private:
-	static std::vector<Character*> hurtBoxes;
+	//static std::vector<Character*> hurtBoxes;
 };
 #endif

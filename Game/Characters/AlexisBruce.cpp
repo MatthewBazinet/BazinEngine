@@ -240,7 +240,7 @@ void AlexisBruce::SetModels(Model* rockModel_)
 void AlexisBruce::QCF(int strength, bool simpleInput)
 {
 	if (proj == nullptr) {
-		proj = new Projectile(model, glm::vec3(1.0f, 0.0f, 1.0f));
+		proj = new Projectile(rockModel, glm::vec3(1.0f, 0.0f, 1.0f));
 	}
 	//Rock Toss
 	if (nextActionable > 0.0f) return;
