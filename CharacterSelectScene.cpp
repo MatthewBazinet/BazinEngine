@@ -1,6 +1,7 @@
 #include "CharacterSelectScene.h"
 #include "Game/Character.h"
 #include "Game/Characters/AlexisBruce.h"
+#include "Projectile.h"
 CharacterSelectScene::CharacterSelectScene()
 {
 }
@@ -29,7 +30,9 @@ bool CharacterSelectScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
 	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel);
+	CollisionHandler::GetInstance()->AddCharacter(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1")));
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
+	CollisionHandler::GetInstance()->AddCharacter(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 
 	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1")));
