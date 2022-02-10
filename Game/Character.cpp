@@ -254,7 +254,7 @@ bool Character::CheckMoveState(moveState move_)
 	}
 }
 
-bool Character::CheckRunCancel()
+bool Character::CheckRunCancel(moveState move_)
 {
 	if (currentMove != moveState::NONE && currentMove != moveState::RUN)
 	{
@@ -350,7 +350,7 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning_)
 {
-	if (!CheckRunCancel()) return;;
+	if (!CheckRunCancel(currentMove)) return;;
 
 	if (nextActionable > 0.0f) return;
 

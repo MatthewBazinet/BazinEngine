@@ -5,10 +5,8 @@ std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
 std::vector<GameObject*> CollisionHandler::prevCollisions = std::vector<GameObject*>();
 OctSpacialPartition* CollisionHandler::scenePartition = nullptr;
 
-
 CollisionHandler::CollisionHandler()
 {
-	characters.reserve(2);
 	prevCollisions.reserve(10);
 }
 
@@ -38,11 +36,6 @@ void CollisionHandler::AddObject(GameObject* go_)
 	{
 		scenePartition->AddObject(go_);
 	}
-}
-
-void CollisionHandler::AddCharacter(Character* character_)
-{
-	characters.push_back(character_);
 }
 
 void CollisionHandler::MouseUpdate(glm::vec2 mousePostion_, int buttonType_)
@@ -76,11 +69,6 @@ void CollisionHandler::OnDestroy()
 	{
 		entry = nullptr;
 	}
-	for (auto entry : characters)
-	{
-		entry = nullptr;
-	}
-	characters.clear();
 	prevCollisions.clear();
 	delete scenePartition;
 	scenePartition = nullptr;

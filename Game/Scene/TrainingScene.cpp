@@ -43,7 +43,7 @@ bool TrainingScene::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(0.7f, 0.9f, 0.5f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(15.0f, 15.0f, 15.0f)), "skybox");
 	EnvironmentalCollisionManager::GetInstance()->AddObject(SceneGraph::GetInstance()->GetGameObject("char1"));
 	EnvironmentalCollisionManager::GetInstance()->AddObject(SceneGraph::GetInstance()->GetGameObject("wall"));
-
+	
 	//SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(-10.0f, 0.0f, 0.0f)), "ai1");
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 

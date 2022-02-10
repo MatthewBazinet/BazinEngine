@@ -12,7 +12,6 @@ StartScene::~StartScene()
 	
 	delete network;
 	network = nullptr;
-	music.Play_Pause();
 	
 }
 
@@ -21,7 +20,7 @@ bool StartScene::OnCreate()
 	Log::Info("Start Scene initiated", "StartScene.cpp", __LINE__);
 	CoreEngine::GetInstance()->SetCamera(new Camera());
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
-	music.playMusicTrack(0);
+	
 	
 	return true;
 }

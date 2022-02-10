@@ -18,6 +18,8 @@ AlexisBruce::AlexisBruce(float health_, float meter_, bool isRunning_, bool isAi
 
 AlexisBruce::~AlexisBruce()
 {
+
+
 	proj = nullptr;
 	delete proj;
 
@@ -178,54 +180,10 @@ void AlexisBruce::NotifyOnKeyUp(SDL_Scancode key_)
 
 void AlexisBruce::Update(const float deltaTime_)
 {
-	hurtBox.Update(deltaTime_);
-	if (nextActionable > 0.0f)
-	{
-		nextActionable -= deltaTime_;
-
-	}
-
-	if (isRunning)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
-	if (position.y >= 0.1f)
-	{
-		isAirborne = true;
-	}
-
-	if (position.y <= -0.1f)
-	{
-		position.y = 0.0f;
-		vel.y = 0.0f;
-		accel.y = 0.0f;
-		isAirborne = false;
-	}
-
-	if (getIsAirborne())
-	{
-		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
-	}
-
-	
-	if (!isRunning) {
-		if (!opponent->getIsRunning() && getIsAirborne() == false)
-		{
-			axisOf2DMovement = camera->GetRight();
-		}
-
-		dir2D = 0.0f;
-		if (MovingLeft) dir2D = -1.0f;
-		if (MovingRight) dir2D = 1.0f;
-
-
-		float preserveY = vel.y;
-		vel = axisOf2DMovement * maxSpeed * dir2D;
-		vel.y = preserveY;
-	}
-	if (vel != glm::vec3())	angle = atan2(vel.x, vel.z);
 	if (proj) {
 		proj->Update(deltaTime_);
 	}
-	GameObject::Update(deltaTime_);
+	Character::Update(deltaTime_);
 }
 
 void AlexisBruce::SetModels(Model* rockModel_)
@@ -240,7 +198,7 @@ void AlexisBruce::SetModels(Model* rockModel_)
 void AlexisBruce::QCF(int strength, bool simpleInput)
 {
 	if (proj == nullptr) {
-		proj = new Projectile(rockModel, glm::vec3(1.0f, 0.0f, 1.0f));
+		proj = new Projectile(rockModel, glm::vec3(1.0f, 0.0f, 1.0f),this);
 	}
 	//Rock Toss
 	if (nextActionable > 0.0f) return;
@@ -338,21 +296,6 @@ void AlexisBruce::Move(glm::vec2 input)
 	if (nextActionable > 0.0f) return;
 }
 
-std::vector<Sphere> AlexisBruce::GetHurtBoxes() const
-{
-	return std::vector<Sphere>();
-}
-
-bool AlexisBruce::IsCharge()
-{
-	return isCharge;
-}
-
-bool AlexisBruce::FacingLeft()
-{
-	glm::vec3 dir = position - opponent->GetPosition();
-	return glm::dot(glm::normalize(dir), camera->GetRight()) < 0;
-}
 
 void AlexisBruce::AirQCF(int strength, bool simpleInput)
 {

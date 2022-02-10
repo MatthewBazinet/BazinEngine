@@ -41,6 +41,7 @@ public:
 	void SetCamera(Camera* camera_) { camera = camera_; };
 	//void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
+	Character* GetOpponent()const { return opponent; };
 	float GetHealth() const { return health; };
 	std::vector<Sphere> GetHurtBoxes()const;
 

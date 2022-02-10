@@ -1,6 +1,7 @@
-[INFO]: OpenGL Version: 4.6.14802 Compatibility Profile Context 22.1.2 30.0.14023.3004 in: Window.cpp on line: 39
+[INFO]: OpenGL Version: 4.6.14802 Compatibility Profile Context 22.2.1 30.0.14023.7007 in: Window.cpp on line: 39
 [INFO]: Graphics Card Vendor: ATI Technologies Inc. in: Window.cpp on line: 40
 [INFO]: Window Created Succesfully in: CoreEngine.cpp on line: 33
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 20
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 60
 [INFO]: Character Select Scene initiated in: CharacterSelectScene.cpp on line: 16
+[INFO]: Game Scene initiated in: GameScene.cpp on line: 20
