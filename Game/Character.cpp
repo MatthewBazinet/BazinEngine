@@ -223,7 +223,7 @@ void Character::Update(const float deltaTime_)
 	}
 
 	
-	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
+	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);
 
 
 }
