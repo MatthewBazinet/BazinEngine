@@ -21,6 +21,16 @@ void InputManager::SetPlayer2(Character* player2_)
 	player2 = player2_;
 }
 
+void InputManager::SetPlayer1Keybinds(Keybinds player1Keybinds_)
+{
+	player1Keybinds = player1Keybinds_;
+}
+
+void InputManager::SetPlayer2Keybinds(Keybinds player2Keybinds_)
+{
+	player2Keybinds = player2Keybinds_;
+}
+
 void InputManager::OnKeyDown(SDL_Scancode key_)
 {
 	if (key_ == player1Keybinds.up)

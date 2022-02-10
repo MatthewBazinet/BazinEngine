@@ -103,13 +103,16 @@ std::vector<Mesh*> Model::GetMeshes()
 
 glm::mat4 Model::CreateTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const
 {
-	glm::mat4 model;
-	model = glm::scale(model, scale_);
-	model = glm::translate(model, position_);
-	model = glm::rotate(model, angle_, rotation_);
+	//glm::mat4 model;
+	//model = glm::translate(model, position_);
+	//model = glm::rotate(model, angle_, rotation_);
+	//model = glm::scale(model, scale_);
+	glm::mat4 matrix = glm::mat4();
+	glm::mat4 mat = glm::translate(matrix, position_)
+		* glm::toMat4(glm::angleAxis(angle_, glm::vec3(0, 0, 1)))
+		* glm::scale(matrix, scale_);
 
-
-	return model;
+	return mat;
 }
 
 glm::mat4 Model::CreateTransform(glm::vec3 position_, glm::quat orientation_, glm::vec3 scale_) const
