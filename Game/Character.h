@@ -49,7 +49,7 @@ public:
 	bool FacingLeft();
 
 	bool CheckMoveState(moveState move_);
-	bool CheckRunCancel(moveState move_);
+	bool CheckRunCancel();
 
 protected:
 
