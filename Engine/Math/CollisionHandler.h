@@ -3,6 +3,7 @@
 
 #include "Ray.h"
 #include "..//Rendering/3D/GameObject.h"
+#include "../Game/Character.h"
 #include "..//Core/OctSpatialPartition.h"
 
 
@@ -17,6 +18,9 @@ public:
 	static CollisionHandler* GetInstance();
 	void OnCreate(float worldSize_);
 	void AddObject(GameObject* go_);
+	void AddCharacter(Character* character_);
+	std::vector<Character*> GetCharacters() { return characters; };
+
 	void MouseUpdate(glm::vec2 mousePostion_, int buttonType_);
 	void OnDestroy();
 
@@ -29,6 +33,8 @@ private:
 
 	static std::vector<GameObject*> prevCollisions;
 	static OctSpacialPartition* scenePartition;
+
+	std::vector<Character*> characters;
 };
 
 #endif

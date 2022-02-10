@@ -3,7 +3,6 @@
 Projectile::Projectile(Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
 	target = nullptr;//glm::vec3(0.0f, 0.0f, 0.0f);
-	character = nullptr;
 	SetMaxSpeed(3.0f);
 	hitBox = HitBox(this);
 	hitBox.spawnSpheres(this->GetPosition(), this->GetPosition(), 1.0f, 1);
@@ -39,16 +38,16 @@ void Projectile::Update(const float deltaTime_)
 		SetVelocity(kin.velocity);
 		SetAngle(kin.rotation);
 	}
-	else
-	{
-		SetVelocity(glm::vec3(1.0f, 0.0f, 0.0f));
-	}
+
 	hitBox.Update(deltaTime_);
-	if (character) {
-		if (hitBox.CheckCollision(character->GetHurtBoxes())) {
-			std::cout << "collided" << std::endl;
+	for (int i = 0; i < CollisionHandler::GetInstance()->GetCharacters().size(); i++) {
+		if (CollisionHandler::GetInstance()->GetCharacters()[i]) {
+			if (hitBox.CheckCollision(CollisionHandler::GetInstance()->GetCharacters()[i]->GetHurtBoxes())) {
+				std::cout << "collided" << std::endl;
+			}
 		}
 	}
+
 	GameObject::Update(deltaTime_);
 }
 

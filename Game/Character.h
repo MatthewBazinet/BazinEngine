@@ -10,6 +10,8 @@
 #include "..//MorphTargetAnimatedModel.h"
 #include "../HurtBox.h"
 
+enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, HCB, CHARGEDOWNUP, CHARGEBACKFORWARD};
+
 class Projectile;
 class Character : public GameObject
 {
@@ -37,13 +39,16 @@ public:
 
 	void SetOpponent(Character* opponent_) { opponent = opponent_; };
 	void SetCamera(Camera* camera_) { camera = camera_; };
-	void SetProjectile(Projectile* projectile_) { proj = projectile_; };
+	//void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
 	float GetHealth() const { return health; };
 	std::vector<Sphere> GetHurtBoxes()const;
 
 	bool IsCharge();
 	bool FacingLeft();
+
+	bool CheckMoveState(moveState move_);
+	bool CheckRunCancel(moveState move_);
 
 protected:
 
@@ -61,7 +66,7 @@ protected:
 	bool isRunning;
 	bool isAirborne;
 	Model* model;
-	Projectile* proj;
+	//Projectile* proj;
 	Character* opponent;
 
 	Camera* camera;
@@ -75,6 +80,7 @@ protected:
 	HurtBox hurtBox;
 
 	bool isCharge;
+	moveState currentMove;
 };
 
 #endif

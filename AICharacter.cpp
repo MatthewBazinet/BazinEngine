@@ -247,7 +247,7 @@ void AICharacter::Update(const float deltaTime_)
 
 	if (vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
 
-	proj->Update(deltaTime_);
+	//proj->Update(deltaTime_);
 }
 
 void AICharacter::SetDir2D(float dir_)

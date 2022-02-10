@@ -9,7 +9,7 @@
 #include "SoundEffects.h"
 #include "NetworkingBase.h"
 
-enum class State {Menu,Settings,Online,SinglePlayer,Empty };
+enum class State { Menu, Settings, Online, SinglePlayer, CharacterSelect, Empty };
 
 class UserInterface
 {
@@ -25,6 +25,7 @@ public:
 	void StartTimer();
 	void ShowMenu();
 	void ShowGameUi();
+	void ShowCharacterSelect();
 	bool TextBox();
 private:
 	State state;
