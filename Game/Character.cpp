@@ -12,16 +12,16 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	maxSpeed = 5.0f;
 	//proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
 	target = glm::vec3();
-	hurtBox = HurtBox(this);
-	hurtBox.SpawnHurtBox(this->position, this->position, 1.0f, 1);
+	hurtBox = new HurtBox(this);
+	hurtBox->SpawnHurtBox(this->position, this->position, 1.0f, 1);
 	currentMove = moveState::NONE;
 }
 
 Character::~Character() {
-	//if (proj) {
-		//delete proj;
-		//proj = nullptr;
-	//}
+	if (hurtBox) {
+		delete hurtBox;
+		hurtBox = nullptr;
+	}
 }
 
 void Character::NotifyOnKeyDown(SDL_Scancode key_)
@@ -176,7 +176,7 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
-	hurtBox.Update(deltaTime_);
+	hurtBox->Update(deltaTime_);
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
@@ -224,7 +224,11 @@ void Character::Update(const float deltaTime_)
 
 	
 	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);
-
+	//gonna remove once we can damage characters
+	health -= 1.0f;
+	if (health <= 5.0f) {
+		health = 100.0f;
+	}	
 
 }
 
@@ -254,7 +258,7 @@ bool Character::CheckMoveState(moveState move_)
 	}
 }
 
-bool Character::CheckRunCancel(moveState move_)
+bool Character::CheckRunCancel()
 {
 	if (currentMove != moveState::NONE && currentMove != moveState::RUN)
 	{
@@ -350,7 +354,7 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning_)
 {
-	if (!CheckRunCancel(currentMove)) return;;
+	if (!CheckRunCancel()) return;;
 
 	if (nextActionable > 0.0f) return;
 
@@ -365,7 +369,7 @@ void Character::Move(glm::vec2 input)
 
 std::vector<Sphere> Character::GetHurtBoxes() const
 {
-	return hurtBox.GetHurtBoxes();
+	return hurtBox->GetHurtBoxes();
 }
 
 bool Character::IsCharge()

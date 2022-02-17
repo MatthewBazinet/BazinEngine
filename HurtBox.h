@@ -25,8 +25,6 @@ private:
 	float radius;
 	GameObject* parent;
 	glm::vec3 position;
-	std::vector<Sphere> spheres;
 	std::vector<Sphere> hurtBoxes;
-	
 };
 #endif

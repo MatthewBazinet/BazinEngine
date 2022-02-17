@@ -12,8 +12,8 @@ AlexisBruce::AlexisBruce(float health_, float meter_, bool isRunning_, bool isAi
 	rockModel = nullptr;
 	
 	target = glm::vec3();
-	hurtBox = HurtBox(this);
-	hurtBox.SpawnHurtBox(this->position, this->position, 1.0f, 1);
+	hurtBox = new HurtBox(this);
+	hurtBox->SpawnHurtBox(this->position, this->position, 1.0f, 1);
 }
 
 AlexisBruce::~AlexisBruce()
@@ -25,6 +25,8 @@ AlexisBruce::~AlexisBruce()
 
 	rockModel = nullptr;
 	delete rockModel;
+
+	Character::~Character();
 }
 
 void AlexisBruce::NotifyOnKeyDown(SDL_Scancode key_)
