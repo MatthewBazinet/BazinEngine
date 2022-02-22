@@ -40,7 +40,7 @@ void Projectile::Update(const float deltaTime_)
 		SetAngle(kin.rotation);
 	}
 
-	hitBox.Update(deltaTime_);
+
 		if (parent) {
 			if (parent->GetOpponent()) {
 				if (hitBox.CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
@@ -48,7 +48,7 @@ void Projectile::Update(const float deltaTime_)
 				}
 			}
 		}
-
+		hitBox.Update(deltaTime_);
 	GameObject::Update(deltaTime_);
 }
 

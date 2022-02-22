@@ -1,6 +1,7 @@
 #include "Character.h"
 #include <glm/gtx/rotate_vector.hpp>
 #include "../Projectile.h"
+#include "../HurtBox.h"
 
 Character::Character(float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
@@ -11,9 +12,10 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	model = model_;
 	maxSpeed = 5.0f;
 	//proj = new Projectile(model, glm::vec3(1.0f,0.0f,1.0f));
+
 	target = glm::vec3();
-	hurtBox = new HurtBox(this);
-	hurtBox->SpawnHurtBox(this->position, this->position, 1.0f, 1);
+	hurtBox = new HurtBox(model_);
+	hurtBox->SpawnHurtBox(model_,this->position, this->position, 1.0f, 1);
 	currentMove = moveState::NONE;
 }
 
@@ -176,7 +178,8 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
-	hurtBox->Update(deltaTime_);
+
+	
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
@@ -371,6 +374,8 @@ std::vector<Sphere> Character::GetHurtBoxes() const
 {
 	return hurtBox->GetHurtBoxes();
 }
+
+
 
 bool Character::IsCharge()
 {

@@ -12,14 +12,11 @@ AlexisBruce::AlexisBruce(float health_, float meter_, bool isRunning_, bool isAi
 	rockModel = nullptr;
 	
 	target = glm::vec3();
-	hurtBox = new HurtBox(this);
-	hurtBox->SpawnHurtBox(this->position, this->position, 1.0f, 1);
+	
 }
 
 AlexisBruce::~AlexisBruce()
 {
-
-
 	proj = nullptr;
 	delete proj;
 
@@ -185,16 +182,26 @@ void AlexisBruce::Update(const float deltaTime_)
 	if (proj) {
 		proj->Update(deltaTime_);
 	}
+	if (hurtBox) {
+		hurtBox->Update(deltaTime_);
+	}
 	Character::Update(deltaTime_);
 }
 
-void AlexisBruce::SetModels(Model* rockModel_)
+void AlexisBruce::SetModels(Model* rockModel_, Model* hurtBox_)
 {
 	if (rockModel != nullptr) {
 		delete rockModel;
 		rockModel = nullptr;
 	}
 	rockModel = rockModel_;
+	if (hurtBoxM != nullptr) {
+		delete hurtBoxM;
+		hurtBoxM = nullptr;
+	}
+	hurtBoxM = hurtBox_;
+	hurtBox = new HurtBox(hurtBoxM,this->position,this);
+	hurtBox->SpawnHurtBox(hurtBox_,this->position, this->position + glm::vec3(0.0f,16.0f,0.0f), 2.0f, 5);
 }
 
 void AlexisBruce::QCF(int strength, bool simpleInput)

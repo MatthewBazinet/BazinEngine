@@ -16,20 +16,23 @@ bool CharacterSelectScene::OnCreate()
 	Log::Info("Character Select Scene initiated", "CharacterSelectScene.cpp", __LINE__);
 	CoreEngine::GetInstance()->SetCamera(new Camera());
 	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 1.0f, 0.0f)));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 0.0f, 1.0f)));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 0.0f, 0.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(0.0f, 1.0f, 0.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(0.0f, 0.0f, 1.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-5.0f, 12.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(1.0f, 1.0f, 1.0f)));
 
 	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "Resources/Textures/CheckerboardTexture.png");
 
 	Model* Alexis = new Model("Resources/Models/AlexisBruce.obj", "Resources/Materials/AlexisBruce.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* appleModel = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	Model* Dice = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	SceneGraph::GetInstance()->AddModel(Alexis);
 	SceneGraph::GetInstance()->AddModel(appleModel);
+	SceneGraph::GetInstance()->AddModel(Dice);
 
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
-	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel);
+	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2")));
@@ -39,6 +42,7 @@ bool CharacterSelectScene::OnCreate()
 
 	appleModel = nullptr;
 	Alexis = nullptr;
+	Dice = nullptr;
 	return true;
 }
 

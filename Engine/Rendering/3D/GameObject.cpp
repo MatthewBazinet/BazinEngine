@@ -79,6 +79,7 @@ void GameObject::Render(Camera* camera_)
 	if (model) {
 		model->Render(camera_);
 	}
+
 }
 
 glm::vec3 GameObject::GetPosition() const

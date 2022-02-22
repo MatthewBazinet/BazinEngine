@@ -8,11 +8,12 @@
 #include <unordered_map>
 #include "..//MorphTarget.h"
 #include "..//MorphTargetAnimatedModel.h"
-#include "../HurtBox.h"
+
 
 enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, HCB, CHARGEDOWNUP, CHARGEBACKFORWARD};
 
 class Projectile;
+class HurtBox;
 class Character : public GameObject
 {
 public:
@@ -45,7 +46,6 @@ public:
 	float GetHealth() const { return health; };
 	float GetOverclock() const { return overclock; };
 	std::vector<Sphere> GetHurtBoxes()const;
-
 	bool IsCharge();
 	bool FacingLeft();
 

@@ -15,7 +15,7 @@ public:
 
 	virtual void Update(const float deltaTime_);
 
-	void SetModels(Model* rockModel_);
+	void SetModels(Model* rockModel_, Model* hurtBox_);
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
 	void Unique();
@@ -35,6 +35,7 @@ protected:
 	void AirHeavy();
 
 	Model* rockModel;
+	Model* hurtBoxM;
 	Projectile* proj;
 };
 

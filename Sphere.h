@@ -7,6 +7,7 @@
 struct Sphere {
 	glm::vec3 position;
 	float radius;
+	float offset;
 	inline Sphere() {
 		position = glm::vec3();
 		radius = 1.0f;
@@ -14,6 +15,12 @@ struct Sphere {
 	inline Sphere(glm::vec3 position_, float radius_) {
 		position = position_;
 		radius = radius_;
+	}
+	void SetPosition(glm::vec3 position_) {
+		position = position_;
+	}
+	void SetOffset(float offset_) {
+		offset = offset_;
 	}
 	bool Intersects(BoundingBox bb);
 };

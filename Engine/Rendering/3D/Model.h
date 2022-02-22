@@ -12,7 +12,7 @@ public:
 	Model(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_);
 	~Model();
 
-	void Render(Camera* camera_);
+	virtual void Render(Camera* camera_);
 	void AddMesh(Mesh* mesh_);
 
 	unsigned int CreateInstance(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
