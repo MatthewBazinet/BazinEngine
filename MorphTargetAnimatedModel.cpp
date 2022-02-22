@@ -38,6 +38,10 @@ void MorphTargetAnimatedModel::Update(const float deltaTime_)
 		if (timeToMorphComplete < 0.0f)
 		{
 			timeToMorphComplete = 0.0f;
+			if (static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget]))
+			{
+				SetCurrentMorphTarget(static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget])->nextTarget, static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget])->nextTargetAnimLength);
+			}
 		}
 		for (int i = 0; i < meshes.size(); i++)
 		{

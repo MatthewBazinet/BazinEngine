@@ -6,7 +6,7 @@
 class Wulfrun : public Character
 {
 public:
-	Wulfrun();
+	Wulfrun(glm::vec3 pos);
 	~Wulfrun();
 
 	void QCF(int strength, bool simpleInput);
@@ -15,6 +15,7 @@ public:
 	void Light();
 	void Medium();
 	void Heavy();
+
 protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);

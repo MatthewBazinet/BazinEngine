@@ -20,5 +20,21 @@ protected:
 	std::vector<Mesh*> meshes;
 };
 
+class AnimationTarget : public MorphTarget
+{
+	friend class MorphTargetAnimatedModel;
+public:
+	AnimationTarget();
+	AnimationTarget(const std::string& objPath_, const std::string& matPath_);
+	~AnimationTarget();
+
+	void SetNextMorphTarget(std::string target_, float animLength_);
+
+private:
+	std::string nextTarget;
+	float nextTargetAnimLength;
+	
+};
+
 #endif
 

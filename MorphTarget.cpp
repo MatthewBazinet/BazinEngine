@@ -14,6 +14,14 @@ MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath
 
 MorphTarget::~MorphTarget()
 {
+	delete obj;
+	obj = nullptr;
+	for (auto m : meshes)
+	{
+		delete m;
+		m = nullptr;
+	}
+	meshes.clear();
 }
 
 void MorphTarget::LoadModel()
@@ -24,4 +32,24 @@ void MorphTarget::LoadModel()
 	}
 	delete obj;
 	obj = nullptr;
+}
+
+AnimationTarget::AnimationTarget()
+{
+}
+
+AnimationTarget::AnimationTarget(const std::string& objPath_, const std::string& matPath_) : MorphTarget(objPath_, matPath_)
+{
+	
+}
+
+AnimationTarget::~AnimationTarget()
+{
+	MorphTarget::~MorphTarget();
+}
+
+void AnimationTarget::SetNextMorphTarget(std::string target_, float animLength_)
+{
+	nextTarget = target_;
+	nextTargetAnimLength = animLength_;
 }
