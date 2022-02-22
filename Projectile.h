@@ -6,11 +6,13 @@
 #include "HitBox.h"
 #include "Engine/Math/CollisionHandler.h"
 #include "Game/Character.h"
+
 class Projectile : public GameObject
 {
+	
 private:
 	GameObject* target;
-	HitBox hitBox;
+	HitBox* hitBox;
 	Character* parent;
 public:
 	void Update(const float deltaTime_) override;

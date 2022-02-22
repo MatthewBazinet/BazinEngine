@@ -4,6 +4,7 @@
 #include "..//Character.h"
 #include "../Projectile.h"
 
+class HurtBox;
 class AlexisBruce : public Character
 {
 public:

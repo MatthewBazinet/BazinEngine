@@ -1,16 +1,21 @@
 #include "Projectile.h"
 
+
 Projectile::Projectile(Model* model_, glm::vec3 position_, Character* parent_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
 	target = nullptr;//glm::vec3(0.0f, 0.0f, 0.0f);
 	SetMaxSpeed(3.0f);
 	parent = parent_;
-	hitBox = HitBox(this);
-	hitBox.spawnSpheres(this->GetPosition(), this->GetPosition(), 1.0f, 1);
+	hitBox = new HitBox(parent->GetModel(), this->GetPosition(),this);
+	hitBox->spawnSpheres(this->GetPosition(), this->GetPosition(), 2.0f, 1);
 }
 
 Projectile::~Projectile()
 {
+	if (hitBox) {
+		delete hitBox;
+		hitBox = nullptr;
+	}
 }
 
 void Projectile::Separate(std::vector<GameObject*> objects_)
@@ -43,12 +48,12 @@ void Projectile::Update(const float deltaTime_)
 
 		if (parent) {
 			if (parent->GetOpponent()) {
-				if (hitBox.CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
+				if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
 					std::cout << "collided" << std::endl;
 				}
 			}
 		}
-		hitBox.Update(deltaTime_);
+		hitBox->Update(deltaTime_);
 	GameObject::Update(deltaTime_);
 }
 
