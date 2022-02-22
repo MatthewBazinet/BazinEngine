@@ -43,6 +43,11 @@ AnimationTarget::AnimationTarget(const std::string& objPath_, const std::string&
 	
 }
 
+AnimationTarget::AnimationTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_) : AnimationTarget(objPath_, matPath_)
+{
+	SetNextMorphTarget(target_, animlength_);
+}
+
 AnimationTarget::~AnimationTarget()
 {
 	MorphTarget::~MorphTarget();

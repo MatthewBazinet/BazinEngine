@@ -26,6 +26,8 @@ class AnimationTarget : public MorphTarget
 public:
 	AnimationTarget();
 	AnimationTarget(const std::string& objPath_, const std::string& matPath_);
+	AnimationTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_);
+
 	~AnimationTarget();
 
 	void SetNextMorphTarget(std::string target_, float animLength_);
