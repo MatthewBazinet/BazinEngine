@@ -23,7 +23,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 {
 	Log::OnCreate();
 	window = new Window();
-	userInterface = new UserInterface();
+	//userInterface = new UserInterface();
 
 	if (!window->CreatesWindow(name_, width_, height_)) {
 		Log::FatalError("Window failed to initialize", "CoreEngine.cpp", __LINE__);
@@ -48,14 +48,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 			return isRunning = false;
 		}
 	}
-
-	if (userInterface) {
-		if (!userInterface->OnCreate()) {
-			Log::FatalError("UserInterface failed tp initialize", "CoreEngine.cpp", __LINE__);
-			OnDestroy();
-			return isRunning = false;
-		}
-	}
+	UserInterface::GetInstance()->OnCreate();
 	
 	Log::Info("Game Created Succesfully", "CoreEngine.cpp", __LINE__);
 	timer = new Timer();
@@ -252,9 +245,7 @@ void CoreEngine::Update(const float deltaTime_)
 	{
 		gameInterface->Update(deltaTime_);
 	}
-	if (userInterface) {
-		userInterface->Update(deltaTime_);
-	}
+	UserInterface::GetInstance()->Update(deltaTime_);
 }
 
 void CoreEngine::Render()
@@ -269,10 +260,7 @@ void CoreEngine::Render()
 		{
 			gameInterface->Render();
 		}
-		if (userInterface) 
-		{
-			userInterface->Render();
-		}
+		UserInterface::GetInstance()->Render();
 		SDL_GL_SwapWindow(window->GetWindow());
 
 		break;
@@ -292,10 +280,7 @@ void CoreEngine::OnDestroy()
 	TextureHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
 	MaterialHandler::GetInstance()->OnDestroy();
-	userInterface->DestroyUI();
-
-	delete userInterface;
-	userInterface = nullptr;
+	UserInterface::GetInstance()->DestroyUI();
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete camera;

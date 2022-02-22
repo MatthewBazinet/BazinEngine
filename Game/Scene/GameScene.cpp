@@ -4,6 +4,7 @@
 #include "../ParticleSystem.h"
 #include "../Component.h"
 #include "../XMLDecisionTreeReader.h"
+#include "../UserInterface.h"
 
 GameScene::GameScene()
 {
@@ -355,13 +356,11 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(player, glm::vec3(4.0f,0.0f, 0.0f)),"apple");
 	SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(100, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
-	ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
-
-	//SceneGraph::GetInstance()->AddGameObject(new Flocking(diceModel, glm::vec3(0.0f, 0.0f, 0.0f)), "rop");
+	//ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
 
 	SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 	
-	SceneGraph::GetInstance()->AddGameObject(new Character(1.0f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 	
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 	//static_cast<Flocking*>(SceneGraph::GetInstance()->GetGameObject("rop"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
@@ -375,9 +374,6 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
-
-	
-	
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
 
 	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(12.5f, 0.0f, 0.0f)), "projectile");
@@ -398,6 +394,8 @@ bool GameScene::OnCreate()
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 	
+	UserInterface::GetInstance()->SetPlayer1(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	UserInterface::GetInstance()->SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);
 
@@ -413,14 +411,15 @@ bool GameScene::OnCreate()
 void GameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
-	ptr->Update(deltaTime_);
+	//ptr->Update(deltaTime_);
+	//std::cout << dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() << std::endl;
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 }
 
 void GameScene::Render()
 {
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	ptr->Render(CoreEngine::GetInstance()->GetCamera());
+	//ptr->Render(CoreEngine::GetInstance()->GetCamera());
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
 
 }

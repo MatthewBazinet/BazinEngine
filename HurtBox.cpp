@@ -13,6 +13,11 @@ HurtBox::HurtBox(GameObject* parent_)
 
 HurtBox::~HurtBox()
 {
+	if (this) {
+		if (parent) {
+			parent = nullptr;
+		}
+	}
 }
 
 void HurtBox::Update(const float deltaTime_)
@@ -25,25 +30,31 @@ void HurtBox::Update(const float deltaTime_)
 
 std::vector<Sphere> HurtBox::SpawnHurtBox(glm::vec3 startingPos_, glm::vec3 endingPos_, float width_, int numOfSpheres)
 {
+
 	if (numOfSpheres >= 2) {
-		spheres.resize(2 + numOfSpheres);
 		float dist = glm::distance(startingPos_, endingPos_);
 		float spacing = dist / numOfSpheres;
 
-		for (int i = 0; i < spheres.size(); i++) {
+		for (int i = 0; i < numOfSpheres; i++) {
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
-			spheres[i] = Sphere(pos, width_);
-			hurtBoxes.push_back(spheres[i]);
+			hurtBoxes.push_back(Sphere(pos, width_));
 			std::cout << hurtBoxes[i].position.x << "," << hurtBoxes[i].position.y << "," << hurtBoxes[i].position.z << std::endl;
 		}
 	}
 	else {
-		spheres.resize(numOfSpheres);
-		spheres[0] = Sphere(startingPos_, width_);
-		hurtBoxes.push_back(spheres[0]);
+		hurtBoxes.push_back(Sphere(startingPos_, width_));
 		std::cout << hurtBoxes[0].position.x << "," << hurtBoxes[0].position.y << "," << hurtBoxes[0].position.z << std::endl;
 	}
+
 	return hurtBoxes;
+}
+
+std::vector<Sphere> HurtBox::GetHurtBoxes() const
+{
+	if (hurtBoxes.size() > 0) {
+		return hurtBoxes;
+	}
+	return std::vector<Sphere>();
 }
 
 void HurtBox::SetPosition()

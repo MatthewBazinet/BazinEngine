@@ -18,15 +18,13 @@ public:
 	glm::vec3 GetPosition() { return position; };
 	std::vector<Sphere> SpawnHurtBox(glm::vec3 startingPos_, glm::vec3 endingPos_, float width_, int numOfSpheres);
 	float GetRadius() { return radius; };
-	std::vector<Sphere> GetHurtBoxes()const { return hurtBoxes; };
+	std::vector<Sphere> GetHurtBoxes()const;
 	void SetPosition();
 	glm::vec3 GetPointOnLine(glm::vec3 x, glm::vec3 y, float normalizedDistance);
 private:
 	float radius;
 	GameObject* parent;
 	glm::vec3 position;
-	std::vector<Sphere> spheres;
 	std::vector<Sphere> hurtBoxes;
-	
 };
 #endif

@@ -25,16 +25,7 @@ public:
 	void Run(bool isRunning_);
 	void Move(glm::vec2 input);
 
-	bool getIsRunning() const { return isRunning; };
-	bool getIsAirborne() const { return isAirborne; };
-	void SetOpponent(AlexisBruce* opponent_) { opponent = opponent_; };
-	void SetCamera(Camera* camera_) { camera = camera_; };
 
-	float GetHealth() const { return health; };
-	std::vector<Sphere> GetHurtBoxes()const;
-
-	bool IsCharge();
-	bool FacingLeft();
 protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);
@@ -43,28 +34,8 @@ protected:
 	void AirMedium();
 	void AirHeavy();
 
-	float health;
-	float overclock;
-	float nextActionable;
-	float dir2D;
-
-	bool isRunning;
-	bool isAirborne;
-	bool MovingLeft;
-	bool MovingRight;
-	bool isCharge;
-
-	Model* model;
 	Model* rockModel;
 	Projectile* proj;
-	AlexisBruce* opponent;
-	Camera* camera;
-	HurtBox hurtBox;
-
-	glm::vec3 axisOf2DMovement;
-	glm::vec3 target;
-	glm::vec3 relativeVel;
-
 };
 
 #endif
