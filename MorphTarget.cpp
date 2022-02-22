@@ -1,8 +1,5 @@
 #include "MorphTarget.h"
 
-MorphTarget::MorphTarget()
-{
-}
 
 MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath_)
 {
@@ -14,8 +11,6 @@ MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath
 
 MorphTarget::~MorphTarget()
 {
-	delete obj;
-	obj = nullptr;
 	for (auto m : meshes)
 	{
 		delete m;
@@ -34,9 +29,6 @@ void MorphTarget::LoadModel()
 	obj = nullptr;
 }
 
-AnimationTarget::AnimationTarget()
-{
-}
 
 AnimationTarget::AnimationTarget(const std::string& objPath_, const std::string& matPath_) : MorphTarget(objPath_, matPath_)
 {

@@ -32,16 +32,16 @@ bool AnimationTestScene::OnCreate()
 	
 	MorphTargetAnimatedModel* model1 = new MorphTargetAnimatedModel("Resources/Models/characterAnim1.obj", "Resources/Materials/characterAnim1.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
-	model1->AddMorphTarget("Target1", MorphTarget("Resources/Models/characterAnim1.obj", "Resources/Materials/characterAnim1.mtl"));
-	model1->AddMorphTarget("Target2", MorphTarget("Resources/Models/characterAnim2.obj", "Resources/Materials/characterAnim2.mtl"));
+	model1->AddMorphTarget("Target1", new MorphTarget("Resources/Models/characterAnim1.obj", "Resources/Materials/characterAnim1.mtl"));
+	model1->AddMorphTarget("Target2", new MorphTarget("Resources/Models/characterAnim2.obj", "Resources/Materials/characterAnim2.mtl"));
 
 	model1->SetCurrentMorphTarget("Target1", 5.0f);
 	model1->SetCurrentMorphTarget("Target2", 5.0f);
 
-	Model* model2 = new Model("Resources/Models/MorphTargetContracted.obj", "Resources/Materials/MorphTargetContracted.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	//Model* model2 = new Model("Resources/Models/MorphTargetContracted.obj", "Resources/Materials/MorphTargetContracted.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	SceneGraph::GetInstance()->AddModel(model1);
-	SceneGraph::GetInstance()->AddModel(model2);
+	//SceneGraph::GetInstance()->AddModel(model2);
 	
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(model1, glm::vec3(0.0f, 0.0f, 0.0f)), "model1");
 
@@ -50,7 +50,7 @@ bool AnimationTestScene::OnCreate()
 
 
 	model1 = nullptr;
-	model2 = nullptr;
+	//model2 = nullptr;
 
 	return true;
 }
@@ -128,12 +128,12 @@ void AnimationTestScene::NotifyOfKeyDown(const SDL_Scancode key_)
 	switch (key_)
 	{
 	case SDL_SCANCODE_Y:
-		static_cast<MorphTargetAnimatedModel*>(SceneGraph::GetInstance()->GetGameObject("model1")->GetModel())->SetCurrentMorphTarget("Target1", 5.0f);
-		SceneGraph::GetInstance()->GetGameObject("model1")->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+		static_cast<MorphTargetAnimatedModel*>(SceneGraph::GetInstance()->GetGameObject("model1")->GetModel())->SetCurrentMorphTarget("Target1", 1.0f);
+		//SceneGraph::GetInstance()->GetGameObject("model1")->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 			break;
 	case SDL_SCANCODE_U:
-		static_cast<MorphTargetAnimatedModel*>(SceneGraph::GetInstance()->GetGameObject("model1")->GetModel())->SetCurrentMorphTarget("Target2", 5.0f);
-		SceneGraph::GetInstance()->GetGameObject("model1")->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
+		static_cast<MorphTargetAnimatedModel*>(SceneGraph::GetInstance()->GetGameObject("model1")->GetModel())->SetCurrentMorphTarget("Target2", 1.0f);
+		//SceneGraph::GetInstance()->GetGameObject("model1")->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
 		break;
 	default:
 		break;
