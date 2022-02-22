@@ -2,7 +2,7 @@
 
 MorphTargetAnimatedModel::MorphTargetAnimatedModel(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_) : Model(objPath_, matPath_, shaderProgram_)
 {
-	animationMorphTargets = std::unordered_map<std::string, MorphTarget>();
+	animationMorphTargets = std::unordered_map<std::string, MorphTarget*>();
 	prevVertexLists = std::vector<std::vector<Vertex>>();
 	for (int i = 0; i < meshes.size(); i++)
 	{
@@ -12,9 +12,14 @@ MorphTargetAnimatedModel::MorphTargetAnimatedModel(const std::string& objPath_, 
 
 MorphTargetAnimatedModel::~MorphTargetAnimatedModel()
 {
+	for (auto m : animationMorphTargets)
+	{
+		delete m.second;
+		m.second = nullptr;
+	}
 }
 
-void MorphTargetAnimatedModel::AddMorphTarget(std::string name_, MorphTarget target_)
+void MorphTargetAnimatedModel::AddMorphTarget(std::string name_, MorphTarget* target_)
 {
 	animationMorphTargets[name_.c_str()] = target_;
 }
@@ -38,15 +43,15 @@ void MorphTargetAnimatedModel::Update(const float deltaTime_)
 		if (timeToMorphComplete < 0.0f)
 		{
 			timeToMorphComplete = 0.0f;
-			if (static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget]))
-			{
-				SetCurrentMorphTarget(static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget])->nextTarget, static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget])->nextTargetAnimLength);
-			}
+			//if (static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget]))
+			//{
+			//	SetCurrentMorphTarget(static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget])->nextTarget, static_cast<AnimationTarget*>(&animationMorphTargets[currentMorphTarget])->nextTargetAnimLength);
+			//}
 		}
 		for (int i = 0; i < meshes.size(); i++)
 		{
 			meshes[i]->subMesh.vertexList = SubMesh::Lerp(
-				prevVertexLists[i], animationMorphTargets[currentMorphTarget].meshes[i]->subMesh.vertexList,
+				prevVertexLists[i], animationMorphTargets[currentMorphTarget]->meshes[i]->subMesh.vertexList,
 				(animationTime - timeToMorphComplete) / animationTime);
 		}
 	}

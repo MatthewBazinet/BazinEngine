@@ -32,6 +32,7 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_, std::vect
 	{
 	case RendererType::OPENGL:	
 	{
+		if (subMesh.vertexList.size() <= 0) return;
 		glNamedBufferSubData(VBO, 0, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0]);
 		glUniform1i(diffuseMapMatLoc, 0);
 		glActiveTexture(GL_TEXTURE0);

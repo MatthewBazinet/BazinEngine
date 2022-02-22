@@ -8,7 +8,6 @@ class MorphTarget
 {
 	friend class MorphTargetAnimatedModel;
 public:
-	MorphTarget();
 	MorphTarget(const std::string& objPath_, const std::string& matPath_);
 	~MorphTarget();
 	void LoadModel();
@@ -24,7 +23,6 @@ class AnimationTarget : public MorphTarget
 {
 	friend class MorphTargetAnimatedModel;
 public:
-	AnimationTarget();
 	AnimationTarget(const std::string& objPath_, const std::string& matPath_);
 	AnimationTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_);
 
@@ -37,6 +35,7 @@ private:
 	float nextTargetAnimLength;
 	
 };
+
 
 #endif
 
