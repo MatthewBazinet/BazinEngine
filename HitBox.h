@@ -27,7 +27,8 @@ public:
 	float GetRadius() { return radius; }
 	std::vector<Sphere> GetSpheres() {return spheres;};
 
-
+	void DisableHitBox() { isEnabled = false; };
+	void EnableHitBox() { isEnabled = true; };
 	void setMaxVert(glm::vec3 maxVert_) { maxVert = maxVert_; };
 	void setMinVert(glm::vec3 minVert_) { minVert = minVert_; };
 private:
@@ -38,6 +39,7 @@ private:
 	GameObject* parent;
 	std::vector<Sphere> spheres;
 	std::vector<Sphere> hitBoxes;
+	bool isEnabled;
 };
 
 #endif

@@ -8,6 +8,7 @@ HitBox::HitBox()
 HitBox::HitBox(GameObject* parent_)
 {
 	parent = parent_;
+	isEnabled = true;
 	int j = 0;
 }
 
@@ -21,19 +22,24 @@ void HitBox::SpawnBoundingBox()
 
 bool HitBox::CheckCollision(HitBox* hitbox)
 {
-	if ((this->minVert.x <= hitbox->maxVert.x && this->maxVert.x >= hitbox->minVert.x) && (this->minVert.y <= hitbox->maxVert.y && this->maxVert.y >= hitbox->minVert.y) && (this->minVert.z <= hitbox->maxVert.z && this->maxVert.z >= hitbox->minVert.z))
-	{
-		//std::cout << "collided" << std::endl;
-		return true;
+	if (isEnabled) {
+		if ((this->minVert.x <= hitbox->maxVert.x && this->maxVert.x >= hitbox->minVert.x) && (this->minVert.y <= hitbox->maxVert.y && this->maxVert.y >= hitbox->minVert.y) && (this->minVert.z <= hitbox->maxVert.z && this->maxVert.z >= hitbox->minVert.z))
+		{
+			//std::cout << "collided" << std::endl;
+			return true;
+		}
 	}
+
 	return false;
 }
 
 bool HitBox::CheckCollision(std::vector<Sphere> hurtbox)
 {
-	for (int i = 0; i < hurtbox.size(); i++) {
-		for (int j = 0; j < hitBoxes.size(); j++) {
+	if (isEnabled) {
+		for (int i = 0; i < hurtbox.size(); i++) {
+			for (int j = 0; j < hitBoxes.size(); j++) {
 				return CollisionDetection::SphereSphereCollision(hurtbox[i], hitBoxes[j]);
+			}
 		}
 	}
 }
