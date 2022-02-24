@@ -27,12 +27,12 @@ public:
 
 	virtual void Update(const float deltaTime_);
 
-	void QCF(int strength, bool simpleInput);
-	void QCB(int strength, bool simpleInput);
-	void Unique();
-	void Light();
-	void Medium();
-	void Heavy();
+	virtual void QCF(int strength, bool simpleInput);
+	virtual void QCB(int strength, bool simpleInput);
+	virtual void Unique();
+	virtual void Light();
+	virtual void Medium();
+	virtual void Heavy();
 	void Run(bool isRunning_);
 	void Move(glm::vec2 input);
 
@@ -55,12 +55,12 @@ public:
 
 protected:
 
-	void AirQCF(int strength, bool simpleInput);
-	void AirQCB(int strength, bool simpleInput);
-	void AirUnique();
-	void AirLight();
-	void AirMedium();
-	void AirHeavy();
+	virtual void AirQCF(int strength, bool simpleInput);
+	virtual void AirQCB(int strength, bool simpleInput);
+	virtual void AirUnique();
+	virtual void AirLight();
+	virtual void AirMedium();
+	virtual void AirHeavy();
 
 	float health;
 	float overclock;

@@ -34,3 +34,27 @@ void Wulfrun::Medium()
 void Wulfrun::Heavy()
 {
 }
+
+void Wulfrun::AirQCF(int strength, bool simpleInput)
+{
+}
+
+void Wulfrun::AirQCB(int strength, bool simpleInput)
+{
+}
+
+void Wulfrun::AirUnique()
+{
+}
+
+void Wulfrun::AirLight()
+{
+}
+
+void Wulfrun::AirMedium()
+{
+}
+
+void Wulfrun::AirHeavy()
+{
+}

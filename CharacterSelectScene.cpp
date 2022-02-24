@@ -38,9 +38,9 @@ bool CharacterSelectScene::OnCreate()
 	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(5.0f, 0.0f, 0.0f)), "char2");*/
 
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(1.0f, 1.0f, false, false, Hoshis, glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
 	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(1.0f, 1.0f, false, false, Hoshis, glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
@@ -77,7 +77,7 @@ void CharacterSelectScene::NotifyOfKeyDown(const SDL_Scancode key_)
 	switch (key_)
 	{
 	default:
-		AlexisBruce* char1 = dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"));
+		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
 		char1->NotifyOnKeyDown(key_);
 		char1 = nullptr;
 		break;
@@ -89,7 +89,7 @@ void CharacterSelectScene::NotifyOfKeyUp(const SDL_Scancode key_)
 	switch (key_)
 	{
 	default:
-		AlexisBruce* char1 = dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"));
+		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
 		char1->NotifyOnKeyUp(key_);
 		char1 = nullptr;
 		break;

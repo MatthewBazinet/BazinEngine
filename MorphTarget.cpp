@@ -7,6 +7,13 @@ MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath
 	obj = new LoadOBJModel();
 	obj->LoadModel(objPath_, matPath_);
 	LoadModel();
+	nextTargetAnimLength = 0.0f;
+	nextTarget = "";
+}
+
+MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_) : MorphTarget(objPath_, matPath_)
+{
+	SetNextMorphTarget(target_, animlength_);
 }
 
 MorphTarget::~MorphTarget()
@@ -29,23 +36,7 @@ void MorphTarget::LoadModel()
 	obj = nullptr;
 }
 
-
-AnimationTarget::AnimationTarget(const std::string& objPath_, const std::string& matPath_) : MorphTarget(objPath_, matPath_)
-{
-	
-}
-
-AnimationTarget::AnimationTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_) : AnimationTarget(objPath_, matPath_)
-{
-	SetNextMorphTarget(target_, animlength_);
-}
-
-AnimationTarget::~AnimationTarget()
-{
-	MorphTarget::~MorphTarget();
-}
-
-void AnimationTarget::SetNextMorphTarget(std::string target_, float animLength_)
+void MorphTarget::SetNextMorphTarget(std::string target_, float animLength_)
 {
 	nextTarget = target_;
 	nextTargetAnimLength = animLength_;
