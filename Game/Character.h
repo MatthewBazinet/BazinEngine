@@ -14,6 +14,7 @@ enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIR
 
 class Projectile;
 class HurtBox;
+class HitBox;
 class Character : public GameObject
 {
 public:
@@ -80,6 +81,7 @@ protected:
 
 	glm::vec3 relativeVel;
 	HurtBox* hurtBox;
+	HitBox* hitBox;
 
 	bool isCharge;
 	moveState currentMove;
