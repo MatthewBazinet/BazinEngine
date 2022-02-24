@@ -2,6 +2,7 @@
 
 Hoshi::Hoshi(float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : Character(health_, meter_, isRunning_, isAirborne_, model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
+
 	health = health_;
 	overclock = meter_;
 	isRunning = isRunning_;
