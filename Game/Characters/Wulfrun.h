@@ -9,6 +9,8 @@ public:
 	Wulfrun(glm::vec3 pos);
 	~Wulfrun();
 
+	void Update(const float deltaTime_);
+
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
 	void Unique();

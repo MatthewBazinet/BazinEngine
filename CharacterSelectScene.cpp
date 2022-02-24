@@ -2,6 +2,7 @@
 #include "Game/Character.h"
 #include "Game/Characters/AlexisBruce.h"
 #include "Game/Characters/Hoshi.h"
+#include "Game/Characters/Wulfrun.h"
 #include "Projectile.h"
 CharacterSelectScene::CharacterSelectScene()
 {
@@ -38,9 +39,9 @@ bool CharacterSelectScene::OnCreate()
 	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(5.0f, 0.0f, 0.0f)), "char2");*/
 
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
-	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
+	SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
+	//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
+	SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
