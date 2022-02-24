@@ -375,14 +375,11 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
 	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
-
-	SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(12.5f, 0.0f, 0.0f)), "projectile");
 	
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile1"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile2"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	
-	static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	
 	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
 
