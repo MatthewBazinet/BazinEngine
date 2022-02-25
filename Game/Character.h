@@ -55,6 +55,9 @@ public:
 
 protected:
 
+	std::unordered_map<std::string, HitBox*> hitBoxes;
+	std::unordered_map<std::string, HurtBox*> hurtBoxes;
+
 	virtual void AirQCF(int strength, bool simpleInput);
 	virtual void AirQCB(int strength, bool simpleInput);
 	virtual void AirUnique();

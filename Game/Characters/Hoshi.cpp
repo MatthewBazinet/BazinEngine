@@ -29,8 +29,8 @@ Hoshi::Hoshi(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphT
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunEnd", new MorphTarget("Resources/Models/Hoshi/HoshiRunEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.1f));
 
 	// Grounded
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabStart.obj", "Resources/Materials/Hoshi.mtl", "LightEnd", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabStart.obj", "Resources/Materials/Hoshi.mtl", "LightEnd", 0.1f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.1f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("HeavyStart", new MorphTarget("Resources/Models/Hoshi/HoshiHeavyStart.obj", "Resources/Materials/Hoshi.mtl", "HeavyEnd", 0.5f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("HeavyEnd", new MorphTarget("Resources/Models/Hoshi/HoshiHeavyEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.5f));
 
