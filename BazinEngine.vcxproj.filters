@@ -106,6 +106,7 @@
     <ClCompile Include="Game\Characters\Eldric.cpp" />
     <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="HurtBoxVisual.cpp" />
+    <ClCompile Include="Kunai.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Game\Characters\Eldric.h" />
     <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="HurtBoxVisual.h" />
+    <ClInclude Include="Kunai.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />
