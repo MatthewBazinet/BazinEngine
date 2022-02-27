@@ -1,6 +1,6 @@
 #include "HurtBoxVisual.h"
 
-HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_) : Model(objPath_,matPath_,shaderProgram_)
+HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_, bool enabled_) : Model(objPath_,matPath_,shaderProgram_)
 {
 	shaderProgram = shaderProgram_;
 	meshes.reserve(10);
@@ -9,7 +9,7 @@ HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& mat
 	obj = new LoadOBJModel();
 	obj->LoadModel(objPath_, matPath_);
 	LoadModel();
-	isEnabled = false;
+	isEnabled = enabled_;
 }
 
 HurtBoxVisual::~HurtBoxVisual()
@@ -53,3 +53,4 @@ void HurtBoxVisual::Render(Camera* camera_)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
+

@@ -6,11 +6,11 @@
 class HurtBoxVisual: public Model
 {	
 public:
-	HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_);
+	HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_,bool enabled_);
 	~HurtBoxVisual();
 	void Render(Camera* camera_) override;
-	void EnableVisual() { isEnabled = true; };
-	void DisableVisual(){ isEnabled = false; };
+
+private:
 	bool isEnabled;
 };
 #endif

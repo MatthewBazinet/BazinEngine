@@ -8,6 +8,7 @@
 #include "HurtBox.h"
 #include "HurtBoxVisual.h"
 #include "Engine/Rendering/3D/GameObject.h"
+
 class HitBox : public GameObject
 {
 public:

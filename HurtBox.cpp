@@ -18,7 +18,6 @@ HurtBox::HurtBox(Model* model_, glm::vec3 position_, GameObject* parent_, float 
 		modelInstance = model->CreateInstance(position, angle, rotation, scale);
 		boundingBox = model->GetBoundingBox();
 		boundingBox.transform = model->GetTransform(modelInstance);
-
 		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
 
@@ -58,9 +57,6 @@ void HurtBox::Update(const float deltaTime_)
 		}
 		GameObject::Update(deltaTime_);
 	}
-
-
-
 }
 
 
@@ -73,7 +69,7 @@ std::vector<Sphere> HurtBox::SpawnHurtBox(Model* model_, glm::vec3 startingPos_,
 	if (numOfSpheres >= 2) {
 		float dist = glm::distance(startingPos_, endingPos_);
 		float spacing = dist / numOfSpheres;
-		HurtBoxVisual* hurtBoxDebug = new HurtBoxVisual("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+		HurtBoxVisual* hurtBoxDebug = new HurtBoxVisual("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"), true);
 		SceneGraph::GetInstance()->AddModel(hurtBoxDebug);
 		for (int i = 0; i < numOfSpheres; i++) {
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
