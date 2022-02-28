@@ -45,8 +45,8 @@ Hoshi::Hoshi(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphT
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirHeavyEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.5f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirLightStart.obj", "Resources/Materials/Hoshi.mtl", "AirLightEnd", 0.1f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirLightEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirMediumStart.obj", "Resources/Materials/Hoshi.mtl", "AirMediumEnd", 0.3f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirMediumEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.3f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirMedStart.obj", "Resources/Materials/Hoshi.mtl", "AirMediumEnd", 0.3f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirMedEnd.obj", "Resources/Materials/Hoshi.mtl", "Idle", 0.3f));
 	
 	// Specials
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("GravityWaveStart", new MorphTarget("Resources/Models/Hoshi/HoshiGravityWaveStart.obj", "Resources/Materials/Hoshi.mtl", "GravityWaveEnd", 0.3f));
@@ -86,8 +86,12 @@ void Hoshi::Update(const float deltaTime_)
 
 void Hoshi::SetModels(Model* model_, Model* hurtBox_)
 {
-	hitBox = new HitBox(hurtBox_, this->position, this);
-	hitBox->spawnSpheres(this->position, this->position + glm::vec3(0.0f, 12.0f, 0.0f), 2.0f, 4);
+	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["basic"]->SpawnHurtBox(model_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 1.25f, 5);
+
+	hurtBoxes["aerial"] = new HurtBox(hurtBox_, this->position, this);
+
+	hurtBox = hurtBoxes["basic"];
 
 	//hurtBox = new HurtBox(hurtBox_, this->position, this);
 	//hurtBox->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 2.0f, 4);
@@ -96,11 +100,13 @@ void Hoshi::SetModels(Model* model_, Model* hurtBox_)
 void Hoshi::QCF(int strength, bool simpleInput)
 {
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWaveStart", 0.5f);
+	resetCombo();
 }
 
 void Hoshi::QCB(int strength, bool simpleInput)
 {
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
+	resetCombo();
 }
 
 void Hoshi::Unique()
@@ -124,7 +130,16 @@ void Hoshi::Light()
 	}
 	else
 	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.5f);
+		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
+	}
+
+	if (combo["light"] == false)
+	{
+		combo["light"] = true;
+	}
+	else if (combo["light"] == true)
+	{
+		resetCombo();
 	}
 }
 
@@ -136,7 +151,16 @@ void Hoshi::Medium()
 	}
 	else
 	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.5f);
+		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
+	}
+
+	if (combo["medium"] == false)
+	{
+		combo["medium"] = true;
+	}
+	else if (combo["medium"] == true)
+	{
+		resetCombo();
 	}
 }
 
@@ -150,11 +174,20 @@ void Hoshi::Heavy()
 	{
 		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
 	}
+
+	if (combo["heavy"] == false)
+	{
+		combo["heavy"] = true;
+	}
+	else if (combo["heavy"] == true)
+	{
+		resetCombo();
+	}
 }
 
 void Hoshi::AirQCF(int strength, bool simpleInput)
 {
-	
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWave", 0.5f);
 }
 
 void Hoshi::AirQCB(int strength, bool simpleInput)
@@ -169,7 +202,7 @@ void Hoshi::AirUnique()
 
 void Hoshi::AirLight()
 {
-	
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
 }
 
 void Hoshi::AirMedium()
