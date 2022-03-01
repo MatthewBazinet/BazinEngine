@@ -17,6 +17,10 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	hurtBox = new HurtBox(model_);
 	hurtBox->SpawnHurtBox(model_,this->position, this->position, 1.0f, 1);
 	currentMove = moveState::NONE;
+
+	//combo["light"] = false;
+	//combo["medium"] = false;
+	//combo["heavy"] = false;
 }
 
 Character::~Character() {
@@ -420,4 +424,20 @@ void Character::AirHeavy()
 {
 	if (nextActionable > 0.0f) return;
 
+}
+
+void Character::resetCombo()
+{
+	combo["light"] = false;
+	combo["medium"] = false;
+	combo["heavy"] = false;
+}
+
+bool Character::checkCombo()
+{
+	if (combo["light"] == combo["medium"] == combo["heavy"] == true)
+	{
+		return true;
+	}
+	return false;
 }

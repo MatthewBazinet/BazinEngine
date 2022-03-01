@@ -37,8 +37,6 @@
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
-[ERROR]: Cannot open OBJ file: Resources/Models/Hoshi/HoshiAirMediumStart.obj in: LoadOBJModel.cpp on line: 73
-[ERROR]: Cannot open OBJ file: Resources/Models/Hoshi/HoshiAirMediumEnd.obj in: LoadOBJModel.cpp on line: 73
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
@@ -77,8 +75,10 @@
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
-[ERROR]: Cannot open OBJ file: Resources/Models/Hoshi/HoshiAirMediumStart.obj in: LoadOBJModel.cpp on line: 73
-[ERROR]: Cannot open OBJ file: Resources/Models/Hoshi/HoshiAirMediumEnd.obj in: LoadOBJModel.cpp on line: 73
+[ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
+[ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
+[ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
+[ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
 [ERROR]: Material Material was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
