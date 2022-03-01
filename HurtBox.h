@@ -4,7 +4,6 @@
 #include "Sphere.h"
 #include <iostream>
 #include <vector>
-
 #include "Engine/Core/CoreEngine.h"
 #include "HurtBoxVisual.h"
 class GameObject;
@@ -30,5 +29,6 @@ private:
 	GameObject* parent;
 	std::vector<GameObject*> hurtBoxVisual;
 	std::vector<Sphere> hurtBoxes;
+	
 };
 #endif

@@ -17,6 +17,10 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	hurtBox = new HurtBox(model_);
 	hurtBox->SpawnHurtBox(model_,this->position, this->position, 1.0f, 1);
 	currentMove = moveState::NONE;
+
+	//combo["light"] = false;
+	//combo["medium"] = false;
+	//combo["heavy"] = false;
 }
 
 Character::~Character() {
@@ -45,7 +49,7 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 			{
 				vel = glm::vec3(vel.x, 10.0f, vel.z);
 			}
-			ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
+			//ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 		}
 		break;
 	case SDL_SCANCODE_A:
@@ -178,7 +182,7 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
-
+	
 	
 	if (nextActionable > 0.0f)
 	{
@@ -422,4 +426,20 @@ void Character::AirHeavy()
 {
 	if (nextActionable > 0.0f) return;
 
+}
+
+void Character::resetCombo()
+{
+	combo["light"] = false;
+	combo["medium"] = false;
+	combo["heavy"] = false;
+}
+
+bool Character::checkCombo()
+{
+	if (combo["light"] == combo["medium"] == combo["heavy"] == true)
+	{
+		return true;
+	}
+	return false;
 }

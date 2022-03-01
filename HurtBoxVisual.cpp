@@ -1,6 +1,6 @@
 #include "HurtBoxVisual.h"
 
-HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_) : Model(objPath_,matPath_,shaderProgram_)
+HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_, bool enabled_) : Model(objPath_,matPath_,shaderProgram_)
 {
 	shaderProgram = shaderProgram_;
 	meshes.reserve(10);
@@ -9,6 +9,7 @@ HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& mat
 	obj = new LoadOBJModel();
 	obj->LoadModel(objPath_, matPath_);
 	LoadModel();
+	isEnabled = enabled_;
 }
 
 HurtBoxVisual::~HurtBoxVisual()
@@ -30,23 +31,26 @@ HurtBoxVisual::~HurtBoxVisual()
 
 void HurtBoxVisual::Render(Camera* camera_)
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	switch (CoreEngine::GetInstance()->GetRendererType())
-	{
-	case RendererType::OPENGL:
-		glUseProgram(shaderProgram);
-		break;
-	case RendererType::VULKAN:
-		break;
-	case RendererType::DIRECTX11:
-		break;
-	case RendererType::DIRECTX12:
-		break;
+	if (isEnabled) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		switch (CoreEngine::GetInstance()->GetRendererType())
+		{
+		case RendererType::OPENGL:
+			glUseProgram(shaderProgram);
+			break;
+		case RendererType::VULKAN:
+			break;
+		case RendererType::DIRECTX11:
+			break;
+		case RendererType::DIRECTX12:
+			break;
+		}
+		for (auto m : meshes)
+		{
+			m->Render(camera_, modelInstances, modelInstancesVisable);
+		}
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
-	for (auto m : meshes)
-	{
-		m->Render(camera_, modelInstances, modelInstancesVisable);
-	}
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
+

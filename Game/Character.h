@@ -52,8 +52,14 @@ public:
 
 	bool CheckMoveState(moveState move_);
 	bool CheckRunCancel();
+	void resetCombo();
+	bool checkCombo();
 
 protected:
+
+	std::unordered_map<std::string, HitBox*> hitBoxes;
+	std::unordered_map<std::string, HurtBox*> hurtBoxes;
+	std::unordered_map<std::string, bool> combo = { {"light", false}, {"medium", false}, {"heavy", false} };
 
 	virtual void AirQCF(int strength, bool simpleInput);
 	virtual void AirQCB(int strength, bool simpleInput);

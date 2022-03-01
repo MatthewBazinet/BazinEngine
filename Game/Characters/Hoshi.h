@@ -33,6 +33,7 @@ protected:
 	void AirHeavy();
 
 	Projectile* proj;
+	bool floating;
 };
 
 #endif
