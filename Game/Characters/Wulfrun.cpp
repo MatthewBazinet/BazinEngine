@@ -9,6 +9,8 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightStart.obj", "Resources/Materials/Wulfrun.mtl", "LightEnd", 0.2f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightEnd.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 0.1f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Heavy", new MorphTarget("Resources/Models/Wulfrun/WulfrunHeavyEnd.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMedium", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirMedium.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 1.0f));
+
 
 	SceneGraph::GetInstance()->AddModel(model);
 
@@ -118,6 +120,7 @@ void Wulfrun::AirLight()
 
 void Wulfrun::AirMedium()
 {
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirMedium", 0.5f);
 }
 
 void Wulfrun::AirHeavy()
