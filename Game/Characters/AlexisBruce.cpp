@@ -2,18 +2,10 @@
 #include "../HurtBox.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-AlexisBruce::AlexisBruce(float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : Character(health_,meter_,isRunning_,isAirborne_,model_,position_,angle_,rotation_,scale_,vel_,orientation_,angularVelocity_)
+AlexisBruce::AlexisBruce(glm::vec3 position_) : Character(1000.0f, 0.0f, false, false, new MorphTargetAnimatedModel("Resources/Models/AlexisBruce.obj", "Resources/Materials/AlexisBruce.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), position_)
 {
-	health = health_;
-	overclock = meter_;
-	isRunning = isRunning_;
-	isAirborne = isAirborne_;
-	model = model_;
-	maxSpeed = 5.0f;
+	SceneGraph::GetInstance()->AddModel(model);
 	rockModel = nullptr;
-	
-	target = glm::vec3();
-	
 }
 
 AlexisBruce::~AlexisBruce()
@@ -196,12 +188,7 @@ void AlexisBruce::SetModels(Model* rockModel_, Model* hurtBox_)
 		rockModel = nullptr;
 	}
 	rockModel = rockModel_;
-	if (hurtBoxM != nullptr) {
-		delete hurtBoxM;
-		hurtBoxM = nullptr;
-	}
-	hurtBoxM = hurtBox_;
-	hurtBox = new HurtBox(hurtBoxM,this->position,this);
+	hurtBox = new HurtBox(NULL,this->position,this);
 	hurtBox->SpawnHurtBox(hurtBox_,this->position, this->position + glm::vec3(0.0f,16.0f,0.0f), 2.0f, 5);
 }
 
@@ -219,20 +206,24 @@ void AlexisBruce::QCF(int strength, bool simpleInput)
 	}
 	if (strength == 0)
 	{
+		glm::vec3 dir = position - opponent->GetPosition();
 		proj->SetTarget(nullptr);
 		proj->SetPosition(this->GetPosition());
-		proj->SetVelocity(glm::vec3(20.0f, 0.0f, 0.0f));
+
+		proj->SetVelocity(glm::vec3(dir));
 		
 	}
 	else if (strength == 1) {
+		glm::vec3 dir = position - opponent->GetPosition();
 		proj->SetTarget(nullptr);
 		proj->SetPosition(this->GetPosition());
-		proj->SetVelocity(glm::vec3(6.0f, 0.0f, 0.0f));
+		proj->SetVelocity(glm::vec3(dir));
 		//proj->SetScale(proj->GetScale() * glm::vec3(2));
 		
 	}
 	else if(strength == 2)
 	{
+		glm::vec3 dir = position - opponent->GetPosition();
 		proj->SetTarget(opponent);
 		proj->SetPosition(this->GetPosition());
 		proj->SetScale(proj->GetScale() * glm::vec3(1.5));

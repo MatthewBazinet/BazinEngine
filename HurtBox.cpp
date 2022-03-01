@@ -49,7 +49,7 @@ void HurtBox::Update(const float deltaTime_)
 	if (parent) {
 		for (int i = 0; i < hurtBoxes.size(); i++) {
 			hurtBoxes[0].SetPosition(parent->GetPosition());
-			hurtBoxVisual[0]->SetPosition(parent->GetPosition());
+			hurtBoxVisual[0]->SetPosition(hurtBoxes[0].position);
 			if (i != 0) {
 				hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::vec3(0.0f,hurtBoxes[i].offset,0.0f)));
 				hurtBoxVisual[i]->SetPosition(hurtBoxes[i].position);

@@ -6,7 +6,7 @@ Projectile::Projectile(Model* model_, glm::vec3 position_, Character* parent_, f
 	target = nullptr;//glm::vec3(0.0f, 0.0f, 0.0f);
 	SetMaxSpeed(3.0f);
 	parent = parent_;
-	hitBox = new HitBox(parent->GetModel(), this->GetPosition(),this);
+	hitBox = new HitBox(NULL,this->GetPosition(),this);
 	hitBox->spawnSpheres(this->GetPosition(), this->GetPosition(), 2.0f, 1);
 }
 

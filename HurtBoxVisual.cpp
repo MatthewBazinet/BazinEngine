@@ -3,9 +3,6 @@
 HurtBoxVisual::HurtBoxVisual(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_, bool enabled_) : Model(objPath_,matPath_,shaderProgram_)
 {
 	shaderProgram = shaderProgram_;
-	meshes.reserve(10);
-	modelInstances.reserve(5);
-	modelInstancesVisable.reserve(5);
 	obj = new LoadOBJModel();
 	obj->LoadModel(objPath_, matPath_);
 	LoadModel();
