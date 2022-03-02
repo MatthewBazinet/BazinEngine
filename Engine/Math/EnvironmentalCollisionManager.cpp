@@ -51,16 +51,14 @@ void EnvironmentalCollisionManager::OnDestroy()
 	scenePartition = nullptr;
 }
 
-void EnvironmentalCollisionManager::Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_)
+void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<glm::vec4> planes_)
 {
-	if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), leftPlane_))
+	for (auto& element : planes_)
 	{
-		gameObject_->SetVelocity(glm::vec3(-(leftPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
-	}
-
-	if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), rightPlane_))
-	{
-		gameObject_->SetVelocity(glm::vec3(-(rightPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+		if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), element))
+		{
+			gameObject_->SetVelocity(glm::vec3(-(element.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+		}
 	}
 
 	checkObjectCollision(gameObject_);

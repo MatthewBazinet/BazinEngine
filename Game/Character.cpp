@@ -182,8 +182,6 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 
 void Character::Update(const float deltaTime_)
 {
-	
-	
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
@@ -276,6 +274,38 @@ bool Character::CheckRunCancel()
 		return false;
 	}
 	return true;
+}
+
+bool Character::checkComboState(moveState move_)
+{
+	// make sure move can still go through when going from idle states
+	switch (currentMove)
+	{
+	case moveState::AIRLIGHT:
+	case moveState::GROUNDLIGHT:
+		if (combo["light"] > 0)
+		{
+			combo["light"]--;
+			return true;
+		}
+	case moveState::AIRMEDIUM:
+	case moveState::GROUNDMEDIUM:
+		if (combo["medium"] > 0)
+		{
+			combo["medium"]--;
+			return true;
+		}
+	case moveState::AIRHEAVY:
+	case moveState::GROUNDHEAVY:
+		if (combo["heavy"] > 0)
+		{
+			combo["heavy"]--;
+			return true;
+		}
+	default:
+		resetCombo();
+		return false;
+	}
 }
 
 void Character::QCF(int strength, bool simpleInput)
@@ -430,16 +460,7 @@ void Character::AirHeavy()
 
 void Character::resetCombo()
 {
-	combo["light"] = false;
-	combo["medium"] = false;
-	combo["heavy"] = false;
-}
-
-bool Character::checkCombo()
-{
-	if (combo["light"] == combo["medium"] == combo["heavy"] == true)
-	{
-		return true;
-	}
-	return false;
+	combo["light"] = 1;
+	combo["medium"] = 1;
+	combo["heavy"] = 1;
 }

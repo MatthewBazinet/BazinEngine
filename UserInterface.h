@@ -1,13 +1,15 @@
 #ifndef USERINTERFACE_H
 #define USERINTERFACE_H
 
-
+#include <chrono>
+#include <thread>
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl.h"
 #include "SoundEffects.h"
 #include "NetworkingBase.h"
 #include "Game/Character.h"
+#include "Engine/Core/Timer.h"
 
 enum class State { Menu, Settings, Online, SinglePlayer, CharacterSelect, Empty };
 class UserInterface
@@ -41,6 +43,7 @@ private:
 	State state;
 	ImGuiBackendFlags flags;
 	int time = 60;
+	bool timerStarted;
 	Character* player1;
 	Character* player2;
 	SoundEffects se;

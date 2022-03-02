@@ -1,14 +1,13 @@
 #include "UserInterface.h"
 #include "Engine/Core/CoreEngine.h"
 #include <iostream>
-#include <chrono>
-#include <thread>
+
 
 std::unique_ptr<UserInterface> UserInterface::UserInterfaceInstance = nullptr;
 
 UserInterface::UserInterface():state(State::Menu),player1(nullptr),player2(nullptr)
 {
-	
+
 	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
 }
 
@@ -49,6 +48,7 @@ bool UserInterface::OnCreate()
 		ImGui::StyleColorsDark();
 		ImGui_ImplSDL2_InitForOpenGL(CoreEngine::GetInstance()->GetWindow(), &io);
 		ImGui_ImplOpenGL3_Init("#version 450");
+		timerStarted = false;
 	return true;
 }
 
@@ -93,12 +93,9 @@ void UserInterface::Render()
 
 void UserInterface::StartTimer()
 {
-	while (true) {
+	while (true){
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		time -= 1;
-		if (time == 0) {
-			break;
-		}
 	}
 }
 //Menu Ui
@@ -136,12 +133,12 @@ void UserInterface::ShowMenu()
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Online Selection ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Host", ImVec2(250, 90))) {
-			std::thread net(&NetworkingBase::Run, true, str0);
-			net.detach();
+			//std::thread net(&NetworkingBase::Run, true, str0);
+			//net.detach();
 		}
 		if (ImGui::Button("Join", ImVec2(250, 90))) {
-			std::thread net(&NetworkingBase::Run, false, str0);
-			net.detach();
+			//std::thread net(&NetworkingBase::Run, false, str0);
+			//net.detach();
 		}
 		if (ImGui::InputText("Host IP", str0, IM_ARRAYSIZE(str0),ImGuiInputTextFlags_EnterReturnsTrue)) {
 			std::cout << str0 << std::endl;
@@ -163,6 +160,12 @@ void UserInterface::ShowGameUi()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
+	if (!timerStarted) {
+		std::cout << "Timer Started" << std::endl;
+		std::thread Thread = std::thread(&UserInterface::StartTimer, this);
+		Thread.detach();
+		timerStarted = true;
+	}
 	if (state == State::SinglePlayer) {
 
 		//Player 1 Health Bar & Overclock Meter
@@ -230,10 +233,12 @@ void UserInterface::ShowCharacterSelect()
 		//Single Player Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.9f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
+		ImGui::TextColored(ImVec4(1.0, 1.0, 1.0, 1.0), "A<								>D");
 		if (ImGui::Button("Start Game", ImVec2(250, 80))) {
 			se.playSoundEffect(0);
 			CoreEngine::GetInstance()->SetCurrentScene(1);
 		}
+		
 	}
 		ImGui::End();
 }

@@ -17,12 +17,16 @@ public:
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
-
+	void AddCharacter(std::string name_, Character* character_);
+	void CharacterSelection();
 	//static std::vector<Character*> GetHurtBoxes() {return hurtBoxes;};
-
 	//static std::vector<Character*> SetHurtBoxes(std::vector<Character*> hurtBoxes_) { hurtBoxes = hurtBoxes_; };
-
 private:
 	//static std::vector<Character*> hurtBoxes;
+	std::unordered_map<std::string, Character*> listOfCharacters;
+	std::vector<std::string> names;
+	std::string selectedCharacter;
+	std::string currentCharacter;
+	int count;
 };
 #endif

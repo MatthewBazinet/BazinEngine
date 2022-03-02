@@ -276,7 +276,9 @@ void GameObject::SetShape(Tetrahedron shape_)
 void GameObject::CheckVisible()
 {
 	if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(position, glm::mat4())) {
-		model->SetInstanceVisiblity(modelInstance, true);
+		if (model) {
+			model->SetInstanceVisiblity(modelInstance, true);
+		}
 		return;
 	}
 
@@ -293,17 +295,22 @@ void GameObject::CheckVisible()
 	}
 
 	if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(boundingBox.minVert, transform)) {
-		model->SetInstanceVisiblity(modelInstance, true);
+		if (model) {
+			model->SetInstanceVisiblity(modelInstance, true);
+		}
 		return;
 	}
 
 	else if (CoreEngine::GetInstance()->GetCamera()->TestPointAgainstPlanes(boundingBox.maxVert, transform)) {
-		model->SetInstanceVisiblity(modelInstance, true);
+		if (model) {
+			model->SetInstanceVisiblity(modelInstance, true);
+		}
 		return;
 	}
 
 	else {
-
-		model->SetInstanceVisiblity(modelInstance, false);
+		if (model) {
+			model->SetInstanceVisiblity(modelInstance, false);
+		}
 	}
 };
