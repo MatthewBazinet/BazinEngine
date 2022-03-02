@@ -39,6 +39,8 @@ public:
 	bool getIsRunning() const { return isRunning; };
 	bool getIsAirborne() const { return isAirborne; };
 
+	void SetIsRunning(bool isRunning_) { isRunning = isRunning_; if (!isRunning) relativeVel = glm::vec3(0.0f, 0.0f, 0.0f); };
+
 	void SetOpponent(Character* opponent_) { opponent = opponent_; };
 	void SetCamera(Camera* camera_) { camera = camera_; };
 	//void SetProjectile(Projectile* projectile_) { proj = projectile_; };

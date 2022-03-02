@@ -58,6 +58,12 @@ void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<
 		if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), element))
 		{
 			gameObject_->SetVelocity(glm::vec3(-(element.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+			if (dynamic_cast<Character*>(gameObject_)) {
+				if (dynamic_cast<Character*>(gameObject_)->getIsRunning())
+				{
+					dynamic_cast<Character*>(gameObject_)->SetIsRunning(false);
+				}
+			}
 		}
 	}
 
@@ -86,10 +92,22 @@ void EnvironmentalCollisionManager::checkObjectCollision(GameObject* gameObject_
 				if (gameObject_->GetHitBox()->getMinVert().z - 1.0f <= gameObjects->GetHitBox()->getMaxVert().z + 1.0f && gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
 				{
 					gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, -gameObject_->GetVelocity().z));
+					if (dynamic_cast<Character*>(gameObject_)) {
+						if (dynamic_cast<Character*>(gameObject_)->getIsRunning())
+						{
+							dynamic_cast<Character*>(gameObject_)->SetIsRunning(false);
+						}
+					}
 				}
 				else if (gameObject_->GetHitBox()->getMaxVert().z + 1.0f >= gameObjects->GetHitBox()->getMinVert().z - 1.0f && gameObject_->GetPosition().y <= gameObjects->GetPosition().y + 2.0f)
 				{
 					gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+					if (dynamic_cast<Character*>(gameObject_)) {
+						if (dynamic_cast<Character*>(gameObject_)->getIsRunning())
+						{
+							dynamic_cast<Character*>(gameObject_)->SetIsRunning(false);
+						}
+					}
 				}
 
 				// y collision - not sure is needed?
