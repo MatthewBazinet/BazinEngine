@@ -85,6 +85,7 @@ void Character::NotifyOnKeyDown(SDL_Scancode key_)
 		break;
 	case SDL_SCANCODE_LSHIFT:
 		Run(true);
+		break;
 	case SDL_SCANCODE_U:
 		Light();
 		break;
@@ -175,6 +176,7 @@ void Character::NotifyOnKeyUp(SDL_Scancode key_)
 	case SDL_SCANCODE_LSHIFT:
 		Run(false);
 		relativeVel = glm::vec3(0.0f, 0.0f, 0.0f);
+		break;
 	default:
 		break;
 	}
@@ -281,6 +283,22 @@ bool Character::checkComboState(moveState move_)
 	// make sure move can still go through when going from idle states
 	switch (currentMove)
 	{
+	case moveState::NONE:
+	case moveState::RUN:
+		resetCombo();
+	case moveState::GROUNDHEAVY:
+	case moveState::GROUNDMEDIUM:
+	case moveState::GROUNDLIGHT:
+	case moveState::AIRHEAVY:
+	case moveState::AIRMEDIUM:
+	case moveState::AIRLIGHT:
+		return true;
+		break;
+	default:
+		return false;
+	}
+	/*switch (move_)
+	{
 	case moveState::AIRLIGHT:
 	case moveState::GROUNDLIGHT:
 		if (combo["light"] > 0)
@@ -288,6 +306,7 @@ bool Character::checkComboState(moveState move_)
 			combo["light"]--;
 			return true;
 		}
+		break;
 	case moveState::AIRMEDIUM:
 	case moveState::GROUNDMEDIUM:
 		if (combo["medium"] > 0)
@@ -295,6 +314,7 @@ bool Character::checkComboState(moveState move_)
 			combo["medium"]--;
 			return true;
 		}
+		break;
 	case moveState::AIRHEAVY:
 	case moveState::GROUNDHEAVY:
 		if (combo["heavy"] > 0)
@@ -302,10 +322,12 @@ bool Character::checkComboState(moveState move_)
 			combo["heavy"]--;
 			return true;
 		}
+		break;
 	default:
 		resetCombo();
 		return false;
 	}
+	*/
 }
 
 void Character::QCF(int strength, bool simpleInput)

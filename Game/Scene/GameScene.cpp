@@ -5,6 +5,7 @@
 #include "../Component.h"
 #include "../XMLDecisionTreeReader.h"
 #include "../UserInterface.h"
+#include "../Game/Characters/Hoshi.h"
 
 GameScene::GameScene()
 {
@@ -360,7 +361,9 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 	
-	SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
+	//SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
+
 	
 	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
 	//static_cast<Flocking*>(SceneGraph::GetInstance()->GetGameObject("rop"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
@@ -374,8 +377,9 @@ bool GameScene::OnCreate()
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
 	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
-	SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
-	
+	//SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile1"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile2"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
@@ -477,23 +481,21 @@ void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 {
 	switch (key_)
 	{
-	case SDL_SCANCODE_P:
-		static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
-		break;
-	case SDL_SCANCODE_R:
-		if (static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->getIsRunning()) {
-			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(false);
-		}
-		else
-		{
-			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(true);
-		}
+	//case SDL_SCANCODE_P:
+		//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
+		//static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
+		//break;
+	//case SDL_SCANCODE_R:
+		//if (static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->getIsRunning()) {
+		//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(false);
+		//}
+		//else
+		//{
+		//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(true);
+		//}
 		break;
 	default:
-		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
-		char1->NotifyOnKeyDown(key_);
-		char1 = nullptr;
+		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->NotifyOnKeyDown(key_);
 		break;
 	}
 }
@@ -502,22 +504,20 @@ void GameScene::NotifyOfKeyUp(const SDL_Scancode key_)
 {
 	switch (key_)
 	{
-	case SDL_SCANCODE_LEFT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
-		break;
-	case SDL_SCANCODE_RIGHT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
-		break;
-	case SDL_SCANCODE_UP:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::SELF);
-		break;
-	case SDL_SCANCODE_DOWN:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
-		break;
+	//case SDL_SCANCODE_LEFT:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
+	//	break;
+	//case SDL_SCANCODE_RIGHT:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
+	//	break;
+	//case SDL_SCANCODE_UP:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::SELF);
+	//	break;
+	//case SDL_SCANCODE_DOWN:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
+	//	break;
 	default:
-		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
-		char1->NotifyOnKeyUp(key_);
-		char1 = nullptr;
+		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->NotifyOnKeyUp(key_);
 		break;
 	}
 }

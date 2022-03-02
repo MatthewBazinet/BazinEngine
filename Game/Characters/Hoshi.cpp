@@ -131,13 +131,19 @@ void Hoshi::Light()
 {
 	if (checkComboState(moveState::GROUNDLIGHT))
 	{
-		if (isAirborne)
+		if (combo["light"] > 0)
 		{
-			AirLight();
-		}
-		else
-		{
-			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
+			combo["light"] -= 1;
+
+			if (isAirborne)
+			{
+				AirLight();
+			}
+			else
+			{
+				currentMove = moveState::GROUNDLIGHT;
+				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
+			}
 		}
 	}
 }
@@ -146,13 +152,19 @@ void Hoshi::Medium()
 {
 	if (checkComboState(moveState::GROUNDMEDIUM))
 	{
-		if (isAirborne)
+		if (combo["medium"] > 0)
 		{
-			AirMedium();
-		}
-		else
-		{
-			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
+			combo["medium"] -= 1;
+
+			if (isAirborne)
+			{
+				AirMedium();
+			}
+			else
+			{
+				currentMove = moveState::GROUNDMEDIUM;
+				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
+			}
 		}
 	}
 }
@@ -161,13 +173,19 @@ void Hoshi::Heavy()
 {
 	if (checkComboState(moveState::GROUNDHEAVY))
 	{
-		if (isAirborne)
+		if (combo["heavy"] > 0)
 		{
-			AirHeavy();
-		}
-		else
-		{
-			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
+			combo["heavy"] -= 1;
+
+			if (isAirborne)
+			{
+				AirHeavy();
+			}
+			else
+			{
+				currentMove = moveState::GROUNDHEAVY;
+				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
+			}
 		}
 	}
 }
@@ -189,15 +207,18 @@ void Hoshi::AirUnique()
 
 void Hoshi::AirLight()
 {
+	currentMove = moveState::AIRLIGHT;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
 }
 
 void Hoshi::AirMedium()
 {
+	currentMove = moveState::AIRMEDIUM;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirMediumStart", 0.5f);
 }
 
 void Hoshi::AirHeavy()
 {
+	currentMove = moveState::AIRHEAVY;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirHeavyStart", 0.5f);
 }
