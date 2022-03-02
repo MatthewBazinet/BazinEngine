@@ -87,11 +87,15 @@ void Hoshi::Update(const float deltaTime_)
 void Hoshi::SetModels(Model* model_, Model* hurtBox_)
 {
 	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["basic"]->SpawnHurtBox(model_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 1.25f, 5);
+	//hurtBoxes["basic"]->SpawnHurtBox(model_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 1.25f, 5);
 
 	hurtBoxes["aerial"] = new HurtBox(hurtBox_, this->position, this);
 
-	hurtBox = hurtBoxes["basic"];
+	hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 0.0f, 0.0f), this->position + glm::vec3(5.0f, 8.0f, 0.0f), 1.0f, 5);
+
+	//hurtBox = hurtBoxes["basic"];
+	hitBox = hitBoxes["light"];
 
 	//hurtBox = new HurtBox(hurtBox_, this->position, this);
 	//hurtBox->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 2.0f, 4);
@@ -111,6 +115,7 @@ void Hoshi::QCB(int strength, bool simpleInput)
 
 void Hoshi::Unique()
 {
+	// fix levitate animations
 	floating = !floating;
 	if (floating)
 	{
@@ -124,64 +129,46 @@ void Hoshi::Unique()
 
 void Hoshi::Light()
 {
-	if (isAirborne)
+	if (checkComboState(moveState::GROUNDLIGHT))
 	{
-		AirLight();
-	}
-	else
-	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
-	}
-
-	if (combo["light"] == false)
-	{
-		combo["light"] = true;
-	}
-	else if (combo["light"] == true)
-	{
-		resetCombo();
+		if (isAirborne)
+		{
+			AirLight();
+		}
+		else
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
+		}
 	}
 }
 
 void Hoshi::Medium()
 {
-	if (isAirborne)
+	if (checkComboState(moveState::GROUNDMEDIUM))
 	{
-		AirMedium();
-	}
-	else
-	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
-	}
-
-	if (combo["medium"] == false)
-	{
-		combo["medium"] = true;
-	}
-	else if (combo["medium"] == true)
-	{
-		resetCombo();
+		if (isAirborne)
+		{
+			AirMedium();
+		}
+		else
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
+		}
 	}
 }
 
 void Hoshi::Heavy()
 {
-	if (isAirborne)
+	if (checkComboState(moveState::GROUNDHEAVY))
 	{
-		AirHeavy();
-	}
-	else
-	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
-	}
-
-	if (combo["heavy"] == false)
-	{
-		combo["heavy"] = true;
-	}
-	else if (combo["heavy"] == true)
-	{
-		resetCombo();
+		if (isAirborne)
+		{
+			AirHeavy();
+		}
+		else
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
+		}
 	}
 }
 

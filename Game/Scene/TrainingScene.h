@@ -25,6 +25,9 @@ public:
 	GridWithWeights navgrid;
 	glm::vec4 leftPlane;
 	glm::vec4 rightPlane;
+	glm::vec4 northPlane;
+	glm::vec4 southPlane;
+	std::vector<glm::vec4> planes;
 };
 
 #endif;

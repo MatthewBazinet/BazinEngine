@@ -4,6 +4,7 @@
 #include "../Engine/Rendering/3D/GameObject.h"
 #include "../Game/Character.h"
 #include "..//Core/OctSpatialPartition.h"
+#include <vector>
 
 class EnvironmentalCollisionManager
 {
@@ -17,7 +18,7 @@ public:
 	void OnCreate(float worldSize_);
 	void AddObject(GameObject* go_);
 	void OnDestroy();
-	void Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_);
+	void Update(GameObject* gameObject_, std::vector<glm::vec4> planes_);
 
 	void checkObjectCollision(GameObject* gameObject_);
 	bool checkPlaneCollision(glm::vec3 point_, glm::vec4 plane_);
