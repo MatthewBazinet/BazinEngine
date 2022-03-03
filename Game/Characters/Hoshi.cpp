@@ -111,12 +111,14 @@ void Hoshi::SetModels(Model* model_, Model* hurtBox_)
 
 void Hoshi::QCF(int strength, bool simpleInput)
 {
+	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWaveStart", 0.5f);
 	resetCombo();
 }
 
 void Hoshi::QCB(int strength, bool simpleInput)
 {
+	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
 	if (strength == 0)
 	{
@@ -218,11 +220,13 @@ void Hoshi::ResetProjectile()
 
 void Hoshi::AirQCF(int strength, bool simpleInput)
 {
+	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWave", 0.5f);
 }
 
 void Hoshi::AirQCB(int strength, bool simpleInput)
 {
+	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
 }
 

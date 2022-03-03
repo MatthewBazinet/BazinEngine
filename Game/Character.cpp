@@ -212,8 +212,6 @@ void Character::Update(const float deltaTime_)
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}
 
-	GameObject::Update(deltaTime_);
-
 	if (!isRunning) {
 		if (!opponent->getIsRunning() && getIsAirborne() == false)
 		{
@@ -238,6 +236,7 @@ void Character::Update(const float deltaTime_)
 		health = 100.0f;
 	}	
 
+	GameObject::Update(deltaTime_);
 }
 
 bool Character::CheckMoveState(moveState move_)
@@ -272,6 +271,7 @@ bool Character::CheckRunCancel()
 	{
 		if (overclock >= 50.0f)
 		{
+			overclock -= 50.0f;
 			return true;
 		}
 		return false;
@@ -414,10 +414,12 @@ void Character::Heavy()
 
 void Character::Run(bool isRunning_)
 {
-	if (!CheckRunCancel()) return;;
+	if (isRunning_)
+	{
+		if (nextActionable > 0.0f) return;
 
-	if (nextActionable > 0.0f) return;
-
+		if (!CheckRunCancel()) return;;
+	}
 	isRunning = isRunning_;
 }
 
@@ -513,6 +515,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		{
 			health -= damage_;
 			nextActionable = hitStun_;
+			ApplyForce(push_);
 		}
 	}
 	else
@@ -526,6 +529,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		{
 			health -= damage_;
 			nextActionable = hitStun_;
+			ApplyForce(push_);
 		}
 	}
 }
