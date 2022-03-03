@@ -18,6 +18,7 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	hurtBox->SpawnHurtBox(model_,this->position, this->position, 1.0f, 1);
 	currentMove = moveState::NONE;
 
+	lastInput.x = lastInput.y = 0.0f;
 	//combo["light"] = false;
 	//combo["medium"] = false;
 	//combo["heavy"] = false;
@@ -424,6 +425,82 @@ void Character::Move(glm::vec2 input)
 {
 	if (nextActionable > 0.0f) return;
 
+	if (input.y != lastInput.y)
+	{
+
+		if (input.y > 0)
+		{
+			//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+			if (isRunning)
+			{
+				relativeVel = glm::vec3(relativeVel.x, relativeVel.y, -5.0f);
+
+			}
+			else
+			{
+				if (!isAirborne)
+				{
+					vel = glm::vec3(vel.x, 10.0f, vel.z);
+				}
+				//ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
+			}
+		}
+		else if (input.y < 0)
+		{
+			if (isRunning)
+			{
+				relativeVel = glm::vec3(relativeVel.x, relativeVel.y, 5.0f);
+
+			}
+		}
+		else
+		{
+			if (isRunning)
+			{
+				relativeVel = glm::vec3(relativeVel.x, relativeVel.y, 0.0f);
+			}
+		}
+
+		if (input.x < 0)
+		{
+			//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+			if (isRunning) {
+				relativeVel = glm::vec3(-5.0f, relativeVel.y, relativeVel.z);
+			}
+			else
+			{
+				MovingLeft = true;
+				MovingRight = false;
+			}
+
+		}
+		else if (input.x > 0)
+		{
+			if (isRunning)
+			{
+				relativeVel = glm::vec3(5.0f, relativeVel.y, relativeVel.z);
+			}
+			else
+			{
+				MovingRight = true;
+				MovingLeft = false;
+			}
+		}
+		else
+		{
+			if (isRunning)
+			{
+				relativeVel = glm::vec3(0.0f, relativeVel.y, relativeVel.z);
+			}
+			else
+			{
+				dir2D = 0.0f;
+			}
+			MovingRight = false;
+			MovingLeft = false;
+		}
+	}
+	lastInput = input;
 }
 
 void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_)

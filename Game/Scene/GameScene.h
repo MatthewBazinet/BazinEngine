@@ -8,6 +8,7 @@
 #include "../Pawn.h"
 #include "../ParticleSystem.h"
 #include <vector>
+#include "../InputManager.h"
 class GameScene : public Scene
 {
 public:
@@ -23,6 +24,7 @@ public:
 	Component* ptr;
 	float scale;
 	bool tmp = true;
+	InputManager inputManager;
 };
 
 #endif // !GAMESCENE_H

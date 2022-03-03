@@ -1,5 +1,6 @@
 #include "HitBox.h"
 #include "Engine/Math/CollisionDetection.h"
+#include <glm/gtx/rotate_vector.hpp>
 HitBox::HitBox(Model* model_, glm::vec3 position_, GameObject* parent_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
 {
 	parent = parent_;
@@ -60,7 +61,7 @@ std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endin
 			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent), "Hitbox " + std::to_string(i));
 			hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject(std::to_string(i)));
 			hitBoxVisual[i]->SetScale(glm::vec3(width_));
-			hitBoxes[i].SetOffset(glm::distance(parent->GetPosition(), hitBoxes[i].position));
+			hitBoxes[i].SetOffset(hitBoxes[i].position- parent->GetPosition());
 		}
 		return hitBoxes;
 	}
@@ -88,7 +89,7 @@ void HitBox::Update(float deltaTime_)
 			hitBoxes[0].SetPosition(parent->GetPosition());
 			hitBoxVisual[0]->SetPosition(parent->GetPosition());
 			if (i != 0) {
-				hitBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::vec3(0.0f, hitBoxes[i].offset,0.0f)));
+				hitBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hitBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
 				hitBoxVisual[i]->SetPosition(hitBoxes[i].position);
 			}
 		}

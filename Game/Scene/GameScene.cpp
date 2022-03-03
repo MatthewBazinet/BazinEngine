@@ -400,6 +400,24 @@ bool GameScene::OnCreate()
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);
 
+	inputManager = InputManager();
+	inputManager.SetPlayer1(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	Keybinds binds;
+	binds.down = SDL_SCANCODE_S;
+	binds.up = SDL_SCANCODE_W;
+	binds.left = SDL_SCANCODE_A;
+	binds.right = SDL_SCANCODE_D;
+	binds.run = SDL_SCANCODE_LSHIFT;
+	binds.light = SDL_SCANCODE_U;
+	binds.medium = SDL_SCANCODE_I;
+	binds.heavy = SDL_SCANCODE_O;
+	binds.unique = SDL_SCANCODE_P;
+	binds.shortcutForward = SDL_SCANCODE_E;
+	binds.shortcutBackward = SDL_SCANCODE_Q;
+	binds.super = SDL_SCANCODE_Y;
+
+	inputManager.SetPlayer1Keybinds(binds);
+
 	diceModel = nullptr;
 	player = nullptr;
 	appleModel = nullptr;
@@ -415,6 +433,7 @@ void GameScene::Update(const float deltaTime_)
 	//ptr->Update(deltaTime_);
 	//std::cout << dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() << std::endl;
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
+	inputManager.Update(deltaTime_);
 }
 
 void GameScene::Render()
@@ -495,7 +514,7 @@ void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
 		//}
 		break;
 	default:
-		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->NotifyOnKeyDown(key_);
+		inputManager.OnKeyDown(key_);
 		break;
 	}
 }
@@ -517,7 +536,7 @@ void GameScene::NotifyOfKeyUp(const SDL_Scancode key_)
 	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
 	//	break;
 	default:
-		dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->NotifyOnKeyUp(key_);
+		inputManager.OnKeyUp(key_);
 		break;
 	}
 }

@@ -109,6 +109,8 @@ protected:
 
 	bool isCharge;
 	moveState currentMove;
+
+	glm::vec2 lastInput;
 };
 
 #endif

@@ -9,6 +9,7 @@
 
 struct CharacterInput
 {
+	CharacterInput();
 	std::deque<glm::vec2> directions;
 	bool lightPressed;
 	bool mediumPressed;
@@ -48,6 +49,7 @@ public:
 
 class InputManager
 {
+public:
 	InputManager();
 	~InputManager();
 	void SetPlayer1(Character* player1_);

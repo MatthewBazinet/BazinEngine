@@ -1,5 +1,6 @@
 #include "HurtBox.h"
 #include "Engine/Rendering/3D/GameObject.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 
 HurtBox::HurtBox(Model* model_, glm::vec3 position_, GameObject* parent_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : GameObject(model_, position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_)
@@ -51,7 +52,7 @@ void HurtBox::Update(const float deltaTime_)
 			hurtBoxes[0].SetPosition(parent->GetPosition());
 			hurtBoxVisual[0]->SetPosition(hurtBoxes[0].position);
 			if (i != 0) {
-				hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::vec3(0.0f,hurtBoxes[i].offset,0.0f)));
+				hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hurtBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
 				hurtBoxVisual[i]->SetPosition(hurtBoxes[i].position);
 			}
 		}
@@ -77,7 +78,7 @@ std::vector<Sphere> HurtBox::SpawnHurtBox(Model* model_, glm::vec3 startingPos_,
 			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent),std::to_string(i));
 			hurtBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject(std::to_string(i)));
 			hurtBoxVisual[i]->SetScale(glm::vec3(width_));
-			hurtBoxes[i].SetOffset(glm::distance(parent->GetPosition(), hurtBoxes[i].position));
+			hurtBoxes[i].SetOffset(hurtBoxes[i].position - parent->GetPosition());
 		}
 
 		return hurtBoxes;
