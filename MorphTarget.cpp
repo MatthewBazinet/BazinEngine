@@ -1,17 +1,17 @@
 #include "MorphTarget.h"
 
 
-MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath_)
+MorphTarget::MorphTarget(const std::string& objPath_)
 {
 	meshes.reserve(10);
 	obj = new LoadOBJModel();
-	obj->LoadModel(objPath_, matPath_);
+	obj->LoadModelMaterialLess(objPath_);
 	LoadModel();
 	nextTargetAnimLength = 0.0f;
 	nextTarget = "";
 }
 
-MorphTarget::MorphTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_) : MorphTarget(objPath_, matPath_)
+MorphTarget::MorphTarget(const std::string& objPath_, std::string target_, float animlength_) : MorphTarget(objPath_)
 {
 	SetNextMorphTarget(target_, animlength_);
 }

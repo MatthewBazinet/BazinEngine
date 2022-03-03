@@ -9,12 +9,14 @@ class BattleCamera :
 {
 public:
 	BattleCamera();
+	BattleCamera(float height_);
 	~BattleCamera();
 	void Update(const float deltaTime_);
 	void SetPlayers(Character* player1_, Character* player2_);
 private:
 	Character* player1;
 	Character* player2;
+	float height;
 };
 
 #endif

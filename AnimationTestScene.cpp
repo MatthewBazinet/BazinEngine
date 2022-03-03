@@ -32,8 +32,8 @@ bool AnimationTestScene::OnCreate()
 	
 	MorphTargetAnimatedModel* model1 = new MorphTargetAnimatedModel("Resources/Models/characterAnim1.obj", "Resources/Materials/characterAnim1.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
-	model1->AddMorphTarget("Target1", new MorphTarget("Resources/Models/characterAnim1.obj", "Resources/Materials/characterAnim1.mtl"));
-	model1->AddMorphTarget("Target2", new MorphTarget("Resources/Models/characterAnim2.obj", "Resources/Materials/characterAnim2.mtl"));
+	model1->AddMorphTarget("Target1", new MorphTarget("Resources/Models/characterAnim1.obj"));
+	model1->AddMorphTarget("Target2", new MorphTarget("Resources/Models/characterAnim2.obj"));
 
 	model1->SetCurrentMorphTarget("Target1", 5.0f);
 	model1->SetCurrentMorphTarget("Target2", 5.0f);

@@ -4,12 +4,12 @@
 
 Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphTargetAnimatedModel("Resources/Models/Wulfrun/Wulfrun.obj", "Resources/Materials/Wulfrun.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), pos_)
 {
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance.obj", "Resources/Materials/Wulfrun.mtl", "Idle2", 1.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle2", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance2.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 1.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightStart.obj", "Resources/Materials/Wulfrun.mtl", "LightEnd", 0.2f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightEnd.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Heavy", new MorphTarget("Resources/Models/Wulfrun/WulfrunHeavyEnd.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMedium", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirMedium.obj", "Resources/Materials/Wulfrun.mtl", "Idle", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance.obj", "Idle2", 1.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle2", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance2.obj", "Idle", 1.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightStart.obj", "LightEnd", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightEnd.obj", "Idle", 0.1f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Heavy", new MorphTarget("Resources/Models/Wulfrun/WulfrunHeavyEnd.obj", "Idle", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMedium", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirMedium.obj", "Idle", 1.0f));
 
 
 	SceneGraph::GetInstance()->AddModel(model);

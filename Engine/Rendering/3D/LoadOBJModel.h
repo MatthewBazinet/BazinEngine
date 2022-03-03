@@ -12,6 +12,7 @@ public:
 	~LoadOBJModel();
 
 	void LoadModel(const std::string& objFilePath_, const std::string& mtlFilePath_);
+	void LoadModelMaterialLess(const std::string& objFilePath_);
 	std::vector<SubMesh> GetSubMeshes();
 
 	BoundingBox GetBoundingBox() const;

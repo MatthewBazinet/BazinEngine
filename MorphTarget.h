@@ -8,8 +8,8 @@ class MorphTarget
 {
 	friend class MorphTargetAnimatedModel;
 public:
-	MorphTarget(const std::string& objPath_, const std::string& matPath_);
-	MorphTarget(const std::string& objPath_, const std::string& matPath_, std::string target_, float animlength_);
+	MorphTarget(const std::string& objPath_);
+	MorphTarget(const std::string& objPath_, std::string target_, float animlength_);
 	~MorphTarget();
 	void LoadModel();
 	void SetNextMorphTarget(std::string target_, float animLength_);
