@@ -10,7 +10,7 @@
 class Projectile : public GameObject
 {
 	
-private:
+protected:
 	GameObject* target;
 	HitBox* hitBox;
 	Character* parent;

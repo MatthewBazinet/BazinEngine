@@ -2,8 +2,8 @@
 #define HOSHI_H
 
 #include "..//Character.h"
-#include "../HurtBox.h"
-#include "../HitBox.h"
+#include "../Projectile.h"
+#include "../Kunai.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 
@@ -33,6 +33,7 @@ protected:
 	void AirHeavy();
 
 	Projectile* proj;
+	Model* kunai;
 	bool floating;
 };
 

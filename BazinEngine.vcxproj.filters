@@ -107,6 +107,7 @@
     <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="HurtBoxVisual.cpp" />
     <ClCompile Include="Kunai.cpp" />
+    <ClCompile Include="GravityWave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -224,6 +225,7 @@
     <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="HurtBoxVisual.h" />
     <ClInclude Include="Kunai.h" />
+    <ClInclude Include="GravityWave.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

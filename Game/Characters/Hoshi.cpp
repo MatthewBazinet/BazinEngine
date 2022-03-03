@@ -66,6 +66,10 @@ Hoshi::Hoshi(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphT
 
 Hoshi::~Hoshi()
 {
+	proj = nullptr;
+	delete proj;
+	kunai = nullptr;
+	delete kunai;
 	Character::~Character();
 }
 
@@ -74,6 +78,11 @@ void Hoshi::Update(const float deltaTime_)
 	if (floating && getIsAirborne())
 	{
 		this->SetVelocity(glm::vec3(this->GetVelocity().x, 0.0f, this->GetVelocity().z));
+	}
+
+	if (proj)
+	{
+		proj->Update(deltaTime_);
 	}
 
 	if (hurtBox)
@@ -86,19 +95,18 @@ void Hoshi::Update(const float deltaTime_)
 
 void Hoshi::SetModels(Model* model_, Model* hurtBox_)
 {
+	kunai = model_;
 	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
 	//hurtBoxes["basic"]->SpawnHurtBox(model_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 1.25f, 5);
 
 	hurtBoxes["aerial"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["aerial"]->SpawnHurtBox(model_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 1.25f, 5);
 
 	hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
 	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 0.0f, 0.0f), this->position + glm::vec3(5.0f, 8.0f, 0.0f), 1.0f, 5);
 
 	//hurtBox = hurtBoxes["basic"];
 	hitBox = hitBoxes["light"];
-
-	//hurtBox = new HurtBox(hurtBox_, this->position, this);
-	//hurtBox->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(5.0f, 12.0f, 0.0f), 2.0f, 4);
 }
 
 void Hoshi::QCF(int strength, bool simpleInput)
@@ -109,7 +117,19 @@ void Hoshi::QCF(int strength, bool simpleInput)
 
 void Hoshi::QCB(int strength, bool simpleInput)
 {
-	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
+	if (strength == 0)
+	{
+
+	}
+	else if (strength == 1)
+	{
+
+	}
+	else if (strength == 2)
+	{
+
+	}
 	resetCombo();
 }
 
@@ -209,6 +229,15 @@ void Hoshi::AirLight()
 {
 	currentMove = moveState::AIRLIGHT;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
+
+	if (proj == nullptr) {
+		proj = new Kunai(kunai, glm::vec3(1.0f, 0.0f, 1.0f), this);
+	}
+
+	glm::vec3 dir = position - opponent->GetPosition();
+	proj->SetTarget(nullptr);
+	proj->SetPosition(this->GetPosition());
+	proj->SetVelocity(glm::vec3(-dir));
 }
 
 void Hoshi::AirMedium()

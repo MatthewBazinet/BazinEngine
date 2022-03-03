@@ -191,6 +191,7 @@
     <ClCompile Include="Game\Scene\StartScene.cpp" />
     <ClCompile Include="Game\TestChar.cpp" />
     <ClCompile Include="GJKTestScene.cpp" />
+    <ClCompile Include="GravityWave.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="HurtBox.cpp" />
     <ClCompile Include="HurtBoxVisual.cpp" />
@@ -303,6 +304,7 @@
     <ClInclude Include="Engine\Math\Ray.h" />
     <ClInclude Include="Game\TestChar.h" />
     <ClInclude Include="GJKTestScene.h" />
+    <ClInclude Include="GravityWave.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="HurtBox.h" />
     <ClInclude Include="HurtBoxVisual.h" />
