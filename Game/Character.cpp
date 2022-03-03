@@ -425,9 +425,6 @@ void Character::Move(glm::vec2 input)
 {
 	if (nextActionable > 0.0f) return;
 
-	if (input.y != lastInput.y)
-	{
-
 		if (input.y > 0)
 		{
 			//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
@@ -499,7 +496,7 @@ void Character::Move(glm::vec2 input)
 			MovingRight = false;
 			MovingLeft = false;
 		}
-	}
+
 	lastInput = input;
 }
 
