@@ -426,6 +426,36 @@ void Character::Move(glm::vec2 input)
 
 }
 
+void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_)
+{
+	if (FacingLeft())
+	{
+		if (MovingRight)
+		{
+			nextActionable = blockStun_;
+			currentMove = moveState::NONE;
+		}
+		else
+		{
+			health -= damage_;
+			nextActionable = hitStun_;
+		}
+	}
+	else
+	{
+		if (MovingLeft)
+		{
+			nextActionable = blockStun_;
+			currentMove = moveState::NONE;
+		}
+		else
+		{
+			health -= damage_;
+			nextActionable = hitStun_;
+		}
+	}
+}
+
 std::vector<Sphere> Character::GetHurtBoxes() const
 {
 	return hurtBox->GetHurtBoxes();
@@ -485,4 +515,22 @@ void Character::resetCombo()
 	combo["light"] = 1;
 	combo["medium"] = 1;
 	combo["heavy"] = 1;
+}
+
+FrameData::FrameData()
+{
+	startup = 0.0f;
+	active = 0.0f;
+	recovery = 0.0f;
+	hitStun = 0.0f;
+	blockStun = 0.0f;
+}
+
+FrameData::~FrameData()
+{
+}
+
+float FrameData::GetTotalTime()
+{
+	return startup + active + recovery;
 }

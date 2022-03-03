@@ -210,6 +210,12 @@ void Hoshi::Heavy()
 	}
 }
 
+void Hoshi::ResetProjectile()
+{
+	if(proj) delete proj;
+	proj = nullptr;
+}
+
 void Hoshi::AirQCF(int strength, bool simpleInput)
 {
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWave", 0.5f);

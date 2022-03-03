@@ -20,6 +20,7 @@ public:
 	void OnDestroy();
 	void AddModel(Model* model_);
 	void AddGameObject(GameObject* go_, std::string tag_ = "");
+	void RemoveGameObject(std::string tag_);
 	GameObject* GetGameObject(std::string tag_);
 
 	void Update(const float deltaTime);

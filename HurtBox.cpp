@@ -36,7 +36,7 @@ HurtBox::~HurtBox()
 	{
 		for (auto m : hurtBoxVisual)
 		{
-			delete m;
+			SceneGraph::GetInstance()->RemoveGameObject(m->GetTag());
 			m = nullptr;
 		}
 		hurtBoxVisual.clear();

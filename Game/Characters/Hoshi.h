@@ -24,6 +24,8 @@ public:
 	void Medium();
 	void Heavy();
 
+	void ResetProjectile();
+
 protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);

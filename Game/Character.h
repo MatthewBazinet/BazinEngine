@@ -15,6 +15,19 @@ enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIR
 class Projectile;
 class HurtBox;
 class HitBox;
+
+struct FrameData
+{
+	FrameData();
+	~FrameData();
+	float GetTotalTime();
+	float startup;
+	float active;
+	float recovery;
+	float hitStun;
+	float blockStun;
+};
+
 class Character : public GameObject
 {
 public:
@@ -35,6 +48,8 @@ public:
 	virtual void Heavy();
 	void Run(bool isRunning_);
 	void Move(glm::vec2 input);
+
+	void Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_);
 
 	bool getIsRunning() const { return isRunning; };
 	bool getIsAirborne() const { return isAirborne; };
@@ -61,6 +76,7 @@ protected:
 
 	std::unordered_map<std::string, HitBox*> hitBoxes;
 	std::unordered_map<std::string, HurtBox*> hurtBoxes;
+	std::unordered_map<std::string, FrameData> frameData;
 	std::unordered_map<std::string, int> combo = { {"light", 1}, {"medium", 1}, {"heavy", 1} };
 
 	virtual void AirQCF(int strength, bool simpleInput);

@@ -10,6 +10,15 @@ HitBox::HitBox(Model* model_, glm::vec3 position_, GameObject* parent_, float an
 
 HitBox::~HitBox()
 {
+	if (hitBoxVisual.size() > 0)
+	{
+		for (auto m : hitBoxVisual)
+		{
+			SceneGraph::GetInstance()->RemoveGameObject(m->GetTag());
+			m = nullptr;
+		}
+		hitBoxVisual.clear();
+	}
 }
 
 
@@ -48,7 +57,7 @@ std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endin
 		for (int i = 0; i < numOfSpheres; i++) {
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
 			hitBoxes.push_back(Sphere(pos, width_));
-			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent), std::to_string(i));
+			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent), "Hitbox " + std::to_string(i));
 			hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject(std::to_string(i)));
 			hitBoxVisual[i]->SetScale(glm::vec3(width_));
 			hitBoxes[i].SetOffset(glm::distance(parent->GetPosition(), hitBoxes[i].position));

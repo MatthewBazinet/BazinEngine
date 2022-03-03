@@ -1,4 +1,5 @@
 #include "Kunai.h"
+#include "../Game/Characters/Hoshi.h"
 
 Kunai::Kunai(Model* model_, glm::vec3 position_, Character* parent_, float angle_, glm::vec3 rotation_ , glm::vec3 scale_) : Projectile(model_, position_, parent_, angle_, rotation_)
 {
@@ -26,7 +27,7 @@ void Kunai::Update(const float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
 				std::cout << "collided" << std::endl;
 				parent->GetOpponent()->SetVelocity(parent->GetPosition() - parent->GetOpponent()->GetPosition());
-				Kunai::~Kunai();
+				dynamic_cast<Hoshi*>(parent)->ResetProjectile();
 				return;
 			}
 		}
