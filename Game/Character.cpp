@@ -19,9 +19,7 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	currentMove = moveState::NONE;
 
 	lastInput.x = lastInput.y = 0.0f;
-	//combo["light"] = false;
-	//combo["medium"] = false;
-	//combo["heavy"] = false;
+	applyGravity = true;
 }
 
 Character::~Character() {
@@ -207,7 +205,7 @@ void Character::Update(const float deltaTime_)
 		isAirborne = false;
 	}
 
-	if (getIsAirborne())
+	if (getIsAirborne() && applyGravity)
 	{
 		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
 	}

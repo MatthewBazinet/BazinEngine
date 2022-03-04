@@ -34,7 +34,8 @@ void GravityWave::Update(float deltaTime_)
 				}
 				else if (strength == 2)
 				{
-
+					parent->GetOpponent()->SetVelocity(glm::vec3(0.0f, 10.0f, 0.0f));
+					//parent->GetOpponent()->setApplyGravity(false);
 				}
 			}
 		}

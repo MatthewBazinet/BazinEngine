@@ -72,6 +72,9 @@ public:
 	void resetCombo();
 	bool checkComboState(moveState move_);
 
+	bool getApplyGravity() { return applyGravity; };
+	void setApplyGravity(bool applyGravity_) { applyGravity = applyGravity_; };
+
 protected:
 
 	std::unordered_map<std::string, HitBox*> hitBoxes;
@@ -92,6 +95,7 @@ protected:
 	
 	bool isRunning;
 	bool isAirborne;
+	bool applyGravity;
 	Model* model;
 	//Projectile* proj;
 	Character* opponent;

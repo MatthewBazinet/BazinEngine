@@ -4,6 +4,7 @@
 #include "..//Character.h"
 #include "../Projectile.h"
 #include "../Kunai.h"
+#include "../GravityWave.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 
@@ -15,7 +16,7 @@ public:
 	~Hoshi();
 
 	virtual void Update(const float deltaTime_);
-	void SetModels(Model* model_, Model* hurtBox_);
+	void SetModels(Model* hurtBox_);
 
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
@@ -35,7 +36,6 @@ protected:
 	void AirHeavy();
 
 	Projectile* proj;
-	Model* kunai;
 	bool floating;
 };
 

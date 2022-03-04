@@ -38,7 +38,6 @@ bool CharacterSelectScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(Sphere);
 
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(100.0f, 0.0f, 0.0f)), "char1");
-	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Rock, Sphere);
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(1000.0f, 0.0f, 0.0f)), "char2");
 
 	//dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);

@@ -53,6 +53,8 @@ bool TrainingScene::OnCreate()
 	southPlane = glm::vec4(1.0f, 0.0f, -10.0f, 0.0f);
 	planes.push_back(leftPlane);
 	planes.push_back(rightPlane);
+	planes.push_back(northPlane);
+	planes.push_back(southPlane);
 
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
