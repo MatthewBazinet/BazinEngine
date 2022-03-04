@@ -46,8 +46,8 @@ public:
 	virtual void Light();
 	virtual void Medium();
 	virtual void Heavy();
-	void Run(bool isRunning_);
-	void Move(glm::vec2 input);
+	virtual void Run(bool isRunning_);
+	virtual void Move(glm::vec2 input);
 
 	void Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_);
 

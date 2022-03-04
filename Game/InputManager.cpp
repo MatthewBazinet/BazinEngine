@@ -533,6 +533,14 @@ void InputManager::CheckMotion(int strength, int character)
 CharacterInput::CharacterInput()
 {
 	directions.push_back(glm::vec2());
+	lightPressed = false;
+	mediumPressed = false;
+	heavyPressed = false;
+	uniquePressed = false;
+	runPressed = false;
+	superPressed = false;
+	shortcutForwardPressed = false;
+	shortcutBackwardPressed = false;
 }
 
 void CharacterInput::Update(const float deltaTime_)

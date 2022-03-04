@@ -26,7 +26,7 @@ Hoshi::Hoshi(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphT
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run4", new MorphTarget("Resources/Models/Hoshi/HoshiRun4.obj", "Run5", 0.1f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run5", new MorphTarget("Resources/Models/Hoshi/HoshiRun5.obj", "Run6", 0.1f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run6", new MorphTarget("Resources/Models/Hoshi/HoshiRun1.obj", "RunEnd", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunEnd", new MorphTarget("Resources/Models/Hoshi/HoshiRunEnd.obj", "Idle", 0.1f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunEnd", new MorphTarget("Resources/Models/Hoshi/HoshiRunEnd.obj", "Run1", 0.1f));
 
 	// Grounded
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabStart.obj", "LightEnd", 0.1f));
@@ -89,15 +89,6 @@ void Hoshi::Update(const float deltaTime_)
 		hurtBox->Update(deltaTime_);
 	}
 
-	if (this->getIsRunning())
-	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("RunStart", 0.5f);
-	}
-	else if (this->GetVelocity().x > 0.0f)
-	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
-	}
-
 	static_cast<MorphTargetAnimatedModel*>(model)->Update(deltaTime_);
 	Character::Update(deltaTime_);
 }
@@ -118,6 +109,102 @@ void Hoshi::SetModels(Model* hurtBox_)
 
 	hurtBox = hurtBoxes["basic"];
 	//hitBox = hitBoxes["light"];
+}
+
+void Hoshi::Run(bool isRunning_)
+{
+	if (isRunning_)
+	{
+		if (nextActionable > 0.0f) return;
+
+		if (!CheckRunCancel()) return;;
+		if (!isRunning)
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("RunStart", 0.5f);
+		}
+	}
+	isRunning = isRunning_;
+}
+
+void Hoshi::Move(glm::vec2 input)
+{
+	if (nextActionable > 0.0f) return;
+
+	if (input.y > 0)
+	{
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
+		if (isRunning)
+		{
+			relativeVel = glm::vec3(relativeVel.x, relativeVel.y, -5.0f);
+
+		}
+		else
+		{
+			if (!isAirborne)
+			{
+				vel = glm::vec3(vel.x, 10.0f, vel.z);
+			}
+			//ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
+		}
+	}
+	else if (input.y < 0)
+	{
+		if (isRunning)
+		{
+			relativeVel = glm::vec3(relativeVel.x, relativeVel.y, 5.0f);
+
+		}
+	}
+	else
+	{
+		if (isRunning)
+		{
+			relativeVel = glm::vec3(relativeVel.x, relativeVel.y, 0.0f);
+		}
+	}
+
+	if (input.x < 0)
+	{
+		//GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
+		if (isRunning) {
+			relativeVel = glm::vec3(-5.0f, relativeVel.y, relativeVel.z);
+		}
+		else
+		{
+			if(!MovingLeft)	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
+			MovingLeft = true;
+			MovingRight = false;
+		}
+
+	}
+	else if (input.x > 0)
+	{
+		if (isRunning)
+		{
+			relativeVel = glm::vec3(5.0f, relativeVel.y, relativeVel.z);
+		}
+		else
+		{
+			if (!MovingRight) static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
+			MovingRight = true;
+			MovingLeft = false;
+		}
+	}
+	else
+	{
+		if (isRunning)
+		{
+			relativeVel = glm::vec3(0.0f, relativeVel.y, relativeVel.z);
+		}
+		else
+		{
+			dir2D = 0.0f;
+		}
+		MovingRight = false;
+		MovingLeft = false;
+	}
+
+	lastInput = input;
 }
 
 void Hoshi::QCF(int strength, bool simpleInput)
