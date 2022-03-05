@@ -21,13 +21,18 @@ void Kunai::Update(const float deltaTime_)
 		SetAngle(kin.rotation);
 	}
 
+	if (position.y < 0.1f)
+	{
+		dynamic_cast<Hoshi*>(parent)->ResetProjectile();
+		return;
+	}
 
 	if (parent) {
 		if (parent->GetOpponent()) {
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
 				//std::cout << "collided" << std::endl;
 				parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, parent->GetPosition() - parent->GetOpponent()->GetPosition());
-				dynamic_cast<Hoshi*>(parent)->ResetProjectile();
+				//dynamic_cast<Hoshi*>(parent)->ResetProjectile();
 				return;
 			}
 		}
