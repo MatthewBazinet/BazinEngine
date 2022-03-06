@@ -136,6 +136,13 @@ void Hoshi::Run(bool isRunning_)
 			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("RunStart", 0.5f);
 		}
 	}
+	else
+	{
+		if (isRunning)
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+		}
+	}
 	isRunning = isRunning_;
 }
 
@@ -238,9 +245,9 @@ void Hoshi::QCF(int strength, bool simpleInput)
 	}
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
-	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
-	proj->SetVelocity(glm::vec3(-dir));
+	//proj->SetTarget(nullptr);
+	//proj->SetPosition(this->GetPosition());
+	//proj->SetVelocity(glm::vec3(-dir));
 
 	resetCombo();
 }

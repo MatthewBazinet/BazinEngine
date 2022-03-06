@@ -24,8 +24,10 @@ struct FrameData
 	float startup;
 	float active;
 	float recovery;
+	float damage;
 	float hitStun;
 	float blockStun;
+	glm::vec3 push;
 };
 
 class Character : public GameObject
@@ -51,6 +53,7 @@ public:
 	virtual void OnLand();
 
 	void Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_);
+	void Hit(FrameData frameData_);
 
 	bool getIsRunning() const { return isRunning; };
 	bool getIsAirborne() const { return isAirborne; };
@@ -102,6 +105,8 @@ protected:
 	float startUpTimeLeft;
 	float activeTimeLeft;
 	float recoveryTimeLeft;
+
+	FrameData currentFrameData;
 	
 	bool isRunning;
 	bool isAirborne;

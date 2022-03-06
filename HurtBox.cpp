@@ -52,7 +52,15 @@ void HurtBox::Update(const float deltaTime_)
 			hurtBoxes[0].SetPosition(parent->GetPosition());
 			hurtBoxVisual[0]->SetPosition(hurtBoxes[0].position);
 			if (i != 0) {
-				hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hurtBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
+				bool left = dynamic_cast<Character*>(parent)->FacingLeft();
+				if (left)
+				{
+					hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hurtBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
+				}
+				else
+				{
+					hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hurtBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
+				}
 				hurtBoxVisual[i]->SetPosition(hurtBoxes[i].position);
 			}
 		}

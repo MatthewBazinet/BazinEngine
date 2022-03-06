@@ -217,7 +217,7 @@ void Character::Update(const float deltaTime_)
 				hitBox->Update(deltaTime_);
 				if (hitBox->CheckCollision(opponent->GetHurtBoxes()))
 				{
-					opponent->Hit(20, 1, 1, glm::vec3());
+					opponent->Hit(currentFrameData);
 					hitBox->DisableHitBox();
 				}
 			}
@@ -377,6 +377,10 @@ bool Character::checkComboState(moveState move_)
 
 void Character::SetFrameData(float startup_, float active_, float recovery_)
 {
+	currentFrameData = FrameData();
+	currentFrameData.active = active_;
+	currentFrameData.startup = startup_;
+	currentFrameData.recovery = recovery_;
 
 	startUpTimeLeft = startup_;
 	activeTimeLeft = active_;
@@ -387,6 +391,7 @@ void Character::SetFrameData(float startup_, float active_, float recovery_)
 
 void Character::SetFrameData(FrameData frameData_)
 {
+	currentFrameData = frameData_;
 	startUpTimeLeft = frameData_.startup;
 	activeTimeLeft = frameData_.active;
 	recoveryTimeLeft = frameData_.recovery;
@@ -582,7 +587,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		{
 			health -= damage_;
 			nextActionable = hitStun_;
-			ApplyForce(push_);
+			ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		}
 	}
 	else
@@ -596,9 +601,14 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		{
 			health -= damage_;
 			nextActionable = hitStun_;
-			ApplyForce(push_);
+			ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		}
 	}
+}
+
+void Character::Hit(FrameData frameData_)
+{
+	Hit(frameData_.damage, frameData_.hitStun, frameData_.blockStun, frameData_.push);
 }
 
 std::vector<Sphere> Character::GetHurtBoxes() const
@@ -667,8 +677,10 @@ FrameData::FrameData()
 	startup = 0.0f;
 	active = 0.0f;
 	recovery = 0.0f;
+	damage = 1.0f;
 	hitStun = 0.0f;
 	blockStun = 0.0f;
+	push = glm::vec3();
 }
 
 FrameData::~FrameData()
