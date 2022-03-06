@@ -90,6 +90,10 @@ protected:
 	virtual void AirMedium();
 	virtual void AirHeavy();
 
+	void SetFrameData(float startup_, float active_, float recovery_);
+	void SetFrameData(FrameData frameData_);
+
+
 	float health;
 	float overclock;
 	float nextActionable;

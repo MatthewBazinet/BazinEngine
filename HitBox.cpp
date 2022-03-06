@@ -89,7 +89,15 @@ void HitBox::Update(float deltaTime_)
 			hitBoxes[0].SetPosition(parent->GetPosition());
 			hitBoxVisual[0]->SetPosition(parent->GetPosition());
 			if (i != 0) {
-				hitBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hitBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
+				bool left = dynamic_cast<Character*>(parent)->FacingLeft();
+				if (left)
+				{
+					hitBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hitBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
+				}
+				else
+				{
+					hitBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hitBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
+				}
 				hitBoxVisual[i]->SetPosition(hitBoxes[i].position);
 			}
 		}

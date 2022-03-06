@@ -32,7 +32,7 @@ void Kunai::Update(const float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
 				//std::cout << "collided" << std::endl;
 				parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, parent->GetPosition() - parent->GetOpponent()->GetPosition());
-				//dynamic_cast<Hoshi*>(parent)->ResetProjectile();
+				dynamic_cast<Hoshi*>(parent)->ResetProjectile();
 				return;
 			}
 		}

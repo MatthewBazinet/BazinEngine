@@ -197,13 +197,29 @@ void Character::Update(const float deltaTime_)
 		if (startUpTimeLeft > 0.0f)
 		{
 			startUpTimeLeft -= deltaTime_;
+			if (startUpTimeLeft <= 0.0f)
+			{
+				hitBox->EnableHitBox();
+			}
 		}
 		else if (activeTimeLeft > 0.0f)
 		{
 			activeTimeLeft -= deltaTime_;
-			if (!hitBox->GetIsEnabled())
+			if (activeTimeLeft <= 0.0f)
 			{
-				hitBox->EnableHitBox();
+				if (hitBox->GetIsEnabled())
+				{
+					hitBox->DisableHitBox();
+				}
+			}
+			if (hitBox->GetIsEnabled())
+			{
+				hitBox->Update(deltaTime_);
+				if (hitBox->CheckCollision(opponent->GetHurtBoxes()))
+				{
+					opponent->Hit(20, 1, 1, glm::vec3());
+					hitBox->DisableHitBox();
+				}
 			}
 		}
 		else if (recoveryTimeLeft > 0.0f)
@@ -214,10 +230,6 @@ void Character::Update(const float deltaTime_)
 				currentMove = moveState::NONE;
 				resetCombo();
 				isAttacking = false;
-			}
-			if (hitBox->GetIsEnabled())
-			{
-				hitBox->DisableHitBox();
 			}
 		}
 	}
@@ -360,6 +372,26 @@ bool Character::checkComboState(moveState move_)
 		return false;
 	}
 	*/
+}
+
+
+void Character::SetFrameData(float startup_, float active_, float recovery_)
+{
+
+	startUpTimeLeft = startup_;
+	activeTimeLeft = active_;
+	recoveryTimeLeft = recovery_;
+	moveTimeLeft = startUpTimeLeft + activeTimeLeft + recoveryTimeLeft;
+	isAttacking = true;
+}
+
+void Character::SetFrameData(FrameData frameData_)
+{
+	startUpTimeLeft = frameData_.startup;
+	activeTimeLeft = frameData_.active;
+	recoveryTimeLeft = frameData_.recovery;
+	moveTimeLeft = startUpTimeLeft + activeTimeLeft + recoveryTimeLeft;
+	isAttacking = true;
 }
 
 void Character::QCF(int strength, bool simpleInput)

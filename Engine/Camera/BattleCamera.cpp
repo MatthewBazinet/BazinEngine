@@ -30,6 +30,11 @@ void BattleCamera::Update(const float deltaTime_)
 		midpoint *= 0.5f;
 
 		float distance = glm::distance(player1->GetPosition(), player2->GetPosition());
+
+		if (distance < 5.0f)
+		{
+			distance = 5.0f;
+		}
 		
 		glm::vec3 diff = midpoint - player2->GetPosition();
 		glm::vec3 camDiff = midpoint - position;

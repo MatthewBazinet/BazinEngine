@@ -302,11 +302,9 @@ void Hoshi::Light()
 				currentMove = moveState::GROUNDLIGHT;
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
 				hurtBox = hurtBoxes["basic"];
-				moveTimeLeft = 0.6f;
-				startUpTimeLeft = 0.1f;
-				activeTimeLeft = 0.3f;
-				recoveryTimeLeft = 0.1f;
-				isAttacking = true;
+				//hitBox = hitBoxes["light"];
+				SetFrameData(4.0f / 60.0f, 6.0f / 60.0f, 10.0f / 60.0f);
+				//SetFrameData(frameData["light"]);
 			}
 		}
 	}
