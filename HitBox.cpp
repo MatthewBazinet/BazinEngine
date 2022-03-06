@@ -59,7 +59,7 @@ std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endin
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
 			hitBoxes.push_back(Sphere(pos, width_));
 			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent), "Hitbox " + std::to_string(i));
-			hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject(std::to_string(i)));
+			hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject("Hitbox " + std::to_string(i)));
 			hitBoxVisual[i]->SetScale(glm::vec3(width_));
 			hitBoxes[i].SetOffset(hitBoxes[i].position- parent->GetPosition());
 		}

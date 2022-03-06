@@ -20,6 +20,8 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 
 	lastInput.x = lastInput.y = 0.0f;
 	applyGravity = true;
+	isAttacking = false;
+	isIdle = true;
 }
 
 Character::~Character() {
@@ -189,6 +191,36 @@ void Character::Update(const float deltaTime_)
 
 	}
 	//proj->Update(deltaTime_);
+	if (isAttacking)
+	{
+		moveTimeLeft -= deltaTime_;
+		if (startUpTimeLeft > 0.0f)
+		{
+			startUpTimeLeft -= deltaTime_;
+		}
+		else if (activeTimeLeft > 0.0f)
+		{
+			activeTimeLeft -= deltaTime_;
+			if (!hitBox->GetIsEnabled())
+			{
+				hitBox->EnableHitBox();
+			}
+		}
+		else if (recoveryTimeLeft > 0.0f)
+		{
+			recoveryTimeLeft -= deltaTime_;
+			if (recoveryTimeLeft <= 0.0f)
+			{
+				currentMove = moveState::NONE;
+				resetCombo();
+				isAttacking = false;
+			}
+			if (hitBox->GetIsEnabled())
+			{
+				hitBox->DisableHitBox();
+			}
+		}
+	}
 
 	if(isRunning)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
 	
@@ -203,6 +235,7 @@ void Character::Update(const float deltaTime_)
 		vel.y = 0.0f;
 		accel.y = 0.0f;
 		isAirborne = false;
+		OnLand();
 	}
 
 	if (getIsAirborne() && applyGravity)
@@ -498,6 +531,10 @@ void Character::Move(glm::vec2 input)
 		}
 
 	lastInput = input;
+}
+
+void Character::OnLand()
+{
 }
 
 void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_)

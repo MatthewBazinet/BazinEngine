@@ -48,6 +48,7 @@ public:
 	virtual void Heavy();
 	virtual void Run(bool isRunning_);
 	virtual void Move(glm::vec2 input);
+	virtual void OnLand();
 
 	void Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_);
 
@@ -92,9 +93,16 @@ protected:
 	float health;
 	float overclock;
 	float nextActionable;
+
+	float moveTimeLeft;
+	float startUpTimeLeft;
+	float activeTimeLeft;
+	float recoveryTimeLeft;
 	
 	bool isRunning;
 	bool isAirborne;
+	bool isAttacking;
+	bool isIdle;
 	bool applyGravity;
 	Model* model;
 	//Projectile* proj;

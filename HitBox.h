@@ -28,6 +28,7 @@ public:
 	glm::vec3 GetPosition() { return position; };
 	float GetRadius() { return radius; }
 	std::vector<Sphere> GetSpheres() {return spheres;};
+	bool GetIsEnabled() { return isEnabled; };
 
 	void DisableHitBox() { isEnabled = false; };
 	void EnableHitBox() { isEnabled = true; };

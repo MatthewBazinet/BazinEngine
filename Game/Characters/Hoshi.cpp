@@ -88,7 +88,17 @@ void Hoshi::Update(const float deltaTime_)
 	{
 		hurtBox->Update(deltaTime_);
 	}
-
+	if (!isIdle && currentMove == moveState::NONE)
+	{
+		if (isAirborne)
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Fall", 0.5f);
+		}
+		else
+		{
+			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+		}
+	}
 	static_cast<MorphTargetAnimatedModel*>(model)->Update(deltaTime_);
 	Character::Update(deltaTime_);
 }
@@ -212,6 +222,11 @@ void Hoshi::Move(glm::vec2 input)
 	lastInput = input;
 }
 
+void Hoshi::OnLand()
+{
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+}
+
 void Hoshi::QCF(int strength, bool simpleInput)
 {
 	overclock += 25;
@@ -287,6 +302,11 @@ void Hoshi::Light()
 				currentMove = moveState::GROUNDLIGHT;
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
 				hurtBox = hurtBoxes["basic"];
+				moveTimeLeft = 0.6f;
+				startUpTimeLeft = 0.1f;
+				activeTimeLeft = 0.3f;
+				recoveryTimeLeft = 0.1f;
+				isAttacking = true;
 			}
 		}
 	}

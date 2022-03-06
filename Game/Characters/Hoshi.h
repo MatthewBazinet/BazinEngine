@@ -20,6 +20,7 @@ public:
 
 	void Run(bool isRunning_);
 	void Move(glm::vec2 input);
+	void OnLand();
 
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
