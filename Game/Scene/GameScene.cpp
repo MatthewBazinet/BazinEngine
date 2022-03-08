@@ -417,6 +417,7 @@ bool GameScene::OnCreate()
 
 	inputManager.SetPlayer1Keybinds(binds);
 
+	
 	inputManager.SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	binds.down = SDL_SCANCODE_DOWN;
 	binds.up = SDL_SCANCODE_UP;
@@ -432,6 +433,7 @@ bool GameScene::OnCreate()
 	binds.super = SDL_SCANCODE_B;
 
 	inputManager.SetPlayer2Keybinds(binds);
+	
 
 	diceModel = nullptr;
 	player = nullptr;
@@ -439,14 +441,14 @@ bool GameScene::OnCreate()
 	rachidaShape = nullptr;
 	man = nullptr;
 
-	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 1.0f);
-	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, -11.0f);
-	northPlane = glm::vec4(-1.0f, 0.0f, 10.0f, 0.0f);
-	southPlane = glm::vec4(1.0f, 0.0f, -10.0f, 0.0f);
+	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 15.0f);
+	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, 15.0f);
+	northPlane = glm::vec4(0.0f, 0.0f, 1.0f, -15.0f);
+	southPlane = glm::vec4(0.0f, 0.0f, -1.0f, 15.0f);
 	planes.push_back(leftPlane);
 	planes.push_back(rightPlane);
-	planes.push_back(northPlane);
-	planes.push_back(southPlane);
+	//planes.push_back(northPlane);
+	//planes.push_back(southPlane);
 
 	return true;
 }

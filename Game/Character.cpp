@@ -22,6 +22,7 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	applyGravity = true;
 	isAttacking = false;
 	isIdle = true;
+	nextActionable = 0.0f;
 }
 
 Character::~Character() {
@@ -241,7 +242,7 @@ void Character::Update(const float deltaTime_)
 		}
 	}
 
-	if(isRunning && nextActionable <= 0.0f)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
+	if(isRunning) vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
 	
 	if (position.y >= 0.1f)
 	{

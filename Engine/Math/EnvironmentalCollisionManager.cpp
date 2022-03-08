@@ -53,13 +53,16 @@ void EnvironmentalCollisionManager::OnDestroy()
 
 void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<glm::vec4> planes_)
 {
+	int i = 0;
 	for (auto& element : planes_)
 	{
-		if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), element))
+		i++;
+		if (checkPlaneCollision(gameObject_->GetPosition(), element))
 		{
+			std::cout << "Plane " << i << std::endl;
 			if (element.x != 0.0f)
 			{
-				gameObject_->SetVelocity(glm::vec3(-element.w, gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+				gameObject_->SetPosition(glm::vec3(-element.x * element.w - element.x * 0.1f, gameObject_->GetPosition().y, gameObject_->GetPosition().z));
 			}
 			else
 			{
@@ -146,12 +149,14 @@ void EnvironmentalCollisionManager::checkObjectCollision(GameObject* gameObject_
 
 bool EnvironmentalCollisionManager::checkPlaneCollision(glm::vec3 point_, glm::vec4 plane_)
 {
-	glm::vec4 tmpleftPlane = NormalizePlane(plane_);
+	glm::vec4 tmpleftPlane = plane_;//NormalizePlane(plane_);
 	float test = tmpleftPlane.x * point_.x + tmpleftPlane.y * point_.y + tmpleftPlane.z * point_.z + tmpleftPlane.w;
-
-	if (test < -0.05f) {
-		return false;
-	};
+	
+	if (test > -0.05f)
+	{
+			return false;
+	}
+	return true;
 }
 
 glm::vec4 EnvironmentalCollisionManager::NormalizePlane(glm::vec4 plane_)
