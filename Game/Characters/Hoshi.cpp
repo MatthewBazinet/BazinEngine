@@ -98,6 +98,7 @@ void Hoshi::Update(const float deltaTime_)
 		{
 			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
 		}
+		isIdle = true;
 	}
 	static_cast<MorphTargetAnimatedModel*>(model)->Update(deltaTime_);
 	Character::Update(deltaTime_);
@@ -134,19 +135,22 @@ void Hoshi::Run(bool isRunning_)
 {
 	if (isRunning_)
 	{
+		isIdle = false;
 		if (nextActionable > 0.0f) return;
 
-		if (!CheckRunCancel()) return;;
+		if (!CheckRunCancel()) return;
 		if (!isRunning)
 		{
 			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("RunStart", 0.5f);
 		}
+		currentMove = moveState::RUN;
 	}
 	else
 	{
 		if (isRunning)
 		{
 			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+			currentMove = moveState::NONE;
 		}
 	}
 	isRunning = isRunning_;
@@ -198,7 +202,12 @@ void Hoshi::Move(glm::vec2 input)
 		else
 		{
 			if(!MovingLeft)	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
+<<<<<<< HEAD
 			hurtBox = hurtBoxes["basic"];
+=======
+			hurtBox = hurtBoxes["basicLeft"];
+			isIdle = false;
+>>>>>>> 0dbd34b4348fab83c9ac4227edaf99379515a349
 			MovingLeft = true;
 			MovingRight = false;
 		}
@@ -213,7 +222,12 @@ void Hoshi::Move(glm::vec2 input)
 		else
 		{
 			if (!MovingRight) static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
+<<<<<<< HEAD
 			hurtBox = hurtBoxes["basic"];
+=======
+			hurtBox = hurtBoxes["basicRight"];
+			isIdle = false;
+>>>>>>> 0dbd34b4348fab83c9ac4227edaf99379515a349
 			MovingRight = true;
 			MovingLeft = false;
 		}
@@ -227,6 +241,10 @@ void Hoshi::Move(glm::vec2 input)
 		else
 		{
 			dir2D = 0.0f;
+			if (lastInput.x != 0.0f)
+			{
+				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+			}
 		}
 		MovingRight = false;
 		MovingLeft = false;
@@ -242,6 +260,11 @@ void Hoshi::OnLand()
 
 void Hoshi::QCF(int strength, bool simpleInput)
 {
+	if (!CheckMoveState(moveState::QCF)) return;
+
+	if (nextActionable > 0.0f) return;
+
+	isIdle = false;
 	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWaveStart", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
@@ -260,6 +283,11 @@ void Hoshi::QCF(int strength, bool simpleInput)
 
 void Hoshi::QCB(int strength, bool simpleInput)
 {
+	if (!CheckMoveState(moveState::QCB)) return;
+
+	if (nextActionable > 0.0f) return;
+
+	isIdle = false;
 	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
 	hurtBox = hurtBoxes["slide"];
@@ -290,6 +318,11 @@ void Hoshi::QCB(int strength, bool simpleInput)
 
 void Hoshi::Unique()
 {
+	if (!CheckMoveState(moveState::UNIQUE)) return;
+
+	if (nextActionable > 0.0f) return;
+
+	isIdle = false;
 	// fix levitate animations
 	floating = !floating;
 	if (floating)
@@ -313,6 +346,7 @@ void Hoshi::Light()
 		if (combo["light"] > 0)
 		{
 			combo["light"] -= 1;
+			isIdle = false;
 
 			if (isAirborne)
 			{
@@ -343,6 +377,7 @@ void Hoshi::Medium()
 		if (combo["medium"] > 0)
 		{
 			combo["medium"] -= 1;
+			isIdle = false;
 
 			if (isAirborne)
 			{
@@ -372,6 +407,7 @@ void Hoshi::Heavy()
 		if (combo["heavy"] > 0)
 		{
 			combo["heavy"] -= 1;
+			isIdle = false;
 
 			if (isAirborne)
 			{
@@ -415,7 +451,7 @@ void Hoshi::AirQCB(int strength, bool simpleInput)
 
 void Hoshi::AirUnique()
 {
-	
+
 }
 
 void Hoshi::AirLight()
