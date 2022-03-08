@@ -66,8 +66,10 @@ void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<
 			}
 			else
 			{
-				gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, -element.z));
+				gameObject_->SetPosition(glm::vec3(gameObject_->GetPosition().x, gameObject_->GetPosition().y, -element.z * element.w - element.z * 0.1f));
 			}
+
+			//gameObject_->GetPosition() + 0.1f * glm::vec3(-element.x, -element.y, -element.z);
 			
 			//std::cout << gameObject_->GetPosition().x << " " << gameObject_->GetPosition().z << std::endl;
 			if (dynamic_cast<Character*>(gameObject_)) {
