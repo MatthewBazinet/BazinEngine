@@ -202,12 +202,8 @@ void Hoshi::Move(glm::vec2 input)
 		else
 		{
 			if(!MovingLeft)	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
-<<<<<<< HEAD
 			hurtBox = hurtBoxes["basic"];
-=======
-			hurtBox = hurtBoxes["basicLeft"];
 			isIdle = false;
->>>>>>> 0dbd34b4348fab83c9ac4227edaf99379515a349
 			MovingLeft = true;
 			MovingRight = false;
 		}
@@ -222,14 +218,12 @@ void Hoshi::Move(glm::vec2 input)
 		else
 		{
 			if (!MovingRight) static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("WalkStart", 0.5f);
-<<<<<<< HEAD
-			hurtBox = hurtBoxes["basic"];
-=======
-			hurtBox = hurtBoxes["basicRight"];
-			isIdle = false;
->>>>>>> 0dbd34b4348fab83c9ac4227edaf99379515a349
-			MovingRight = true;
-			MovingLeft = false;
+			{
+				hurtBox = hurtBoxes["basic"];
+				isIdle = false;
+				MovingRight = true;
+				MovingLeft = false;
+			}
 		}
 	}
 	else
