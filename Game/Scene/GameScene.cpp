@@ -361,6 +361,7 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetModels(Sphere);
 	//SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 
 	
@@ -411,6 +412,22 @@ bool GameScene::OnCreate()
 	binds.super = SDL_SCANCODE_Y;
 
 	inputManager.SetPlayer1Keybinds(binds);
+
+	inputManager.SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
+	binds.down = SDL_SCANCODE_DOWN;
+	binds.up = SDL_SCANCODE_UP;
+	binds.left = SDL_SCANCODE_LEFT;
+	binds.right = SDL_SCANCODE_RIGHT;
+	binds.run = SDL_SCANCODE_SPACE;
+	binds.light = SDL_SCANCODE_Z;
+	binds.medium = SDL_SCANCODE_X;
+	binds.heavy = SDL_SCANCODE_C;
+	binds.unique = SDL_SCANCODE_V;
+	binds.shortcutForward = SDL_SCANCODE_RSHIFT;
+	binds.shortcutBackward = SDL_SCANCODE_RCTRL;
+	binds.super = SDL_SCANCODE_B;
+
+	inputManager.SetPlayer2Keybinds(binds);
 
 	diceModel = nullptr;
 	player = nullptr;

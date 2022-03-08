@@ -96,7 +96,7 @@ protected:
 	void SetFrameData(float startup_, float active_, float recovery_);
 	void SetFrameData(FrameData frameData_);
 
-	void OnDeath();
+	virtual void OnDeath();
 
 	float health;
 	float overclock;
