@@ -57,7 +57,16 @@ void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<
 	{
 		if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), element))
 		{
-			gameObject_->SetVelocity(glm::vec3(-(element.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+			if (element.x != 0.0f)
+			{
+				gameObject_->SetVelocity(glm::vec3(-element.w, gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+			}
+			else
+			{
+				gameObject_->SetVelocity(glm::vec3(gameObject_->GetVelocity().x, gameObject_->GetVelocity().y, -element.z));
+			}
+			
+			//std::cout << gameObject_->GetPosition().x << " " << gameObject_->GetPosition().z << std::endl;
 			if (dynamic_cast<Character*>(gameObject_)) {
 				if (dynamic_cast<Character*>(gameObject_)->getIsRunning())
 				{
@@ -69,6 +78,21 @@ void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<
 
 	checkObjectCollision(gameObject_);
 }
+
+//void EnvironmentalCollisionManager::Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_)
+//{
+//	if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), leftPlane_))
+//	{
+//		gameObject_->SetVelocity(glm::vec3(-(leftPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+//	}
+//
+//	if (checkPlaneCollision(gameObject_->GetHitBox()->getMaxVert(), rightPlane_))
+//	{
+//		std::cout << "collided" << std::endl;
+//		gameObject_->SetVelocity(glm::vec3(-(rightPlane_.x), gameObject_->GetVelocity().y, gameObject_->GetVelocity().z));
+//	}
+//	checkObjectCollision(gameObject_);
+//}
 
 void EnvironmentalCollisionManager::checkObjectCollision(GameObject* gameObject_)
 {

@@ -3,4 +3,6 @@
 [INFO]: Window Created Succesfully in: CoreEngine.cpp on line: 33
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 20
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 53
-[INFO]: Game Scene initiated in: GameScene.cpp on line: 22
+[INFO]: Game Scene initiated in: GameScene.cpp on line: 23
+[ERROR]: Surface for texture Kunai failed to be created in: TextureHandler.cpp on line: 47
+[ERROR]: Material Kunai was not found. Using Default Material. in: MaterialHandler.cpp on line: 50
