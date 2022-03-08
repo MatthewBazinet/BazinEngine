@@ -13,6 +13,10 @@ public:
 	~BattleCamera();
 	void Update(const float deltaTime_);
 	void SetPlayers(Character* player1_, Character* player2_);
+
+	virtual void ProcessMouseMovement(glm::vec2 offset_);
+	virtual void ProcessMouseZoom(int y_);
+	
 private:
 	Character* player1;
 	Character* player2;

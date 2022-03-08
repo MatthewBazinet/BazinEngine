@@ -10,7 +10,7 @@
 #include "..//MorphTargetAnimatedModel.h"
 
 
-enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, HCB, CHARGEDOWNUP, CHARGEBACKFORWARD};
+enum class moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, UNIQUE};
 
 class Projectile;
 class HurtBox;
@@ -96,6 +96,7 @@ protected:
 	void SetFrameData(float startup_, float active_, float recovery_);
 	void SetFrameData(FrameData frameData_);
 
+	void OnDeath();
 
 	float health;
 	float overclock;

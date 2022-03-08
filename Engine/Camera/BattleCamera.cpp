@@ -33,24 +33,44 @@ void BattleCamera::Update(const float deltaTime_)
 
 		if (distance < 5.0f)
 		{
-			distance = 5.0f;
+			//distance = 5.0f;
+			return;
 		}
 		
-		glm::vec3 diff = midpoint - player2->GetPosition();
-		glm::vec3 camDiff = midpoint - position;
+		glm::vec3 diff;
+		if (player1->FacingLeft())
+		{
+			diff = player1->GetPosition() - midpoint;
+		}
+		else
+		{
+			diff = player2->GetPosition() - midpoint;
+		}
 
-		SetRotation(yaw + glm::angle(camDiff, diff), 0.0f, 0.0f);
+		diff = glm::cross(glm::normalize(diff), glm::vec3(0.0f,1.0f,0.0f));
+
+		glm::vec3 camDiff = midpoint - position;
+		camDiff.y = 0.0f;
+
+		SetForward(diff);
 
 		position = midpoint - 2.0f * distance * forward;
 
 		position.y = height;
 
 	}
-
 }
 
 void BattleCamera::SetPlayers(Character* player1_, Character* player2_)
 {
 	player1 = player1_;
 	player2 = player2_;
+}
+
+void BattleCamera::ProcessMouseMovement(glm::vec2 offset_)
+{
+}
+
+void BattleCamera::ProcessMouseZoom(int y_)
+{
 }

@@ -36,8 +36,8 @@ public:
 	void AddLightSource(LightSource* light_);
 	const std::vector<LightSource*> GetLightSources() const;
 
-	void ProcessMouseMovement(glm::vec2 offset_);
-	void ProcessMouseZoom(int y_);
+	virtual void ProcessMouseMovement(glm::vec2 offset_);
+	virtual void ProcessMouseZoom(int y_);
 
 	bool TestPointAgainstPlanes(glm::vec3 point_, glm::mat4 transform_);
 
