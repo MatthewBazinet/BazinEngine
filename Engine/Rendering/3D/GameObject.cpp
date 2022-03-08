@@ -13,7 +13,7 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 	angularVelocity = angularVelocity_;
 	hit = false;
 	targetNumber = 0;
-	hitBox = new EnvironmentalHitBox();
+	eHitBox = new EnvironmentalHitBox();
 
 	intersects = false;
 
@@ -33,14 +33,14 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 GameObject::~GameObject()
 {
 	model = nullptr;
-	hitBox = nullptr;
-	delete hitBox;
+	eHitBox = nullptr;
+	delete eHitBox;
 }
 
 void GameObject::Update(const float deltaTime_)
 {
-	hitBox->setMaxVert(position);
-	hitBox->setMinVert(position);
+	eHitBox->setMaxVert(position);
+	eHitBox->setMinVert(position);
 
 	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
 	vel = vel + accel * deltaTime_;

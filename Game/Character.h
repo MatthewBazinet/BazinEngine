@@ -66,7 +66,9 @@ public:
 
 	Character* GetOpponent()const { return opponent; };
 	float GetHealth() const { return health; };
+	void SetHealth(float health_) { health = health_; };
 	float GetOverclock() const { return overclock; };
+	void SetOverclock(float overclock_) { overclock = overclock_; };
 	std::vector<Sphere> GetHurtBoxes()const;
 	bool IsCharge();
 	bool FacingLeft();
@@ -76,7 +78,7 @@ public:
 	void resetCombo();
 	bool checkComboState(moveState move_);
 
-	bool getApplyGravity() { return applyGravity; };
+	bool getApplyGravity() const { return applyGravity; };
 	void setApplyGravity(bool applyGravity_) { applyGravity = applyGravity_; };
 
 protected:

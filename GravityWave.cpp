@@ -1,6 +1,7 @@
 #include "GravityWave.h"
+#include "../Game/Characters/Hoshi.h"
 
-GravityWave::GravityWave(Model* model_, glm::vec3 position_, Character* parent_, int strength_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) : Projectile(model_, position_, parent_, angle_, rotation_)
+GravityWave::GravityWave(glm::vec3 position_, Character* parent_, int strength_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) : Projectile(new Model("Resources/Models/Kunai.obj", "Resources/Materials/Kunai.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), position_, parent_, angle_, rotation_)
 {
 	strength = strength_;
 }
@@ -26,20 +27,31 @@ void GravityWave::Update(float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
 				if (strength == 0)
 				{
-					parent->GetOpponent()->SetVelocity(glm::vec3(10.0f, 00.0f, 0.0f));
+					parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
+					parent->GetOpponent()->ApplyForce((parent->GetOpponent()->GetPosition() - parent->GetPosition()) * 100.0f);
 				}
 				else if (strength == 1)
 				{
-					parent->GetOpponent()->SetVelocity(glm::vec3(0.0f, 10.0f, 0.0f));
+					parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
+					parent->GetOpponent()->ApplyForce(glm::vec3(0.0f, 100.0f, 0.0f));
 				}
 				else if (strength == 2)
 				{
-					parent->GetOpponent()->SetVelocity(glm::vec3(0.0f, 10.0f, 0.0f));
+					parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
+					parent->GetOpponent()->ApplyForce(glm::vec3(0.0f, 100.0f, 0.0f));
 					//parent->GetOpponent()->setApplyGravity(false);
 				}
+
+				GravityWave::~GravityWave();
+				dynamic_cast<Hoshi*>(parent)->ResetProjectile();
+				return;
 			}
 		}
 	}
-	hitBox->Update(deltaTime_);
-	GameObject::Update(deltaTime_);
+
+	if (this)
+	{
+		hitBox->Update(deltaTime_);
+		GameObject::Update(deltaTime_);
+	}
 }

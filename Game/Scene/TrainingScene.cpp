@@ -48,12 +48,12 @@ bool TrainingScene::OnCreate()
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
 
 	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 0.0f);
-	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, -20.0f);
-	northPlane = glm::vec4(-1.0f, 0.0f, 10.0f, 0.0f);
-	southPlane = glm::vec4(1.0f, 0.0f, -10.0f, 0.0f);
+	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, -15.0f);
+	//northPlane = glm::vec4(0.0f, 0.0f, 1.0f, 20.0f);
+	southPlane = glm::vec4(0.0f, 0.0f, 1.0f, -20.0f);
 	planes.push_back(leftPlane);
 	planes.push_back(rightPlane);
-	planes.push_back(northPlane);
+	//planes.push_back(northPlane);
 	planes.push_back(southPlane);
 
 	//SceneGraph::GetInstance()->AddGameObject(new Projectile(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "projectile");
@@ -81,6 +81,7 @@ void TrainingScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
 	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char1"), planes);
+	//EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char1"), leftPlane, rightPlane);
 	//SceneGraph::GetInstance()->GetGameObject("projectile")->SetPosition(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition());
 	//static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 }

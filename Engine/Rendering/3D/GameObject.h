@@ -53,7 +53,7 @@ public:
 	void SetMass(float mass_);
 	void SetTargetNumber(int targetNumber_) { targetNumber = targetNumber_; };
 	
-	EnvironmentalHitBox* GetHitBox() { return hitBox; };
+	EnvironmentalHitBox* GetHitBox() { return eHitBox; };
 
 	Tetrahedron GetShape();
 	void SetShape(Tetrahedron shape_);
@@ -102,7 +102,7 @@ public:
 
 protected:
 	Model* model;
-	EnvironmentalHitBox* hitBox;
+	EnvironmentalHitBox* eHitBox;
 	
 	unsigned int modelInstance;
 
