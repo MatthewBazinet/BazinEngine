@@ -21,10 +21,18 @@ public:
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
+	void ResetRound();
+
 	Component* ptr;
 	float scale;
 	bool tmp = true;
 	InputManager inputManager;
+
+	glm::vec4 leftPlane;
+	glm::vec4 rightPlane;
+	glm::vec4 northPlane;
+	glm::vec4 southPlane;
+	std::vector<glm::vec4> planes;
 };
 
 #endif // !GAMESCENE_H

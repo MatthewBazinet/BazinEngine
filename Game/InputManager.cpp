@@ -106,34 +106,34 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 		{
 			player2Inputs.directions.back().y = -1.0f;
 			player2Inputs.timeDownHeld = time;
-			player1->Move(player1Inputs.directions.back());
+			player2->Move(player2Inputs.directions.back());
 		}
 		else if (key_ == player2Keybinds.left)
 		{
 			player2Inputs.directions.back().x = -1.0f;
 			player2Inputs.timeLeftHeld = time;
-			player1->Move(player1Inputs.directions.back());
+			player2->Move(player2Inputs.directions.back());
 		}
 		else if (key_ == player2Keybinds.right)
 		{
 			player2Inputs.directions.back().x = 1.0f;
 			player2Inputs.timeRightHeld = time;
-			player1->Move(player1Inputs.directions.back());
+			player2->Move(player2Inputs.directions.back());
 		}
 		else if (key_ == player2Keybinds.light)
 		{
 			player2Inputs.lightPressed = true;
-			CheckMotion(0, 2);
+			CheckMotion(0, 1);
 		}
 		else if (key_ == player2Keybinds.medium)
 		{
 			player2Inputs.mediumPressed = true;
-			CheckMotion(1, 2);
+			CheckMotion(1, 1);
 		}
 		else if (key_ == player2Keybinds.heavy)
 		{
 			player2Inputs.heavyPressed = true;
-			CheckMotion(2, 2);
+			CheckMotion(2, 1);
 		}
 		else if (key_ == player2Keybinds.unique)
 		{

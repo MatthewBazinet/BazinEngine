@@ -19,6 +19,7 @@ public:
 	void AddObject(GameObject* go_);
 	void OnDestroy();
 	void Update(GameObject* gameObject_, std::vector<glm::vec4> planes_);
+	//void Update(GameObject* gameObject_, glm::vec4 leftPlane_, glm::vec4 rightPlane_);
 
 	void checkObjectCollision(GameObject* gameObject_);
 	bool checkPlaneCollision(glm::vec3 point_, glm::vec4 plane_);

@@ -10,7 +10,7 @@
 #include "..//MorphTargetAnimatedModel.h"
 
 
-enum moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, HCB, CHARGEDOWNUP, CHARGEBACKFORWARD};
+enum class moveState {NONE, RUN, GROUNDLIGHT, GROUNDMEDIUM, GROUNDHEAVY, AIRLIGHT, AIRMEDIUM, AIRHEAVY, QCF, QCB, UNIQUE};
 
 class Projectile;
 class HurtBox;
@@ -66,7 +66,9 @@ public:
 
 	Character* GetOpponent()const { return opponent; };
 	float GetHealth() const { return health; };
+	void SetHealth(float health_) { health = health_; };
 	float GetOverclock() const { return overclock; };
+	void SetOverclock(float overclock_) { overclock = overclock_; };
 	std::vector<Sphere> GetHurtBoxes()const;
 	bool IsCharge();
 	bool FacingLeft();
@@ -76,7 +78,7 @@ public:
 	void resetCombo();
 	bool checkComboState(moveState move_);
 
-	bool getApplyGravity() { return applyGravity; };
+	bool getApplyGravity() const { return applyGravity; };
 	void setApplyGravity(bool applyGravity_) { applyGravity = applyGravity_; };
 
 protected:
@@ -96,6 +98,7 @@ protected:
 	void SetFrameData(float startup_, float active_, float recovery_);
 	void SetFrameData(FrameData frameData_);
 
+	virtual void OnDeath();
 
 	float health;
 	float overclock;

@@ -22,6 +22,7 @@ Character::Character(float health_, float meter_, bool isRunning_, bool isAirbor
 	applyGravity = true;
 	isAttacking = false;
 	isIdle = true;
+	nextActionable = 0.0f;
 }
 
 Character::~Character() {
@@ -233,8 +234,15 @@ void Character::Update(const float deltaTime_)
 			}
 		}
 	}
+	else
+	{
+		if (hitBox)
+		{
+			if (hitBox->GetIsEnabled()) hitBox->DisableHitBox();
+		}
+	}
 
-	if(isRunning)vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
+	if(isRunning) vel = glm::vec3(0.0f, vel.y, 0.0f) + glm::rotate(relativeVel, -glm::radians(camera->GetRotation().x + 90.0f), glm::vec3(0.0f,1.0f,0.0f));
 	
 	if (position.y >= 0.1f)
 	{
@@ -265,18 +273,30 @@ void Character::Update(const float deltaTime_)
 		if (MovingLeft) dir2D = -1.0f;
 		if (MovingRight) dir2D = 1.0f;
 
-
-		float preserveY = vel.y;
-		vel = axisOf2DMovement * maxSpeed * dir2D;
-		vel.y = preserveY;
+		if (nextActionable <= 0.0f)
+		{
+			float preserveY = vel.y;
+			vel = axisOf2DMovement * maxSpeed * dir2D;
+			vel.y = preserveY;
+		}
 	}
 
 	
-	if(vel != glm::vec3())	angle = atan2(vel.x, vel.z);
-	//gonna remove once we can damage characters
-	health -= 1.0f;
-	if (health <= 5.0f) {
-		health = 100.0f;
+	if (vel != glm::vec3() && isRunning)
+	{
+		angle = atan2(vel.x, vel.z);
+	}
+	else 
+	{
+		if (!opponent->getIsRunning())
+		{
+			angle = atan2(opponent->GetPosition().x - position.x, opponent->GetPosition().z - position.z);
+		}
+	}
+
+
+	if (health < 0.0f) {
+		OnDeath();
 	}	
 
 	GameObject::Update(deltaTime_);
@@ -290,6 +310,9 @@ bool Character::CheckMoveState(moveState move_)
 	case moveState::NONE:
 		currentMove = move_;
 		return true;
+	case moveState::RUN:
+		isRunning = false;
+		currentMove = move_;
 
 	case moveState::AIRLIGHT:
 	case moveState::AIRMEDIUM:
@@ -297,13 +320,13 @@ bool Character::CheckMoveState(moveState move_)
 	case moveState::GROUNDLIGHT:
 	case moveState::GROUNDMEDIUM:
 	case moveState::GROUNDHEAVY:
-		if (move_ == moveState::QCF || move_ == moveState::QCB || move_ == moveState::HCB || move_ == moveState::CHARGEDOWNUP || move_ == moveState::CHARGEBACKFORWARD)
+		if (move_ == moveState::QCF || move_ == moveState::QCB || move_ == moveState::UNIQUE)
 		{
 			currentMove = move_;
 			return true;
 		}
 	default:
-		currentMove = moveState::NONE;
+		//currentMove = moveState::NONE;
 		return false;
 	}
 }
@@ -387,6 +410,11 @@ void Character::SetFrameData(float startup_, float active_, float recovery_)
 	recoveryTimeLeft = recovery_;
 	moveTimeLeft = startUpTimeLeft + activeTimeLeft + recoveryTimeLeft;
 	isAttacking = true;
+}
+
+void Character::OnDeath()
+{
+
 }
 
 void Character::SetFrameData(FrameData frameData_)
@@ -578,7 +606,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 {
 	if (FacingLeft())
 	{
-		if (MovingRight)
+		if (MovingRight && !isAirborne)
 		{
 			nextActionable = blockStun_;
 			currentMove = moveState::NONE;
@@ -587,12 +615,20 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		{
 			health -= damage_;
 			nextActionable = hitStun_;
-			ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+			if (opponent->FacingLeft())
+			{
+				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+
+			}
+			else
+			{
+				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+			}
 		}
 	}
 	else
 	{
-		if (MovingLeft)
+		if (MovingLeft && !isAirborne)
 		{
 			nextActionable = blockStun_;
 			currentMove = moveState::NONE;
@@ -601,7 +637,15 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		{
 			health -= damage_;
 			nextActionable = hitStun_;
-			ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+			if (opponent->FacingLeft())
+			{
+				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+
+			}
+			else
+			{
+				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+			}
 		}
 	}
 }

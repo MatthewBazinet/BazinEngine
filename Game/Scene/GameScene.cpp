@@ -6,6 +6,7 @@
 #include "../XMLDecisionTreeReader.h"
 #include "../UserInterface.h"
 #include "../Game/Characters/Hoshi.h"
+#include "../Engine/Math/EnvironmentalCollisionManager.h"
 
 GameScene::GameScene()
 {
@@ -28,6 +29,7 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 1.0f)));
 
 	CollisionHandler::GetInstance()->OnCreate(100.0f);
+	EnvironmentalCollisionManager::GetInstance()->OnCreate(100.0f);
 	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "Resources/Textures/CheckerboardTexture.png");
 
 	Vertex v;
@@ -358,9 +360,12 @@ bool GameScene::OnCreate()
 
 	//SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 	
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
+
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
 	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
+
 	//SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 
 	
@@ -383,14 +388,14 @@ bool GameScene::OnCreate()
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	
 	
-	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
-	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->SetPlayers(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->SetPlayers(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 	
 	UserInterface::GetInstance()->SetPlayer1(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	UserInterface::GetInstance()->SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("ai1")));
+	UserInterface::GetInstance()->SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);
 
@@ -412,13 +417,52 @@ bool GameScene::OnCreate()
 
 	inputManager.SetPlayer1Keybinds(binds);
 
+	
+	inputManager.SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	binds.down = SDL_SCANCODE_DOWN;
+	binds.up = SDL_SCANCODE_UP;
+	binds.left = SDL_SCANCODE_LEFT;
+	binds.right = SDL_SCANCODE_RIGHT;
+	binds.run = SDL_SCANCODE_SPACE;
+	binds.light = SDL_SCANCODE_Z;
+	binds.medium = SDL_SCANCODE_X;
+	binds.heavy = SDL_SCANCODE_C;
+	binds.unique = SDL_SCANCODE_V;
+	binds.shortcutForward = SDL_SCANCODE_RSHIFT;
+	binds.shortcutBackward = SDL_SCANCODE_RCTRL;
+	binds.super = SDL_SCANCODE_B;
+
+	inputManager.SetPlayer2Keybinds(binds);
+	
+
 	diceModel = nullptr;
 	player = nullptr;
 	appleModel = nullptr;
 	rachidaShape = nullptr;
 	man = nullptr;
 
+	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 15.0f);
+	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, 15.0f);
+	northPlane = glm::vec4(0.0f, 0.0f, 1.0f, 15.0f);
+	southPlane = glm::vec4(0.0f, 0.0f, -1.0f, 15.0f);
+	planes.push_back(leftPlane);
+	planes.push_back(rightPlane);
+	planes.push_back(northPlane);
+	planes.push_back(southPlane);
+
 	return true;
+}
+
+void GameScene::ResetRound()
+{
+	SceneGraph::GetInstance()->GetGameObject("char1")->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	SceneGraph::GetInstance()->GetGameObject("char2")->SetPosition(glm::vec3(10.0f, 0.0f, 0.0f));
+
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetHealth(100.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetHealth(100.0f);
+
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOverclock(0.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOverclock(0.0f);
 }
 
 void GameScene::Update(const float deltaTime_)
@@ -428,6 +472,19 @@ void GameScene::Update(const float deltaTime_)
 	//std::cout << dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() << std::endl;
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 	inputManager.Update(deltaTime_);
+	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char1"), planes);
+	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char2"), planes);
+
+	if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() <= 0.0f)
+	{
+		std::cout << "player 1 win" << std::endl;
+		ResetRound();
+	}
+	else if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth() <= 0.0f)
+	{
+		std::cout << "player 2 win" << std::endl;
+		ResetRound();
+	}
 }
 
 void GameScene::Render()
