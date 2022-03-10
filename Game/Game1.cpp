@@ -1,8 +1,16 @@
 #include "Game1.h"
 
+#include "Scene/StartScene.h"
+#include "Scene/GameScene.h"
+#include "Scene/Scene2.h"
+#include "../OnlineGameScene.h"
+#include "..//GJKTestScene.h"
+#include "..//AnimationTestScene.h"
+#include "Scene/TrainingScene.h"
+#include "../CharacterSelectScene.h"
+
 Game1::Game1() : GameInterface(), currentScene(nullptr), currentSceneNum(0)
 {
-
 }
 
 Game1::~Game1() 
@@ -42,6 +50,16 @@ void Game1::HandleEvents(const SDL_Event& sdlEvent)
 	currentScene->HandleEvents(sdlEvent);
 }
 
+void Game1::NotifyOfKeyDown(const SDL_Scancode key_)
+{
+	currentScene->NotifyOfKeyDown(key_);
+}
+
+void Game1::NotifyOfKeyUp(const SDL_Scancode key_)
+{
+	currentScene->NotifyOfKeyUp(key_);
+}
+
 void Game1::BuildScene()
 {
 	delete currentScene;
@@ -51,6 +69,24 @@ void Game1::BuildScene()
 	{
 	case 1:
 		currentScene = new GameScene();
+		break;
+	case 2:
+		currentScene = new Scene2();
+		break;
+	case 3:
+		currentScene = new GJKTestScene();
+		break;
+	case 4:
+		currentScene = new OnlineGameScene();
+		break;
+	case 5:
+		currentScene = new AnimationTestScene();
+		break;
+	case 6:
+		currentScene = new TrainingScene();
+		break;
+	case 7:
+		currentScene = new CharacterSelectScene();
 		break;
 	default: //case 0:
 		currentScene = new StartScene();

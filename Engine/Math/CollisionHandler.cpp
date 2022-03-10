@@ -1,5 +1,3 @@
-
-#include "CollisionHandler.h"
 #include "..//Core/CoreEngine.h"
 
 std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
@@ -7,10 +5,8 @@ std::unique_ptr<CollisionHandler> CollisionHandler::collisionInstance = nullptr;
 std::vector<GameObject*> CollisionHandler::prevCollisions = std::vector<GameObject*>();
 OctSpacialPartition* CollisionHandler::scenePartition = nullptr;
 
-
 CollisionHandler::CollisionHandler()
 {
-
 	prevCollisions.reserve(10);
 }
 

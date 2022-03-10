@@ -77,11 +77,28 @@ void SceneGraph::AddGameObject(GameObject* go_, std::string tag_)
 	CollisionHandler::GetInstance()->AddObject(go_);
 }
 
+void SceneGraph::RemoveGameObject(std::string tag_)
+{
+	if (sceneGameObjects.count(tag_) >= 1)
+	{
+		delete sceneGameObjects[tag_];
+		sceneGameObjects[tag_] = nullptr;
+		sceneGameObjects.erase(tag_);
+	}
+}
+
 GameObject* SceneGraph::GetGameObject(std::string tag_)
 {
-	if (sceneGameObjects.find(tag_) != sceneGameObjects.end())
+	if (!this) return nullptr;
+	if (sceneGameObjects.size() > 0)
 	{
-		return sceneGameObjects[tag_];
+		if (sceneGameObjects.find(tag_) != sceneGameObjects.end())
+		{
+			if (sceneGameObjects[tag_])
+			{
+				return sceneGameObjects[tag_];
+			}
+		}
 	}
 	return nullptr;
 }

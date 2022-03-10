@@ -155,6 +155,96 @@ void LoadOBJModel::LoadModel(const std::string& objFilePath_)
 	PostProcessing();
 }
 
+void LoadOBJModel::LoadModelMaterialLess(const std::string& objFilePath_)
+{
+	std::ifstream in(objFilePath_.c_str(), std::ios::in);
+	if (!in)
+	{
+		Log::Error("Cannot open OBJ file: " + objFilePath_, "LoadOBJModel.cpp", __LINE__);
+		return;
+	}
+	//currentMaterial = Material();
+
+	std::string line;
+
+	bb.maxVert = glm::vec3(FLT_MIN);
+	bb.minVert = glm::vec3(FLT_MAX);
+
+	while (std::getline(in, line))
+	{
+		//VERTEX DATA
+		if (line.substr(0, 2) == "v ") {
+			std::stringstream v(line.substr(2));
+			float x, y, z;
+			v >> x >> y >> z;
+			vertices.push_back(glm::vec3(x, y, z));
+
+			if (x > bb.maxVert.x) bb.maxVert.x = x;
+			if (y > bb.maxVert.y) bb.maxVert.y = y;
+			if (z > bb.maxVert.z) bb.maxVert.z = z;
+
+			if (x < bb.minVert.x) bb.minVert.x = x;
+			if (y < bb.minVert.y) bb.minVert.y = y;
+			if (z < bb.minVert.z) bb.minVert.z = z;
+		}
+
+		//NORMAL DATA
+		else if (line.substr(0, 3) == "vn ")
+		{
+			std::stringstream n(line.substr(3));
+			float x, y, z;
+			n >> x >> y >> z;
+			normals.push_back(glm::vec3(x, y, z));
+		}
+
+		//TEXTURE COORDINATES
+		else if (line.substr(0, 3) == "vt ")
+		{
+			std::stringstream n(line.substr(3));
+			float x, y, z;
+			n >> x >> y >> z;
+			textureCoords.push_back(glm::vec2(x, y));
+		}
+		//FACE DATA
+		else if (line.substr(0, 2) == "f ")
+		{
+			std::stringstream vn(line.substr(2));
+			char dummy;
+			unsigned int a, b, c, aT, bT, cT, aN, bN, cN;
+			vn >> a >> dummy >> aT >> dummy >> aN >> b >> dummy >> bT >> dummy >> bN
+				>> c >> dummy >> cT >> dummy >> cN;
+
+			a--; b--; c--;
+			aT--; bT--; cT--;
+			aN--; bN--; cN--;
+
+			indices.push_back(a);
+			indices.push_back(b);
+			indices.push_back(c);
+
+			normalIndices.push_back(aN);
+			normalIndices.push_back(bN);
+			normalIndices.push_back(cN);
+
+			textureIndices.push_back(aT);
+			textureIndices.push_back(bT);
+			textureIndices.push_back(cT);
+		}
+
+		//NEW MESH
+		else if (line.substr(0, 7) == "usemtl ")
+		{
+			if (indices.size() > 0)
+			{
+				PostProcessing();
+			}
+			//LoadMaterial(line.substr(7));
+		}
+	}
+	in.close();
+	PostProcessing();
+}
+
 void LoadOBJModel::LoadMaterial(const std::string& matName_)
 {
 	currentMaterial = MaterialHandler::GetInstance()->GetMaterial(matName_);

@@ -1,7 +1,16 @@
 #include "GameScene.h"
+#include "..//Engine/Camera/BattleCamera.h"
+#include "..//../AICharacter.h"
+#include "../ParticleSystem.h"
+#include "../Component.h"
+#include "../XMLDecisionTreeReader.h"
+#include "../UserInterface.h"
+#include "../Game/Characters/Hoshi.h"
+#include "../Engine/Math/EnvironmentalCollisionManager.h"
 
 GameScene::GameScene()
 {
+	scale = 1.5f;
 }
 
 GameScene::~GameScene()
@@ -12,15 +21,15 @@ GameScene::~GameScene()
 bool GameScene::OnCreate()
 {
 	Log::Info("Game Scene initiated", "GameScene.cpp", __LINE__);
-
-	CoreEngine::GetInstance()->SetCamera(new Camera());
-	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 1.0f, 0.0f)));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(0.0f, 0.0f, 1.0f)));
-	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 0.0f, 0.0f)));
+	
+	CoreEngine::GetInstance()->SetCamera(new BattleCamera());
+	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 5.0f, 4.0f));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 1.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 1.0f)));
+	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.1f, 0.5f, 0.5, glm::vec3(1.0f, 1.0f, 1.0f)));
 
 	CollisionHandler::GetInstance()->OnCreate(100.0f);
-
+	EnvironmentalCollisionManager::GetInstance()->OnCreate(100.0f);
 	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "Resources/Textures/CheckerboardTexture.png");
 
 	Vertex v;
@@ -314,42 +323,188 @@ bool GameScene::OnCreate()
 //model->SetScale(glm::vec3(0.5f));
 
 	Model* diceModel = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
-
+	Model* player = new Model("Resources/Models/AlexisBruce.obj", "Resources/Materials/AlexisBruce.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* appleModel = new Model("Resources/Models/Apple.obj","Resources/Materials/Apple.mtl",ShaderHandler::GetInstance()->GetShader("basicShader"));
+	Model* rachidaShape = new Model("Resources/Models/tetrahedron.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	Model* man = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	Model* Sphere = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+
+	//Model* pawn = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	SceneGraph::GetInstance()->AddModel(diceModel);
+	SceneGraph::GetInstance()->AddModel(player);
 	SceneGraph::GetInstance()->AddModel(appleModel);
+	SceneGraph::GetInstance()->AddModel(rachidaShape);
+	SceneGraph::GetInstance()->AddModel(Sphere);
 
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+	XMLDecisionTreeReader read;
+	read.ReadFile("Tree.xml");
+	
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "dice");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+	//Model* rachidaShape = new Model("Resources/Models/tetrahedron.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+
+	/*SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(-4.0f, 0.0f, 0.0f)), "model1");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(4.0f, 0.0f, 0.0f)), "model2");
+
+	SceneGraph::GetInstance()->GetGameObject("model1")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+	SceneGraph::GetInstance()->GetGameObject("model1")->SetAngularVelocity(glm::quat( 0.0f, 0.0f, glm::radians(45.0f), 0.0f));
+	SceneGraph::GetInstance()->GetGameObject("model1")->SetVelocity(glm::vec3(1.0f,0.0f,0.0f));
+	SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+	SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
+	SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));*/
+
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(player, glm::vec3(4.0f,0.0f, 0.0f)),"apple");
+	//SceneGraph::GetInstance()->GetGameObject("apple")->AddComponent<ParticleSystem>(100, ShaderHandler::GetInstance()->GetShader("particleShader"), SceneGraph::GetInstance()->GetGameObject("apple")->GetPosition());
+	//ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
+
+	//SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
+	
+
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
+	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
+	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
+
+	//SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
+
+	
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0f, 0.0f)), "apple");
+	//static_cast<Flocking*>(SceneGraph::GetInstance()->GetGameObject("rop"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
+
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(-4.0f, 0.0f, 0.0f)), "model1");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(rachidaShape, glm::vec3(4.0f, 0.0f, 0.0f)), "model2");
+
+	//SceneGraph::GetInstance()->GetGameObject("model1")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+	//SceneGraph::GetInstance()->GetGameObject("model1")->SetAngularVelocity(glm::quat( 0.0f, 0.0f, glm::radians(45.0f), 0.0f));
+	//SceneGraph::GetInstance()->GetGameObject("model1")->SetVelocity(glm::vec3(1.0f,0.0f,0.0f));
+	//SceneGraph::GetInstance()->GetGameObject("model2")->SetOrientation(glm::angleAxis(glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+	//SceneGraph::GetInstance()->GetGameObject("model2")->SetAngularVelocity(glm::quat(0.0f, 0.0f, glm::radians(-45.0f), 0.0f));
+	//SceneGraph::GetInstance()->GetGameObject("model2")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
+	//SceneGraph::GetInstance()->AddGameObject(new AICharacter(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), 1.0f, 1.0f, false, false, diceModel, glm::vec3(10.0f, 0.0f, 0.0f)), "ai1");
+
+	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile1"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1"));
+	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile2"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
+	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
+	
+	
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->SetPlayers(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+	
+	UserInterface::GetInstance()->SetPlayer1(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	UserInterface::GetInstance()->SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	glm::vec3 s(1.0f);
+	glm::vec3 e(6.0f);
+
+	inputManager = InputManager();
+	inputManager.SetPlayer1(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	Keybinds binds;
+	binds.down = SDL_SCANCODE_S;
+	binds.up = SDL_SCANCODE_W;
+	binds.left = SDL_SCANCODE_A;
+	binds.right = SDL_SCANCODE_D;
+	binds.run = SDL_SCANCODE_LSHIFT;
+	binds.light = SDL_SCANCODE_U;
+	binds.medium = SDL_SCANCODE_I;
+	binds.heavy = SDL_SCANCODE_O;
+	binds.unique = SDL_SCANCODE_P;
+	binds.shortcutForward = SDL_SCANCODE_E;
+	binds.shortcutBackward = SDL_SCANCODE_Q;
+	binds.super = SDL_SCANCODE_Y;
+
+	inputManager.SetPlayer1Keybinds(binds);
+
+	
+	inputManager.SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	binds.down = SDL_SCANCODE_DOWN;
+	binds.up = SDL_SCANCODE_UP;
+	binds.left = SDL_SCANCODE_LEFT;
+	binds.right = SDL_SCANCODE_RIGHT;
+	binds.run = SDL_SCANCODE_SPACE;
+	binds.light = SDL_SCANCODE_Z;
+	binds.medium = SDL_SCANCODE_X;
+	binds.heavy = SDL_SCANCODE_C;
+	binds.unique = SDL_SCANCODE_V;
+	binds.shortcutForward = SDL_SCANCODE_RSHIFT;
+	binds.shortcutBackward = SDL_SCANCODE_RCTRL;
+	binds.super = SDL_SCANCODE_B;
+
+	inputManager.SetPlayer2Keybinds(binds);
+	
 
 	diceModel = nullptr;
+	player = nullptr;
 	appleModel = nullptr;
+	rachidaShape = nullptr;
+	man = nullptr;
+
+	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 15.0f);
+	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, 15.0f);
+	northPlane = glm::vec4(0.0f, 0.0f, 1.0f, 15.0f);
+	southPlane = glm::vec4(0.0f, 0.0f, -1.0f, 15.0f);
+	planes.push_back(leftPlane);
+	planes.push_back(rightPlane);
+	planes.push_back(northPlane);
+	planes.push_back(southPlane);
 
 	return true;
 }
 
+void GameScene::ResetRound()
+{
+	SceneGraph::GetInstance()->GetGameObject("char1")->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	SceneGraph::GetInstance()->GetGameObject("char2")->SetPosition(glm::vec3(10.0f, 0.0f, 0.0f));
+
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetHealth(100.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetHealth(100.0f);
+
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOverclock(0.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOverclock(0.0f);
+}
+
 void GameScene::Update(const float deltaTime_)
 {
-
 	SceneGraph::GetInstance()->Update(deltaTime_);
+	//ptr->Update(deltaTime_);
+	//std::cout << dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() << std::endl;
+	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
+	inputManager.Update(deltaTime_);
+	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char1"), planes);
+	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char2"), planes);
+
+	if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() <= 0.0f)
+	{
+		std::cout << "player 1 win" << std::endl;
+		ResetRound();
+	}
+	else if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth() <= 0.0f)
+	{
+		std::cout << "player 2 win" << std::endl;
+		ResetRound();
+	}
 }
 
 void GameScene::Render()
 {
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//ptr->Render(CoreEngine::GetInstance()->GetCamera());
 	SceneGraph::GetInstance()->Render(CoreEngine::GetInstance()->GetCamera());
+
 }
 
 void GameScene::HandleEvents(const SDL_Event& sdlEvent)
 {
+	/*
 	if (sdlEvent.type == SDL_KEYDOWN) 
 	{
 		switch (sdlEvent.key.keysym.scancode) 
 		{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
 		case SDL_SCANCODE_W:
-			
+
 			CoreEngine::GetInstance()->GetCamera()->SetPosition(CoreEngine::GetInstance()->GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
 			break;
 		case SDL_SCANCODE_A:
@@ -388,5 +543,51 @@ void GameScene::HandleEvents(const SDL_Event& sdlEvent)
 		default:
 			break;
 		}
+	}
+	*/
+}
+
+void GameScene::NotifyOfKeyDown(const SDL_Scancode key_)
+{
+	switch (key_)
+	{
+	//case SDL_SCANCODE_P:
+		//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
+		//static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
+		//break;
+	//case SDL_SCANCODE_R:
+		//if (static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->getIsRunning()) {
+		//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(false);
+		//}
+		//else
+		//{
+		//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(true);
+		//}
+		break;
+	default:
+		inputManager.OnKeyDown(key_);
+		break;
+	}
+}
+
+void GameScene::NotifyOfKeyUp(const SDL_Scancode key_)
+{
+	switch (key_)
+	{
+	//case SDL_SCANCODE_LEFT:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
+	//	break;
+	//case SDL_SCANCODE_RIGHT:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
+	//	break;
+	//case SDL_SCANCODE_UP:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::SELF);
+	//	break;
+	//case SDL_SCANCODE_DOWN:
+	//	static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
+	//	break;
+	default:
+		inputManager.OnKeyUp(key_);
+		break;
 	}
 }

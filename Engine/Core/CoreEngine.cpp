@@ -2,7 +2,7 @@
 
 std::unique_ptr<CoreEngine> CoreEngine::engineInstance = nullptr;
 
-CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0)
+CoreEngine::CoreEngine() :window(nullptr), isRunning(false), fps(60), timer(nullptr), gameInterface(nullptr), currentSceneNum(0),userInterface(nullptr), rendererType(RendererType::OPENGL)
 {
 }
 
@@ -23,7 +23,9 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 {
 	Log::OnCreate();
 	window = new Window();
-	if (!window->OnCreate(name_, width_, height_)) {
+	//userInterface = new UserInterface();
+
+	if (!window->CreatesWindow(name_, width_, height_)) {
 		Log::FatalError("Window failed to initialize", "CoreEngine.cpp", __LINE__);
 		OnDestroy();
 		return isRunning = false;
@@ -31,12 +33,13 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	Log::Info("Window Created Succesfully", "CoreEngine.cpp", __LINE__);
 
 	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
-
 	MouseEventListener::RegisterEngineObject(this);
 	KeyboardEventListener::RegisterEngineObject(this);
 
 	ShaderHandler::GetInstance()->CreateProgram("colourShader", "Engine/Shader/ColourVertexShader.glsl", "Engine/Shader/ColourFragmentShader.glsl");
 	ShaderHandler::GetInstance()->CreateProgram("basicShader", "Engine/Shader/VertexShader.glsl", "Engine/Shader/FragmentShader.glsl");
+	ShaderHandler::GetInstance()->CreateProgram("particleShader", "Engine/Shader/ParticleVertexShader.glsl", "Engine/Shader/ParticleFragmentShader.glsl");
+	ShaderHandler::GetInstance()->CreateProgram("skyboxShader", "Engine/Shader/SkyBoxVert.glsl", "Engine/Shader/SkyBoxFrag.glsl");
 
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
@@ -45,10 +48,30 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 			return isRunning = false;
 		}
 	}
+	UserInterface::GetInstance()->OnCreate();
+	
 	Log::Info("Game Created Succesfully", "CoreEngine.cpp", __LINE__);
 	timer = new Timer();
 	timer->Start();
 	return isRunning = true;
+}
+
+bool CoreEngine::Initiallize(std::string name_, int width_, int height_)
+{
+	switch (rendererType) {
+	case RendererType::OPENGL:
+		OnCreate(name_, width_, height_);
+
+		break;
+
+	case RendererType::VULKAN:
+	case RendererType::DIRECTX11:
+	case RendererType::DIRECTX12:
+		return false;
+		break;
+	}
+
+	return true;
 }
 
 void CoreEngine::Run()
@@ -63,7 +86,7 @@ void CoreEngine::Run()
 	}
 	//if (!isRunning)
 	//{
-		OnDestroy();
+	OnDestroy();
 	//}
 }
 
@@ -97,6 +120,16 @@ Camera* CoreEngine::GetCamera() const
 	return camera;
 }
 
+SDL_Window* CoreEngine::GetWindow() const
+{
+	return window->GetWindow();
+}
+
+RendererType CoreEngine::GetRendererType() const
+{
+	return rendererType;
+}
+
 void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
 {
 	gameInterface = gameInterface_;
@@ -125,6 +158,7 @@ void CoreEngine::NotifyOfMouseMove(glm::ivec2 mouse_)
 {
 	if (camera)
 	{
+		if(currentSceneNum != 4)
 		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset());
 	}
 }
@@ -142,18 +176,8 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	switch (key_)
 	{
 		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
-	case SDL_SCANCODE_W:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.0f, 0.0f, 0.01f));
-		break;
-	case SDL_SCANCODE_A:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() - glm::vec3(0.01f, 0.0f, 0.0f));
-		break;
-	case SDL_SCANCODE_S:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.0f, 0.01f));
-		break;
-	case SDL_SCANCODE_D:
-		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.01f, 0.0f, 0.0f));
-		break;
+
+/*
 	case SDL_SCANCODE_SPACE:
 		GetCamera()->SetPosition(GetCamera()->GetPosition() + glm::vec3(0.0f, 0.01f, 0.0f));
 		break;
@@ -178,41 +202,85 @@ void CoreEngine::NotifyOfKeyDown(SDL_Scancode key_)
 	case SDL_SCANCODE_DOWN:
 		GetCamera()->SetRotation(GetCamera()->GetRotation() - glm::vec3(0.0f, 0.1f, 0.0f));
 		break;
+		*/
+	case SDL_SCANCODE_1:
+		CoreEngine::GetInstance()->SetCurrentScene(1);
+		break;
+	case SDL_SCANCODE_2:
+		CoreEngine::GetInstance()->SetCurrentScene(2);
+		break;
+	case SDL_SCANCODE_3:
+		CoreEngine::GetInstance()->SetCurrentScene(3);
+		break;
+	case SDL_SCANCODE_4:
+		CoreEngine::GetInstance()->SetCurrentScene(4);
+		break;
+	case SDL_SCANCODE_5:
+		CoreEngine::GetInstance()->SetCurrentScene(5);
+		break;
+	case SDL_SCANCODE_6:
+		CoreEngine::GetInstance()->SetCurrentScene(6);
+		break;
 	default:
+		gameInterface->NotifyOfKeyDown(key_);
+		break;
+	}
+}
+
+void CoreEngine::NotifyOfKeyRelease(SDL_Scancode key_)
+{
+	switch (key_)
+	{
+		//Controls for Camera: WASD Move, SPACE UP, LEFT CTRL Down, Q/E Yaw, UP/DOWN Pitch, LEFT/RIGHT Roll
+		
+	default:
+		gameInterface->NotifyOfKeyUp(key_);
 		break;
 	}
 }
 
 void CoreEngine::Update(const float deltaTime_)
 {
-	if(gameInterface)
+	if (gameInterface)
 	{
 		gameInterface->Update(deltaTime_);
-		//std::cout << deltaTime_ << std::endl;
 	}
-
+	UserInterface::GetInstance()->Update(deltaTime_);
 }
 
 void CoreEngine::Render()
 {
-	//Paints the backround colour
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (gameInterface)
+	switch (rendererType) 
 	{
-		gameInterface->Render();
+	case RendererType::OPENGL:
+		//Paints the backround colour
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		if (gameInterface)
+		{
+			gameInterface->Render();
+		}
+		UserInterface::GetInstance()->Render();
+		SDL_GL_SwapWindow(window->GetWindow());
+
+		break;
+	case RendererType::VULKAN:
+	case RendererType::DIRECTX11:
+	case RendererType::DIRECTX12:
+		break;
 	}
-	SDL_GL_SwapWindow(window->GetWindow());
+	
 }
 
 
 void CoreEngine::OnDestroy()
 {
+	NetworkingBase::isRunning = false;
 	ShaderHandler::GetInstance()->OnDestroy();
 	TextureHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
 	MaterialHandler::GetInstance()->OnDestroy();
-
+	UserInterface::GetInstance()->DestroyUI();
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete camera;

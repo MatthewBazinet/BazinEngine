@@ -1,7 +1,7 @@
-#include "CollisionDetection.h"
+﻿#include "CollisionDetection.h"
 #include "Ray.h"
 #include "../Core/CoreEngine.h"
-
+#include "../Sphere.h"
 CollisionDetection::~CollisionDetection() 
 {
 
@@ -195,4 +195,109 @@ bool CollisionDetection::RayAABBIntersection(Ray* ray_, BoundingBox* box_)
 		tMax = tzMax;
 
 	return true;
+}
+
+glm::vec3 CollisionDetection::VectorTripleProduct(glm::vec3 a, glm::vec3 b, glm::vec3 c)
+{
+	return glm::cross(a, glm::cross(b, c));
+	//return (glm::dot(a, c) * b) - (glm::dot(a, b) * c);
+}
+
+/*
+#define ORIGIN glm::vec3(0.0f,0.0f,0.0f)
+template<typename Shape_a, typename SupportMapping_a, typename Shape_b, typename SupportMapping_b>
+bool CollisionDetection::GJKIntersection(Shape_a a, SupportMapping_a aS, Shape_b b, SupportMapping_b bS)
+{
+	glm::vec3 d = glm::normalize(b.center - a.center);
+	glm::vec3 A;
+	Simplex s;
+	s.Add(aS.support(a, d) - bS.support(b, -d));
+
+	d = ORIGIN - s.a;
+	while (true)
+	{
+		A = support(a, b, d);
+		if (glm::dot(A, d) < 0)
+		{
+			return false;
+		}
+		s.Add(A);
+		//if (handleSimplex(s, d))
+		//{
+		//	return true;
+		//}
+	}
+
+	
+	return false;
+}
+#undef ORIGIN
+*/
+
+void CollisionDetection::Simplex::Add(glm::vec3 e)
+{
+		switch (length)
+		{
+		case 0:
+			a = e;
+			length = 1;
+			break;
+		case 1:
+			b = e;
+			length = 2;
+			break;
+		case 2:
+			c = e;
+			length = 3;
+			break;
+		case 3:
+			d = e;
+			length = 4;
+			break;
+		case 4:
+			a = b;
+			b = c;
+			c = d;
+			d = e;
+			break;
+		}
+}
+
+bool CollisionDetection::SphereSphereCollision(const Sphere object1, const Sphere object2) {
+	float distance = sqrt(pow(object2.position.x - object1.position.x, 2) + pow(object2.position.y - object1.position.y, 2) + pow(object2.position.z - object1.position.z, 2));
+	if (distance < object1.radius + object2.radius) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+
+void CollisionDetection::Simplex::Remove(int i)
+{
+	switch (i)
+	{
+	case 0:
+		a = b;
+		b = c;
+		c = d;
+		d = glm::vec3(NULL, NULL, NULL);
+		length--;
+		break;
+	case 1:
+		b = c;
+		c = d;
+		d = glm::vec3(NULL, NULL, NULL);
+		length--;
+		break;
+	case 2:
+		c = d;
+		d = glm::vec3(NULL, NULL, NULL);
+		length--;
+		break;
+	case 3:
+		d = glm::vec3(NULL, NULL, NULL);
+		length--;
+	}
 }

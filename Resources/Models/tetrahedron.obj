@@ -1,0 +1,35 @@
+# 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
+# File Created: 02.10.2021 18:49:11
+
+mtllib tetrahedron.mtl
+
+#
+# object tetrahedron
+#
+
+v  -0.2068 -0.3484 -0.2400
+v  -0.2068 0.6516 -0.2400
+v  0.7932 -0.3484 -0.2400
+v  -0.2068 -0.3484 0.7600
+# 4 vertices
+
+vn -0.5774 -0.5774 -0.5774
+vn -0.6759 -0.2940 -0.6759
+vn -0.2940 -0.6759 -0.6759
+vn -0.6759 -0.6759 -0.2940
+# 4 vertex normals
+
+vt 0.0200 0.9800 0.0000
+vt 0.9800 0.9800 0.0000
+vt 0.0200 0.0200 0.0000
+# 3 texture coords
+
+o tetrahedron
+g tetrahedron
+usemtl Material__25
+f 1/1/1 2/1/2 3/2/3 
+f 1/1/1 4/3/4 2/1/2 
+f 1/1/1 3/2/3 4/3/4 
+f 2/1/2 3/2/3 4/3/4 
+# 4 faces
+

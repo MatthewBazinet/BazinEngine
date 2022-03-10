@@ -25,6 +25,10 @@ public:
 	float GetNearPlane() const;
 	float GetFarPlane() const;
 	glm::vec3 GetForward() const;
+	glm::vec3 GetRight() const;
+
+
+	void SetForward(glm::vec3 forward_);
 
 	float GetZoomSpeed();
 	float GetMouseSensitivity();
@@ -32,12 +36,12 @@ public:
 	void AddLightSource(LightSource* light_);
 	const std::vector<LightSource*> GetLightSources() const;
 
-	void ProcessMouseMovement(glm::vec2 offset_);
-	void ProcessMouseZoom(int y_);
+	virtual void ProcessMouseMovement(glm::vec2 offset_);
+	virtual void ProcessMouseZoom(int y_);
 
 	bool TestPointAgainstPlanes(glm::vec3 point_, glm::mat4 transform_);
 
-private:
+protected:
 	void UpdateCameraVectors();
 	glm::vec4 NormalizePlane(glm::vec4 plane_);
 	glm::vec3 position;

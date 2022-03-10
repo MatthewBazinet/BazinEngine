@@ -75,6 +75,7 @@ void MaterialLoader::LoadMaterial(std::string filePath_)
 GLuint MaterialLoader::LoadTexture(std::string filePath_)
 {
 	GLuint currentTexture = TextureHandler::GetInstance()->GetTexture(filePath_);
+
 	if (currentTexture == 0) {
 		TextureHandler::GetInstance()->CreateTexture(filePath_, "Resources/Textures/" + filePath_ + ".png");
 		currentTexture = TextureHandler::GetInstance()->GetTexture(filePath_);
