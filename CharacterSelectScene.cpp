@@ -7,7 +7,8 @@
 
 CharacterSelectScene::CharacterSelectScene()
 {
-	count = 0;
+	P1count = 0;
+	P2count = 0;
 }
 
 CharacterSelectScene::~CharacterSelectScene()
@@ -19,7 +20,7 @@ bool CharacterSelectScene::OnCreate()
 {
 	Log::Info("Character Select Scene initiated", "CharacterSelectScene.cpp", __LINE__);
 	CoreEngine::GetInstance()->SetCamera(new Camera());
-	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
+	CoreEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 5.0f, 20.0f));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(2.0f, -2.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-2.0f, -2.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(0.0f, 0.0f, 1.0f)));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, -1.0f, 2.0f), 0.2f, 0.8f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f)));
@@ -36,9 +37,11 @@ bool CharacterSelectScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(Hoshis);
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(Hoshis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player1Hoshi");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(Hoshis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player2Hoshi");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(Alexis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player1Alexis");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(Alexis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player2Alexis");
 
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(100.0f, 0.0f, 0.0f)), "char1");
-	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(1000.0f, 0.0f, 0.0f)), "char2");
 
 	//dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
 
@@ -51,15 +54,9 @@ bool CharacterSelectScene::OnCreate()
 	
 	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	//dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2")));
-	//dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(CoreEngine::GetInstance()->GetCamera());
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetCamera(CoreEngine::GetInstance()->GetCamera());
 
-	AddCharacter("Hoshi", dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	AddCharacter("Alexis", dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	AddCharacter("Hoshi1", SceneGraph::GetInstance()->GetGameObject("Player1Hoshi"),"Hoshi2", SceneGraph::GetInstance()->GetGameObject("Player2Hoshi"));
+	AddCharacter("Alexis1", SceneGraph::GetInstance()->GetGameObject("Player1Alexis"),"Alexis2", SceneGraph::GetInstance()->GetGameObject("Player2Alexis"));
 
 	Rock = nullptr;
 	Alexis = nullptr;
@@ -89,18 +86,32 @@ void CharacterSelectScene::NotifyOfKeyDown(const SDL_Scancode key_)
 	switch (key_)
 	{
 	case(SDL_SCANCODE_A):
-		count++;
-		if (count > names.size() -1) {
-			count = 0;
+		P1count++;
+		if (P1count > P1names.size() -1) {
+			P1count = 0;
 		}
-		selectedCharacter = names[count];
+		P1selectedCharacter = P1names[P1count];
 		break;
 	case(SDL_SCANCODE_D):
-		count--;
-		if (count < 0) {
-			count = names.size() -1;
+		P1count--;
+		if (P1count < 0) {
+			P1count = P1names.size() -1;
 		}
-		selectedCharacter = names[count];
+		P1selectedCharacter = P1names[P1count];
+		break;
+	case(SDL_SCANCODE_LEFT):
+		P2count++;
+		if (P2count > P2names.size() - 1) {
+			P2count = 0;
+		}
+		P2selectedCharacter = P2names[P2count];
+		break;
+	case(SDL_SCANCODE_RIGHT):
+		P2count--;
+		if (P2count < 0) {
+			P2count = P2names.size() - 1;
+		}
+		P2selectedCharacter = P2names[P2count];
 		break;
 	default:
 		//AlexisBruce* c1 = dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"));
@@ -123,20 +134,34 @@ void CharacterSelectScene::NotifyOfKeyUp(const SDL_Scancode key_)
 	}
 }
 
-void CharacterSelectScene::AddCharacter(std::string name_, Character* character_)
+void CharacterSelectScene::AddCharacter(std::string P1Name_, GameObject* P1Character_,std::string P2Name_, GameObject* P2Character_)
 {
-	listOfCharacters[name_] = character_;
-	names.push_back(name_);
-	currentCharacter = names[0];
-	selectedCharacter = names[0];
+	P1ListOfCharacters[P1Name_] = P1Character_;
+	P1names.push_back(P1Name_);
+	P1currentCharacter = P1names[0];
+	P1selectedCharacter = P1names[0];
+
+	P2ListOfCharacters[P2Name_] = P2Character_;
+	P2names.push_back(P2Name_);
+	P2currentCharacter = P2names[0];
+	P2selectedCharacter = P2names[0];
 }
 
 void CharacterSelectScene::CharacterSelection()
 {
-	if (currentCharacter != selectedCharacter) {
-		listOfCharacters[currentCharacter]->SetPosition(glm::vec3(-100.0f, 0.0f, 0.0f));
-		currentCharacter = selectedCharacter;
+	//Player 1 character selection
+	if (P1currentCharacter != P1selectedCharacter) {
+		P1ListOfCharacters[P1currentCharacter]->SetPosition(glm::vec3(-100.0f, 0.0f, 0.0f));
+		P1currentCharacter = P1selectedCharacter;
 	}
-	//Character that player sees
-	listOfCharacters[currentCharacter]->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	//Character that player1 sees
+	P1ListOfCharacters[P1currentCharacter]->SetPosition(glm::vec3(-8.0f, 0.0f, 0.0f));
+
+	//Player 2 character selection
+	if (P2currentCharacter != P2selectedCharacter) {
+		P2ListOfCharacters[P2currentCharacter]->SetPosition(glm::vec3(-100.0f, 0.0f, 0.0f));
+		P2currentCharacter = P2selectedCharacter;
+	}
+	//Character that player2 sees
+	P2ListOfCharacters[P2currentCharacter]->SetPosition(glm::vec3(8.0f, 0.0f, 0.0f));
 }

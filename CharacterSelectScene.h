@@ -17,16 +17,25 @@ public:
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
-	void AddCharacter(std::string name_, Character* character_);
+	void AddCharacter(std::string P1Name_, GameObject* P1Character_,std::string P2Name_, GameObject* P2Character_);
 	void CharacterSelection();
 	//static std::vector<Character*> GetHurtBoxes() {return hurtBoxes;};
 	//static std::vector<Character*> SetHurtBoxes(std::vector<Character*> hurtBoxes_) { hurtBoxes = hurtBoxes_; };
 private:
 	//static std::vector<Character*> hurtBoxes;
-	std::unordered_map<std::string, Character*> listOfCharacters;
-	std::vector<std::string> names;
-	std::string selectedCharacter;
-	std::string currentCharacter;
-	int count;
+	std::vector<std::string> P1names;
+	std::vector<std::string> P2names;
+
+	std::unordered_map<std::string, GameObject*> P1ListOfCharacters;
+	std::unordered_map<std::string, GameObject*> P2ListOfCharacters;
+
+	std::string P1selectedCharacter;
+	std::string P1currentCharacter;
+
+	std::string P2selectedCharacter;
+	std::string P2currentCharacter;
+
+	int P1count;
+	int P2count;
 };
 #endif
