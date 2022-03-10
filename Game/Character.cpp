@@ -604,6 +604,8 @@ void Character::OnLand()
 
 void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_)
 {
+	isRunning = false;
+	isIdle = false;
 	if (FacingLeft())
 	{
 		if (MovingRight && !isAirborne)
@@ -617,12 +619,12 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 			nextActionable = hitStun_;
 			if (opponent->FacingLeft())
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 
 			}
 			else
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 			}
 		}
 	}
@@ -639,12 +641,13 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 			nextActionable = hitStun_;
 			if (opponent->FacingLeft())
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 
 			}
 			else
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 			}
 		}
 	}
