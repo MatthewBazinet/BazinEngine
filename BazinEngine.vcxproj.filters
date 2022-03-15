@@ -108,6 +108,7 @@
     <ClCompile Include="HurtBoxVisual.cpp" />
     <ClCompile Include="Kunai.cpp" />
     <ClCompile Include="GravityWave.cpp" />
+    <ClCompile Include="SlashWave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="HurtBoxVisual.h" />
     <ClInclude Include="Kunai.h" />
     <ClInclude Include="GravityWave.h" />
+    <ClInclude Include="SlashWave.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

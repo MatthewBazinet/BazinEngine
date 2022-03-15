@@ -19,6 +19,7 @@ class HitBox;
 struct FrameData
 {
 	FrameData();
+	FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_);
 	~FrameData();
 	float GetTotalTime();
 	float startup;

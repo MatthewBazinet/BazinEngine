@@ -1,5 +1,5 @@
-#ifndef KUNAI_H
-#define KUNAI_H
+#ifndef SLASHWAVE_H
+#define SLASHWAVE_H
 
 #include "Projectile.h"
 

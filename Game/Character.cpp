@@ -730,6 +730,17 @@ FrameData::FrameData()
 	push = glm::vec3();
 }
 
+FrameData::FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_)
+{
+	startup = startup_;
+	active = active_;
+	recovery = recovery_;
+	damage = damage_;
+	hitStun = hitStun_;
+	blockStun = blockStun_;
+	push = push_;
+}
+
 FrameData::~FrameData()
 {
 }
