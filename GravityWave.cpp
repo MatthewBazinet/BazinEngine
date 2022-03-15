@@ -27,18 +27,16 @@ void GravityWave::Update(float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes())) {
 				if (strength == 0)
 				{
-					parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
-					parent->GetOpponent()->ApplyForce((parent->GetOpponent()->GetPosition() - parent->GetPosition()) * 100.0f);
+					parent->GetOpponent()->Hit(50.0f, 0.5f, 0.25f, (parent->GetOpponent()->GetPosition() - parent->GetPosition()) * 0.5f);
 				}
 				else if (strength == 1)
 				{
-					parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
-					parent->GetOpponent()->ApplyForce(glm::vec3(0.0f, 100.0f, 0.0f));
+					parent->GetOpponent()->Hit(50.0f, 0.5f, 0.25f, glm::vec3(0.0f, 10.0f, 0.0f));
 				}
 				else if (strength == 2)
 				{
-					parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
-					parent->GetOpponent()->ApplyForce(glm::vec3(0.0f, 100.0f, 0.0f));
+					parent->GetOpponent()->Hit(50.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
+					std::cout << parent->GetOpponent()->GetHealth() << std::endl;
 					//parent->GetOpponent()->setApplyGravity(false);
 				}
 

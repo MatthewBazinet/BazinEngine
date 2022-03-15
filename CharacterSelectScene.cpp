@@ -38,7 +38,7 @@ bool CharacterSelectScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(Hoshis);
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
-	SceneGraph::GetInstance()->AddModel(kunai);
+	//SceneGraph::GetInstance()->AddModel(kunai);
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(Hoshis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player1Hoshi");
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(Hoshis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player2Hoshi");
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(Alexis, glm::vec3(1000.0f, 0.0f, 0.0f)), "Player1Alexis");

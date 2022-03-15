@@ -125,10 +125,10 @@ void Hoshi::SetModels(Model* hurtBox_)
 	hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
 			
 	hitBoxes["slide"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["slide"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(-5.0f, 3.5f, 0.0f), 1.25f, 4);
+	hitBoxes["slide"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(7.5f, 0.5f, 0.0f), 1.25f, 2);
 
 	hurtBox = hurtBoxes["basic"];
-	//hitBox = hitBoxes["slide"];
+	hitBox = hitBoxes["light"];
 }
 
 void Hoshi::Run(bool isRunning_)
@@ -252,6 +252,7 @@ void Hoshi::OnLand()
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
 }
 
+// Gravity Wave
 void Hoshi::QCF(int strength, bool simpleInput)
 {
 	if (!CheckMoveState(moveState::QCF)) return;
@@ -262,6 +263,7 @@ void Hoshi::QCF(int strength, bool simpleInput)
 	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWaveStart", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
+	SetFrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f);
 
 	if (proj == nullptr) {
 		proj = new GravityWave(glm::vec3(1.0f, 0.0f, 1.0f), this, strength);
@@ -275,6 +277,7 @@ void Hoshi::QCF(int strength, bool simpleInput)
 	resetCombo();
 }
 
+// Slide
 void Hoshi::QCB(int strength, bool simpleInput)
 {
 	if (!CheckMoveState(moveState::QCB)) return;
@@ -286,23 +289,24 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
 	hurtBox = hurtBoxes["slide"];
 	hitBox = hitBoxes["slide"];
+	SetFrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f);
 
-	ApplyForce(position - opponent->GetPosition());
+	this->ApplyForce(GetPosition() - opponent->GetPosition());
 
 	if (hitBoxes["slide"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
 	{
-		GetOpponent()->Hit(5.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
+		//GetOpponent()->Hit(5.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
 		if (strength == 0)
 		{
 
 		}
 		else if (strength == 1)
 		{
-			GetOpponent()->ApplyForce(glm::vec3(0.0f, 20.0f, 0.0f));
+			GetOpponent()->ApplyForce(glm::vec3(0.0f, 10.0f, 0.0f));
 		}
 		else if (strength == 2)
 		{
-			GetOpponent()->ApplyForce(glm::vec3(0.0f, 20.0f, 0.0f));
+			GetOpponent()->ApplyForce(glm::vec3(0.0f, 10.0f, 0.0f));
 			//GetOpponent()->setApplyGravity(false);
 		}
 	}
@@ -352,13 +356,8 @@ void Hoshi::Light()
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
 				hurtBox = hurtBoxes["basic"];
 				hitBox = hitBoxes["light"];
-				SetFrameData(4.0f / 60.0f, 6.0f / 60.0f, 10.0f / 60.0f);
+				SetFrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f);
 				//SetFrameData(frameData["light"]);
-
-				if (hitBoxes["light"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
-				{
-					GetOpponent()->Hit(5.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
-				}
 			}
 		}
 	}
@@ -383,12 +382,7 @@ void Hoshi::Medium()
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
 				hurtBox = hurtBoxes["basic"];
 				hitBox = hitBoxes["medium"];
-				SetFrameData(4.0f / 60.0f, 6.0f / 60.0f, 10.0f / 60.0f);
-
-				if (hitBoxes["medium"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
-				{
-					GetOpponent()->Hit(7.0f, 1.5f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
-				}
+				SetFrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f);
 			}
 		}
 	}
@@ -413,11 +407,7 @@ void Hoshi::Heavy()
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
 				hurtBox = hurtBoxes["basic"];
 				hitBox = hitBoxes["heavy"];
-
-				if (hitBoxes["heavy"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
-				{
-					GetOpponent()->Hit(10.0f, 1.5f, 1.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-				}
+				SetFrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f);
 			}
 		}
 	}
@@ -453,6 +443,7 @@ void Hoshi::AirLight()
 	currentMove = moveState::AIRLIGHT;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
+	SetFrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f);
 
 	if (proj == nullptr) {
 		proj = new Kunai(glm::vec3(1.0f, 4.0f, 1.0f), this);
@@ -469,6 +460,7 @@ void Hoshi::AirMedium()
 	currentMove = moveState::AIRMEDIUM;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirMediumStart", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
+	SetFrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f);
 
 	if (proj == nullptr) {
 		proj = new Kunai(glm::vec3(1.0f, 4.0f, 1.0f), this);
@@ -485,6 +477,7 @@ void Hoshi::AirHeavy()
 	currentMove = moveState::AIRHEAVY;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirHeavyStart", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
+	SetFrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f);
 
 	if (proj == nullptr) {
 		proj = new Kunai(glm::vec3(1.0f, 4.0f, 1.0f), this);
