@@ -78,7 +78,7 @@ std::vector<Sphere> HurtBox::SpawnHurtBox(Model* model_, glm::vec3 startingPos_,
 	if (numOfSpheres >= 2) {
 		float dist = glm::distance(startingPos_, endingPos_);
 		float spacing = dist / numOfSpheres;
-		HurtBoxVisual* hurtBoxDebug = new HurtBoxVisual("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"), false);
+		HurtBoxVisual* hurtBoxDebug = new HurtBoxVisual("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"), true);
 		SceneGraph::GetInstance()->AddModel(hurtBoxDebug);
 		for (int i = 0; i < numOfSpheres; i++) {
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);

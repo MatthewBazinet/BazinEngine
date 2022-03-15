@@ -123,17 +123,17 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 		else if (key_ == player2Keybinds.light)
 		{
 			player2Inputs.lightPressed = true;
-			CheckMotion(0, 1);
+			CheckMotion(0, 2);
 		}
 		else if (key_ == player2Keybinds.medium)
 		{
 			player2Inputs.mediumPressed = true;
-			CheckMotion(1, 1);
+			CheckMotion(1, 2);
 		}
 		else if (key_ == player2Keybinds.heavy)
 		{
 			player2Inputs.heavyPressed = true;
-			CheckMotion(2, 1);
+			CheckMotion(2, 2);
 		}
 		else if (key_ == player2Keybinds.unique)
 		{
