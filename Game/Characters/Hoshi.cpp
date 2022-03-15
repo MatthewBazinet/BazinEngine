@@ -291,7 +291,7 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	hitBox = hitBoxes["slide"];
 	SetFrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f);
 
-	this->ApplyForce(GetPosition() - opponent->GetPosition());
+	ApplyForce(10.0f * (opponent->GetPosition() - GetPosition()));
 
 	if (hitBoxes["slide"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
 	{

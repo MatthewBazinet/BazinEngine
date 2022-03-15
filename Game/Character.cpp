@@ -306,7 +306,7 @@ void Character::Update(const float deltaTime_)
 		if (MovingLeft) dir2D = -1.0f;
 		if (MovingRight) dir2D = 1.0f;
 
-		if (nextActionable <= 0.0f)
+		if (nextActionable <= 0.0f && moveTimeLeft <= 0.0f)
 		{
 			float preserveY = vel.y;
 			vel = axisOf2DMovement * maxSpeed * dir2D;
