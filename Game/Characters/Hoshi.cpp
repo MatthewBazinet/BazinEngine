@@ -319,7 +319,7 @@ void Hoshi::Unique()
 	if (!CheckMoveState(moveState::UNIQUE)) return;
 
 	if (nextActionable > 0.0f) return;
-
+	SetFrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f);
 	isIdle = false;
 	// fix levitate animations
 	floating = !floating;

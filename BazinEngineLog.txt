@@ -22,8 +22,6 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 72
@@ -50,5 +48,3 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 72
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 72
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 72

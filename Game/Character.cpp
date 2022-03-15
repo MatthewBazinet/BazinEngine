@@ -189,7 +189,10 @@ void Character::Update(const float deltaTime_)
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
-
+		if (nextActionable <= 0.0f)
+		{
+			applyGravity = true;
+		}
 	}
 	//proj->Update(deltaTime_);
 	if (isAttacking)
@@ -690,7 +693,14 @@ void Character::Hit(FrameData frameData_)
 
 std::vector<Sphere> Character::GetHurtBoxes() const
 {
-	return hurtBox->GetHurtBoxes();
+	if (hurtBox)
+	{
+		return hurtBox->GetHurtBoxes();
+	}
+	else
+	{
+		return std::vector<Sphere>();
+	}
 }
 
 
