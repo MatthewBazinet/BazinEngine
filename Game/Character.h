@@ -19,7 +19,7 @@ class HitBox;
 struct FrameData
 {
 	FrameData();
-	FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_);
+	FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_, int strength_ = 0);
 	~FrameData();
 	float GetTotalTime();
 	float startup;
@@ -29,6 +29,7 @@ struct FrameData
 	float hitStun;
 	float blockStun;
 	glm::vec3 push;
+	int strength;
 };
 
 class Character : public GameObject
@@ -95,6 +96,19 @@ protected:
 	virtual void AirLight();
 	virtual void AirMedium();
 	virtual void AirHeavy();
+
+	virtual void OnQCFActive(int strength);
+	virtual void OnQCBActive(int strength);
+	virtual void OnUniqueActive();
+	virtual void OnLightActive();
+	virtual void OnMediumActive();
+	virtual void OnHeavyActive();
+	virtual void OnAirQCFActive(int strength);
+	virtual void OnAirQCBActive(int strength);
+	virtual void OnAirUniqueActive();
+	virtual void OnAirLightActive();
+	virtual void OnAirMediumActive();
+	virtual void OnAirHeavyActive();
 
 	void SetFrameData(float startup_, float active_, float recovery_);
 	void SetFrameData(FrameData frameData_);

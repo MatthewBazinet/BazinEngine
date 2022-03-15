@@ -200,26 +200,56 @@ void Character::Update(const float deltaTime_)
 			startUpTimeLeft -= deltaTime_;
 			if (startUpTimeLeft <= 0.0f)
 			{
-				hitBox->EnableHitBox();
+				if(hitBox) hitBox->EnableHitBox();
+				switch (currentMove)
+				{
+				case moveState::QCB:
+					OnQCBActive(currentFrameData.strength);
+					break;
+				case moveState::QCF:
+					OnQCFActive(currentFrameData.strength);
+					break;
+				case moveState::GROUNDLIGHT:
+					OnLightActive();
+					break;
+				case moveState::GROUNDMEDIUM:
+					OnMediumActive();
+					break;
+				case moveState::GROUNDHEAVY:
+					OnHeavyActive();
+					break;
+				case moveState::AIRLIGHT:
+					OnAirLightActive();
+					break;
+				case moveState::AIRMEDIUM:
+					OnAirMediumActive();
+					break;
+				case moveState::AIRHEAVY:
+					OnAirHeavyActive();
+					break;
+				}
 			}
 		}
 		else if (activeTimeLeft > 0.0f)
 		{
 			activeTimeLeft -= deltaTime_;
-			if (activeTimeLeft <= 0.0f)
+			if (hitBox)
 			{
+				if (activeTimeLeft <= 0.0f)
+				{
+					if (hitBox->GetIsEnabled())
+					{
+						hitBox->DisableHitBox();
+					}
+				}
 				if (hitBox->GetIsEnabled())
 				{
-					hitBox->DisableHitBox();
-				}
-			}
-			if (hitBox->GetIsEnabled())
-			{
-				hitBox->Update(deltaTime_);
-				if (hitBox->CheckCollision(opponent->GetHurtBoxes()))
-				{
-					opponent->Hit(currentFrameData);
-					hitBox->DisableHitBox();
+					hitBox->Update(deltaTime_);
+					if (hitBox->CheckCollision(opponent->GetHurtBoxes()))
+					{
+						opponent->Hit(currentFrameData);
+						hitBox->DisableHitBox();
+					}
 				}
 			}
 		}
@@ -712,6 +742,19 @@ void Character::AirHeavy()
 
 }
 
+void Character::OnQCFActive(int strength){}
+void Character::OnQCBActive(int strength){}
+void Character::OnUniqueActive(){}
+void Character::OnLightActive(){}
+void Character::OnMediumActive(){}
+void Character::OnHeavyActive(){}
+void Character::OnAirQCFActive(int strength){}
+void Character::OnAirQCBActive(int strength){}
+void Character::OnAirUniqueActive(){}
+void Character::OnAirLightActive(){}
+void Character::OnAirMediumActive(){}
+void Character::OnAirHeavyActive(){}
+
 void Character::resetCombo()
 {
 	combo["light"] = 1;
@@ -730,7 +773,7 @@ FrameData::FrameData()
 	push = glm::vec3();
 }
 
-FrameData::FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_)
+FrameData::FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_, int strength_)
 {
 	startup = startup_;
 	active = active_;
@@ -739,6 +782,7 @@ FrameData::FrameData(float startup_, float active_, float recovery_, float damag
 	hitStun = hitStun_;
 	blockStun = blockStun_;
 	push = push_;
+	strength = strength_;
 }
 
 FrameData::~FrameData()

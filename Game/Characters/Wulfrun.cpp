@@ -127,13 +127,28 @@ void Wulfrun::Unique()
 
 void Wulfrun::Light()
 {
-	if (isAirborne)
+
+	if (checkComboState(moveState::GROUNDLIGHT))
 	{
-		AirLight();
-	}
-	else
-	{
-		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.2f);
+		if (combo["light"] > 0)
+		{
+			combo["light"] -= 1;
+			isIdle = false;
+
+			if (isAirborne)
+			{
+				AirLight();
+			}
+			else
+			{
+				currentMove = moveState::GROUNDLIGHT;
+				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
+				hurtBox = hurtBoxes["basic"];
+				hitBox = hitBoxes["light"];
+				SetFrameData(4.0f / 60.0f, 6.0f / 60.0f, 10.0f / 60.0f);
+				//SetFrameData(frameData["light"]);
+			}
+		}
 	}
 }
 
@@ -196,13 +211,54 @@ void Wulfrun::AirHeavy()
 	hurtBox = hurtBoxes["aerial"];
 
 	hitBox = nullptr;
+	SetFrameData(frameData["airHeavy"]);
 
+}
+
+void Wulfrun::OnQCFActive()
+{
 	if (proj == nullptr) {
-		proj = new SlashWave(frameData["airMedium"], glm::vec3(1.0f, 4.0f, 1.0f), this);
+		proj = new SlashWave(frameData["qcf"], glm::vec3(1.0f, 4.0f, 1.0f), this);
 	}
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 15.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
 	proj->SetPosition(this->GetPosition());
 	proj->SetVelocity(glm::vec3(-dir));
+}
+
+void Wulfrun::OnQCBActive()
+{
+}
+
+void Wulfrun::OnUniqueActive()
+{
+}
+
+void Wulfrun::OnAirHeavyActive()
+{
+	if (proj == nullptr) {
+		proj = new SlashWave(frameData["airHeavy"], glm::vec3(1.0f, 4.0f, 1.0f), this);
+	}
+
+	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 15.0f, position.z - opponent->GetPosition().z);
+	proj->SetTarget(nullptr);
+	proj->SetPosition(this->GetPosition());
+	proj->SetVelocity(glm::vec3(-dir));
+}
+
+void Wulfrun::OnHeavyActive()
+{
+}
+
+void Wulfrun::OnAirQCFActive()
+{
+}
+
+void Wulfrun::OnAirQCBActive()
+{
+}
+
+void Wulfrun::OnAirUniqueActive()
+{
 }

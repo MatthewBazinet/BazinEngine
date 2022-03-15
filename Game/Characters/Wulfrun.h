@@ -28,6 +28,15 @@ protected:
 	void AirMedium();
 	void AirHeavy();
 
+	void OnQCFActive(int strength);
+	void OnQCBActive(int strength);
+	void OnUniqueActive();
+	void OnHeavyActive();
+	void OnAirQCFActive(int strength);
+	void OnAirQCBActive(int strength);
+	void OnAirUniqueActive();
+	void OnAirHeavyActive();
+
 	Projectile* proj;
 };
 
