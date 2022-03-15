@@ -37,6 +37,9 @@ public:
 	void SetPlayer1(Character* character_);
 	void SetPlayer2(Character* character_);
 
+	void SetTime(int time_) { time = time_; };
+	int GetTime() { return time; };
+
 private:
 	UserInterface();
 	~UserInterface();

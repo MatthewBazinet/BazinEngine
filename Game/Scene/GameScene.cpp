@@ -455,11 +455,13 @@ bool GameScene::OnCreate()
 
 void GameScene::ResetRound()
 {
+	UserInterface::GetInstance()->SetTime(60);
+
 	SceneGraph::GetInstance()->GetGameObject("char1")->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	SceneGraph::GetInstance()->GetGameObject("char2")->SetPosition(glm::vec3(10.0f, 0.0f, 0.0f));
 
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetHealth(100.0f);
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetHealth(100.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetHealth(1000.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetHealth(1000.0f);
 
 	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOverclock(0.0f);
 	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOverclock(0.0f);
@@ -483,6 +485,11 @@ void GameScene::Update(const float deltaTime_)
 	else if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth() <= 0.0f)
 	{
 		std::cout << "player 2 win" << std::endl;
+		ResetRound();
+	}
+	else if (UserInterface::GetInstance()->GetTime() <= 0)
+	{
+		std::cout << "tied" << std::endl;
 		ResetRound();
 	}
 }
