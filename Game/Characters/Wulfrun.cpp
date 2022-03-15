@@ -215,7 +215,7 @@ void Wulfrun::AirHeavy()
 
 }
 
-void Wulfrun::OnQCFActive()
+void Wulfrun::OnQCFActive(int strenth)
 {
 	if (proj == nullptr) {
 		proj = new SlashWave(frameData["qcf"], glm::vec3(1.0f, 4.0f, 1.0f), this);
@@ -227,7 +227,7 @@ void Wulfrun::OnQCFActive()
 	proj->SetVelocity(glm::vec3(-dir));
 }
 
-void Wulfrun::OnQCBActive()
+void Wulfrun::OnQCBActive(int strenth)
 {
 }
 
@@ -251,11 +251,11 @@ void Wulfrun::OnHeavyActive()
 {
 }
 
-void Wulfrun::OnAirQCFActive()
+void Wulfrun::OnAirQCFActive(int strenth)
 {
 }
 
-void Wulfrun::OnAirQCBActive()
+void Wulfrun::OnAirQCBActive(int strenth)
 {
 }
 
