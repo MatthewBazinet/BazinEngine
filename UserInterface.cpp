@@ -172,7 +172,7 @@ void UserInterface::ShowGameUi()
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 2HP", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
 		if (player2) {
-			float health = (player2->GetHealth() - 0.0f) / (100.0f - 0.0f);
+			float health = (player2->GetHealth() - 0.0f) / (1000.0f - 0.0f);
 			ImGui::ProgressBar(health, ImVec2(400, 35));
 		}
 		else {
@@ -195,7 +195,7 @@ void UserInterface::ShowGameUi()
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.25f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 1HP", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
 		if (player1) {
-			float health = (player1->GetHealth() - 0.0f) / (100.0f - 0.0f);
+			float health = (player1->GetHealth() - 0.0f) / (1000.0f - 0.0f);
 			
 			ImGui::ProgressBar(health, ImVec2(400, 35));
 		}

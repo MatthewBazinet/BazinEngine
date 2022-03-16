@@ -729,6 +729,11 @@ void Character::AirQCB(int strength, bool simpleInput)
 
 }
 
+float Character::GetHealth() const
+{
+	return health;
+}
+
 void Character::AirUnique()
 {
 	if (nextActionable > 0.0f) return;

@@ -67,7 +67,7 @@ public:
 	//void SetProjectile(Projectile* projectile_) { proj = projectile_; };
 
 	Character* GetOpponent()const { return opponent; };
-	float GetHealth() const { return health; };
+	float GetHealth() const;
 	void SetHealth(float health_) { health = health_; };
 	float GetOverclock() const { return overclock; };
 	void SetOverclock(float overclock_) { overclock = overclock_; };
