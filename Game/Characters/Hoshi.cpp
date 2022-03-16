@@ -538,7 +538,7 @@ void Hoshi::AirLight()
 void Hoshi::OnAirLightActive()
 {
 	if (proj == nullptr) {
-		proj = new Kunai(glm::vec3(1.0f, 4.0f, 1.0f), this);
+		proj = new Kunai(glm::vec3(1.0f, 4.0f, 1.0f), this, 0.0f, glm::vec3(0.0f, 1.0f, 90.0f));
 	}
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 15.0f, position.z - opponent->GetPosition().z);

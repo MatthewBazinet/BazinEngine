@@ -53,7 +53,7 @@ bool HitBox::CheckCollision(std::vector<Sphere> hurtbox)
 
 std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endingPos_, float width_, int numOfSpheres)
 {
-	HurtBoxVisual* hurtBoxDebug = new HurtBoxVisual("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"), true);
+	HurtBoxVisual* hurtBoxDebug = new HurtBoxVisual("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"), false);
 	SceneGraph::GetInstance()->AddModel(hurtBoxDebug);
 	if (numOfSpheres >= 2) {
 		float dist = glm::distance(startingPos_, endingPos_);

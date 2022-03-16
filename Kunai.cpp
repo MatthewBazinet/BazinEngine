@@ -1,9 +1,9 @@
 #include "Kunai.h"
 #include "../Game/Characters/Hoshi.h"
 
-Kunai::Kunai(glm::vec3 position_, Character* parent_, float angle_, glm::vec3 rotation_ , glm::vec3 scale_) : Projectile(new Model("Resources/Models/Kunai.obj", "Resources/Materials/Kunai.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), position_, parent_, angle_, rotation_)
+Kunai::Kunai(glm::vec3 position_, Character* parent_, float angle_, glm::vec3 rotation_ , glm::vec3 scale_) : Projectile(new Model("Resources/Models/Kunai.obj", "Resources/Materials/Kunai.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), position_, parent_, angle_, rotation_, scale_)
 {
-	//SceneGraph::GetInstance()->AddModel(model);
+	SceneGraph::GetInstance()->AddModel(model);
 }
 
 Kunai::~Kunai()
