@@ -458,6 +458,7 @@ void Character::SetFrameData(FrameData frameData_)
 	recoveryTimeLeft = frameData_.recovery;
 	moveTimeLeft = startUpTimeLeft + activeTimeLeft + recoveryTimeLeft;
 	isAttacking = true;
+	currentFrameData = frameData_;
 }
 
 void Character::QCF(int strength, bool simpleInput)

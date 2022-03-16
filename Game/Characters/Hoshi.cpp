@@ -97,9 +97,9 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 	// Gravity Wave
-	frameData["QSF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(-5.0f, 0.0f, 0.0f), 0);
-	frameData["QSF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QSF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(-5.0f, 0.0f, 0.0f), 0);
+	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	// Slide
 	frameData["QSB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(-1.0f, 0.0f, 0.0f), 0);
@@ -286,15 +286,15 @@ void Hoshi::QCF(int strength, bool simpleInput)
 
 	if (strength == 0)
 	{
-		SetFrameData(frameData["QSF0"]);
+		SetFrameData(frameData["QCF0"]);
 	}
 	else if (strength == 1)
 	{
-		SetFrameData(frameData["QSF1"]);
+		SetFrameData(frameData["QCF1"]);
 	}
 	else if (strength == 2)
 	{
-		SetFrameData(frameData["QSF2"]);
+		SetFrameData(frameData["QCF2"]);
 	}
 
 	// make hurtbox nullptr for invincible reversal, turn it back to regular afterwards
