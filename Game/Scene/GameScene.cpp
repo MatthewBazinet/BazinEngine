@@ -366,7 +366,7 @@ bool GameScene::OnCreate()
 	switch (MatchSettings::GetInstance()->GetPlayer1Character()) {
 	case(Player1Characters::Hoshi):
 		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
-		dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
+		//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
 		break;
 	case(Player1Characters::Alexis):
 		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
@@ -379,7 +379,7 @@ bool GameScene::OnCreate()
 	switch (MatchSettings::GetInstance()->GetPlayer2Character()) {
 	case(Player2Characters::Hoshi):
 		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
-		dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
+		//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
 		break;
 	case(Player2Characters::Alexis):
 		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");

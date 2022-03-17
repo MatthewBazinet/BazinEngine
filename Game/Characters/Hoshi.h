@@ -16,7 +16,7 @@ public:
 	~Hoshi();
 
 	virtual void Update(const float deltaTime_);
-	void SetModels(Model* hurtBox_);
+	//void SetModels(Model* hurtBox_);
 
 	void Run(bool isRunning_);
 	void Move(glm::vec2 input);
