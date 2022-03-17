@@ -362,9 +362,10 @@ bool GameScene::OnCreate()
 
 	//SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
 
+
 	switch (MatchSettings::GetInstance()->GetPlayer1Character()) {
 	case(Player1Characters::Hoshi):
-		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
 		dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
 		break;
 	case(Player1Characters::Alexis):
@@ -377,7 +378,7 @@ bool GameScene::OnCreate()
 
 	switch (MatchSettings::GetInstance()->GetPlayer2Character()) {
 	case(Player2Characters::Hoshi):
-		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
+		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
 		dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
 		break;
 	case(Player2Characters::Alexis):
@@ -391,6 +392,12 @@ bool GameScene::OnCreate()
 	
 	
 	
+
+	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
+	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
+	//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
+	//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
+
 
 	//SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 
@@ -480,11 +487,13 @@ bool GameScene::OnCreate()
 
 void GameScene::ResetRound()
 {
+	UserInterface::GetInstance()->SetTime(60);
+
 	SceneGraph::GetInstance()->GetGameObject("char1")->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	SceneGraph::GetInstance()->GetGameObject("char2")->SetPosition(glm::vec3(10.0f, 0.0f, 0.0f));
 
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetHealth(100.0f);
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetHealth(100.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetHealth(1000.0f);
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetHealth(1000.0f);
 
 	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOverclock(0.0f);
 	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOverclock(0.0f);
@@ -508,6 +517,11 @@ void GameScene::Update(const float deltaTime_)
 	else if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth() <= 0.0f)
 	{
 		std::cout << "player 2 win" << std::endl;
+		ResetRound();
+	}
+	else if (UserInterface::GetInstance()->GetTime() <= 0)
+	{
+		std::cout << "tied" << std::endl;
 		ResetRound();
 	}
 }

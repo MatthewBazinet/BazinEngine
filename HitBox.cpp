@@ -41,10 +41,14 @@ bool HitBox::CheckCollision(std::vector<Sphere> hurtbox)
 	if (isEnabled) {
 		for (int i = 0; i < hurtbox.size(); i++) {
 			for (int j = 0; j < hitBoxes.size(); j++) {
-				return CollisionDetection::SphereSphereCollision(hurtbox[i], hitBoxes[j]);
+				if (CollisionDetection::SphereSphereCollision(hurtbox[i], hitBoxes[j]))
+				{
+					return true;
+				}
 			}
 		}
 	}
+	return false;
 }
 
 std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endingPos_, float width_, int numOfSpheres)

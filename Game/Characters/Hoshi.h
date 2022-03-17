@@ -12,7 +12,7 @@ class HurtBox;
 class Hoshi : public Character
 {
 public:
-	Hoshi(glm::vec3 pos_);
+	Hoshi(glm::vec3 pos_, Model* hurtBox_);
 	~Hoshi();
 
 	virtual void Update(const float deltaTime_);
@@ -38,6 +38,19 @@ protected:
 	void AirLight();
 	void AirMedium();
 	void AirHeavy();
+
+	void OnQCFActive(int strength);
+	void OnQCBActive(int strength);
+	void OnUniqueActive();
+	void OnLightActive();
+	void OnMediumActive();
+	void OnHeavyActive();
+	void OnAirQCFActive(int strength);
+	void OnAirQCBActive(int strength);
+	void OnAirUniqueActive();
+	void OnAirLightActive();
+	void OnAirMediumActive();
+	void OnAirHeavyActive();
 
 	Projectile* proj;
 	bool floating;

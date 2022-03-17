@@ -33,17 +33,21 @@ bool CharacterSelectScene::OnCreate()
 	Model* Hoshis = new Model("Resources/Models/Hoshi.obj", "Resources/Materials/Hoshi.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Rock = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Sphere = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	//Model* kunai = new Model("Resources/Models/Kunai.obj", "Resources/Materials/Kunai.mtl", ShaderHandler::GetInstance()->GetShader("basicShader");
 
 	SceneGraph::GetInstance()->AddModel(Alexis);
 	SceneGraph::GetInstance()->AddModel(Hoshis);
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Hoshi");
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Hoshi");
+
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f),Hoshis), "Player1Hoshi");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Hoshis), "Player2Hoshi");
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Alexis");
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Alexis");
+	//SceneGraph::GetInstance()->AddModel(kunai);
 
 
+	//kunai = nullptr;
 	//dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
 
 	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");

@@ -18,6 +18,8 @@ public:
 	void Medium();
 	void Heavy();
 
+	void ResetProjectile();
+
 protected:
 	void AirQCF(int strength, bool simpleInput);
 	void AirQCB(int strength, bool simpleInput);
@@ -25,6 +27,17 @@ protected:
 	void AirLight();
 	void AirMedium();
 	void AirHeavy();
+
+	void OnQCFActive(int strength);
+	void OnQCBActive(int strength);
+	void OnUniqueActive();
+	void OnHeavyActive();
+	void OnAirQCFActive(int strength);
+	void OnAirQCBActive(int strength);
+	void OnAirUniqueActive();
+	void OnAirHeavyActive();
+
+	Projectile* proj;
 };
 
 #endif

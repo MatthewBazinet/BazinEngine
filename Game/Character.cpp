@@ -189,7 +189,10 @@ void Character::Update(const float deltaTime_)
 	if (nextActionable > 0.0f)
 	{
 		nextActionable -= deltaTime_;
-
+		if (nextActionable <= 0.0f)
+		{
+			applyGravity = true;
+		}
 	}
 	//proj->Update(deltaTime_);
 	if (isAttacking)
@@ -200,26 +203,56 @@ void Character::Update(const float deltaTime_)
 			startUpTimeLeft -= deltaTime_;
 			if (startUpTimeLeft <= 0.0f)
 			{
-				hitBox->EnableHitBox();
+				if(hitBox) hitBox->EnableHitBox();
+				switch (currentMove)
+				{
+				case moveState::QCB:
+					OnQCBActive(currentFrameData.strength);
+					break;
+				case moveState::QCF:
+					OnQCFActive(currentFrameData.strength);
+					break;
+				case moveState::GROUNDLIGHT:
+					OnLightActive();
+					break;
+				case moveState::GROUNDMEDIUM:
+					OnMediumActive();
+					break;
+				case moveState::GROUNDHEAVY:
+					OnHeavyActive();
+					break;
+				case moveState::AIRLIGHT:
+					OnAirLightActive();
+					break;
+				case moveState::AIRMEDIUM:
+					OnAirMediumActive();
+					break;
+				case moveState::AIRHEAVY:
+					OnAirHeavyActive();
+					break;
+				}
 			}
 		}
 		else if (activeTimeLeft > 0.0f)
 		{
 			activeTimeLeft -= deltaTime_;
-			if (activeTimeLeft <= 0.0f)
+			if (hitBox)
 			{
+				if (activeTimeLeft <= 0.0f)
+				{
+					if (hitBox->GetIsEnabled())
+					{
+						hitBox->DisableHitBox();
+					}
+				}
 				if (hitBox->GetIsEnabled())
 				{
-					hitBox->DisableHitBox();
-				}
-			}
-			if (hitBox->GetIsEnabled())
-			{
-				hitBox->Update(deltaTime_);
-				if (hitBox->CheckCollision(opponent->GetHurtBoxes()))
-				{
-					opponent->Hit(currentFrameData);
-					hitBox->DisableHitBox();
+					hitBox->Update(deltaTime_);
+					if (hitBox->CheckCollision(opponent->GetHurtBoxes()))
+					{
+						opponent->Hit(currentFrameData);
+						hitBox->DisableHitBox();
+					}
 				}
 			}
 		}
@@ -276,7 +309,7 @@ void Character::Update(const float deltaTime_)
 		if (MovingLeft) dir2D = -1.0f;
 		if (MovingRight) dir2D = 1.0f;
 
-		if (nextActionable <= 0.0f)
+		if (nextActionable <= 0.0f && moveTimeLeft <= 0.0f)
 		{
 			float preserveY = vel.y;
 			vel = axisOf2DMovement * maxSpeed * dir2D;
@@ -430,6 +463,7 @@ void Character::SetFrameData(FrameData frameData_)
 	recoveryTimeLeft = frameData_.recovery;
 	moveTimeLeft = startUpTimeLeft + activeTimeLeft + recoveryTimeLeft;
 	isAttacking = true;
+	currentFrameData = frameData_;
 }
 
 void Character::QCF(int strength, bool simpleInput)
@@ -609,6 +643,8 @@ void Character::OnLand()
 
 void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 push_)
 {
+	isRunning = false;
+	isIdle = false;
 	if (FacingLeft())
 	{
 		if (MovingRight && !isAirborne)
@@ -622,12 +658,12 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 			nextActionable = hitStun_;
 			if (opponent->FacingLeft())
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 
 			}
 			else
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 			}
 		}
 	}
@@ -644,12 +680,13 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 			nextActionable = hitStun_;
 			if (opponent->FacingLeft())
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x + 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 
 			}
 			else
 			{
-				ApplyForce(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+				SetVelocity(glm::rotate(push_, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 			}
 		}
 	}
@@ -662,7 +699,14 @@ void Character::Hit(FrameData frameData_)
 
 std::vector<Sphere> Character::GetHurtBoxes() const
 {
-	return hurtBox->GetHurtBoxes();
+	if (hurtBox)
+	{
+		return hurtBox->GetHurtBoxes();
+	}
+	else
+	{
+		return std::vector<Sphere>();
+	}
 }
 
 
@@ -690,6 +734,11 @@ void Character::AirQCB(int strength, bool simpleInput)
 
 }
 
+float Character::GetHealth() const
+{
+	return health;
+}
+
 void Character::AirUnique()
 {
 	if (nextActionable > 0.0f) return;
@@ -714,6 +763,19 @@ void Character::AirHeavy()
 
 }
 
+void Character::OnQCFActive(int strength){}
+void Character::OnQCBActive(int strength){}
+void Character::OnUniqueActive(){}
+void Character::OnLightActive(){}
+void Character::OnMediumActive(){}
+void Character::OnHeavyActive(){}
+void Character::OnAirQCFActive(int strength){}
+void Character::OnAirQCBActive(int strength){}
+void Character::OnAirUniqueActive(){}
+void Character::OnAirLightActive(){}
+void Character::OnAirMediumActive(){}
+void Character::OnAirHeavyActive(){}
+
 void Character::resetCombo()
 {
 	combo["light"] = 1;
@@ -730,6 +792,18 @@ FrameData::FrameData()
 	hitStun = 0.0f;
 	blockStun = 0.0f;
 	push = glm::vec3();
+}
+
+FrameData::FrameData(float startup_, float active_, float recovery_, float damage_, float hitStun_, float blockStun_, glm::vec3 push_, int strength_)
+{
+	startup = startup_;
+	active = active_;
+	recovery = recovery_;
+	damage = damage_;
+	hitStun = hitStun_;
+	blockStun = blockStun_;
+	push = push_;
+	strength = strength_;
 }
 
 FrameData::~FrameData()

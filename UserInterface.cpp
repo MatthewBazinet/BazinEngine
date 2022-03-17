@@ -174,6 +174,7 @@ void UserInterface::ShowGameUi()
 		//Player 1 Health Bar & Overclock Meter
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 2HP", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
+
 		if (SceneGraph::GetInstance()->GetGameObject("char2")) {
 			float health = (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() - 0.0f) / (100.0f - 0.0f);
 			ImGui::ProgressBar(health, ImVec2(400, 35));
@@ -199,7 +200,6 @@ void UserInterface::ShowGameUi()
 		ImGui::Begin("Player 1HP", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
 		if (SceneGraph::GetInstance()->GetGameObject("char2")) {
 			float health = (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth() - 0.0f) / (100.0f - 0.0f);
-			
 			ImGui::ProgressBar(health, ImVec2(400, 35));
 		}
 		else {

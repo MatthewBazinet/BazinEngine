@@ -226,6 +226,7 @@
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SDLInit.cpp" />
     <ClCompile Include="SDLMusic.cpp" />
+    <ClCompile Include="SlashWave.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
@@ -340,6 +341,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
+    <ClInclude Include="SlashWave.h" />
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SteeringOutput.h" />
