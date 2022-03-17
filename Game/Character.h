@@ -110,6 +110,19 @@ protected:
 	virtual void OnAirMediumActive();
 	virtual void OnAirHeavyActive();
 
+	virtual void OnQCFRecovery(int strength);
+	virtual void OnQCBRecovery(int strength);
+	virtual void OnUniqueRecovery();
+	virtual void OnLightRecovery();
+	virtual void OnMediumRecovery();
+	virtual void OnHeavyRecovery();
+	virtual void OnAirQCFRecovery(int strength);
+	virtual void OnAirQCBRecovery(int strength);
+	virtual void OnAirUniqueRecovery();
+	virtual void OnAirLightRecovery();
+	virtual void OnAirMediumRecovery();
+	virtual void OnAirHeavyRecovery();
+
 	void SetFrameData(float startup_, float active_, float recovery_);
 	void SetFrameData(FrameData frameData_);
 

@@ -236,15 +236,46 @@ void Character::Update(const float deltaTime_)
 		else if (activeTimeLeft > 0.0f)
 		{
 			activeTimeLeft -= deltaTime_;
-			if (hitBox)
-			{
+
 				if (activeTimeLeft <= 0.0f)
 				{
-					if (hitBox->GetIsEnabled())
+					if (hitBox)
 					{
-						hitBox->DisableHitBox();
+						if (hitBox->GetIsEnabled())
+						{
+							hitBox->DisableHitBox();
+						}
+					}
+					switch (currentMove)
+					{
+					case moveState::QCB:
+						OnQCBRecovery(currentFrameData.strength);
+						break;
+					case moveState::QCF:
+						OnQCFRecovery(currentFrameData.strength);
+						break;
+					case moveState::GROUNDLIGHT:
+						OnLightRecovery();
+						break;
+					case moveState::GROUNDMEDIUM:
+						OnMediumRecovery();
+						break;
+					case moveState::GROUNDHEAVY:
+						OnHeavyRecovery();
+						break;
+					case moveState::AIRLIGHT:
+						OnAirLightRecovery();
+						break;
+					case moveState::AIRMEDIUM:
+						OnAirMediumRecovery();
+						break;
+					case moveState::AIRHEAVY:
+						OnAirHeavyRecovery();
+						break;
 					}
 				}
+				if (hitBox)
+				{
 				if (hitBox->GetIsEnabled())
 				{
 					hitBox->Update(deltaTime_);
@@ -778,6 +809,20 @@ void Character::OnAirUniqueActive(){}
 void Character::OnAirLightActive(){}
 void Character::OnAirMediumActive(){}
 void Character::OnAirHeavyActive(){}
+
+void Character::OnQCFRecovery(int strength) {}
+void Character::OnQCBRecovery(int strength) {}
+void Character::OnUniqueRecovery() {}
+void Character::OnLightRecovery() {}
+void Character::OnMediumRecovery() {}
+void Character::OnHeavyRecovery() {}
+void Character::OnAirQCFRecovery(int strength) {}
+void Character::OnAirQCBRecovery(int strength) {}
+void Character::OnAirUniqueRecovery() {}
+void Character::OnAirLightRecovery() {}
+void Character::OnAirMediumRecovery() {}
+void Character::OnAirHeavyRecovery() {}
+
 
 void Character::resetCombo()
 {
