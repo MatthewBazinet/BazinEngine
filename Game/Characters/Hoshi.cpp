@@ -102,9 +102,9 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	// Slide
-	frameData["QSB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(-1.0f, 0.0f, 0.0f), 0);
-	frameData["QSB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QSB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(-1.0f, 0.0f, 0.0f), 0);
+	frameData["QCB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["QCB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	SceneGraph::GetInstance()->AddModel(model);
 
@@ -113,8 +113,8 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 
 Hoshi::~Hoshi()
 {
-	proj = nullptr;
 	delete proj;
+	proj = nullptr;
 
 	Character::~Character();
 }
@@ -135,7 +135,7 @@ void Hoshi::Update(const float deltaTime_)
 	{
 		hurtBox->Update(deltaTime_);
 	}
-	if (!isIdle && currentMove == moveState::NONE)
+	if (!isIdle && currentMove == moveState::NONE && !MovingLeft && !MovingRight)
 	{
 		if (isAirborne)
 		{
@@ -339,15 +339,32 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
 	hurtBox = hurtBoxes["slide"];
 	hitBox = hitBoxes["slide"];
+	
+	if (strength == 0)
+	{
+		SetFrameData(frameData["QCB0"]);
+	}
+	else if (strength == 1)
+	{
+		SetFrameData(frameData["QCB1"]);
+	}
+	else if (strength == 2)
+	{
+		SetFrameData(frameData["QCB2"]);
+	}
 
 	ApplyForce(10.0f * (opponent->GetPosition() - GetPosition()));
 
+	resetCombo();
+}
+
+void Hoshi::OnQCBActive(int strength)
+{
 	if (hitBoxes["slide"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
 	{
 		//GetOpponent()->Hit(5.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
 		if (strength == 0)
 		{
-
 		}
 		else if (strength == 1)
 		{
@@ -359,13 +376,6 @@ void Hoshi::QCB(int strength, bool simpleInput)
 			//GetOpponent()->setApplyGravity(false);
 		}
 	}
-
-	resetCombo();
-}
-
-void Hoshi::OnQCBActive(int strength)
-{
-
 }
 
 void Hoshi::Unique()

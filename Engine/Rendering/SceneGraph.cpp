@@ -54,6 +54,21 @@ void SceneGraph::AddModel(Model* model_)
 	sceneModels[shader].push_back(model_);
 }
 
+void SceneGraph::RemoveModel(Model* model_)
+{
+	GLuint shader = model_->GetShaderProgram();
+
+	for (int i = 0; i < sceneModels[shader].size(); i++) 
+	{
+		if (sceneModels[shader][i] == model_)
+		{
+			delete sceneModels[shader][i];
+			sceneModels[shader][i] = nullptr;
+			sceneModels[shader].erase(sceneModels[shader].begin() + i);
+		}
+	}
+}
+
 void SceneGraph::AddGameObject(GameObject* go_, std::string tag_)
 {
 	if (tag_ == "")
