@@ -211,6 +211,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\Core\Timer.cpp" />
     <ClCompile Include="Engine\Graphics\TextureHandler.cpp" />
+    <ClCompile Include="MatchSettings.cpp" />
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="MorphTarget.cpp" />
     <ClCompile Include="MorphTargetAnimatedModel.cpp" />
@@ -323,6 +324,7 @@
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
     <ClInclude Include="Kunai.h" />
+    <ClInclude Include="MatchSettings.h" />
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="MorphTarget.h" />
     <ClInclude Include="MorphTargetAnimatedModel.h" />

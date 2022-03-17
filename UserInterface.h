@@ -10,6 +10,7 @@
 #include "NetworkingBase.h"
 #include "Game/Character.h"
 #include "Engine/Core/Timer.h"
+#include "MatchSettings.h"
 
 enum class State { Menu, Settings, Online, SinglePlayer, CharacterSelect, Empty };
 class UserInterface
@@ -34,18 +35,14 @@ public:
 	void ShowCharacterSelect();
 	bool TextBox();
 
-	void SetPlayer1(Character* character_);
-	void SetPlayer2(Character* character_);
-
+	inline int GetTimer() { return time; };
 private:
 	UserInterface();
 	~UserInterface();
 	State state;
 	ImGuiBackendFlags flags;
-	int time = 60;
+	int time;
 	bool timerStarted;
-	Character* player1;
-	Character* player2;
 	SoundEffects se;
 	char str0[256] = { 0 };
 

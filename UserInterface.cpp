@@ -5,7 +5,7 @@
 
 std::unique_ptr<UserInterface> UserInterface::UserInterfaceInstance = nullptr;
 
-UserInterface::UserInterface():state(State::Menu),player1(nullptr),player2(nullptr)
+UserInterface::UserInterface():state(State::Menu)
 {
 
 	se.AddSoundEffects("Resources/Audio/mixkit-retro-game-notification-212.wav");
@@ -13,8 +13,6 @@ UserInterface::UserInterface():state(State::Menu),player1(nullptr),player2(nullp
 
 UserInterface::~UserInterface()
 {
-	player1 = nullptr;
-	player2 = nullptr;
 }
 
 UserInterface* UserInterface::GetInstance()
@@ -36,8 +34,6 @@ void UserInterface::DestroyUI()
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 	se.~SoundEffects();
-	player1 = nullptr;
-	player2 = nullptr;
 }
 
 bool UserInterface::OnCreate()
@@ -94,8 +90,10 @@ void UserInterface::Render()
 void UserInterface::StartTimer()
 {
 	while (true){
+		if (time > 0) {
 		std::this_thread::sleep_for(std::chrono::seconds(1));
-		time -= 1;
+			time -= 1;
+		}
 	}
 }
 //Menu Ui
@@ -108,9 +106,13 @@ void UserInterface::ShowMenu()
 		//Single Player Button
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
-		if (ImGui::Button("Single Player", ImVec2(300, 100))) {
+		if (ImGui::Button("Versus Mode", ImVec2(300, 100))) {
 			se.playSoundEffect(0);
 			CoreEngine::GetInstance()->SetCurrentScene(7);
+		}
+
+		if (ImGui::Button("Training Mode (WIP)", ImVec2(300, 100))) {
+			se.playSoundEffect(0);
 		}
 
 		//Online Button
@@ -121,7 +123,7 @@ void UserInterface::ShowMenu()
 		ImGui::End();
 
 		//Quit Button
-		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.7f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.5f, CoreEngine::GetInstance()->GetScreenHeight() * 0.8f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("quit ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Quit", ImVec2(250, 90))) {
 			CoreEngine::GetInstance()->Exit();
@@ -162,6 +164,7 @@ void UserInterface::ShowGameUi()
 	ImGui::NewFrame();
 	if (!timerStarted) {
 		std::cout << "Timer Started" << std::endl;
+		time = MatchSettings::GetInstance()->GetTimer();
 		std::thread Thread = std::thread(&UserInterface::StartTimer, this);
 		Thread.detach();
 		timerStarted = true;
@@ -171,8 +174,8 @@ void UserInterface::ShowGameUi()
 		//Player 1 Health Bar & Overclock Meter
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.75f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 2HP", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-		if (player2) {
-			float health = (player2->GetHealth() - 0.0f) / (100.0f - 0.0f);
+		if (SceneGraph::GetInstance()->GetGameObject("char2")) {
+			float health = (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() - 0.0f) / (100.0f - 0.0f);
 			ImGui::ProgressBar(health, ImVec2(400, 35));
 		}
 		else {
@@ -182,8 +185,8 @@ void UserInterface::ShowGameUi()
 		ImGui::End();
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.675f, CoreEngine::GetInstance()->GetScreenHeight() * 0.1f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 2OC", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-		if (player2) {
-			float overclock = (player2->GetOverclock() - 0.0f) / (100.0f - 0.0f);
+		if (SceneGraph::GetInstance()->GetGameObject("char1")) {
+			float overclock = (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetOverclock() - 0.0f) / (100.0f - 0.0f);
 			ImGui::ProgressBar(overclock, ImVec2(250, 25));
 		}
 		else {
@@ -194,8 +197,8 @@ void UserInterface::ShowGameUi()
 		//Player 2 Health Bar & Overclock Meter
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.25f, CoreEngine::GetInstance()->GetScreenHeight() * 0.05f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 1HP", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-		if (player1) {
-			float health = (player1->GetHealth() - 0.0f) / (100.0f - 0.0f);
+		if (SceneGraph::GetInstance()->GetGameObject("char2")) {
+			float health = (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth() - 0.0f) / (100.0f - 0.0f);
 			
 			ImGui::ProgressBar(health, ImVec2(400, 35));
 		}
@@ -205,8 +208,8 @@ void UserInterface::ShowGameUi()
 		ImGui::End();
 		ImGui::SetNextWindowPos(ImVec2(CoreEngine::GetInstance()->GetScreenWidth() * 0.325f, CoreEngine::GetInstance()->GetScreenHeight() * 0.1f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 		ImGui::Begin("Player 1OC", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMouseInputs);
-		if (player1) {
-			float overclock = (player1->GetOverclock() - 0.0f) / (100.0f - 0.0f);
+		if (SceneGraph::GetInstance()->GetGameObject("char2")) {
+			float overclock = (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetOverclock() - 0.0f) / (100.0f - 0.0f);
 			ImGui::ProgressBar(overclock, ImVec2(250, 25));
 		}
 		else {
@@ -248,14 +251,6 @@ bool UserInterface::TextBox()
 	return false;
 }
 
-void UserInterface::SetPlayer1(Character* character_)
-{
-	player1 = character_;
-}
 
-void UserInterface::SetPlayer2(Character* character_)
-{
-	player2 = character_;
-}
 
 

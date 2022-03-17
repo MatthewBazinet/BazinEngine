@@ -5,6 +5,7 @@
 #include "..//NetworkingBase.h"
 #include "../SDLMusic.h"
 #include <thread>
+#include "MatchSettings.h"
 #include "../ParticleSystem.h"
 class CharacterSelectScene : public Scene
 {
@@ -17,7 +18,7 @@ public:
 	void HandleEvents(const SDL_Event& sdlEvent) override;
 	void NotifyOfKeyDown(const SDL_Scancode key_);
 	void NotifyOfKeyUp(const SDL_Scancode key_);
-	void AddCharacter(std::string P1Name_, GameObject* P1Character_,std::string P2Name_, GameObject* P2Character_);
+	void AddCharacter(std::string P1Name_, GameObject* P1Character_, Player1Characters P1Enums_,std::string P2Name_, GameObject* P2Character_, Player2Characters P2Enums_);
 	void CharacterSelection();
 	//static std::vector<Character*> GetHurtBoxes() {return hurtBoxes;};
 	//static std::vector<Character*> SetHurtBoxes(std::vector<Character*> hurtBoxes_) { hurtBoxes = hurtBoxes_; };
@@ -28,6 +29,9 @@ private:
 
 	std::unordered_map<std::string, GameObject*> P1ListOfCharacters;
 	std::unordered_map<std::string, GameObject*> P2ListOfCharacters;
+
+	std::unordered_map<std::string, Player1Characters> P1Enums;
+	std::unordered_map<std::string, Player2Characters> P2Enums;
 
 	std::string P1selectedCharacter;
 	std::string P1currentCharacter;

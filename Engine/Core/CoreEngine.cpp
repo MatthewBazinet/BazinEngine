@@ -49,7 +49,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		}
 	}
 	UserInterface::GetInstance()->OnCreate();
-	
+	MatchSettings::GetInstance()->OnCreate();
+
 	Log::Info("Game Created Succesfully", "CoreEngine.cpp", __LINE__);
 	timer = new Timer();
 	timer->Start();
@@ -281,6 +282,7 @@ void CoreEngine::OnDestroy()
 	SceneGraph::GetInstance()->OnDestroy();
 	MaterialHandler::GetInstance()->OnDestroy();
 	UserInterface::GetInstance()->DestroyUI();
+	MatchSettings::GetInstance()->OnDestroy();
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete camera;

@@ -23,6 +23,7 @@
 #include "..//Events/EventListener.h"
 
 #include "../UserInterface.h"
+#include "../MatchSettings.h"
 
 class CoreEngine
 {

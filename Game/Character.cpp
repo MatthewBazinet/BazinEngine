@@ -264,10 +264,13 @@ void Character::Update(const float deltaTime_)
 	}
 
 	if (!isRunning) {
-		if (!opponent->getIsRunning() && getIsAirborne() == false)
-		{
-			axisOf2DMovement = camera->GetRight();
+		if(opponent){
+			if (!opponent->getIsRunning() && getIsAirborne() == false)
+			{
+				axisOf2DMovement = camera->GetRight();
+			}
 		}
+
 
 		dir2D = 0.0f;
 		if (MovingLeft) dir2D = -1.0f;
@@ -288,9 +291,11 @@ void Character::Update(const float deltaTime_)
 	}
 	else 
 	{
-		if (!opponent->getIsRunning())
-		{
-			angle = atan2(opponent->GetPosition().x - position.x, opponent->GetPosition().z - position.z);
+		if (opponent) {
+			if (!opponent->getIsRunning())
+			{
+				angle = atan2(opponent->GetPosition().x - position.x, opponent->GetPosition().z - position.z);
+			}
 		}
 	}
 

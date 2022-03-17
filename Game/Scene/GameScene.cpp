@@ -6,7 +6,9 @@
 #include "../XMLDecisionTreeReader.h"
 #include "../UserInterface.h"
 #include "../Game/Characters/Hoshi.h"
+#include "../Characters/AlexisBruce.h"
 #include "../Engine/Math/EnvironmentalCollisionManager.h"
+#include "../MatchSettings.h"
 
 GameScene::GameScene()
 {
@@ -328,7 +330,7 @@ bool GameScene::OnCreate()
 	Model* rachidaShape = new Model("Resources/Models/tetrahedron.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* man = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Sphere = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
-
+	Model* Rock = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	//Model* pawn = new Model("Resources/Models/basecharactermodel.obj", "Resources/Materials/basecharactermodel.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 	SceneGraph::GetInstance()->AddModel(diceModel);
@@ -336,7 +338,7 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(appleModel);
 	SceneGraph::GetInstance()->AddModel(rachidaShape);
 	SceneGraph::GetInstance()->AddModel(Sphere);
-
+	SceneGraph::GetInstance()->AddModel(Rock);
 	XMLDecisionTreeReader read;
 	read.ReadFile("Tree.xml");
 	
@@ -359,12 +361,36 @@ bool GameScene::OnCreate()
 	//ptr = SceneGraph::GetInstance()->GetGameObject("apple")->GetComponent<ParticleSystem>();
 
 	//SceneGraph::GetInstance()->AddGameObject(new Flocking(appleModel, glm::vec3(-2.0f, 0.0f, 0.0f)), "rop");
-	
 
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
-	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
-	dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
+	switch (MatchSettings::GetInstance()->GetPlayer1Character()) {
+	case(Player1Characters::Hoshi):
+		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+		dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Sphere);
+		break;
+	case(Player1Characters::Alexis):
+		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Rock, Sphere);
+		break;
+	default:
+			break;
+	}
+
+	switch (MatchSettings::GetInstance()->GetPlayer2Character()) {
+	case(Player2Characters::Hoshi):
+		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
+		dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
+		break;
+	case(Player2Characters::Alexis):
+		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
+		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
+		break;
+	default:
+		break;
+	}
+	
+	
+	
+	
 
 	//SceneGraph::GetInstance()->AddGameObject(new Character(0.5f, 1.0f, false, false, diceModel, glm::vec3(0.0f, 5.0f, 0.0f)), "char1");
 
@@ -388,14 +414,12 @@ bool GameScene::OnCreate()
 	//static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile3"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("projectile1"));
 	
 	
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->SetPlayers(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
 	
-	UserInterface::GetInstance()->SetPlayer1(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	UserInterface::GetInstance()->SetPlayer2(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);
 
@@ -440,6 +464,7 @@ bool GameScene::OnCreate()
 	appleModel = nullptr;
 	rachidaShape = nullptr;
 	man = nullptr;
+	Rock = nullptr;
 
 	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 15.0f);
 	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, 15.0f);
