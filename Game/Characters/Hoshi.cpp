@@ -86,9 +86,9 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	hitBox = hitBoxes["light"];
 	 
 	// Framedata
-	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(-0.5f, 0.0f, 0.0f), 0);
-	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(-0.5f, 0.0f, 0.0f), 0);
-	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(-0.5f, 0.0f, 0.0f), 0);
+	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 
 	frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 	frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
@@ -97,14 +97,14 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 	// Gravity Wave
-	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(-5.0f, 0.0f, 0.0f), 0);
-	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 10.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	// Slide
-	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(-1.0f, 0.0f, 0.0f), 0);
-	frameData["QCB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QCB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 30.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
+	frameData["QCB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["QCB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	SceneGraph::GetInstance()->AddModel(model);
 
@@ -360,21 +360,17 @@ void Hoshi::QCB(int strength, bool simpleInput)
 
 void Hoshi::OnQCBActive(int strength)
 {
-	if (hitBoxes["slide"]->CheckCollision(GetOpponent()->GetHurtBoxes()))
+	if (strength == 2)
 	{
-		//GetOpponent()->Hit(5.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
-		if (strength == 0)
-		{
-		}
-		else if (strength == 1)
-		{
-			GetOpponent()->ApplyForce(glm::vec3(0.0f, 10.0f, 0.0f));
-		}
-		else if (strength == 2)
-		{
-			GetOpponent()->ApplyForce(glm::vec3(0.0f, 10.0f, 0.0f));
-			//GetOpponent()->setApplyGravity(false);
-		}
+		hitBox = nullptr;
+	}
+}
+
+void Hoshi::OnQCBRecovery(int strength)
+{
+	if (strength == 2)
+	{
+		hitBox = hitBoxes["basic"];
 	}
 }
 
@@ -385,7 +381,6 @@ void Hoshi::Unique()
 	if (nextActionable > 0.0f) return;
 	SetFrameData(frameData["unique"]);
 	isIdle = false;
-	// fix levitate animations
 	floating = !floating;
 	if (floating)
 	{
@@ -527,10 +522,7 @@ void Hoshi::OnAirQCBActive(int strength)
 
 }
 
-void Hoshi::AirUnique()
-{
-
-}
+void Hoshi::AirUnique() {}
 
 void Hoshi::OnAirUniqueActive()
 {

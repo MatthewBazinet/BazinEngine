@@ -52,6 +52,8 @@ protected:
 	void OnAirMediumActive();
 	void OnAirHeavyActive();
 
+	void OnQCBRecovery(int strength);
+
 	Projectile* proj;
 	bool floating;
 };

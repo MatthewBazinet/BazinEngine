@@ -27,21 +27,9 @@ void GravityWave::Update(float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes()))
 			{
 				parent->GetOpponent()->Hit(frameData);
-				std::cout << parent->GetOpponent()->GetHealth() << std::endl;
-				//if (strength == 0)
-				//{
-				//	parent->GetOpponent()->Hit(50.0f, 0.5f, 0.25f, (parent->GetOpponent()->GetPosition() - parent->GetPosition()) * 0.5f);
-				//}
-				//else if (strength == 1)
-				//{
-				//	parent->GetOpponent()->Hit(50.0f, 0.5f, 0.25f, glm::vec3(0.0f, 10.0f, 0.0f));
-				//}
-				//else if (strength == 2)
-				//{
-				//	parent->GetOpponent()->Hit(50.0f, 0.5f, 0.25f, glm::vec3(0.0f, 0.0f, 0.0f));
-				//	
-				//	//parent->GetOpponent()->setApplyGravity(false);
-				//}
+				parent->GetOpponent()->SetVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
+				//parent->GetOpponent()->SetPosition(glm::vec3(parent->GetOpponent()->GetPosition().x, 4.0f, parent->GetOpponent()->GetPosition().z));
+				parent->GetOpponent()->setApplyGravity(false);
 
 				GravityWave::~GravityWave();
 				dynamic_cast<Hoshi*>(parent)->ResetProjectile();

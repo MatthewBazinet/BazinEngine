@@ -40,8 +40,8 @@ bool CharacterSelectScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
 
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f),Hoshis), "Player1Hoshi");
-	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Hoshis), "Player2Hoshi");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Sphere), "Player1Hoshi");
+	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Sphere), "Player2Hoshi");
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Alexis");
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Alexis");
 	//SceneGraph::GetInstance()->AddModel(kunai);
