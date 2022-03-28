@@ -7,6 +7,7 @@
 #include "../UserInterface.h"
 #include "../Game/Characters/Hoshi.h"
 #include "../Characters/AlexisBruce.h"
+#include "../Characters/Eldric.h";
 #include "../Engine/Math/EnvironmentalCollisionManager.h"
 #include "../MatchSettings.h"
 
@@ -372,6 +373,9 @@ bool GameScene::OnCreate()
 		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
 		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Rock, Sphere);
 		break;
+	case(Player1Characters::Eldric):
+		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
+		break;
 	default:
 			break;
 	}
@@ -384,6 +388,9 @@ bool GameScene::OnCreate()
 	case(Player2Characters::Alexis):
 		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
 		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
+		break;
+	case(Player2Characters::Eldric):
+		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
 		break;
 	default:
 		break;

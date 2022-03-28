@@ -8,12 +8,14 @@
 enum class Player1Characters {
 	None,
 	Hoshi,
-	Alexis
+	Alexis,
+	Eldric,
 };
 enum class Player2Characters {
 	None,
 	Hoshi,
-	Alexis
+	Alexis,
+	Eldric
 };
 class MatchSettings
 {

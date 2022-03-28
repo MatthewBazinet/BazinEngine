@@ -57,7 +57,7 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlideEnd", new MorphTarget("Resources/Models/Hoshi/HoshiSlidingEnd.obj", "Idle", 0.1f));
 	
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
-	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+	//static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
 
 	// Hurtboxes
 	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
@@ -288,13 +288,13 @@ void Hoshi::QCF(int strength, bool simpleInput)
 	{
 		SetFrameData(frameData["QCF0"]);
 	}
-	else if (strength == 1)
-	{
-		SetFrameData(frameData["QCF1"]);
-	}
-	else if (strength == 2)
+	else if (strength == 2 && overclock >= 25.0f)
 	{
 		SetFrameData(frameData["QCF2"]);
+	}
+	else
+	{
+		SetFrameData(frameData["QCF1"]);
 	}
 
 	// make hurtbox nullptr for invincible reversal, turn it back to regular afterwards
@@ -309,13 +309,14 @@ void Hoshi::OnQCFActive(int strength)
 			std::cout << "light" << std::endl;
 			proj = new GravityWave(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 		}
-		else if (strength == 1)
-		{
-			proj = new GravityWave(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-		}
-		else if (strength == 2)
+		else if (strength == 2 && overclock >= 25.0f)
 		{
 			proj = new GravityWave(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			overclock -= 25.0f;
+		}
+		else
+		{
+			proj = new GravityWave(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 		}
 	}
 
@@ -344,13 +345,13 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	{
 		SetFrameData(frameData["QCB0"]);
 	}
-	else if (strength == 1)
-	{
-		SetFrameData(frameData["QCB1"]);
-	}
-	else if (strength == 2)
+	else if (strength == 2 && overclock >= 25.0f)
 	{
 		SetFrameData(frameData["QCB2"]);
+	}
+	else
+	{
+		SetFrameData(frameData["QCB1"]);
 	}
 
 	ApplyForce(10.0f * (opponent->GetPosition() - GetPosition()));
@@ -362,7 +363,7 @@ void Hoshi::OnQCBActive(int strength)
 {
 	if (strength == 2)
 	{
-		hitBox = nullptr;
+		hurtBox = nullptr;
 	}
 }
 
@@ -370,7 +371,7 @@ void Hoshi::OnQCBRecovery(int strength)
 {
 	if (strength == 2)
 	{
-		hitBox = hitBoxes["basic"];
+		hurtBox = hurtBoxes["basic"];
 	}
 }
 
