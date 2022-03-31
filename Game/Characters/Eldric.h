@@ -3,6 +3,7 @@
 
 #include "..//Character.h"
 #include "../Projectile.h"
+#include "../Eel.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 

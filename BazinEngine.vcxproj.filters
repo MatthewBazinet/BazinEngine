@@ -110,6 +110,7 @@
     <ClCompile Include="GravityWave.cpp" />
     <ClCompile Include="MatchSettings.cpp" />
     <ClCompile Include="SlashWave.cpp" />
+    <ClCompile Include="Eel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="GravityWave.h" />
     <ClInclude Include="MatchSettings.h" />
     <ClInclude Include="SlashWave.h" />
+    <ClInclude Include="Eel.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

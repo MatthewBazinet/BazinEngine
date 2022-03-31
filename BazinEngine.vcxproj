@@ -148,6 +148,7 @@
     <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
+    <ClCompile Include="Eel.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Engine\Events\ControllerEventListener.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugSphere.h" />
+    <ClInclude Include="Eel.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Events\ControllerEventListener.h" />

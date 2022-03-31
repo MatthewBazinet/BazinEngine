@@ -49,8 +49,8 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy4", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy4.obj", "AirHeavyEnd", 0.5f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Eldric/EldricAirHeavyEnd.obj", "Idle", 0.5f));
 
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Eldric/EldricAirLightStart.obj", "AirLightEnd", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Eldric/EldricAirLightEnd.obj", "Idle", 0.1f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Eldric/EldricAirLightStart.obj", "AirLightEnd", 0.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Eldric/EldricAirLightEnd.obj", "Idle", 0.5f));
 
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Eldric/EldricAirMediumStart.obj", "AirMediumEnd", 0.3f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Eldric/EldricAirMediumEnd.obj", "Idle", 0.3f));
@@ -68,26 +68,59 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
 	hurtBoxes["basic"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(1.0f, 15.0f, 0.0f), 1.25f, 6);
 
-	hurtBoxes["heavy"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["heavy"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-2.0f, 15.0f, 0.0f), 1.25f, 6);
+	hurtBoxes["light"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["light"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(0.0f, 15.0f, 0.0f), 1.25f, 6);
+
+	hurtBoxes["medium"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["medium"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-1.0f, 15.0f, 0.0f), 1.25f, 6);
 
 	hurtBoxes["heavy"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["heavy"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-4.0f, 13.0f, 0.0f), 1.25f, 6);
+	hurtBoxes["heavy"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-2.5f, 13.0f, 0.0f), 1.25f, 6);
+
+	hurtBoxes["airLight"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["airLight"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(0.0f, 15.0f, 0.0f), 1.25f, 6);
+
+	hurtBoxes["airMedium"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["airMedium"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-1.0f, 15.0f, 0.0f), 1.25f, 6);
+
+	hurtBoxes["airHeavy"] = new HurtBox(hurtBox_, this->position, this);
+	hurtBoxes["airHeavy"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-2.5f, 13.0f, 0.0f), 1.25f, 6);
 
 	// Hiboxes
+	hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(8.0f, 7.0f, 0.0f), 0.75f, 6);
+
+	hitBoxes["medium1"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["medium1"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(6.0f, 7.0f, 0.0f), 0.75f, 6);
+
+	hitBoxes["medium2"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["medium2"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(6.0f, 1.0f, 0.0f), 0.75f, 6);
+
+	hitBoxes["heavy"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(5.0f, 7.0f, 0.0f), 0.75f, 4);
 
 	// Framedata
 	frameData["light"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
-	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["medium"] = FrameData(5.0f / 60.0f, 15.0f / 60.0f, 40.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["heavy"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 
-	frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-	frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-	frameData["airHeavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["airLight"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 45.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["airMedium"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 30.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["airHeavy"] = FrameData(1.0f / 60.0f, 90.0f / 60.0f, 20.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 	frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
-	hurtBox = hurtBoxes["heavy"];
+	// Eel
+	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+
+	// Gaunts
+	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
+	frameData["QCB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
+	frameData["QCB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f), 2);
+
+	hurtBox = hurtBoxes["basic"];
 	SceneGraph::GetInstance()->AddModel(model);
 }
 
@@ -247,6 +280,7 @@ void Eldric::OnLand()
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
 }
 
+// Eel
 void Eldric::QCF(int strength, bool simpleInput)
 {
 	if (!CheckMoveState(moveState::QCF)) return;
@@ -255,11 +289,47 @@ void Eldric::QCF(int strength, bool simpleInput)
 
 	isIdle = false;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("QCF", 0.3f);
+	hurtBox = hurtBoxes["basic"];
+
+	if (strength == 0)
+	{
+		SetFrameData(frameData["QCF0"]);
+	}
+	else if (strength == 2 && overclock >= 25.0f)
+	{
+		SetFrameData(frameData["QCF2"]);
+	}
+	else
+	{
+		SetFrameData(frameData["QCF1"]);
+	}
 }
 
 void Eldric::OnQCFActive(int strength)
 {
+	if (proj == nullptr)
+	{
+		if (strength == 0)
+		{
+			proj = new Eel(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+		}
+		else if (strength == 2 && overclock >= 25.0f)
+		{
+			proj = new Eel(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			overclock -= 25.0f;
+		}
+		else
+		{
+			proj = new Eel(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+		}
+	}
 
+	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
+	proj->SetTarget(nullptr);
+	proj->SetPosition(this->GetPosition());
+	proj->SetVelocity(glm::vec3(-dir));
+
+	resetCombo();
 }
 
 void Eldric::AirQCF(int strength, bool simpleInput)
@@ -272,6 +342,8 @@ void Eldric::OnAirQCFActive(int strength)
 
 }
 
+// Gaunts
+
 void Eldric::QCB(int strength, bool simpleInput)
 {
 	if (!CheckMoveState(moveState::QCB)) return;
@@ -280,6 +352,7 @@ void Eldric::QCB(int strength, bool simpleInput)
 
 	isIdle = false;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("QCB", 0.3f);
+	hurtBox = hurtBoxes["basic"];
 }
 
 void Eldric::OnQCBActive(int strength)
@@ -303,6 +376,9 @@ void Eldric::Unique()
 
 	if (nextActionable > 0.0f) return;
 	isIdle = false;
+
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("UniqueStart", 0.3f);
+	hurtBox = hurtBoxes["basic"];
 }
 
 void Eldric::OnUniqueActive()
@@ -338,7 +414,7 @@ void Eldric::Light()
 				currentMove = moveState::GROUNDLIGHT;
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("LightStart", 0.3f);
 				hurtBox = hurtBoxes["basic"];
-				//hitBox = hitBoxes["light"];
+				hitBox = hitBoxes["light"];
 				SetFrameData(frameData["light"]);
 			}
 		}
@@ -354,7 +430,8 @@ void Eldric::AirLight()
 {
 	currentMove = moveState::AIRLIGHT;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
-	hurtBox = hurtBoxes["aerial"];
+	hurtBox = hurtBoxes["basic"];
+	hitBox = hitBoxes["airLight"];
 	SetFrameData(frameData["airLight"]);
 }
 
@@ -381,7 +458,7 @@ void Eldric::Medium()
 				currentMove = moveState::GROUNDMEDIUM;
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("MediumStart", 0.3f);
 				hurtBox = hurtBoxes["basic"];
-				//hitBox = hitBoxes["medium"];
+				hitBox = hitBoxes["medium1"];
 				SetFrameData(frameData["medium"]);
 			}
 		}
@@ -390,14 +467,15 @@ void Eldric::Medium()
 
 void Eldric::OnMediumActive()
 {
-
+	
 }
 
 void Eldric::AirMedium()
 {
 	currentMove = moveState::AIRMEDIUM;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirMediumStart", 0.5f);
-	hurtBox = hurtBoxes["aerial"];
+	hurtBox = hurtBoxes["basic"];
+	hitBox = hitBoxes["airMedium"];
 	SetFrameData(frameData["airMedium"]);
 }
 
@@ -408,6 +486,7 @@ void Eldric::OnAirMediumActive()
 
 void Eldric::OnMediumRecovery()
 {
+	hitBox = hitBoxes["medium2"];
 	hurtBox = hurtBoxes["medium"];
 }
 
@@ -429,7 +508,6 @@ void Eldric::Heavy()
 				currentMove = moveState::GROUNDHEAVY;
 				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.5f);
 				hurtBox = hurtBoxes["basic"];
-				//hitBox = hitBoxes["heavy"];
 				SetFrameData(frameData["heavy"]);
 			}
 		}
@@ -445,7 +523,8 @@ void Eldric::AirHeavy()
 {
 	currentMove = moveState::AIRHEAVY;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirHeavyStart", 0.5f);
-	hurtBox = hurtBoxes["aerial"];
+	hurtBox = hurtBoxes["basic"];
+	hitBox = hitBoxes["airHeavy"];
 	SetFrameData(frameData["airHeavy"]);
 }
 
@@ -456,6 +535,7 @@ void Eldric::OnAirHeavyActive()
 
 void Eldric::OnHeavyRecovery()
 {
+	hitBox = hitBoxes["heavy"];
 	hurtBox = hurtBoxes["heavy"];
 }
 
