@@ -17,10 +17,15 @@ enum class Player2Characters {
 	Alexis,
 	Eldric
 };
+
+enum GameMode
+{
+	None,
+	Versus,
+	Arcade
+};
 class MatchSettings
 {
-
-
 public:
 	MatchSettings(const MatchSettings&) = delete;
 	MatchSettings(MatchSettings&&) = delete;
@@ -41,6 +46,10 @@ public:
 	Player1Characters GetPlayer1Character();
 	Player2Characters GetPlayer2Character();
 
+	void NextMatch();
+	GameMode GetGameMode() { return gameMode; };
+	void SetGameMode(GameMode gameMode_) {gameMode = gameMode_;};
+
 private:
 	MatchSettings();
 	~MatchSettings();
@@ -51,5 +60,10 @@ private:
 
 	Player1Characters player1Character;
 	Player2Characters player2Character;
+
+	int player1Points;
+	int player2Points;
+
+	GameMode gameMode;
 };
 #endif

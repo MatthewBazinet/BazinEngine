@@ -218,6 +218,7 @@
     <ClCompile Include="MorphTargetAnimatedModel.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="NetworkingPackets.cpp" />
+    <ClCompile Include="NightGaunt.cpp" />
     <ClCompile Include="OnlineGameScene.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
@@ -230,6 +231,7 @@
     <ClCompile Include="SlashWave.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Spike.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="Tetrahedron.cpp" />
@@ -333,6 +335,7 @@
     <ClInclude Include="MorphTargetAnimatedModel.h" />
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="NetworkingPackets.h" />
+    <ClInclude Include="NightGaunt.h" />
     <ClInclude Include="OnlineGameScene.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Pathfinding.h" />
@@ -346,6 +349,7 @@
     <ClInclude Include="SlashWave.h" />
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Spike.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
     <ClInclude Include="Tetrahedron.h" />

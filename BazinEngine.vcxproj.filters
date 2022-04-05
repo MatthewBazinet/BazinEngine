@@ -111,6 +111,8 @@
     <ClCompile Include="MatchSettings.cpp" />
     <ClCompile Include="SlashWave.cpp" />
     <ClCompile Include="Eel.cpp" />
+    <ClCompile Include="NightGaunt.cpp" />
+    <ClCompile Include="Spike.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -232,6 +234,8 @@
     <ClInclude Include="MatchSettings.h" />
     <ClInclude Include="SlashWave.h" />
     <ClInclude Include="Eel.h" />
+    <ClInclude Include="NightGaunt.h" />
+    <ClInclude Include="Spike.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

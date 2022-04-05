@@ -42,22 +42,23 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("MediumEnd", new MorphTarget("Resources/Models/Eldric/EldricMediumEnd.obj", "Idle", 0.3f));
 
 	// Aerials
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyStart", new MorphTarget("Resources/Models/Eldric/EldricAirHeavyStart.obj", "AirHeavy1", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy1", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy1.obj", "AirHeavy2", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy2", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy2.obj", "AirHeavy3", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy3", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy3.obj", "AirHeavy4", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy4", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy4.obj", "AirHeavyEnd", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Eldric/EldricAirHeavyEnd.obj", "Idle", 0.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyStart", new MorphTarget("Resources/Models/Eldric/EldricAirHeavyStart.obj", "AirHeavy1", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy1", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy1.obj", "AirHeavy2", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy2", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy2.obj", "AirHeavy3", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy3", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy3.obj", "AirHeavy4", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy4", new MorphTarget("Resources/Models/Eldric/EldricAirHeavy4.obj", "AirHeavyEnd", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Eldric/EldricAirHeavyEnd.obj", "Idle", 0.2f));
 
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Eldric/EldricAirLightStart.obj", "AirLightEnd", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Eldric/EldricAirLightEnd.obj", "Idle", 0.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Eldric/EldricAirLightStart.obj", "AirLightEnd", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Eldric/EldricAirLightEnd.obj", "Idle", 0.2f));
 
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Eldric/EldricAirMediumStart.obj", "AirMediumEnd", 0.3f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Eldric/EldricAirMediumEnd.obj", "Idle", 0.3f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Eldric/EldricAirMediumStart.obj", "AirMedium1", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMedium1", new MorphTarget("Resources/Models/Eldric/EldricAirMedium1.obj", "AirMediumEnd", 0.2f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Eldric/EldricAirMediumEnd.obj", "Idle", 0.2f));
 
 	// Specials
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("QCB", new MorphTarget("Resources/Models/Eldric/EldricQCB.obj", "Idle", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("QCF", new MorphTarget("Resources/Models/Eldric/EldricQCF.obj", "Idle", 0.5f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("QCB", new MorphTarget("Resources/Models/Eldric/EldricQCB.obj", "Idle", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("QCF", new MorphTarget("Resources/Models/Eldric/EldricQCF.obj", "Idle", 1.0f));
 
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("UniqueStart", new MorphTarget("Resources/Models/Eldric/EldricUniqueStart.obj", "UniqueEnd", 0.25f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("UniqueEnd", new MorphTarget("Resources/Models/Eldric/EldricUniqueEnd.obj", "Idle", 0.25f));
@@ -86,9 +87,9 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 	hurtBoxes["airHeavy"] = new HurtBox(hurtBox_, this->position, this);
 	hurtBoxes["airHeavy"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(-2.5f, 13.0f, 0.0f), 1.25f, 6);
 
-	// Hiboxes
+	// Hitboxes
 	hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(8.0f, 7.0f, 0.0f), 0.75f, 6);
+	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(5.0f, 8.0f, 0.0f), 0.75f, 6);
 
 	hitBoxes["medium1"] = new HitBox(hurtBox_, this->position, this);
 	hitBoxes["medium1"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(6.0f, 7.0f, 0.0f), 0.75f, 6);
@@ -99,6 +100,18 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 	hitBoxes["heavy"] = new HitBox(hurtBox_, this->position, this);
 	hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(1.0f, 6.0f, 0.0f), this->position + glm::vec3(5.0f, 7.0f, 0.0f), 0.75f, 4);
 
+	hitBoxes["airLight"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["airLight"]->spawnSpheres(this->position + glm::vec3(0.0f, 6.0f, 0.0f), this->position + glm::vec3(5.0f, 4.0f, 0.0f), 0.75f, 6);
+
+	hitBoxes["airMedium1"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["airMedium1"]->spawnSpheres(this->position + glm::vec3(0.0f, 6.0f, 0.0f), this->position + glm::vec3(6.0f, 8.0f, 0.0f), 0.75f, 6);
+
+	hitBoxes["airMedium2"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["airMedium2"]->spawnSpheres(this->position + glm::vec3(0.0f, 6.0f, 0.0f), this->position + glm::vec3(6.0f, 1.0f, 0.0f), 0.75f, 6);
+
+	hitBoxes["airHeavy"] = new HitBox(hurtBox_, this->position, this);
+	hitBoxes["airHeavy"]->spawnSpheres(this->position + glm::vec3(-2.0f, 6.0f, 0.0f), this->position + glm::vec3(5.0f, 6.0f, 0.0f), 0.75f, 6);
+
 	// Framedata
 	frameData["light"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["medium"] = FrameData(5.0f / 60.0f, 15.0f / 60.0f, 40.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
@@ -106,14 +119,14 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 
 	frameData["airLight"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 45.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 	frameData["airMedium"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 30.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-	frameData["airHeavy"] = FrameData(1.0f / 60.0f, 90.0f / 60.0f, 20.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["airHeavy"] = FrameData(1.0f / 60.0f, 120.0f / 60.0f, 20.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 	frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 	// Eel
-	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
-	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["QCF0"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+	frameData["QCF1"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
+	frameData["QCF2"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 2);
 
 	// Gaunts
 	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
@@ -288,7 +301,7 @@ void Eldric::QCF(int strength, bool simpleInput)
 	if (nextActionable > 0.0f) return;
 
 	isIdle = false;
-	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("QCF", 0.3f);
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("QCF", 0.5f);
 	hurtBox = hurtBoxes["basic"];
 
 	if (strength == 0)
@@ -312,22 +325,25 @@ void Eldric::OnQCFActive(int strength)
 		if (strength == 0)
 		{
 			proj = new Eel(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			proj->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
 		}
 		else if (strength == 2 && overclock >= 25.0f)
 		{
 			proj = new Eel(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			proj->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
 			overclock -= 25.0f;
 		}
 		else
 		{
 			proj = new Eel(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			proj->SetVelocity(glm::vec3(10.0f, 10.0f, 0.0f));
 		}
 	}
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
-	proj->SetVelocity(glm::vec3(-dir));
+	proj->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
+	
 
 	resetCombo();
 }
@@ -353,11 +369,46 @@ void Eldric::QCB(int strength, bool simpleInput)
 	isIdle = false;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("QCB", 0.3f);
 	hurtBox = hurtBoxes["basic"];
+
+	if (strength == 0)
+	{
+		SetFrameData(frameData["QCB0"]);
+	}
+	else if (strength == 2 && overclock >= 25.0f)
+	{
+		SetFrameData(frameData["QCB2"]);
+	}
+	else
+	{
+		SetFrameData(frameData["QCB1"]);
+	}
 }
 
 void Eldric::OnQCBActive(int strength)
 {
+	if (proj == nullptr)
+	{
+		if (strength == 0)
+		{
+			proj = new NightGaunt(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+		}
+		else if (strength == 2 && overclock >= 25.0f)
+		{
+			proj = new NightGaunt(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			overclock -= 25.0f;
+		}
+		else
+		{
+			proj = new NightGaunt(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+		}
+	}
 
+	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
+	proj->SetTarget(nullptr);
+	proj->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
+	proj->SetVelocity((glm::vec3(-dir)) * 0.25f);
+
+	resetCombo();
 }
 
 void Eldric::AirQCB(int strength, bool simpleInput)
@@ -379,6 +430,18 @@ void Eldric::Unique()
 
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("UniqueStart", 0.3f);
 	hurtBox = hurtBoxes["basic"];
+	SetFrameData(frameData["Unique"]);
+
+	if (proj == nullptr)
+	{
+		proj = new Spike(frameData["Unique"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+		proj->SetVelocity(glm::vec3(0.0f));
+		proj->SetPosition(this->GetPosition() + (glm::vec3(4.0f, 0.0f, 0.0f)));
+	}
+	else
+	{
+		static_cast<Spike*>(proj)->SetActive(true);
+	}
 }
 
 void Eldric::OnUniqueActive()
@@ -475,7 +538,7 @@ void Eldric::AirMedium()
 	currentMove = moveState::AIRMEDIUM;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirMediumStart", 0.5f);
 	hurtBox = hurtBoxes["basic"];
-	hitBox = hitBoxes["airMedium"];
+	hitBox = hitBoxes["airMedium1"];
 	SetFrameData(frameData["airMedium"]);
 }
 
@@ -488,6 +551,11 @@ void Eldric::OnMediumRecovery()
 {
 	hitBox = hitBoxes["medium2"];
 	hurtBox = hurtBoxes["medium"];
+}
+
+void Eldric::OnAirMediumRecovery()
+{
+	hitBox = hitBoxes["airMedium2"];
 }
 
 void Eldric::Heavy()
@@ -524,19 +592,23 @@ void Eldric::AirHeavy()
 	currentMove = moveState::AIRHEAVY;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirHeavyStart", 0.5f);
 	hurtBox = hurtBoxes["basic"];
-	hitBox = hitBoxes["airHeavy"];
 	SetFrameData(frameData["airHeavy"]);
 }
 
 void Eldric::OnAirHeavyActive()
 {
-
+	
 }
 
 void Eldric::OnHeavyRecovery()
 {
 	hitBox = hitBoxes["heavy"];
 	hurtBox = hurtBoxes["heavy"];
+}
+
+void Eldric::OnAirHeavyRecovery()
+{
+	hitBox = hitBoxes["airHeavy"];
 }
 
 void Eldric::ResetProjectile()

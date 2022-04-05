@@ -22,6 +22,7 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 	void ResetRound();
+	void LoadCharacters();
 
 	Component* ptr;
 	float scale;

@@ -6,6 +6,7 @@ MatchSettings::MatchSettings()
 {
 	player1Character = Player1Characters::None;
 	player2Character = Player2Characters::None;
+	gameMode = GameMode::Arcade;
 }
 MatchSettings::~MatchSettings()
 {
@@ -74,4 +75,7 @@ Player2Characters MatchSettings::GetPlayer2Character()
 	return player2Character;
 }
 
-
+void MatchSettings::NextMatch()
+{
+	player2Character = static_cast<Player2Characters>(static_cast<int>(player2Character) + 1);
+}
