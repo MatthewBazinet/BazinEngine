@@ -42,19 +42,19 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 		else if (key_ == player1Keybinds.down)
 		{
 			player1Inputs.directions.back().y = -1.0f;
-			player1Inputs.timeDownHeld = time;
+			if(player1Inputs.timeDownHeld <= 0.0f) player1Inputs.timeDownHeld = time;
 			player1->Move(player1Inputs.directions.back());
 		}
 		else if (key_ == player1Keybinds.left)
 		{
 			player1Inputs.directions.back().x = -1.0f;
-			player1Inputs.timeLeftHeld = time;
+			if (player1Inputs.timeLeftHeld <= 0.0f) player1Inputs.timeLeftHeld = time;
 			player1->Move(player1Inputs.directions.back());
 		}
 		else if (key_ == player1Keybinds.right)
 		{
 			player1Inputs.directions.back().x = 1.0f;
-			player1Inputs.timeRightHeld = time;
+			if (player1Inputs.timeRightHeld <= 0.0f) player1Inputs.timeRightHeld = time;
 			player1->Move(player1Inputs.directions.back());
 		}
 		else if (key_ == player1Keybinds.light)
@@ -105,19 +105,19 @@ void InputManager::OnKeyDown(SDL_Scancode key_)
 		else if (key_ == player2Keybinds.down)
 		{
 			player2Inputs.directions.back().y = -1.0f;
-			player2Inputs.timeDownHeld = time;
+			if (player2Inputs.timeDownHeld <= 0.0f) player2Inputs.timeDownHeld = time;
 			player2->Move(player2Inputs.directions.back());
 		}
 		else if (key_ == player2Keybinds.left)
 		{
 			player2Inputs.directions.back().x = -1.0f;
-			player2Inputs.timeLeftHeld = time;
+			if (player2Inputs.timeLeftHeld <= 0.0f) player2Inputs.timeLeftHeld = time;
 			player2->Move(player2Inputs.directions.back());
 		}
 		else if (key_ == player2Keybinds.right)
 		{
 			player2Inputs.directions.back().x = 1.0f;
-			player2Inputs.timeRightHeld = time;
+			if (player2Inputs.timeRightHeld <= 0.0f) player2Inputs.timeRightHeld = time;
 			player2->Move(player2Inputs.directions.back());
 		}
 		else if (key_ == player2Keybinds.light)
@@ -336,7 +336,7 @@ void InputManager::CheckMotion(int strength, int character)
 		{
 			if(characterObject->FacingLeft())
 			{ 
-				if (time - input->timeRightHeld > 1.0f || input->timeRightHeld > 0.0f)
+				if (time - input->timeRightHeld > 1.0f && input->timeRightHeld > 0.0f)
 				{
 					characterObject->QCF(strength, true);
 					input->timeRightHeld = 0.0f;
@@ -361,7 +361,7 @@ void InputManager::CheckMotion(int strength, int character)
 			}
 			else 
 			{
-				if (time - input->timeLeftHeld > 1.0f || input->timeLeftHeld > 0.0f)
+				if (time - input->timeLeftHeld > 1.0f && input->timeLeftHeld > 0.0f)
 				{
 					characterObject->QCF(strength, true);
 					input->timeLeftHeld = 0.0f;
@@ -394,7 +394,7 @@ void InputManager::CheckMotion(int strength, int character)
 	{
 		if (characterObject->IsCharge())
 		{
-			if (time - input->timeDownHeld > 1.0f || input->timeDownHeld > 0.0f)
+			if (time - input->timeDownHeld > 1.0f && input->timeDownHeld > 0.0f)
 			{
 				characterObject->QCB(strength, true);
 				input->timeDownHeld = 0.0f;

@@ -1,4 +1,4 @@
-[INFO]: OpenGL Version: 4.6.0 NVIDIA 471.96 in: Window.cpp on line: 39
+[INFO]: OpenGL Version: 4.6.0 NVIDIA 511.79 in: Window.cpp on line: 39
 [INFO]: Graphics Card Vendor: NVIDIA Corporation in: Window.cpp on line: 40
 [INFO]: Window Created Succesfully in: CoreEngine.cpp on line: 33
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 20
@@ -48,7 +48,6 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[INFO]: Game Scene initiated in: GameScene.cpp on line: 25
 [ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
@@ -58,6 +57,82 @@
 [ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[INFO]: Game Scene initiated in: GameScene.cpp on line: 26
+[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
@@ -66,6 +141,16 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
+[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87

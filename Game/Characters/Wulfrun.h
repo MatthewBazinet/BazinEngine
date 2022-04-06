@@ -11,6 +11,10 @@ public:
 
 	void Update(const float deltaTime_);
 
+	void Run(bool isRunning_);
+
+	void Move(glm::vec2 input);
+
 	void QCF(int strength, bool simpleInput);
 	void QCB(int strength, bool simpleInput);
 	void Unique();
@@ -18,7 +22,8 @@ public:
 	void Medium();
 	void Heavy();
 
-	void ResetProjectile();
+	void ResetProjectiles();
+	void RemoveProjectile(std::string tag_);
 
 protected:
 	void AirQCF(int strength, bool simpleInput);
@@ -29,7 +34,9 @@ protected:
 	void AirHeavy();
 
 	void OnQCFActive(int strength);
+	void OnQCFRecovery(int strength);
 	void OnQCBActive(int strength);
+	void OnQCBRecovery(int strength);
 	void OnUniqueActive();
 	void OnHeavyActive();
 	void OnAirQCFActive(int strength);
@@ -37,7 +44,7 @@ protected:
 	void OnAirUniqueActive();
 	void OnAirHeavyActive();
 
-	Projectile* proj;
+	std::vector<Projectile*> projs;
 };
 
 #endif

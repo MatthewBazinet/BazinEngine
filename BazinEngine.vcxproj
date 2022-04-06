@@ -215,6 +215,7 @@
     <ClCompile Include="MatchVelocity.cpp" />
     <ClCompile Include="MorphTarget.cpp" />
     <ClCompile Include="MorphTargetAnimatedModel.cpp" />
+    <ClCompile Include="MorphTargetManager.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="NetworkingPackets.cpp" />
     <ClCompile Include="OnlineGameScene.cpp" />
@@ -329,6 +330,7 @@
     <ClInclude Include="MatchVelocity.h" />
     <ClInclude Include="MorphTarget.h" />
     <ClInclude Include="MorphTargetAnimatedModel.h" />
+    <ClInclude Include="MorphTargetManager.h" />
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="NetworkingPackets.h" />
     <ClInclude Include="OnlineGameScene.h" />

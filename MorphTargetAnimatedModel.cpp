@@ -1,4 +1,5 @@
 #include "MorphTargetAnimatedModel.h"
+#include "MorphTargetManager.h"
 
 MorphTargetAnimatedModel::MorphTargetAnimatedModel(const std::string& objPath_, const std::string& matPath_, GLuint shaderProgram_) : Model(objPath_, matPath_, shaderProgram_)
 {
@@ -51,7 +52,7 @@ void MorphTargetAnimatedModel::Update(const float deltaTime_)
 		for (int i = 0; i < meshes.size(); i++)
 		{
 			meshes[i]->subMesh.vertexList = SubMesh::Lerp(
-				prevVertexLists[i], animationMorphTargets[currentMorphTarget]->meshes[i]->subMesh.vertexList,
+				prevVertexLists[i], animationMorphTargets[currentMorphTarget]->GetMorphTarget()[i]->subMesh.vertexList,
 				(animationTime - timeToMorphComplete) / animationTime);
 		}
 	}
