@@ -108,18 +108,24 @@ void UserInterface::ShowMenu()
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		if (ImGui::Button("Versus Mode", ImVec2(300, 100))) {
 			se.playSoundEffect(0);
+			MatchSettings::GetInstance()->SetGameMode(GameMode::Versus);
 			CoreEngine::GetInstance()->SetCurrentScene(7);
 		}
-
-		if (ImGui::Button("Training Mode (WIP)", ImVec2(300, 100))) {
+		if (ImGui::Button("Training Mode", ImVec2(300, 100))) {
 			se.playSoundEffect(0);
+			MatchSettings::GetInstance()->SetGameMode(GameMode::Training);
+			CoreEngine::GetInstance()->SetCurrentScene(7);
 		}
-
+		if (ImGui::Button("Arcade", ImVec2(300, 100))) {
+			se.playSoundEffect(0);
+			MatchSettings::GetInstance()->SetGameMode(GameMode::Arcade);
+			CoreEngine::GetInstance()->SetCurrentScene(7);
+		}
 		//Online Button
-		if (ImGui::Button("Online", ImVec2(300, 100))) {
-			se.playSoundEffect(0);
-			state = State::Online;
-		}
+		//if (ImGui::Button("Online", ImVec2(300, 100))) {
+		//	se.playSoundEffect(0);
+		//	state = State::Online;
+		//}
 		ImGui::End();
 
 		//Quit Button
@@ -238,8 +244,19 @@ void UserInterface::ShowCharacterSelect()
 		ImGui::Begin("here ", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		ImGui::TextColored(ImVec4(1.0, 1.0, 1.0, 1.0), "A<								>D");
 		if (ImGui::Button("Start Game", ImVec2(250, 80))) {
-			se.playSoundEffect(0);
-			CoreEngine::GetInstance()->SetCurrentScene(1);
+			
+			if (MatchSettings::GetInstance()->GetGameMode() == GameMode::Versus) {
+				se.playSoundEffect(0);
+				CoreEngine::GetInstance()->SetCurrentScene(1);
+			}
+			else if (MatchSettings::GetInstance()->GetGameMode() == GameMode::Arcade) {
+				CoreEngine::GetInstance()->SetCurrentScene(8);
+				se.playSoundEffect(0);
+			}
+			else {
+
+				se.playSoundEffect(0);
+			}
 		}
 		
 	}

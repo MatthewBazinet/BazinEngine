@@ -19,7 +19,11 @@ enum class Player2Characters {
 	Wulfrun,
 	Eldric
 };
-
+enum class GameMode {
+	Versus,
+	Arcade,
+	Training
+};
 class MatchSettings
 {
 public:
@@ -39,9 +43,10 @@ public:
 	void SetGameTime(int time_);
 	void SetPlayer1Character(Player1Characters character_);
 	void SetPlayer2Character(Player2Characters character_);
+	void SetGameMode(GameMode gamemode_);
 	Player1Characters GetPlayer1Character();
 	Player2Characters GetPlayer2Character();
-
+	GameMode GetGameMode();
 	void NextMatch();
 
 	int GetP1Points() { return player1Points; };
@@ -49,7 +54,6 @@ public:
 
 	int GetP2Points() { return player2Points; };
 	void SetP2Points(int points_) { player2Points = points_; };
-
 private:
 	MatchSettings();
 	~MatchSettings();
@@ -60,6 +64,7 @@ private:
 
 	Player1Characters player1Character;
 	Player2Characters player2Character;
+	GameMode gamemode;
 
 	int player1Points;
 	int player2Points;
