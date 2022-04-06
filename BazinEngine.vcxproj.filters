@@ -113,6 +113,7 @@
     <ClCompile Include="Eel.cpp" />
     <ClCompile Include="NightGaunt.cpp" />
     <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="Game\Scene\ArcadeScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Eel.h" />
     <ClInclude Include="NightGaunt.h" />
     <ClInclude Include="Spike.h" />
+    <ClInclude Include="Game\Scene\ArcadeScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

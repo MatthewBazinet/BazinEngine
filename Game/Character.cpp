@@ -749,7 +749,7 @@ bool Character::IsCharge()
 
 bool Character::FacingLeft()
 {
-	if (opponent) {
+uu	if (opponent) {
 		glm::vec3 dir = position - opponent->position;
 		return glm::dot(glm::normalize(dir), camera->GetRight()) < 0;
 	}

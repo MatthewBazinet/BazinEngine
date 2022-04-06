@@ -18,12 +18,6 @@ enum class Player2Characters {
 	Eldric
 };
 
-enum GameMode
-{
-	None,
-	Versus,
-	Arcade
-};
 class MatchSettings
 {
 public:
@@ -47,8 +41,12 @@ public:
 	Player2Characters GetPlayer2Character();
 
 	void NextMatch();
-	GameMode GetGameMode() { return gameMode; };
-	void SetGameMode(GameMode gameMode_) {gameMode = gameMode_;};
+
+	int GetP1Points() { return player1Points; };
+	void SetP1Points(int points_) { player1Points = points_; };
+
+	int GetP2Points() { return player2Points; };
+	void SetP2Points(int points_) { player2Points = points_; };
 
 private:
 	MatchSettings();
@@ -63,7 +61,5 @@ private:
 
 	int player1Points;
 	int player2Points;
-
-	GameMode gameMode;
 };
 #endif

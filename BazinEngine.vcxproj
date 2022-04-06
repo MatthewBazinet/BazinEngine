@@ -145,6 +145,7 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="Game\Scene\ArcadeScene.cpp" />
     <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="AnimationTestScene.h" />
+    <ClInclude Include="Game\Scene\ArcadeScene.h" />
     <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugSphere.h" />
