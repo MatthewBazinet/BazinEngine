@@ -64,6 +64,11 @@ void MatchSettings::SetPlayer2Character(Player2Characters character_)
 	player2Character = character_;
 }
 
+void MatchSettings::SetGameMode(GameMode gamemode_)
+{
+	gamemode = gamemode_;
+}
+
 Player1Characters MatchSettings::GetPlayer1Character()
 {
 	return player1Character;
@@ -72,6 +77,11 @@ Player1Characters MatchSettings::GetPlayer1Character()
 Player2Characters MatchSettings::GetPlayer2Character()
 {
 	return player2Character;
+}
+
+GameMode MatchSettings::GetGameMode()
+{
+	return gamemode;
 }
 
 
