@@ -57,7 +57,7 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlideEnd", new MorphTarget("Resources/Models/Hoshi/HoshiSlidingEnd.obj", "Idle", 0.1f));
 	
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
-	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+	//static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
 
 	// Hurtboxes
 	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
@@ -86,7 +86,7 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	hitBox = hitBoxes["light"];
 	 
 	// Framedata
-	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 600.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 
@@ -97,9 +97,9 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 	// Gravity Wave
-	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
-	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	// Slide
 	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
@@ -288,16 +288,14 @@ void Hoshi::QCF(int strength, bool simpleInput)
 	{
 		SetFrameData(frameData["QCF0"]);
 	}
-	else if (strength == 1)
-	{
-		SetFrameData(frameData["QCF1"]);
-	}
-	else if (strength == 2)
+	else if (strength == 2 && overclock >= 25.0f)
 	{
 		SetFrameData(frameData["QCF2"]);
 	}
-
-	// make hurtbox nullptr for invincible reversal, turn it back to regular afterwards
+	else
+	{
+		SetFrameData(frameData["QCF1"]);
+	}
 }
 
 void Hoshi::OnQCFActive(int strength)
@@ -306,22 +304,22 @@ void Hoshi::OnQCFActive(int strength)
 	{
 		if (strength == 0)
 		{
-			std::cout << "light" << std::endl;
-			proj = new GravityWave(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			proj = new GravityWave(frameData["QCF0"], glm::vec3(1.0f, 4.0f, 0.0f), this);
 		}
-		else if (strength == 1)
+		else if (strength == 2 && overclock >= 25.0f)
 		{
-			proj = new GravityWave(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			proj = new GravityWave(frameData["QCF2"], glm::vec3(1.0f, 4.0f, 0.0f), this);
+			overclock -= 25.0f;
 		}
-		else if (strength == 2)
+		else
 		{
-			proj = new GravityWave(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			proj = new GravityWave(frameData["QCF1"], glm::vec3(1.0f, 4.0f, 0.0f), this);
 		}
 	}
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
+	proj->SetPosition(this->GetPosition() + glm::vec3(0.0f, 4.0f, 0.0f));
 	proj->SetVelocity(glm::vec3(-dir));
 
 	resetCombo();
@@ -344,15 +342,16 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	{
 		SetFrameData(frameData["QCB0"]);
 	}
-	else if (strength == 1)
-	{
-		SetFrameData(frameData["QCB1"]);
-	}
-	else if (strength == 2)
+	else if (strength == 2 && overclock >= 25.0f)
 	{
 		SetFrameData(frameData["QCB2"]);
 	}
+	else
+	{
+		SetFrameData(frameData["QCB1"]);
+	}
 
+	// change to set distances based on strength
 	ApplyForce(10.0f * (opponent->GetPosition() - GetPosition()));
 
 	resetCombo();
@@ -362,7 +361,7 @@ void Hoshi::OnQCBActive(int strength)
 {
 	if (strength == 2)
 	{
-		hitBox = nullptr;
+		hurtBox = nullptr;
 	}
 }
 
@@ -370,7 +369,7 @@ void Hoshi::OnQCBRecovery(int strength)
 {
 	if (strength == 2)
 	{
-		hitBox = hitBoxes["basic"];
+		hurtBox = hurtBoxes["basic"];
 	}
 }
 

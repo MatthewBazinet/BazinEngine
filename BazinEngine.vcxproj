@@ -145,9 +145,11 @@
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
     <ClCompile Include="AICharacter.cpp" />
+    <ClCompile Include="Game\Scene\ArcadeScene.cpp" />
     <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="DebugSphere.cpp" />
     <ClCompile Include="AnimationTestScene.cpp" />
+    <ClCompile Include="Eel.cpp" />
     <ClCompile Include="Engine\Camera\BattleCamera.cpp" />
     <ClCompile Include="Engine\Events\ControllerEventListener.cpp" />
     <ClCompile Include="Engine\Math\EnvironmentalCollisionManager.cpp" />
@@ -218,6 +220,7 @@
     <ClCompile Include="MorphTargetManager.cpp" />
     <ClCompile Include="NetworkingBase.cpp" />
     <ClCompile Include="NetworkingPackets.cpp" />
+    <ClCompile Include="NightGaunt.cpp" />
     <ClCompile Include="OnlineGameScene.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
@@ -230,6 +233,7 @@
     <ClCompile Include="SlashWave.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Spike.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="test_common.cpp" />
     <ClCompile Include="Tetrahedron.cpp" />
@@ -256,9 +260,11 @@
     <ClInclude Include="ActionRunTowards.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="AnimationTestScene.h" />
+    <ClInclude Include="Game\Scene\ArcadeScene.h" />
     <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DebugSphere.h" />
+    <ClInclude Include="Eel.h" />
     <ClInclude Include="Engine\Camera\BattleCamera.h" />
     <ClInclude Include="Engine\Core\OctSpatialPartition.h" />
     <ClInclude Include="Engine\Events\ControllerEventListener.h" />
@@ -333,6 +339,7 @@
     <ClInclude Include="MorphTargetManager.h" />
     <ClInclude Include="NetworkingBase.h" />
     <ClInclude Include="NetworkingPackets.h" />
+    <ClInclude Include="NightGaunt.h" />
     <ClInclude Include="OnlineGameScene.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Pathfinding.h" />
@@ -346,6 +353,7 @@
     <ClInclude Include="SlashWave.h" />
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Spike.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="test_common.h" />
     <ClInclude Include="Tetrahedron.h" />
