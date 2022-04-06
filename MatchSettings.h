@@ -45,6 +45,13 @@ public:
 	Player1Characters GetPlayer1Character();
 	Player2Characters GetPlayer2Character();
 	GameMode GetGameMode();
+	void NextMatch();
+
+	int GetP1Points() { return player1Points; };
+	void SetP1Points(int points_) { player1Points = points_; };
+
+	int GetP2Points() { return player2Points; };
+	void SetP2Points(int points_) { player2Points = points_; };
 private:
 	MatchSettings();
 	~MatchSettings();
@@ -56,5 +63,8 @@ private:
 	Player1Characters player1Character;
 	Player2Characters player2Character;
 	GameMode gamemode;
+
+	int player1Points;
+	int player2Points;
 };
 #endif

@@ -4,9 +4,12 @@
 #include "..//Character.h"
 #include "../Projectile.h"
 #include "../Eel.h"
+#include "../NightGaunt.h"
+#include "../Spike.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 
+class HurtBox;
 class Eldric : public Character
 {
 public:
@@ -51,6 +54,8 @@ protected:
 
 	void OnHeavyRecovery();
 	void OnMediumRecovery();
+	void OnAirMediumRecovery();
+	void OnAirHeavyRecovery();
 
 	Projectile* proj;
 };

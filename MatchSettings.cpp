@@ -6,6 +6,8 @@ MatchSettings::MatchSettings()
 {
 	player1Character = Player1Characters::None;
 	player2Character = Player2Characters::None;
+	player1Points = 0;
+	player2Points - 0;
 }
 MatchSettings::~MatchSettings()
 {
@@ -84,4 +86,7 @@ GameMode MatchSettings::GetGameMode()
 	return gamemode;
 }
 
-
+void MatchSettings::NextMatch()
+{
+	player2Character = static_cast<Player2Characters>(static_cast<int>(player2Character) + 1);
+}

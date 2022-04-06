@@ -86,7 +86,7 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 	hitBox = hitBoxes["light"];
 	 
 	// Framedata
-	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 600.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 
@@ -319,7 +319,7 @@ void Hoshi::OnQCFActive(int strength)
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
+	proj->SetPosition(this->GetPosition() + glm::vec3(0.0f, 4.0f, 0.0f));
 	proj->SetVelocity(glm::vec3(-dir));
 
 	resetCombo();
@@ -351,6 +351,7 @@ void Hoshi::QCB(int strength, bool simpleInput)
 		SetFrameData(frameData["QCB1"]);
 	}
 
+	// change to set distances based on strength
 	ApplyForce(10.0f * (opponent->GetPosition() - GetPosition()));
 
 	resetCombo();

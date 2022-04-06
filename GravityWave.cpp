@@ -29,7 +29,6 @@ void GravityWave::Update(const float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes()))
 			{
 				parent->GetOpponent()->Hit(frameData);
-				parent->GetOpponent()->SetVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
 				//parent->GetOpponent()->SetPosition(glm::vec3(parent->GetOpponent()->GetPosition().x, 4.0f, parent->GetOpponent()->GetPosition().z));
 				parent->GetOpponent()->setApplyGravity(false);
 

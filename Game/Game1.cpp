@@ -8,6 +8,7 @@
 #include "..//AnimationTestScene.h"
 #include "Scene/TrainingScene.h"
 #include "../CharacterSelectScene.h"
+#include "Scene/ArcadeScene.h"
 
 Game1::Game1() : GameInterface(), currentScene(nullptr), currentSceneNum(0)
 {
@@ -87,6 +88,9 @@ void Game1::BuildScene()
 		break;
 	case 7:
 		currentScene = new CharacterSelectScene();
+		break;
+	case 8:
+		currentScene = new ArcadeScene();
 		break;
 	default: //case 0:
 		currentScene = new StartScene();

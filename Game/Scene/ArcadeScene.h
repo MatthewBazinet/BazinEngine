@@ -1,5 +1,5 @@
-#ifndef GAMESCENE_H
-#define GAMESCENE_H
+#ifndef ARCADESCENE_H
+#define ARCADESCENE_H
 
 #include "../../Engine/Core/CoreEngine.h"
 #include "../Character.h"
@@ -7,13 +7,14 @@
 #include "../../Flocking.h"
 #include "../Pawn.h"
 #include "../ParticleSystem.h"
-#include <vector>
 #include "../InputManager.h"
-class GameScene : public Scene
+#include <vector>
+
+class ArcadeScene : public Scene
 {
 public:
-	GameScene();
-	~GameScene();
+	ArcadeScene();
+	~ArcadeScene();
 	bool OnCreate() override;
 	void Update(const float deltaTime_) override;
 	void Render() override;
@@ -22,11 +23,10 @@ public:
 	void NotifyOfKeyUp(const SDL_Scancode key_);
 
 	void ResetRound();
-	void LoadCharacters();
+	void LoadPlayer1Character();
+	void LoadPlayer2Character();
 
-	Component* ptr;
 	float scale;
-	bool tmp = true;
 	InputManager inputManager;
 
 	glm::vec4 leftPlane;
@@ -36,4 +36,4 @@ public:
 	std::vector<glm::vec4> planes;
 };
 
-#endif // !GAMESCENE_H
+#endif;
