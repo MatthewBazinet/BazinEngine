@@ -36,12 +36,7 @@ bool ArcadeScene::OnCreate()
 
 	LoadPlayer1Character();
 	LoadPlayer2Character();
-
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
-	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
-	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->SetPlayers(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
-	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+	SetPlayerSettings();
 
 	Model* floor = new Model("Resources/Models/Floor.obj", "Resources/Materials/Floor.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(floor, glm::vec3(5.0f, -0.25f, 0.0f), 0.0f, glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(2.0f, 1.0f, 2.0f)), "floor");
@@ -132,6 +127,15 @@ void ArcadeScene::LoadPlayer2Character()
 	Sphere = nullptr;
 }
 
+void ArcadeScene::SetPlayerSettings()
+{
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetOpponent(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")));
+	static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetOpponent(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->SetPlayers(dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1")), dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+	dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetCamera(static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera()));
+}
+
 void ArcadeScene::ResetRound()
 {
 	UserInterface::GetInstance()->SetTime(300);
@@ -160,14 +164,23 @@ void ArcadeScene::Update(const float deltaTime_)
 		MatchSettings::GetInstance()->SetP1Points(MatchSettings::GetInstance()->GetP1Points() + 1);
 		if (MatchSettings::GetInstance()->GetP1Points() == 2)
 		{
-			SceneGraph::GetInstance()->RemoveModel(SceneGraph::GetInstance()->GetGameObject("char2")->GetModel());
-			SceneGraph::GetInstance()->RemoveGameObject("char2");
-			MatchSettings::GetInstance()->NextMatch();
-			LoadPlayer2Character();
-			ResetRound();
+			if (static_cast<int>(MatchSettings::GetInstance()->GetPlayer2Character()) + 1 != NULL)
+			{
+				SceneGraph::GetInstance()->RemoveModel(SceneGraph::GetInstance()->GetGameObject("char2")->GetModel());
+				SceneGraph::GetInstance()->RemoveGameObject("char2");
+				MatchSettings::GetInstance()->NextMatch();
+				LoadPlayer2Character();
+				SetPlayerSettings();
+				ResetRound();
+			}
+			else
+			{
+				CoreEngine::GetInstance()->SetCurrentScene(0);
+			}
 		}
 		else
 		{
+			std::cout << "round 2" << std::endl;
 			ResetRound();
 		}
 	}

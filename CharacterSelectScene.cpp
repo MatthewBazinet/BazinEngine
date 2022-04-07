@@ -31,13 +31,10 @@ bool CharacterSelectScene::OnCreate()
 	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "Resources/Textures/CheckerboardTexture.png");
 
 	//Model* Alexis = new Model("Resources/Models/Alexis/Alexis_Walk_01.obj", "Resources/Materials/AlexisBruce.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
-	//Model* Hoshis = new Model("Resources/Models/Hoshi.obj", "Resources/Materials/Hoshi.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Rock = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Sphere = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
-	//Model* kunai = new Model("Resources/Models/Kunai.obj", "Resources/Materials/Kunai.mtl", ShaderHandler::GetInstance()->GetShader("basicShader");
 
 	//SceneGraph::GetInstance()->AddModel(Alexis);
-	//SceneGraph::GetInstance()->AddModel(Hoshis);
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
 
@@ -56,13 +53,11 @@ bool CharacterSelectScene::OnCreate()
 	//dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
 
 	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
-	//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
 	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 	/*SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(-8.0f, 0.0f, 0.0f)), "char1");
 	dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(appleModel, Dice);
 	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(1.0f, 1.0f, false, false, Alexis, glm::vec3(5.0f, 0.0f, 0.0f)), "char2");*/
 	
-	//SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 
 
 	AddCharacter("Hoshi1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Hoshi")),Player1Characters::Hoshi,"Hoshi2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Hoshi")),Player2Characters::Hoshi);
@@ -73,7 +68,6 @@ bool CharacterSelectScene::OnCreate()
 	Rock = nullptr;
 	//Alexis = nullptr;
 	Sphere = nullptr;
-	//Hoshis = nullptr;
 	return true;
 }
 

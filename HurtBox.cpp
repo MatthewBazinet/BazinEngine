@@ -19,7 +19,7 @@ HurtBox::HurtBox(Model* model_, glm::vec3 position_, GameObject* parent_, float 
 		modelInstance = model->CreateInstance(position, angle, rotation, scale);
 		boundingBox = model->GetBoundingBox();
 		boundingBox.transform = model->GetTransform(modelInstance);
-		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
+		//std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
 
 }

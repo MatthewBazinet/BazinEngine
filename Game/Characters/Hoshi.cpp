@@ -1,111 +1,114 @@
 #include "Hoshi.h"
 
-Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, false, new MorphTargetAnimatedModel("Resources/Models/Hoshi.obj", "Resources/Materials/Hoshi.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), pos_)
+Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, false, new MorphTargetAnimatedModel("Resources/Models/Hoshi.obj", "Resources/Materials/Hoshi.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), pos_, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.1f, 1.0f))
 {
 	// Add objs to morph target
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle", new MorphTarget("Resources/Models/Hoshi/HoshiIdleEnd.obj"));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Block", new MorphTarget("Resources/Models/Hoshi/HoshiBlock.obj"));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Fall", new MorphTarget("Resources/Models/Hoshi/HoshiFall.obj"));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Float", new MorphTarget("Resources/Models/Hoshi/HoshiFloat.obj"));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Hit", new MorphTarget("Resources/Models/Hoshi/HoshiHitEnd.obj"));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("JumpStart", new MorphTarget("Resources/Models/Hoshi/HoshiJumpStart.obj", "JumpEnd", 0.2f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("JumpEnd", new MorphTarget("Resources/Models/Hoshi/HoshiJumpEnd.obj", "Idle",  0.2f));
 
-	// Walking
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("WalkStart", new MorphTarget("Resources/Models/Hoshi/HoshiWalkStart.obj", "Walk1", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk1", new MorphTarget("Resources/Models/Hoshi/HoshiWalk1.obj", "Walk2", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk2", new MorphTarget("Resources/Models/Hoshi/HoshiWalk2.obj", "Walk3", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk3", new MorphTarget("Resources/Models/Hoshi/HoshiWalk3.obj", "WalkEnd", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("WalkEnd", new MorphTarget("Resources/Models/Hoshi/HoshiWalkEnd.obj", "WalkStart", 0.5f));
+	if (CoreEngine::GetInstance()->GetCurrentScene() != 1 || CoreEngine::GetInstance()->GetCurrentScene() != 6 || CoreEngine::GetInstance()->GetCurrentScene() != 8)
+	{
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Block", new MorphTarget("Resources/Models/Hoshi/HoshiBlock.obj"));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Fall", new MorphTarget("Resources/Models/Hoshi/HoshiFall.obj"));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Float", new MorphTarget("Resources/Models/Hoshi/HoshiFloat.obj"));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Hit", new MorphTarget("Resources/Models/Hoshi/HoshiHitEnd.obj"));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("JumpStart", new MorphTarget("Resources/Models/Hoshi/HoshiJumpStart.obj", "JumpEnd", 0.2f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("JumpEnd", new MorphTarget("Resources/Models/Hoshi/HoshiJumpEnd.obj", "Idle", 0.2f));
 
-	// Running
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunStart", new MorphTarget("Resources/Models/Hoshi/HoshiRunStart.obj", "Run1", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run1", new MorphTarget("Resources/Models/Hoshi/HoshiRun1.obj", "Run2", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run2", new MorphTarget("Resources/Models/Hoshi/HoshiRun2.obj", "Run3", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run3", new MorphTarget("Resources/Models/Hoshi/HoshiRun3.obj", "Run4", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run4", new MorphTarget("Resources/Models/Hoshi/HoshiRun4.obj", "Run5", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run5", new MorphTarget("Resources/Models/Hoshi/HoshiRun5.obj", "Run6", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run6", new MorphTarget("Resources/Models/Hoshi/HoshiRun1.obj", "RunEnd", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunEnd", new MorphTarget("Resources/Models/Hoshi/HoshiRunEnd.obj", "Run1", 0.1f));
+		// Walking
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("WalkStart", new MorphTarget("Resources/Models/Hoshi/HoshiWalkStart.obj", "Walk1", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk1", new MorphTarget("Resources/Models/Hoshi/HoshiWalk1.obj", "Walk2", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk2", new MorphTarget("Resources/Models/Hoshi/HoshiWalk2.obj", "Walk3", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk3", new MorphTarget("Resources/Models/Hoshi/HoshiWalk3.obj", "WalkEnd", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("WalkEnd", new MorphTarget("Resources/Models/Hoshi/HoshiWalkEnd.obj", "WalkStart", 0.5f));
 
-	// Grounded
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabStart.obj", "LightEnd", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabEnd.obj", "Idle", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("HeavyStart", new MorphTarget("Resources/Models/Hoshi/HoshiHeavyStart.obj", "HeavyEnd", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("HeavyEnd", new MorphTarget("Resources/Models/Hoshi/HoshiHeavyEnd.obj", "Idle", 0.5f));
+		// Running
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunStart", new MorphTarget("Resources/Models/Hoshi/HoshiRunStart.obj", "Run1", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run1", new MorphTarget("Resources/Models/Hoshi/HoshiRun1.obj", "Run2", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run2", new MorphTarget("Resources/Models/Hoshi/HoshiRun2.obj", "Run3", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run3", new MorphTarget("Resources/Models/Hoshi/HoshiRun3.obj", "Run4", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run4", new MorphTarget("Resources/Models/Hoshi/HoshiRun4.obj", "Run5", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run5", new MorphTarget("Resources/Models/Hoshi/HoshiRun5.obj", "Run6", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run6", new MorphTarget("Resources/Models/Hoshi/HoshiRun1.obj", "RunEnd", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunEnd", new MorphTarget("Resources/Models/Hoshi/HoshiRunEnd.obj", "Run1", 0.1f));
 
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("MediumStart", new MorphTarget("Resources/Models/Hoshi/HoshiMediumStart.obj", "Medium1", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Medium1", new MorphTarget("Resources/Models/Hoshi/HoshiMedium1.obj", "Medium2", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Medium2", new MorphTarget("Resources/Models/Hoshi/HoshiMedium2.obj", "Medium3", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Medium3", new MorphTarget("Resources/Models/Hoshi/HoshiMedium3.obj", "MediumEnd", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("MediumEnd", new MorphTarget("Resources/Models/Hoshi/HoshiMedium1.obj", "Idle", 0.1f));
+		// Grounded
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabStart.obj", "LightEnd", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiLightJabEnd.obj", "Idle", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("HeavyStart", new MorphTarget("Resources/Models/Hoshi/HoshiHeavyStart.obj", "HeavyEnd", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("HeavyEnd", new MorphTarget("Resources/Models/Hoshi/HoshiHeavyEnd.obj", "Idle", 0.5f));
 
-	// Aerials
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirHeavyStart.obj", "AirHeavyEnd", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirHeavyEnd.obj", "Idle", 0.5f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirLightStart.obj", "AirLightEnd", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirLightEnd.obj", "Idle", 0.1f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirMedStart.obj", "AirMediumEnd", 0.3f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirMedEnd.obj", "Idle", 0.3f));
-	
-	// Specials
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("GravityWaveStart", new MorphTarget("Resources/Models/Hoshi/HoshiGravityWaveStart.obj", "GravityWaveEnd", 0.3f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("GravityWaveEnd", new MorphTarget("Resources/Models/Hoshi/HoshiGravityWaveEnd.obj", "Idle", 0.3f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("MediumStart", new MorphTarget("Resources/Models/Hoshi/HoshiMediumStart.obj", "Medium1", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Medium1", new MorphTarget("Resources/Models/Hoshi/HoshiMedium1.obj", "Medium2", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Medium2", new MorphTarget("Resources/Models/Hoshi/HoshiMedium2.obj", "Medium3", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Medium3", new MorphTarget("Resources/Models/Hoshi/HoshiMedium3.obj", "MediumEnd", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("MediumEnd", new MorphTarget("Resources/Models/Hoshi/HoshiMedium1.obj", "Idle", 0.1f));
 
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlideStart", new MorphTarget("Resources/Models/Hoshi/HoshiSlidingStart.obj", "Slide1", 0.25f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Slide1", new MorphTarget("Resources/Models/Hoshi/HoshiSliding1.obj", "SlideEnd", 0.75f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlideEnd", new MorphTarget("Resources/Models/Hoshi/HoshiSlidingEnd.obj", "Idle", 0.1f));
-	
-	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
-	//static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+		// Aerials
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirHeavyStart.obj", "AirHeavyEnd", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirHeavyEnd.obj", "Idle", 0.5f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirLightStart.obj", "AirLightEnd", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirLightEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirLightEnd.obj", "Idle", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumStart", new MorphTarget("Resources/Models/Hoshi/HoshiAirMedStart.obj", "AirMediumEnd", 0.3f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMediumEnd", new MorphTarget("Resources/Models/Hoshi/HoshiAirMedEnd.obj", "Idle", 0.3f));
 
-	// Hurtboxes
-	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["basic"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(1.5f, 12.0f, 0.0f), 1.25f, 5);
+		// Specials
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("GravityWaveStart", new MorphTarget("Resources/Models/Hoshi/HoshiGravityWaveStart.obj", "GravityWaveEnd", 0.3f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("GravityWaveEnd", new MorphTarget("Resources/Models/Hoshi/HoshiGravityWaveEnd.obj", "Idle", 0.3f));
 
-	hurtBoxes["aerial"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["aerial"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(0.0f, 12.0f, 0.0f), 1.25f, 5);
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlideStart", new MorphTarget("Resources/Models/Hoshi/HoshiSlidingStart.obj", "Slide1", 0.25f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Slide1", new MorphTarget("Resources/Models/Hoshi/HoshiSliding1.obj", "SlideEnd", 0.75f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlideEnd", new MorphTarget("Resources/Models/Hoshi/HoshiSlidingEnd.obj", "Idle", 0.1f));
 
-	hurtBoxes["slide"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["slide"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(-7.5f, 0.5f, 0.0f), this->position + glm::vec3(5.0f, 3.5f, 0.0f), 1.25f, 4);
+		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
+		//static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Idle", 0.5f);
 
-	// Hiboxes
-	hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
+		// Hurtboxes
+		hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
+		hurtBoxes["basic"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(1.5f, 12.0f, 0.0f), 1.25f, 5);
 
-	hitBoxes["medium"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["medium"]->spawnSpheres(this->position + glm::vec3(0.0f, 5.0f, 0.0f), this->position + glm::vec3(6.0f, 5.0f, 0.0f), 0.75f, 4);
+		hurtBoxes["aerial"] = new HurtBox(hurtBox_, this->position, this);
+		hurtBoxes["aerial"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(0.0f, 12.0f, 0.0f), 1.25f, 5);
 
-	hitBoxes["heavy"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
+		hurtBoxes["slide"] = new HurtBox(hurtBox_, this->position, this);
+		hurtBoxes["slide"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(-7.5f, 0.5f, 0.0f), this->position + glm::vec3(5.0f, 3.5f, 0.0f), 1.25f, 4);
 
-	hitBoxes["slide"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["slide"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(7.5f, 0.5f, 0.0f), 1.25f, 2);
+		// Hiboxes
+		hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
+		hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
 
-	hurtBox = hurtBoxes["basic"];
-	hitBox = hitBoxes["light"];
-	 
-	// Framedata
-	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 600.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
-	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
-	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+		hitBoxes["medium"] = new HitBox(hurtBox_, this->position, this);
+		hitBoxes["medium"]->spawnSpheres(this->position + glm::vec3(0.0f, 5.0f, 0.0f), this->position + glm::vec3(6.0f, 5.0f, 0.0f), 0.75f, 4);
 
-	frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-	frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-	frameData["airHeavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		hitBoxes["heavy"] = new HitBox(hurtBox_, this->position, this);
+		hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
 
-	frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		hitBoxes["slide"] = new HitBox(hurtBox_, this->position, this);
+		hitBoxes["slide"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(7.5f, 0.5f, 0.0f), 1.25f, 2);
 
-	// Gravity Wave
-	frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
-	frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+		hurtBox = hurtBoxes["basic"];
+		hitBox = hitBoxes["light"];
 
-	// Slide
-	frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
-	frameData["QCB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["QCB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+		// Framedata
+		frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 600.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+		frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+		frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 
+		frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["airHeavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+
+		frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+
+		// Gravity Wave
+		frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+		frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+		frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+
+		// Slide
+		frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
+		frameData["QCB1"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+		frameData["QCB2"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	}
 	SceneGraph::GetInstance()->AddModel(model);
 
 	floating = false;
