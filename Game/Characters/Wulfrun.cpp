@@ -7,6 +7,18 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 {
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance.obj", "Idle2", 1.5f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle2", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance2.obj", "Idle", 1.5f));
+
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Jump", new MorphTarget("Resources/Models/Wulfrun/WulfrunJumpStart.obj", "Fall", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Fall", new MorphTarget("Resources/Models/Wulfrun/WulfrunFall.obj", "Fall", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Block", new MorphTarget("Resources/Models/Wulfrun/WulfrunBlock.obj", "Block", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Hit", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirHit.obj", "Hit", 1.0f));
+
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("WalkStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunWalk1.obj", "Walk2", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk2", new MorphTarget("Resources/Models/Wulfrun/WulfrunWalk2.obj", "WalkStart", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunRun1.obj", "Run2", 1.0f));
+	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run2", new MorphTarget("Resources/Models/Wulfrun/WulfrunRun2.obj", "RunStart", 1.0f));
+	
+	//Normals
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightStart.obj", "LightEnd", 0.2f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("LightEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunLightEnd.obj", "Idle", 0.1f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("MediumStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunMediumStart.obj", "MediumEnd", 0.2f));
@@ -17,10 +29,8 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirMedium", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirMedium.obj", "Idle", 1.0f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavy", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirHeavyStart.obj", "AirHeavyEnd", 1.0f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("AirHeavyEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirHeavyEnd.obj", "Fall", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("WalkStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunWalk1.obj", "Walk2", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Walk2", new MorphTarget("Resources/Models/Wulfrun/WulfrunWalk2.obj", "WalkStart", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunStart", new MorphTarget("Resources/Models/Wulfrun/WulfrunRun1.obj", "Run2", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run2", new MorphTarget("Resources/Models/Wulfrun/WulfrunRun2.obj", "RunStart", 1.0f));
+
+	//Specials
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlashWave", new MorphTarget("Resources/Models/Wulfrun/WulfrunSlashWave.obj", "SlashWaveEnd", 1.0f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlashWaveEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunSlashWaveEnd.obj", "Idle", 1.0f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlashWaveOverclocked", new MorphTarget("Resources/Models/Wulfrun/WulfrunSlashWave.obj", "SlashWaveOverclocked2", 1.0f));
@@ -29,10 +39,6 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlashKick", new MorphTarget("Resources/Models/Wulfrun/WulfrunSlashKick.obj", "SlashKickEnd", 1.0f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("SlashKickEnd", new MorphTarget("Resources/Models/Wulfrun/WulfrunSlashKickEnd.obj", "Idle", 1.0f));
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("DashBite", new MorphTarget("Resources/Models/Wulfrun/WulfrunDashBite.obj", "Idle", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Jump", new MorphTarget("Resources/Models/Wulfrun/WulfrunJumpStart.obj", "Fall", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Fall", new MorphTarget("Resources/Models/Wulfrun/WulfrunFall.obj", "Fall", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Block", new MorphTarget("Resources/Models/Wulfrun/WulfrunBlock.obj", "Block", 1.0f));
-	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Hit", new MorphTarget("Resources/Models/Wulfrun/WulfrunAirHit.obj", "Hit", 1.0f));
 
 
 	isCharge = true;
@@ -45,29 +51,30 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 	Model* hurtBox_ = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	SceneGraph::GetInstance()->AddModel(hurtBox_);
 
+	//HurtBoxes
+
 	hurtBoxes["basic"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["basic"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(1.5f, 12.0f, 0.0f), 1.25f, 5);
+	hurtBoxes["basic"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(1.5f, 15.0f, 0.0f), 1.25f, 5);
 
 	hurtBoxes["running"] = new HurtBox(hurtBox_, this->position, this);
 	hurtBoxes["running"]->SpawnHurtBox(hurtBox_, this->position, this->position + glm::vec3(1.5f, 12.0f, 0.0f), 1.25f, 5);
 
 	hurtBoxes["aerial"] = new HurtBox(hurtBox_, this->position, this);
-	hurtBoxes["aerial"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(0.0f, 12.0f, 0.0f), 1.25f, 5);
+	hurtBoxes["aerial"]->SpawnHurtBox(hurtBox_, this->position + glm::vec3(0.0f, 2.0f, 0.0f), this->position + glm::vec3(0.0f, 15.0f, 0.0f), 1.25f, 5);
+
+	//HitBoxes
 
 	hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
 	hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
 
 	hitBoxes["medium"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["medium"]->spawnSpheres(this->position + glm::vec3(0.0f, 5.0f, 0.0f), this->position + glm::vec3(6.0f, 5.0f, 0.0f), 0.75f, 4);
-
-	hitBoxes["heavy"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
+	hitBoxes["medium"]->spawnSpheres(this->position + glm::vec3(3.0f, 7.0f, 0.0f), this->position + glm::vec3(4.0f, 12.0f, 0.0f), 0.75f, 4);
 
 	hitBoxes["airLight"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["airLight"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(-5.0f, 3.5f, 0.0f), 1.25f, 4);
+	hitBoxes["airLight"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(3.0f, 6.5f, 0.0f), 1.25f, 4);
 
 	hitBoxes["airMedium"] = new HitBox(hurtBox_, this->position, this);
-	hitBoxes["airMedium"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(-5.0f, 3.5f, 0.0f), 1.25f, 4);
+	hitBoxes["airMedium"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(7.5f, 0.5f, 0.0f), 1.25f, 2);
 
 	hitBoxes["qcb"] = new HitBox(hurtBox_, this->position, this);
 	hitBoxes["qcb"]->spawnSpheres(this->position + glm::vec3(0.0f, 5.0f, 0.0f), this->position + glm::vec3(6.0f, 5.0f, 0.0f), 0.75f, 4);
@@ -75,6 +82,25 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 	hurtBox = hurtBoxes["basic"];
 
 	hurtBox = nullptr;
+
+	frameData["light"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 25.0f, 0.25f, 6.0f / 60.0f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.0f / 60.0f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+
+	frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 30.0f, 0.0f / 60.0f, 0.0f / 60.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 60.0f, 0.0f / 60.0f, 0.0f / 60.0f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
+	frameData["airHeavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
+
+	frameData["DashBite"] = FrameData(8.0f / 60.0f, 16.0f / 60.0f, 24.0f / 60.0f, 80.0f, 1.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+
+	frameData["SlashWave0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+	frameData["SlashWave1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["SlashWave2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+
+	// Slide
+	frameData["SlashKick0"] = FrameData(4.0f / 60.0f, 6.0f / 60.0f, 30.0f / 60.0f, 130.0f, 1.0f, 20.0f / 60.0f, glm::vec3(1.0f, 4.0f, 0.0f), 0);
+	frameData["SlashKick1"] = FrameData(4.0f / 60.0f, 6.0f / 60.0f, 30.0f / 60.0f, 150.0f, 1.0f, 20.0f / 60.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["SlashKick2"] = FrameData(4.0f / 60.0f, 6.0f / 60.0f, 30.0f / 60.0f, 150.0f, 1.0f, 20.0f / 60.0f, glm::vec3(0.0f, 15.0f, 0.0f), 2);
 }
 
 Wulfrun::~Wulfrun()
@@ -236,26 +262,30 @@ void Wulfrun::QCF(int strength, bool simpleInput)
 	if (nextActionable > 0.0f) return;
 
 	isIdle = false;
-	overclock += 25;
 
-	if (isAirborne)
-	{
-		AirQCF(strength, simpleInput);
-	}
-	else
-	{
-		if (strength == 2)
+		if (strength == 2 && overclock >= 25.0f)
 		{
+			overclock -= 25.0f;
+			SetFrameData(frameData["SlashWave2"]);
 			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlashWaveOverclocked", 0.5f);
 		}
 		else
 		{
+			if (strength == 0)
+			{
+				overclock += 3.0f;
+				SetFrameData(frameData["SlashWave0"]);
+			}
+			else
+			{
+				overclock += 5.0f;
+				SetFrameData(frameData["SlashWave1"]);
+			}
 			static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlashWave", 0.5f);
 		}
 		hurtBox = hurtBoxes["aerial"];
-		SetFrameData(frameData["qcf"]);
+		
 		resetCombo();
-	}
 }
 
 void Wulfrun::QCB(int strength, bool simpleInput)
@@ -264,16 +294,33 @@ void Wulfrun::QCB(int strength, bool simpleInput)
 
 	if (nextActionable > 0.0f) return;
 
-	if (isAirborne)
+	if (strength == 2 && overclock >= 25.0f)
 	{
-		AirQCB(strength, simpleInput);
+		overclock -= 25.0f;
+		SetFrameData(frameData["SlashKick2"]);
+		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlashWaveOverclocked", 0.5f);
+		ApplyForce(glm::vec3(0.0f, 4.0f, 0.0f));
 	}
 	else
 	{
-		SetFrameData(frameData["SlashKick"]);
-		ApplyForce(glm::vec3(0.0f, 4.0f, 0.0f));
-		hitBox = hitBoxes["SlashKick"];
+		static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlashWave", 0.5f);
+		if (strength == 0)
+		{
+			overclock += 3.0f;
+			SetFrameData(frameData["SlashKick0"]);
+			ApplyForce(glm::vec3(0.0f, 4.0f, 0.0f));
+		}
+		else
+		{
+			overclock += 5.0f;
+			SetFrameData(frameData["SlashKick1"]);
+			ApplyForce(glm::vec3(0.0f, 4.0f, 0.0f));
+		}
+		
 	}
+	hitBox = hitBoxes["SlashKick"];
+
+	resetCombo();
 }
 
 void Wulfrun::Unique()
@@ -281,20 +328,18 @@ void Wulfrun::Unique()
 	if (!CheckMoveState(moveState::UNIQUE)) return;
 
 	if (nextActionable > 0.0f) return;
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("DashBite", 0.5f);
+	hitBox = hitBoxes["DashBite"];
+	SetFrameData(frameData["DashBite"]);
 
-	if (isAirborne)
-	{
-		AirUnique();
-	}
-	else
-	{
-		ApplyForce(10.0f * glm::normalize(opponent->GetPosition() - GetPosition()));
-	}
+	ApplyForce(10.0f * glm::normalize(opponent->GetPosition() - GetPosition()));
+
+	resetCombo();
 }
 
 void Wulfrun::Light()
 {
-
+	if (nextActionable > 0.0f) return;
 	if (checkComboState(moveState::GROUNDLIGHT))
 	{
 		if (combo["light"] > 0)
@@ -321,6 +366,7 @@ void Wulfrun::Light()
 
 void Wulfrun::Medium()
 {
+	if (nextActionable > 0.0f) return;
 	if (checkComboState(moveState::GROUNDMEDIUM))
 	{
 		if (combo["medium"] > 0)
@@ -347,6 +393,7 @@ void Wulfrun::Medium()
 
 void Wulfrun::Heavy()
 {
+	if (nextActionable > 0.0f) return;
 	if (checkComboState(moveState::GROUNDHEAVY))
 	{
 		if (combo["heavy"] > 0)
@@ -361,7 +408,7 @@ void Wulfrun::Heavy()
 			else
 			{
 				currentMove = moveState::GROUNDHEAVY;
-				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("HeavyStart", 0.3f);
+				static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("Heavy", 0.3f);
 				hurtBox = hurtBoxes["basic"];
 				hitBox = hitBoxes["heavy"];
 				//SetFrameData(4.0f / 60.0f, 6.0f / 60.0f, 10.0f / 60.0f);
@@ -419,6 +466,7 @@ void Wulfrun::AirLight()
 
 void Wulfrun::AirMedium()
 {
+	currentMove = moveState::AIRMEDIUM;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirMedium", 0.5f);
 	hitBox = hitBoxes["airMedium"];
 	SetFrameData(frameData["airMedium"]);
@@ -505,16 +553,14 @@ void Wulfrun::OnAirHeavyActive()
 
 void Wulfrun::OnHeavyActive()
 {
-}
+	Projectile* proj = new SlashWave(frameData["airHeavy"], 1.0f, glm::vec3(1.0f, 4.0f, 1.0f), this);
 
-void Wulfrun::OnAirQCFActive(int strenth)
-{
-}
 
-void Wulfrun::OnAirQCBActive(int strenth)
-{
-}
+	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 15.0f, position.z - opponent->GetPosition().z);
+	proj->SetTarget(nullptr);
+	proj->SetPosition(this->GetPosition());
+	proj->SetVelocity(glm::vec3(-dir));
 
-void Wulfrun::OnAirUniqueActive()
-{
+	projs.push_back(proj);
+	proj = nullptr;
 }

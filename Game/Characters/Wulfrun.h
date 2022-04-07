@@ -39,9 +39,6 @@ protected:
 	void OnQCBRecovery(int strength);
 	void OnUniqueActive();
 	void OnHeavyActive();
-	void OnAirQCFActive(int strength);
-	void OnAirQCBActive(int strength);
-	void OnAirUniqueActive();
 	void OnAirHeavyActive();
 
 	std::vector<Projectile*> projs;
