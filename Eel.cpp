@@ -5,6 +5,7 @@ Eel::Eel(FrameData frameData_, glm::vec3 position_, Character* parent_, float an
 {
 	SceneGraph::GetInstance()->AddModel(model);
 	frameData = frameData_;
+	bounced = false;
 }
 
 Eel::~Eel()
@@ -21,9 +22,17 @@ void Eel::Update(const float deltaTime_)
 	}
 	else
 	{
-		Eel::~Eel();
-		dynamic_cast<Eldric*>(parent)->RemoveProjectile(tag);
-		return;
+		if (bounced == false)
+		{
+			bounced = true;
+			SetVelocity(glm::vec3(GetVelocity().x, -GetVelocity().y, GetVelocity().z));
+		}
+		else
+		{
+			Eel::~Eel();
+			dynamic_cast<Eldric*>(parent)->RemoveProjectile(tag);
+			return;
+		}
 	}
 
 

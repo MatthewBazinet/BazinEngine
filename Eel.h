@@ -10,6 +10,7 @@ public:
 	void Update(const float deltaTime_);
 private:
 	FrameData frameData;
+	bool bounced;
 };
 
 #endif;

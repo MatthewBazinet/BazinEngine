@@ -7,6 +7,8 @@ Spike::Spike(FrameData frameData_, glm::vec3 position_, Character* parent_, floa
 	SceneGraph::GetInstance()->AddModel(model);
 	frameData = frameData_;
 	active = false;
+	lifetime = 5.0f;
+	time = 0.0f;
 }
 
 Spike::~Spike()
@@ -19,12 +21,20 @@ void Spike::Update(const float deltaTime_)
 {
 	if (parent) {
 		if (parent->GetOpponent()) {
-			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes()))
+			if (active)
 			{
-				if (active)
+				time += deltaTime_;
+
+				if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes()))
 				{
 					parent->GetOpponent()->Hit(frameData);
 
+					Spike::~Spike();
+					dynamic_cast<Eldric*>(parent)->ResetProjectile();
+					return;
+				}
+				else if (time > lifetime)
+				{
 					Spike::~Spike();
 					dynamic_cast<Eldric*>(parent)->ResetProjectile();
 					return;

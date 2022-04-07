@@ -13,6 +13,8 @@ public:
 private:
 	FrameData frameData;
 	bool active;
+	float lifetime;
+	float time;
 };
 
 #endif;

@@ -30,6 +30,32 @@ Character::~Character() {
 		delete hurtBox;
 		hurtBox = nullptr;
 	}
+
+	if (hitBox)
+	{
+		delete hitBox;
+		hitBox = nullptr;
+	}
+
+	if (hurtBoxes.size() > 0)
+	{
+		for (auto go : hurtBoxes)
+		{
+			delete go.second;
+			go.second = nullptr;
+		}
+		hurtBoxes.clear();
+	}
+
+	if (hitBoxes.size() > 0)
+	{
+		for (auto go : hitBoxes)
+		{
+			delete go.second;
+			go.second = nullptr;
+		}
+		hitBoxes.clear();
+	}
 }
 
 void Character::NotifyOnKeyDown(SDL_Scancode key_)

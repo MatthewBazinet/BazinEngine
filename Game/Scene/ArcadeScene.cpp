@@ -7,7 +7,8 @@
 #include "../UserInterface.h"
 #include "../Game/Characters/Hoshi.h"
 #include "../Characters/AlexisBruce.h"
-#include "../Characters/Eldric.h";
+#include "../Characters/Eldric.h"
+#include "../Characters/Wulfrun.h"
 #include "../Engine/Math/EnvironmentalCollisionManager.h"
 #include "../MatchSettings.h"
 
@@ -79,6 +80,9 @@ void ArcadeScene::LoadPlayer1Character()
 	case(Player1Characters::Eldric):
 		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
 		break;
+	case(Player1Characters::Wulfrun):
+		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+		break;
 	default:
 		break;
 	}
@@ -115,6 +119,9 @@ void ArcadeScene::LoadPlayer2Character()
 		break;
 	case(Player2Characters::Eldric):
 		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char2");
+		break;
+	case(Player2Characters::Wulfrun):
+		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(0.0f, 0.0f, 0.0f)), "char2");
 		break;
 	default:
 		break;
