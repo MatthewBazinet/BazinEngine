@@ -33,10 +33,15 @@ bool CharacterSelectScene::OnCreate()
 	//Model* Alexis = new Model("Resources/Models/Alexis/Alexis_Walk_01.obj", "Resources/Materials/AlexisBruce.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Rock = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Sphere = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	Model* Sonic = new Model("Resources/Models/SonicHowl.obj", "Resources/Materials/SonicHowl.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+
 
 	//SceneGraph::GetInstance()->AddModel(Alexis);
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
+	SceneGraph::GetInstance()->AddModel(Sonic);
+
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(Sonic), "Sonic");
 
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Sphere), "Player1Hoshi");
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Sphere), "Player2Hoshi");
@@ -72,6 +77,7 @@ bool CharacterSelectScene::OnCreate()
 	Rock = nullptr;
 	//Alexis = nullptr;
 	Sphere = nullptr;
+	Sonic = nullptr;
 	return true;
 }
 

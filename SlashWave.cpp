@@ -3,6 +3,7 @@
 
 SlashWave::SlashWave(FrameData frameData_, float lifeTime_, glm::vec3 position_, Character* parent_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) : Projectile(new Model("Resources/Models/SlashWave.obj", "Resources/Materials/SlashWave.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), position_, parent_, angle_, rotation_)
 {
+	SceneGraph::GetInstance()->AddModel(model);
 	frameData = frameData_;
 	lifeTime = lifeTime_;
 	time = 0.0f;
@@ -10,6 +11,7 @@ SlashWave::SlashWave(FrameData frameData_, float lifeTime_, glm::vec3 position_,
 
 SlashWave::~SlashWave()
 {
+	SceneGraph::GetInstance()->RemoveModel(model);
 	Projectile::~Projectile();
 }
 

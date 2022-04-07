@@ -4,6 +4,7 @@
 #include "../SlashWave.h"
 #include "../SonicHowl.h"
 
+
 Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphTargetAnimatedModel("Resources/Models/Wulfrun/Wulfrun.obj", "Resources/Materials/Wulfrun.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), pos_)
 {
 	static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Idle", new MorphTarget("Resources/Models/Wulfrun/WulfrunIdleStance.obj", "Idle2", 1.5f));
@@ -554,13 +555,11 @@ void Wulfrun::OnAirHeavyActive()
 
 void Wulfrun::OnHeavyActive()
 {
-	Projectile* proj = new SonicHowl(frameData["heavy"], 0.5f, glm::vec3(1.0f, 4.0f, 1.0f), this);
+	Projectile* proj = new SonicHowl(frameData["heavy"], 0.5f, glm::vec3(0.0f, 0.0f, 0.0f), this);
 
-
-	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
+	glm::vec3 dir = 2.0f * glm::normalize(glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z));
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
-	dir = glm::normalize(dir) * 5.0f;
+	proj->SetPosition(this->GetPosition() + glm::vec3(0.0f,4.0f,1.0f));
 	proj->SetVelocity(glm::vec3(-dir));
 
 	projs.push_back(proj);

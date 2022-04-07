@@ -27,13 +27,20 @@ void MorphTargetManager::OnDestroy()
 {
 	if (morphTargets.size() > 0)
 	{
-		for (auto m : morphTargets)
+		for (auto entry : morphTargets)
 		{
-			for (auto mm : m.second)
+			if (!entry.first.compare(""))
 			{
-				delete mm;
+				if (entry.second.size() > 0)
+				{
+					for (auto m : entry.second)
+					{
+						delete m;
+						m = nullptr;
+					}
+				}
+				entry.second.clear();
 			}
-			m.second.clear();
 		}
 		morphTargets.clear();
 	}
