@@ -145,12 +145,20 @@ Eldric::~Eldric()
 {
 	delete proj;
 	proj = nullptr;
+	ResetProjectiles();
 
 	Character::~Character();
 }
 
 void Eldric::Update(const float deltaTime_)
 {
+	if (projs.size() > 0)
+	{
+		for (auto p : projs)
+		{
+			p->Update(deltaTime_);
+		}
+	}
 	if (proj)
 	{
 		proj->Update(deltaTime_);
@@ -324,30 +332,33 @@ void Eldric::QCF(int strength, bool simpleInput)
 
 void Eldric::OnQCFActive(int strength)
 {
-	if (proj == nullptr)
+	Projectile* eel;
 	{
 		if (strength == 0)
 		{
-			proj = new Eel(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			proj->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
+			eel = new Eel(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			eel->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
 		}
 		else if (strength == 2 && overclock >= 25.0f)
 		{
-			proj = new Eel(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			proj->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
+			eel = new Eel(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			eel->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
 			overclock -= 25.0f;
 		}
 		else
 		{
-			proj = new Eel(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			proj->SetVelocity(glm::vec3(10.0f, 10.0f, 0.0f));
+			eel = new Eel(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			eel->SetVelocity(glm::vec3(10.0f, 10.0f, 0.0f));
 		}
 	}
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
-	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
+	eel->SetTarget(nullptr);
+	eel->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
 	
+	projs.push_back(eel);
+
+	eel = nullptr;
 
 	resetCombo();
 }
@@ -390,28 +401,29 @@ void Eldric::QCB(int strength, bool simpleInput)
 
 void Eldric::OnQCBActive(int strength)
 {
-	if (proj == nullptr)
-	{
+	Projectile* nightGaunt;
 		if (strength == 0)
 		{
-			proj = new NightGaunt(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			nightGaunt = new NightGaunt(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 		}
 		else if (strength == 2 && overclock >= 25.0f)
 		{
-			proj = new NightGaunt(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			nightGaunt = new NightGaunt(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 			overclock -= 25.0f;
 		}
 		else
 		{
-			proj = new NightGaunt(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+			nightGaunt = new NightGaunt(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 		}
-	}
+	
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
-	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
-	proj->SetVelocity((glm::vec3(-dir)) * 0.25f);
+	nightGaunt->SetTarget(nullptr);
+	nightGaunt->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
+	nightGaunt->SetVelocity((glm::vec3(-dir)) * 0.25f);
 
+	projs.push_back(nightGaunt);
+	nightGaunt = nullptr;
 	resetCombo();
 }
 
@@ -586,6 +598,39 @@ void Eldric::Heavy()
 	}
 }
 
+void Eldric::ResetProjectile()
+{
+	delete proj;
+	proj = nullptr;
+}
+
+
+void Eldric::ResetProjectiles()
+{
+	if (projs.size() > 0)
+	{
+		for (auto p : projs)
+		{
+			delete p;
+			p = nullptr;
+		}
+	}
+	projs.clear();
+}
+
+void Eldric::RemoveProjectile(std::string tag_)
+{
+	for (int i = 0; i < projs.size(); i++)
+	{
+		if (projs[i]->GetTag() == tag_)
+		{
+			delete projs[i];
+			projs[i] = nullptr;
+			projs.erase(projs.begin() + i);
+		}
+	}
+}
+
 void Eldric::OnHeavyActive()
 {
 	
@@ -613,10 +658,4 @@ void Eldric::OnHeavyRecovery()
 void Eldric::OnAirHeavyRecovery()
 {
 	hitBox = hitBoxes["airHeavy"];
-}
-
-void Eldric::ResetProjectile()
-{
-	if (proj) delete proj;
-	proj = nullptr;
 }

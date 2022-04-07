@@ -22,7 +22,7 @@ void Eel::Update(const float deltaTime_)
 	else
 	{
 		Eel::~Eel();
-		dynamic_cast<Eldric*>(parent)->ResetProjectile();
+		dynamic_cast<Eldric*>(parent)->RemoveProjectile(tag);
 		return;
 	}
 

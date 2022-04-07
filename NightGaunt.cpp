@@ -31,7 +31,7 @@ void NightGaunt::Update(const float deltaTime_)
 				parent->GetOpponent()->Hit(frameData);
 
 				NightGaunt::~NightGaunt();
-				dynamic_cast<Eldric*>(parent)->ResetProjectile();
+				dynamic_cast<Eldric*>(parent)->RemoveProjectile(tag);
 				return;
 			}
 		}

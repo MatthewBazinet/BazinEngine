@@ -110,7 +110,7 @@ void GameScene::LoadCharacters()
 		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
 		break;
 	case(Player2Characters::Eldric):
-		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char1");
+		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
 		break;
 	case(Player2Characters::Wulfrun):
 		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");

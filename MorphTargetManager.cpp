@@ -25,11 +25,9 @@ MorphTargetManager* MorphTargetManager::GetInstance()
 
 void MorphTargetManager::OnDestroy()
 {
-	if (morphTargets.size() > 0)
-	{
 		for (auto entry : morphTargets)
 		{
-			if (!entry.first.compare(""))
+			if (morphTargets.size() > 0)
 			{
 				if (entry.second.size() > 0)
 				{
@@ -43,7 +41,6 @@ void MorphTargetManager::OnDestroy()
 			}
 		}
 		morphTargets.clear();
-	}
 }
 
 

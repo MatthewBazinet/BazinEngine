@@ -30,6 +30,8 @@ public:
 	void Heavy();
 
 	void ResetProjectile();
+	void ResetProjectiles();
+	void RemoveProjectile(std::string tag_);
 
 protected:
 	void AirQCF(int strength, bool simpleInput);
@@ -57,6 +59,7 @@ protected:
 	void OnAirMediumRecovery();
 	void OnAirHeavyRecovery();
 
+	std::vector<Projectile*> projs;
 	Projectile* proj;
 };
 
