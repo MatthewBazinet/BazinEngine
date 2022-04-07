@@ -115,6 +115,7 @@
     <ClCompile Include="NightGaunt.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Game\Scene\ArcadeScene.cpp" />
+    <ClCompile Include="SonicHowl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -240,6 +241,7 @@
     <ClInclude Include="NightGaunt.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Game\Scene\ArcadeScene.h" />
+    <ClInclude Include="SonicHowl.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

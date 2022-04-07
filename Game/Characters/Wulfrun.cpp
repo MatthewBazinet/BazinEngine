@@ -2,6 +2,7 @@
 #include "../../Engine/Graphics/ShaderHandler.h"
 #include "../../Engine/Rendering/SceneGraph.h"
 #include "../SlashWave.h"
+#include "../SonicHowl.h"
 
 Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new MorphTargetAnimatedModel("Resources/Models/Wulfrun/Wulfrun.obj", "Resources/Materials/Wulfrun.mtl", ShaderHandler::GetInstance()->GetShader("basicShader")), pos_)
 {
@@ -87,15 +88,15 @@ Wulfrun::Wulfrun(glm::vec3 pos_) : Character(1000.0f, 0.0f, false, false, new Mo
 	frameData["medium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 30.0f, 0.3, 0.0f / 60.0f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 	frameData["heavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
-	frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 30.0f, 0.0f / 60.0f, 0.0f / 60.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-	frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 60.0f, 0.0f / 60.0f, 0.0f / 60.0f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
-	frameData["airHeavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
+	frameData["airLight"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 30.0f, 6.0f / 60.0f, 0.0f / 60.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["airMedium"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 60.0f, 20.0f / 60.0f, 5.0f / 60.0f, glm::vec3(1.0f, 0.0f, 0.0f), 1);
+	frameData["airHeavy"] = FrameData(5.0f / 60.0f, 20.0f / 60.0f, 10.0f / 60.0f, 100.0f, 0.4f, 0.1f, glm::vec3(1.0f, 0.0f, 0.0f), 2);
 
-	frameData["DashBite"] = FrameData(8.0f / 60.0f, 16.0f / 60.0f, 24.0f / 60.0f, 80.0f, 1.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+	frameData["DashBite"] = FrameData(8.0f / 60.0f, 16.0f / 60.0f, 24.0f / 60.0f, 80.0f, 0.5f, 0.2f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
-	frameData["SlashWave0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
-	frameData["SlashWave1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-	frameData["SlashWave2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+	frameData["SlashWave0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 100.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+	frameData["SlashWave1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 110.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+	frameData["SlashWave2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 100.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 	// Slide
 	frameData["SlashKick0"] = FrameData(4.0f / 60.0f, 6.0f / 60.0f, 30.0f / 60.0f, 130.0f, 1.0f, 20.0f / 60.0f, glm::vec3(1.0f, 4.0f, 0.0f), 0);
@@ -553,12 +554,13 @@ void Wulfrun::OnAirHeavyActive()
 
 void Wulfrun::OnHeavyActive()
 {
-	Projectile* proj = new SlashWave(frameData["airHeavy"], 1.0f, glm::vec3(1.0f, 4.0f, 1.0f), this);
+	Projectile* proj = new SonicHowl(frameData["heavy"], 0.5f, glm::vec3(1.0f, 4.0f, 1.0f), this);
 
 
-	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 15.0f, position.z - opponent->GetPosition().z);
+	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
 	proj->SetPosition(this->GetPosition());
+	dir = glm::normalize(dir) * 5.0f;
 	proj->SetVelocity(glm::vec3(-dir));
 
 	projs.push_back(proj);

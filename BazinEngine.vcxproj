@@ -231,6 +231,7 @@
     <ClCompile Include="SDLInit.cpp" />
     <ClCompile Include="SDLMusic.cpp" />
     <ClCompile Include="SlashWave.cpp" />
+    <ClCompile Include="SonicHowl.cpp" />
     <ClCompile Include="SoundEffects.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Spike.cpp" />
@@ -351,6 +352,7 @@
     <ClInclude Include="SDLInit.h" />
     <ClInclude Include="SDLMusic.h" />
     <ClInclude Include="SlashWave.h" />
+    <ClInclude Include="SonicHowl.h" />
     <ClInclude Include="SoundEffects.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Spike.h" />

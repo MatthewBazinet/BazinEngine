@@ -27,6 +27,14 @@ void MorphTargetManager::OnDestroy()
 {
 	if (morphTargets.size() > 0)
 	{
+		for (auto m : morphTargets)
+		{
+			for (auto mm : m.second)
+			{
+				delete mm;
+			}
+			m.second.clear();
+		}
 		morphTargets.clear();
 	}
 }
