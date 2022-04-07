@@ -4,6 +4,7 @@
 [INFO]: Start Scene initiated in: StartScene.cpp on line: 20
 [INFO]: Game Created Succesfully in: CoreEngine.cpp on line: 54
 [INFO]: Character Select Scene initiated in: CharacterSelectScene.cpp on line: 23
+<<<<<<< HEAD
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiIdleEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 54
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiBlock.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 54
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiFall.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 54
@@ -42,6 +43,8 @@
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiSlidingStart.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 54
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiSliding1.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 54
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiSlidingEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 54
+=======
+>>>>>>> 7b64ed0f62137314db7b0857e56c2ed2f7ee2a77
 [ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
@@ -448,4 +451,7 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
+<<<<<<< HEAD
 [ERROR]: Cannot open OBJ file: Resources/Models/Floor.obj in: LoadOBJModel.cpp on line: 73
+=======
+>>>>>>> 7b64ed0f62137314db7b0857e56c2ed2f7ee2a77

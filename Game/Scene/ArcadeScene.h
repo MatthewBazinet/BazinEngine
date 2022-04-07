@@ -25,6 +25,7 @@ public:
 	void ResetRound();
 	void LoadPlayer1Character();
 	void LoadPlayer2Character();
+	void SetPlayerSettings();
 
 	float scale;
 	InputManager inputManager;

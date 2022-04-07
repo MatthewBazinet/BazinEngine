@@ -26,7 +26,7 @@ GameObject::GameObject(Model* model_, glm::vec3 position_, float angle_, glm::ve
 		boundingBox = model->GetBoundingBox();
 		boundingBox.transform = model->GetTransform(modelInstance);
 		
-		std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
+		//std::cout << "Min: " << glm::to_string(boundingBox.minVert) << ", Max: " << glm::to_string(boundingBox.maxVert) << std::endl;
 	}
 }
 
@@ -44,16 +44,6 @@ void GameObject::Update(const float deltaTime_)
 
 	position += vel * deltaTime_ + 0.5f * accel * deltaTime_ * deltaTime_;
 	vel = vel + accel * deltaTime_;
-
-	/*BoundingBox temp1 = SceneGraph::GetInstance()->GetGameObject("apple")->GetBoundingBox();
-	BoundingBox temp2 = SceneGraph::GetInstance()->GetGameObject("dice")->GetBoundingBox();
-	intersects = temp2.Intersects(&temp1);
-	if (intersects) {
-		SceneGraph::GetInstance()->GetGameObject("apple")->SetVelocity(glm::vec3(0.0f, 0.0f, 0.0f));
-	}
-	else {
-		SceneGraph::GetInstance()->GetGameObject("apple")->SetVelocity(glm::vec3(-1.0f, 0.0f, 0.0f));
-	}*/
 	
 	SetPosition(position);
 	if (orientation == glm::quat(0.0f, 5.0f, 5.0f, 5.0f))

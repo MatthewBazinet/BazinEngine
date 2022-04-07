@@ -59,7 +59,7 @@ void EnvironmentalCollisionManager::Update(GameObject* gameObject_, std::vector<
 		i++;
 		if (checkPlaneCollision(gameObject_->GetPosition(), element))
 		{
-			std::cout << "Plane " << i << std::endl;
+			//std::cout << "Plane " << i << std::endl;
 			if (element.x != 0.0f)
 			{
 				gameObject_->SetPosition(glm::vec3(-element.x * element.w - element.x * 0.1f, gameObject_->GetPosition().y, gameObject_->GetPosition().z));
