@@ -218,6 +218,8 @@ void Character::Update(const float deltaTime_)
 		if (nextActionable <= 0.0f)
 		{
 			applyGravity = true;
+			ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
+			vel.y = 0.0f;
 		}
 	}
 	//proj->Update(deltaTime_);
@@ -437,7 +439,13 @@ bool Character::CheckRunCancel()
 		}
 		return false;
 	}
-	return true;
+	if (overclock >= 5.0f)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool Character::checkComboState(moveState move_)
@@ -720,7 +728,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 	isIdle = false;
 	if (FacingLeft())
 	{
-		if (isBlockingRight && !isAirborne)
+		if (isBlockingLeft && !isAirborne)
 		{
 			nextActionable = blockStun_;
 			currentMove = moveState::NONE;
@@ -728,6 +736,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		else
 		{
 			health -= damage_;
+			overclock += damage_ / 4.0f;
 			nextActionable = hitStun_;
 			if (opponent->FacingLeft())
 			{
@@ -750,6 +759,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 		else
 		{
 			health -= damage_;
+			overclock += damage_ / 4.0f;
 			nextActionable = hitStun_;
 			if (opponent->FacingLeft())
 			{

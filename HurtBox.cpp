@@ -32,7 +32,7 @@ HurtBox::~HurtBox()
 			parent = nullptr;
 		}
 	}
-
+	/*
 	if (hurtBoxVisual.size() > 0)
 	{
 		for (auto m : hurtBoxVisual)
@@ -42,6 +42,7 @@ HurtBox::~HurtBox()
 		}
 		hurtBoxVisual.clear();
 	}
+	*/
 
 }
 
@@ -50,7 +51,7 @@ void HurtBox::Update(const float deltaTime_)
 	if (parent) {
 		for (int i = 0; i < hurtBoxes.size(); i++) {
 			hurtBoxes[0].SetPosition(parent->GetPosition());
-			hurtBoxVisual[0]->SetPosition(hurtBoxes[0].position);
+			//hurtBoxVisual[0]->SetPosition(hurtBoxes[0].position);
 			if (i != 0) {
 				bool left = dynamic_cast<Character*>(parent)->FacingLeft();
 				if (left)
@@ -61,7 +62,7 @@ void HurtBox::Update(const float deltaTime_)
 				{
 					hurtBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hurtBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
 				}
-				hurtBoxVisual[i]->SetPosition(hurtBoxes[i].position);
+				//hurtBoxVisual[i]->SetPosition(hurtBoxes[i].position);
 			}
 		}
 		GameObject::Update(deltaTime_);
@@ -84,8 +85,8 @@ std::vector<Sphere> HurtBox::SpawnHurtBox(Model* model_, glm::vec3 startingPos_,
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
 			hurtBoxes.push_back(Sphere(pos, width_));
 			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent),std::to_string(i));
-			hurtBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject(std::to_string(i)));
-			hurtBoxVisual[i]->SetScale(glm::vec3(width_));
+			//hurtBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject(std::to_string(i)));
+			//hurtBoxVisual[i]->SetScale(glm::vec3(width_));
 			hurtBoxes[i].SetOffset(hurtBoxes[i].position - parent->GetPosition());
 		}
 
@@ -93,7 +94,7 @@ std::vector<Sphere> HurtBox::SpawnHurtBox(Model* model_, glm::vec3 startingPos_,
 	}
 	else {
 		hurtBoxes.push_back(Sphere(startingPos_, width_));
-		hurtBoxVisual.push_back(new HurtBox(model_, hurtBoxes[0].position, parent));
+		//hurtBoxVisual.push_back(new HurtBox(model_, hurtBoxes[0].position, parent));
 		return hurtBoxes;
 	}
 

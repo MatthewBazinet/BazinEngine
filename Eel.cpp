@@ -11,7 +11,6 @@ Eel::Eel(FrameData frameData_, glm::vec3 position_, Character* parent_, float an
 Eel::~Eel()
 {
 	SceneGraph::GetInstance()->RemoveModel(model);
-	Projectile::~Projectile();
 }
 
 void Eel::Update(const float deltaTime_)

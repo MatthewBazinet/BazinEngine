@@ -7,7 +7,7 @@ MatchSettings::MatchSettings()
 	player1Character = Player1Characters::None;
 	player2Character = Player2Characters::None;
 	player1Points = 0;
-	player2Points - 0;
+	player2Points = 0;
 }
 MatchSettings::~MatchSettings()
 {

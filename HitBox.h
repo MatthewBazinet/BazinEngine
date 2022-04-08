@@ -42,7 +42,7 @@ private:
 	GameObject* parent;
 	std::vector<Sphere> spheres;
 	bool isEnabled;
-	std::vector<GameObject*> hitBoxVisual;
+	//std::vector<GameObject*> hitBoxVisual;
 	std::vector<Sphere> hitBoxes;
 };
 

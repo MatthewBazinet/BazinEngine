@@ -104,7 +104,10 @@ glm::vec3 GameObject::GetScale() const
 
 std::string GameObject::GetTag() const
 {
-	return tag;
+	if (this)
+	{
+		return tag;
+	}
 }
 
 BoundingBox GameObject::GetBoundingBox() const

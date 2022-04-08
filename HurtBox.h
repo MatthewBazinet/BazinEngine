@@ -27,7 +27,7 @@ public:
 private:
 	float radius;
 	GameObject* parent;
-	std::vector<GameObject*> hurtBoxVisual;
+	//std::vector<GameObject*> hurtBoxVisual;
 	std::vector<Sphere> hurtBoxes;
 };
 #endif

@@ -10,7 +10,6 @@ GravityWave::GravityWave(FrameData frameData_, glm::vec3 position_, Character* p
 GravityWave::~GravityWave()
 {
 	SceneGraph::GetInstance()->RemoveModel(model);
-	Projectile::~Projectile();
 }
 
 void GravityWave::Update(const float deltaTime_)
@@ -32,7 +31,6 @@ void GravityWave::Update(const float deltaTime_)
 				//parent->GetOpponent()->SetPosition(glm::vec3(parent->GetOpponent()->GetPosition().x, 4.0f, parent->GetOpponent()->GetPosition().z));
 				parent->GetOpponent()->setApplyGravity(false);
 
-				GravityWave::~GravityWave();
 				dynamic_cast<Hoshi*>(parent)->ResetProjectile();
 				return;
 			}

@@ -156,7 +156,7 @@ void Eldric::Update(const float deltaTime_)
 	{
 		for (auto p : projs)
 		{
-			if (p)
+			if (p->parent)
 			{
 				p->Update(deltaTime_);
 			}
@@ -338,14 +338,17 @@ void Eldric::QCF(int strength, bool simpleInput)
 
 	if (strength == 0)
 	{
+		overclock += 5;
 		SetFrameData(frameData["QCF0"]);
 	}
 	else if (strength == 2 && overclock >= 25.0f)
 	{
+		overclock -= 25;
 		SetFrameData(frameData["QCF2"]);
 	}
 	else
 	{
+		overclock += 5;
 		SetFrameData(frameData["QCF1"]);
 	}
 }
@@ -357,18 +360,17 @@ void Eldric::OnQCFActive(int strength)
 		if (strength == 0)
 		{
 			eel = new Eel(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			eel->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
+			eel->SetVelocity(glm::rotateY(glm::vec3(10.0f, 5.0f, 0.0f), angle));
 		}
-		else if (strength == 2 && overclock >= 25.0f)
+		else if (strength == 2)
 		{
 			eel = new Eel(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			eel->SetVelocity(glm::vec3(10.0f, 5.0f, 0.0f));
-			overclock -= 25.0f;
+			eel->SetVelocity(glm::rotateY(glm::vec3(10.0f, 5.0f, 0.0f), angle));
 		}
 		else
 		{
 			eel = new Eel(frameData["QCF1"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			eel->SetVelocity(glm::vec3(10.0f, 10.0f, 0.0f));
+			eel->SetVelocity(glm::rotateY(glm::vec3(10.0f, 10.0f, 0.0f), angle));
 		}
 	}
 
@@ -407,14 +409,17 @@ void Eldric::QCB(int strength, bool simpleInput)
 
 	if (strength == 0)
 	{
+		overclock += 5;
 		SetFrameData(frameData["QCB0"]);
 	}
 	else if (strength == 2 && overclock >= 25.0f)
 	{
 		SetFrameData(frameData["QCB2"]);
+		overclock -= 25;
 	}
 	else
 	{
+		overclock += 6;
 		SetFrameData(frameData["QCB1"]);
 	}
 }
@@ -426,10 +431,9 @@ void Eldric::OnQCBActive(int strength)
 		{
 			nightGaunt = new NightGaunt(frameData["QCF0"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 		}
-		else if (strength == 2 && overclock >= 25.0f)
+		else if (strength == 2)
 		{
 			nightGaunt = new NightGaunt(frameData["QCF2"], glm::vec3(1.0f, 0.0f, 1.0f), this);
-			overclock -= 25.0f;
 		}
 		else
 		{
@@ -620,7 +624,7 @@ void Eldric::Heavy()
 
 void Eldric::ResetProjectile()
 {
-	delete proj;
+	if(proj) delete proj;
 	proj = nullptr;
 }
 

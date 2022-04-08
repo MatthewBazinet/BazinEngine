@@ -9,7 +9,6 @@ Kunai::Kunai(glm::vec3 position_, Character* parent_, float angle_, glm::vec3 ro
 Kunai::~Kunai()
 {
 	SceneGraph::GetInstance()->RemoveModel(model);
-	Projectile::~Projectile();
 }
 
 void Kunai::Update(const float deltaTime_)
@@ -24,7 +23,6 @@ void Kunai::Update(const float deltaTime_)
 
 	if (position.y < 0.1f)
 	{
-		Kunai::~Kunai();
 		dynamic_cast<Hoshi*>(parent)->ResetProjectile();
 		return;
 	}
@@ -34,7 +32,6 @@ void Kunai::Update(const float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes()))
 			{
 				parent->GetOpponent()->Hit(10.0f, 0.5f, 0.25f, glm::vec3(-7.0f, 1.0f, 0.0f));
-				Kunai::~Kunai();
 				dynamic_cast<Hoshi*>(parent)->ResetProjectile();
 				return;
 			}

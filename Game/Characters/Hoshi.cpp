@@ -100,9 +100,9 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 		frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 		// Gravity Wave
-		frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
-		frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
-		frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
+		frameData["QCF0"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.5f, 0.2f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+		frameData["QCF1"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.5f, 0.2f, glm::vec3(0.0f, 10.0f, 0.0f), 1);
+		frameData["QCF2"] = FrameData(5.0f / 60.0f, 8.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.5f, 0.2f, glm::vec3(0.0f, 10.0f, 0.0f), 2);
 
 		// Slide
 		frameData["QCB0"] = FrameData(1.0f / 60.0f, 20.0f / 60.0f, 60.0f / 60.0f, 70.0f, 1.0f, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f), 0);
@@ -299,20 +299,23 @@ void Hoshi::QCF(int strength, bool simpleInput)
 	if (nextActionable > 0.0f) return;
 
 	isIdle = false;
-	overclock += 25;
+	
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("GravityWaveStart", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
 
 	if (strength == 0)
 	{
+		overclock += 5;
 		SetFrameData(frameData["QCF0"]);
 	}
 	else if (strength == 2 && overclock >= 25.0f)
 	{
+		overclock -= 25;
 		SetFrameData(frameData["QCF2"]);
 	}
 	else
 	{
+		overclock += 6;
 		SetFrameData(frameData["QCF1"]);
 	}
 }
@@ -325,10 +328,9 @@ void Hoshi::OnQCFActive(int strength)
 		{
 			proj = new GravityWave(frameData["QCF0"], glm::vec3(1.0f, 4.0f, 0.0f), this);
 		}
-		else if (strength == 2 && overclock >= 25.0f)
+		else if (strength == 2)
 		{
 			proj = new GravityWave(frameData["QCF2"], glm::vec3(1.0f, 4.0f, 0.0f), this);
-			overclock -= 25.0f;
 		}
 		else
 		{
@@ -352,7 +354,6 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	if (nextActionable > 0.0f) return;
 
 	isIdle = false;
-	overclock += 25;
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("SlideStart", 0.5f);
 	hurtBox = hurtBoxes["slide"];
 	hitBox = hitBoxes["slide"];
@@ -360,13 +361,16 @@ void Hoshi::QCB(int strength, bool simpleInput)
 	if (strength == 0)
 	{
 		SetFrameData(frameData["QCB0"]);
+		overclock += 5;
 	}
 	else if (strength == 2 && overclock >= 25.0f)
 	{
+		overclock -= 25;
 		SetFrameData(frameData["QCB2"]);
 	}
 	else
 	{
+		overclock += 6;
 		SetFrameData(frameData["QCB1"]);
 	}
 

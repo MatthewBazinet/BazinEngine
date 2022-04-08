@@ -11,6 +11,7 @@ HitBox::HitBox(Model* model_, glm::vec3 position_, GameObject* parent_, float an
 
 HitBox::~HitBox()
 {
+	/*
 	if (hitBoxVisual.size() > 0)
 	{
 		for (auto m : hitBoxVisual)
@@ -20,6 +21,7 @@ HitBox::~HitBox()
 		}
 		hitBoxVisual.clear();
 	}
+	*/
 }
 
 
@@ -63,8 +65,8 @@ std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endin
 			glm::vec3 pos = GetPointOnLine(startingPos_, endingPos_, i * spacing / dist);
 			hitBoxes.push_back(Sphere(pos, width_));
 			SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, pos, parent), "Hitbox " + std::to_string(i));
-			hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject("Hitbox " + std::to_string(i)));
-			hitBoxVisual[i]->SetScale(glm::vec3(width_));
+			//hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject("Hitbox " + std::to_string(i)));
+			//hitBoxVisual[i]->SetScale(glm::vec3(width_));
 			hitBoxes[i].SetOffset(hitBoxes[i].position- parent->GetPosition());
 		}
 		return hitBoxes;
@@ -74,8 +76,8 @@ std::vector<Sphere> HitBox::spawnSpheres(glm::vec3 startingPos_, glm::vec3 endin
 		spheres[0] = Sphere(startingPos_, width_);
 		hitBoxes.push_back(spheres[0]);
 		SceneGraph::GetInstance()->AddGameObject(new HurtBox(hurtBoxDebug, startingPos_, parent),"ProjectileHB");
-		hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject("ProjectileHB"));
-		hitBoxVisual[0]->SetScale(glm::vec3(width_));
+		//hitBoxVisual.push_back(SceneGraph::GetInstance()->GetGameObject("ProjectileHB"));
+		//hitBoxVisual[0]->SetScale(glm::vec3(width_));
 		//std::cout << hitBoxes[0].position.x << "," << hitBoxes[0].position.y << "," << hitBoxes[0].position.z << std::endl;
 		return hitBoxes;
 	}
@@ -91,7 +93,7 @@ void HitBox::Update(float deltaTime_)
 	if (parent) {
 		for (int i = 0; i < hitBoxes.size(); i++) {
 			hitBoxes[0].SetPosition(parent->GetPosition());
-			hitBoxVisual[0]->SetPosition(parent->GetPosition());
+		//	hitBoxVisual[0]->SetPosition(parent->GetPosition());
 			if (i != 0) {
 				bool left = dynamic_cast<Character*>(parent)->FacingLeft();
 				if (left)
@@ -102,7 +104,7 @@ void HitBox::Update(float deltaTime_)
 				{
 					hitBoxes[i].SetPosition(glm::vec3(parent->GetPosition() + glm::rotate(hitBoxes[i].offset, -glm::radians(CoreEngine::GetInstance()->GetCamera()->GetRotation().x - 90.0f), glm::vec3(0.0f, 1.0f, 0.0f))));
 				}
-				hitBoxVisual[i]->SetPosition(hitBoxes[i].position);
+				//hitBoxVisual[i]->SetPosition(hitBoxes[i].position);
 			}
 		}
 		GameObject::Update(deltaTime_);

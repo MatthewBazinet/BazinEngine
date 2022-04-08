@@ -37,7 +37,7 @@ bool GameScene::OnCreate()
 
 	LoadCharacters();
 	Model* floor = new Model("Resources/Models/Floor.obj", "Resources/Materials/Floor.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(floor, glm::vec3(5.0f, -0.25f, 0.0f), 0.0f, glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(2.0f, 1.0f, 2.0f)), "floor");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(floor, glm::vec3(5.0f, -0.25f, 0.0f), 0.0f, glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(4.0f, 1.0f, 4.0f)), "floor");
 	SceneGraph::GetInstance()->AddModel(floor);
 	
 	XMLDecisionTreeReader read;
@@ -68,17 +68,17 @@ void GameScene::LoadCharacters()
 
 	switch (MatchSettings::GetInstance()->GetPlayer1Character()) {
 	case(Player1Characters::Hoshi):
-		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
+		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-5.0f, 0.0f, 0.0f), Sphere), "char1");
 		break;
 	case(Player1Characters::Alexis):
-		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-5.0f, 0.0f, 0.0f)), "char1");
 		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char1"))->SetModels(Rock, Sphere);
 		break;
 	case(Player1Characters::Eldric):
-		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char1");
+		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(-5.0f, 0.0f, 0.0f), Sphere), "char1");
 		break;
 	case(Player1Characters::Wulfrun):
-		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(0.0f, 0.0f, 0.0f)), "char1");
+		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(-5.0f, 0.0f, 0.0f)), "char1");
 		break;
 	default:
 			break;
@@ -102,18 +102,18 @@ void GameScene::LoadCharacters()
 
 	switch (MatchSettings::GetInstance()->GetPlayer2Character()) {
 	case(Player2Characters::Hoshi):
-		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
+		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(5.0f, 0.0f, 0.0f), Sphere), "char2");
 		//dynamic_cast<Hoshi*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Sphere);
 		break;
 	case(Player2Characters::Alexis):
-		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
+		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
 		break;
 	case(Player2Characters::Eldric):
-		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(10.0f, 0.0f, 0.0f), Sphere), "char2");
+		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(5.0f, 0.0f, 0.0f), Sphere), "char2");
 		break;
 	case(Player2Characters::Wulfrun):
-		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(10.0f, 0.0f, 0.0f)), "char2");
+		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(5.0f, 0.0f, 0.0f)), "char2");
 		break;
 	default:
 		break;
@@ -150,7 +150,7 @@ void GameScene::LoadCharacters()
 
 void GameScene::ResetRound()
 {
-	UserInterface::GetInstance()->SetTime(360);
+	UserInterface::GetInstance()->SetTime(99);
 
 	SceneGraph::GetInstance()->GetGameObject("char1")->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	SceneGraph::GetInstance()->GetGameObject("char2")->SetPosition(glm::vec3(10.0f, 0.0f, 0.0f));
@@ -185,7 +185,7 @@ void GameScene::Update(const float deltaTime_)
 			ResetRound();
 		}
 	}
-	else if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() <= 0.0f)
+	if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() <= 0.0f)
 	{
 		std::cout << "player 2 win" << std::endl;
 		MatchSettings::GetInstance()->SetP2Points(MatchSettings::GetInstance()->GetP2Points() + 1);
@@ -198,7 +198,7 @@ void GameScene::Update(const float deltaTime_)
 			ResetRound();
 		}
 	}
-	else if (UserInterface::GetInstance()->GetTime() <= 0)
+	if (UserInterface::GetInstance()->GetTime() <= 0)
 	{
 		if (static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"))->GetHealth() > static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2"))->GetHealth())
 		{

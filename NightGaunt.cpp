@@ -11,7 +11,6 @@ NightGaunt::NightGaunt(FrameData frameData_, glm::vec3 position_, Character* par
 NightGaunt::~NightGaunt()
 {
 	SceneGraph::GetInstance()->RemoveModel(model);
-	Projectile::~Projectile();
 }
 
 void NightGaunt::Update(const float deltaTime_)

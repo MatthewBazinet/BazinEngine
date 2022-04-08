@@ -15,7 +15,6 @@ Spike::~Spike()
 {
 	active = false;
 	SceneGraph::GetInstance()->RemoveModel(model);
-	Projectile::~Projectile();
 }
 
 void Spike::Update(const float deltaTime_)
@@ -35,13 +34,11 @@ void Spike::Update(const float deltaTime_)
 				{
 					parent->GetOpponent()->Hit(frameData);
 
-					Spike::~Spike();
 					dynamic_cast<Eldric*>(parent)->ResetProjectile();
 					return;
 				}
 				else if (time > lifetime)
 				{
-					Spike::~Spike();
 					dynamic_cast<Eldric*>(parent)->ResetProjectile();
 					return;
 				}
