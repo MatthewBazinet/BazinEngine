@@ -163,6 +163,9 @@ protected:
 	moveState currentMove;
 
 	glm::vec2 lastInput;
+
+	bool isBlockingLeft;
+	bool isBlockingRight;
 };
 
 #endif

@@ -29,7 +29,6 @@ void NightGaunt::Update(const float deltaTime_)
 			if (hitBox->CheckCollision(parent->GetOpponent()->GetHurtBoxes()))
 			{
 				parent->GetOpponent()->Hit(frameData);
-
 				dynamic_cast<Eldric*>(parent)->RemoveProjectile(tag);
 				return;
 			}

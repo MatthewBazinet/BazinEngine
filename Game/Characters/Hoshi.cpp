@@ -181,6 +181,22 @@ void Hoshi::Run(bool isRunning_)
 
 void Hoshi::Move(glm::vec2 input)
 {
+	if (input.x < 0)
+	{
+		isBlockingLeft = true;
+		isBlockingRight = false;
+	}
+	else if (input.x > 0)
+	{
+		isBlockingLeft = false;
+		isBlockingRight = true;
+	}
+	else
+	{
+		isBlockingLeft = false;
+		isBlockingRight = false;
+	}
+
 	if (nextActionable > 0.0f) return;
 
 	if (input.y > 0)

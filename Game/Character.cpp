@@ -617,6 +617,22 @@ void Character::Run(bool isRunning_)
 
 void Character::Move(glm::vec2 input)
 {
+	if (input.x < 0)
+	{
+		isBlockingLeft = true;
+		isBlockingRight = false;
+	}
+	else if (input.x > 0)
+	{
+		isBlockingLeft = false;
+		isBlockingRight = true;
+	}
+	else
+	{
+		isBlockingLeft = false;
+		isBlockingRight = false;
+	}
+
 	if (nextActionable > 0.0f) return;
 
 		if (input.y > 0)
@@ -704,7 +720,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 	isIdle = false;
 	if (FacingLeft())
 	{
-		if (MovingRight && !isAirborne)
+		if (isBlockingRight && !isAirborne)
 		{
 			nextActionable = blockStun_;
 			currentMove = moveState::NONE;
@@ -726,7 +742,7 @@ void Character::Hit(float damage_, float hitStun_, float blockStun_, glm::vec3 p
 	}
 	else
 	{
-		if (MovingLeft && !isAirborne)
+		if (isBlockingRight && !isAirborne)
 		{
 			nextActionable = blockStun_;
 			currentMove = moveState::NONE;

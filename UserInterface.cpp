@@ -53,6 +53,7 @@ void UserInterface::Update(const float deltaTime_)
 	switch (CoreEngine::GetInstance()->GetCurrentScene())
 	{
 	case 0:
+		state = State::Menu;
 		ShowMenu();
 		break;
 	case 1:

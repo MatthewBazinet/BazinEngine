@@ -25,7 +25,7 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run1", new MorphTarget("Resources/Models/Eldric/EldricRun1.obj", "Run2", 0.1f));
 		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run2", new MorphTarget("Resources/Models/Eldric/EldricRun2.obj", "Run3", 0.1f));
 		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run3", new MorphTarget("Resources/Models/Eldric/EldricRun3.obj", "Run4", 0.1f));
-		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run4", new MorphTarget("Resources/Models/Eldric/EldricRun4.obj", "Run5", 0.1f));
+		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("Run4", new MorphTarget("Resources/Models/Eldric/EldricRun4.obj", "RunEnd", 0.1f));
 		static_cast<MorphTargetAnimatedModel*>(model)->AddMorphTarget("RunEnd", new MorphTarget("Resources/Models/Eldric/EldricRunEnd.obj", "Run1", 0.1f));
 
 		// Grounded
@@ -156,7 +156,7 @@ void Eldric::Update(const float deltaTime_)
 	{
 		for (auto p : projs)
 		{
-			if (p != NULL)
+			if (p)
 			{
 				p->Update(deltaTime_);
 			}
@@ -215,6 +215,22 @@ void Eldric::Run(bool isRunning_)
 
 void Eldric::Move(glm::vec2 input)
 {
+	if (input.x < 0)
+	{
+		isBlockingLeft = true;
+		isBlockingRight = false;
+	}
+	else if (input.x > 0)
+	{
+		isBlockingLeft = false;
+		isBlockingRight = true;
+	}
+	else
+	{
+		isBlockingLeft = false;
+		isBlockingRight = false;
+	}
+
 	if (nextActionable > 0.0f) return;
 
 	if (input.y > 0)

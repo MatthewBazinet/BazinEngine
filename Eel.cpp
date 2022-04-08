@@ -22,7 +22,7 @@ void Eel::Update(const float deltaTime_)
 	}
 	else
 	{
-		if (bounced == false)
+		if (bounced == false && frameData.strength == 2)
 		{
 			bounced = true;
 			SetVelocity(glm::vec3(GetVelocity().x, -GetVelocity().y, GetVelocity().z));
@@ -50,8 +50,7 @@ void Eel::Update(const float deltaTime_)
 			{
 				parent->GetOpponent()->Hit(frameData);
 
-				Eel::~Eel();
-				dynamic_cast<Eldric*>(parent)->ResetProjectile();
+				dynamic_cast<Eldric*>(parent)->RemoveProjectile(tag);
 				return;
 			}
 		}

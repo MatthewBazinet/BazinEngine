@@ -10,8 +10,8 @@ public:
 
 	glm::vec3 getMaxVert() { return maxVert; };
 	glm::vec3 getMinVert() { return minVert; };
-	void setMaxVert(glm::vec3 maxVert_) { maxVert = maxVert_; };
-	void setMinVert(glm::vec3 minVert_) { minVert = minVert_; };
+	void setMaxVert(glm::vec3 maxVert_) { if(this) maxVert = maxVert_; };
+	void setMinVert(glm::vec3 minVert_) { if(this) minVert = minVert_; };
 };
 
 #endif;
