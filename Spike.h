@@ -13,6 +13,7 @@ public:
 private:
 	FrameData frameData;
 	bool active;
+	bool modelLoaded;
 	float lifetime;
 	float time;
 };

@@ -116,18 +116,18 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 		hitBoxes["airHeavy"]->spawnSpheres(this->position + glm::vec3(-2.0f, 6.0f, 0.0f), this->position + glm::vec3(5.0f, 6.0f, 0.0f), 0.75f, 6);
 
 		// Framedata
-		frameData["light"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 25.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
-		frameData["medium"] = FrameData(5.0f / 60.0f, 15.0f / 60.0f, 40.0f / 60.0f, 30.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
-		frameData["heavy"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+		frameData["light"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.25f, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+		frameData["medium"] = FrameData(5.0f / 60.0f, 15.0f / 60.0f, 40.0f / 60.0f, 45.0f, 0.3, 0.1f, glm::vec3(0.5f, 0.0f, 0.0f), 0);
+		frameData["heavy"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 20.0f / 60.0f, 45.0f, 0.5, 0.25, glm::vec3(0.5f, 0.0f, 0.0f), 0);
 
-		frameData["airLight"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 45.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-		frameData["airMedium"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 30.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-		frameData["airHeavy"] = FrameData(1.0f / 60.0f, 120.0f / 60.0f, 20.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["airLight"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 45.0f / 60.0f, 50.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["airMedium"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 30.0f / 60.0f, 75.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["airHeavy"] = FrameData(1.0f / 60.0f, 120.0f / 60.0f, 20.0f / 60.0f, 105.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
-		frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 0.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 100.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 		// Eel
-		frameData["QCF0"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
+		frameData["QCF0"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 20.0f, 0.0f, 0.0f, glm::vec3(5.0f, 0.0f, 0.0f), 0);
 		frameData["QCF1"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 1);
 		frameData["QCF2"] = FrameData(5.0f / 60.0f, 10.0f / 60.0f, 20.0f / 60.0f, 30.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 2);
 
@@ -156,9 +156,13 @@ void Eldric::Update(const float deltaTime_)
 	{
 		for (auto p : projs)
 		{
-			p->Update(deltaTime_);
+			if (p != NULL)
+			{
+				p->Update(deltaTime_);
+			}
 		}
 	}
+
 	if (proj)
 	{
 		proj->Update(deltaTime_);
@@ -446,11 +450,11 @@ void Eldric::Unique()
 
 	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("UniqueStart", 0.3f);
 	hurtBox = hurtBoxes["basic"];
-	SetFrameData(frameData["Unique"]);
+	SetFrameData(frameData["unique"]);
 
 	if (proj == nullptr)
 	{
-		proj = new Spike(frameData["Unique"], glm::vec3(1.0f, 0.0f, 1.0f), this);
+		proj = new Spike(frameData["unique"], glm::vec3(1.0f, 0.0f, 1.0f), this);
 		proj->SetVelocity(glm::vec3(0.0f));
 		proj->SetPosition(this->GetPosition() + (glm::vec3(4.0f, 0.0f, 0.0f)));
 	}
