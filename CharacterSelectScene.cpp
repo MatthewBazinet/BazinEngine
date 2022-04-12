@@ -33,22 +33,22 @@ bool CharacterSelectScene::OnCreate()
 	//Model* Alexis = new Model("Resources/Models/Alexis/Alexis_Walk_01.obj", "Resources/Materials/AlexisBruce.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Rock = new Model("Resources/Models/Rock.obj", "Resources/Materials/Rock.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* Sphere = new Model("Resources/Models/Sphere.obj", "Resources/Materials/tetrahedron.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
-	Model* Sonic = new Model("Resources/Models/SonicHowl.obj", "Resources/Materials/SonicHowl.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	//Model* Sonic = new Model("Resources/Models/SonicHowl.obj", "Resources/Materials/SonicHowl.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 
 	//SceneGraph::GetInstance()->AddModel(Alexis);
 	SceneGraph::GetInstance()->AddModel(Rock);
 	SceneGraph::GetInstance()->AddModel(Sphere);
-	SceneGraph::GetInstance()->AddModel(Sonic);
+	//SceneGraph::GetInstance()->AddModel(Sonic);
 
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(Sonic), "Sonic");
+	//SceneGraph::GetInstance()->AddGameObject(new GameObject(Sonic), "Sonic");
 
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Sphere), "Player1Hoshi");
 	SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(-8000.0f, 0.0f, 0.0f), Sphere), "Player2Hoshi");
-	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Alexis");
-	SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Alexis");
-	SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Wulfrun");
-	SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Wulfrun");
+	//SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Alexis");
+	//SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Alexis");
+	//SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Wulfrun");
+	//SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Wulfrun");
 	//SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player1Alexis");
 	//SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(-8000.0f, 0.0f, 0.0f)), "Player2Alexis");
 
@@ -69,15 +69,15 @@ bool CharacterSelectScene::OnCreate()
 
 
 	AddCharacter("Hoshi1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Hoshi")),Player1Characters::Hoshi,"Hoshi2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Hoshi")),Player2Characters::Hoshi);
-	AddCharacter("Alexis1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Alexis")), Player1Characters::Alexis, "Alexis2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Alexis")),Player2Characters::Alexis);
-	AddCharacter("Wulfrun1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Wulfrun")), Player1Characters::Wulfrun, "Wulfrun2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Wulfrun")), Player2Characters::Wulfrun);
+	//AddCharacter("Alexis1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Alexis")), Player1Characters::Alexis, "Alexis2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Alexis")),Player2Characters::Alexis);
+	//AddCharacter("Wulfrun1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Wulfrun")), Player1Characters::Wulfrun, "Wulfrun2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Wulfrun")), Player2Characters::Wulfrun);
 	//AddCharacter("Alexis1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Alexis")), Player1Characters::Alexis, "Alexis2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Alexis")),Player2Characters::Alexis);
 	AddCharacter("Eldric1", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player1Eldric")), Player1Characters::Eldric, "Eldric2", dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("Player2Eldric")), Player2Characters::Eldric);
 
 	Rock = nullptr;
 	//Alexis = nullptr;
 	Sphere = nullptr;
-	Sonic = nullptr;
+	//Sonic = nullptr;
 	return true;
 }
 

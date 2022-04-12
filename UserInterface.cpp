@@ -112,16 +112,6 @@ void UserInterface::ShowMenu()
 			MatchSettings::GetInstance()->SetGameMode(GameMode::Versus);
 			CoreEngine::GetInstance()->SetCurrentScene(7);
 		}
-		if (ImGui::Button("Training Mode", ImVec2(300, 100))) {
-			se.playSoundEffect(0);
-			MatchSettings::GetInstance()->SetGameMode(GameMode::Training);
-			CoreEngine::GetInstance()->SetCurrentScene(7);
-		}
-		if (ImGui::Button("Arcade", ImVec2(300, 100))) {
-			se.playSoundEffect(0);
-			MatchSettings::GetInstance()->SetGameMode(GameMode::Arcade);
-			CoreEngine::GetInstance()->SetCurrentScene(7);
-		}
 		//Online Button
 		//if (ImGui::Button("Online", ImVec2(300, 100))) {
 		//	se.playSoundEffect(0);
