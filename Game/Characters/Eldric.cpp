@@ -377,6 +377,7 @@ void Eldric::OnQCFActive(int strength)
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
 	eel->SetTarget(nullptr);
 	eel->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
+	eel->SetVelocity(glm::vec3(-dir));
 	
 	projs.push_back(eel);
 
