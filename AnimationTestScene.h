@@ -1,7 +1,7 @@
 #ifndef AnimationTESTSCENE_H
 #define AnimationTESTSCENE_H
 
-#include "../../Engine/Core/CoreEngine.h"
+#include "../Engine/Core/CoreEngine.h"
 
 class AnimationTestScene : public Scene
 {

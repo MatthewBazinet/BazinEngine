@@ -1,7 +1,7 @@
 
 #include "AnimationTestScene.h"
 #include "..//Engine/Camera/BattleCamera.h"
-#include "..//../AICharacter.h"
+#include "../AICharacter.h"
 #include "../Engine/Math/CollisionDetection.h"
 #include "Tetrahedron.h"
 

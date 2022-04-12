@@ -41,6 +41,7 @@ void TextureHandler::CreateTexture(const std::string& textureName_, const std::s
 {
 	Texture* t = new Texture();
 	SDL_Surface* surface = nullptr;
+	Log::Info(textureFilePath_.c_str(), "TextureHandler.cpp", __LINE__);
 	surface = IMG_Load(textureFilePath_.c_str());
 	if (surface == nullptr)
 	{

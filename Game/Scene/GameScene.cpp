@@ -41,7 +41,7 @@ bool GameScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(floor);
 	
 	XMLDecisionTreeReader read;
-	read.ReadFile("Tree.xml");	
+	//read.ReadFile("Tree.xml");	
 	
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);

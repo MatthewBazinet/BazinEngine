@@ -1,7 +1,7 @@
 #ifndef GJKTESTSCENE_H
 #define GJKTESTSCENE_H
 
-#include "../../Engine/Core/CoreEngine.h"
+#include "../Engine/Core/CoreEngine.h"
 
 class GJKTestScene : public Scene
 {

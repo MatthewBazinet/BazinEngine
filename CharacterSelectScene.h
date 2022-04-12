@@ -1,6 +1,6 @@
 #ifndef CHARACTERSELECTSCENE_H
 #define CHARACTERSELECTSCENE_H
-#include "../../Engine/Core/CoreEngine.h"
+#include "../Engine/Core/CoreEngine.h"
 #include "../UserInterface.h"
 #include "..//NetworkingBase.h"
 #include "../SDLMusic.h"
