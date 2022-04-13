@@ -46,8 +46,8 @@ bool GameScene::OnCreate()
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);
 
-	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 15.0f);
-	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, 15.0f);
+	leftPlane = glm::vec4(-1.0f, 0.0f, 0.0f, 25.0f);
+	rightPlane = glm::vec4(1.0f, 0.0f, 0.0f, 16.0f);
 	northPlane = glm::vec4(0.0f, 0.0f, 1.0f, 15.0f);
 	southPlane = glm::vec4(0.0f, 0.0f, -1.0f, 15.0f);
 	planes.push_back(leftPlane);

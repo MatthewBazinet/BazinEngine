@@ -74,13 +74,13 @@ Hoshi::Hoshi(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false, 
 
 		// Hiboxes
 		hitBoxes["light"] = new HitBox(hurtBox_, this->position, this);
-		hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
+		hitBoxes["light"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(5.5f, 7.0f, 0.0f), 0.75f, 3);
 
 		hitBoxes["medium"] = new HitBox(hurtBox_, this->position, this);
-		hitBoxes["medium"]->spawnSpheres(this->position + glm::vec3(0.0f, 5.0f, 0.0f), this->position + glm::vec3(6.0f, 5.0f, 0.0f), 0.75f, 4);
+		hitBoxes["medium"]->spawnSpheres(this->position + glm::vec3(0.0f, 5.0f, 0.0f), this->position + glm::vec3(7.0f, 5.0f, 0.0f), 0.75f, 4);
 
 		hitBoxes["heavy"] = new HitBox(hurtBox_, this->position, this);
-		hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(4.5f, 7.0f, 0.0f), 0.75f, 3);
+		hitBoxes["heavy"]->spawnSpheres(this->position + glm::vec3(0.0f, 7.0f, 0.0f), this->position + glm::vec3(5.5f, 7.0f, 0.0f), 0.75f, 3);
 
 		hitBoxes["slide"] = new HitBox(hurtBox_, this->position, this);
 		hitBoxes["slide"]->spawnSpheres(this->position + glm::vec3(7.5f, 0.5f, 0.0f), this->position + glm::vec3(7.5f, 0.5f, 0.0f), 1.25f, 2);
@@ -567,7 +567,7 @@ void Hoshi::OnAirLightActive()
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 15.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
+	proj->SetPosition(this->GetPosition() + glm::vec3(0.0f, 6.0f, 0.0f));
 	proj->SetVelocity(glm::vec3(-dir));
 }
 
@@ -587,7 +587,7 @@ void Hoshi::OnAirMediumActive()
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 5.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
+	proj->SetPosition(this->GetPosition() + glm::vec3(0.0f, 6.0f, 0.0f));
 	proj->SetVelocity(glm::vec3(-dir));
 }
 
@@ -607,6 +607,6 @@ void Hoshi::OnAirHeavyActive()
 
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 1.0f, position.z - opponent->GetPosition().z);
 	proj->SetTarget(nullptr);
-	proj->SetPosition(this->GetPosition());
+	proj->SetPosition(this->GetPosition() + glm::vec3(0.0f, 6.0f, 0.0f));
 	proj->SetVelocity(glm::vec3(-dir));
 }
