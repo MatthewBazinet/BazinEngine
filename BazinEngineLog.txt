@@ -7,7 +7,6 @@
 [INFO]: Resources/Textures/CheckerboardTexture.png in: TextureHandler.cpp on line: 44
 [INFO]: Resources/Textures/Rock.png in: TextureHandler.cpp on line: 44
 [INFO]: Resources/Textures/Material__25.png in: TextureHandler.cpp on line: 44
-[INFO]: Resources/Textures/SonicHowlTexture.png in: TextureHandler.cpp on line: 44
 [INFO]: Resources/Textures/HoshiTexture.png in: TextureHandler.cpp on line: 44
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiIdleEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
 [ERROR]: MorphTarget Resources/Models/Hoshi/HoshiBlock.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
