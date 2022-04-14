@@ -6,27 +6,36 @@
 #include "Game/Decision Tree/Action.h"
 #include "wantToSpendMeter.h"
 #include "WantToEXFireball.h"
+#include "WantToEXTatsu.h"
+#include "WantToFireball.h"
+#include "WantToTatsu.h"
+#include "WantToLight.h"
+#include "WantToMedium.h"
+#include "WantToHeavy.h"
+#include "WantToUnique.h"
 #include "WantToMeteredCrossUp.h"
 #include "WantToMeterlessCrossUp.h"
 #include "WantToAttack.h"
 #include "WantToBackAway.h"
 #include "ActionEXFireball.h"
+#include "ActionEXTatsu.h"
 #include "ActionFireball.h"
+#include "ActionTatsu.h"
+#include "ActionLight.h"
+#include "ActionMedium.h"
+#include "ActionHeavy.h"
+#include "ActionUnique.h"
 #include "ActionMeteredCrossUp.h"
 #include "ActionMeterlessCrossUp.h"
 #include "ActionBackAway.h"
 #include "ActionMoveTowards.h"
 #include "ActionRunTowards.h"
-#include <thread>
-#include "XMLDecisionTreeReader.h"
 
-AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool isRunning_, bool isAirborne_, Model* model_, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_, glm::vec3 vel_, glm::quat orientation_, glm::quat angularVelocity_) : Character(health_, meter_, isRunning_, isAirborne_, model_,  position_, angle_, rotation_, scale_, vel_, orientation_, angularVelocity_) {
-	opponent = opponent_;
-	SetMaxSpeed(7.0f);
+AICharacter::AICharacter(Character* character_){
+	character = character_;
 	targetShifted = false;
 	projectile = nullptr;
-	dir2D = 1.0f;
-	DecisionTreeNode treeReaderTest = XMLDecisionTreeReader::ReadFile("Resources/Trees/Tree.xml");
+	//DecisionTreeNode treeReaderTest = XMLDecisionTreeReader::ReadFile("Resources/Trees/Tree.xml");
 	decisionTree = CreateTree();
 
 	wantToSpendMeter = 0.0f;
@@ -37,7 +46,7 @@ AICharacter::AICharacter(Character* opponent_, float health_, float meter_, bool
 	wantToAttack = 0.0f;
 	wantToBackAway = 0.0f;
 	isExisting = true;
-	decisionTreeThread = new std::thread(&AICharacter::RunDecisionTree, this);
+	timeSinceLastDecision = 0.0f;
 }
 
 AICharacter::~AICharacter()
@@ -46,15 +55,13 @@ AICharacter::~AICharacter()
 	projectile = nullptr;
 	delete decisionTree;
 	decisionTree = nullptr;
+	character = nullptr;
 	isExisting = false;
-	decisionTreeThread->join();
-	delete decisionTreeThread;
 
 }
 
 void AICharacter::Update(const float deltaTime_)
 {
-	overclock += deltaTime_ * 10;
 	wantToSpendMeter += deltaTime_* RandBetween(0.1, 0.3);
 	wantToEXFireball += deltaTime_ * RandBetween(0.1, 0.3);
 	wantToMeteredCrossUp += deltaTime_ * RandBetween(0.1, 0.3);
@@ -62,93 +69,79 @@ void AICharacter::Update(const float deltaTime_)
 	wantToMeterlessCrossUp += deltaTime_ * RandBetween(0.1, 0.3);
 	wantToAttack += deltaTime_ * RandBetween(0.1, 0.3);
 	wantToBackAway += deltaTime_ * RandBetween(0.1, 0.3);
+	timeSinceLastDecision += deltaTime_;
 
-	if (position.y >= 0.1f)
+	if (timeSinceLastDecision > 2.0f)
 	{
-		isAirborne = true;
+		RunDecisionTree();
+		timeSinceLastDecision = 0.0f;
 	}
-	if (position.y <= -0.1f)
-	{
-		position.y = 0.0f;
-		vel.y = 0.0f;
-		accel.y = 0.0f;
-		isAirborne = false;
-	}
-
-	if (getIsAirborne())
-	{
-		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
-	}
-
-	//std::vector<glm::vec3> targets;
-	//targets.push_back(glm::vec3(2.0f, 0.0f, 5.0f));
-	//targets.push_back(glm::vec3(7.0f, 0.0f, 7.0f));
 	
 	switch (targetType) {
 	case TargetType::CROSSUP:
-		target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+		target = character->opponent->GetPosition() + -character->maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), character->opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 		break;
 	case TargetType::INFRONTCLOSE:
-		target = opponent->GetPosition() + maxSpeed * 0.75f * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+		target = character->opponent->GetPosition() + character->maxSpeed * 0.75f * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), character->opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 		break;
 
 	case TargetType::INFRONTFAR:
-		target = opponent->GetPosition() + maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
+		target = character->opponent->GetPosition() + character->maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), character->opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 		break;
 
 	case TargetType::SELF:
-		target = position;
+		target = character->position;
 		break;
 	default:
-		target = position;
+		target = character->position;
 		break;
 	}
 
 	
 	KinematicSteeringOutput steering;
 
-	if (isRunning)
+	if (character->isRunning)
 	{
 		//target = opponent->GetPosition() + -maxSpeed * glm::rotate(glm::vec3(0.0f, 0.0f, 1.0f), opponent->GetAngle(), glm::vec3(0.0f, 1.0f, 0.0f));
 		Ray ray = Ray();
-		ray.direction = vel;
-		ray.origin = position;
-		BoundingBox tmp = opponent->GetBoundingBox();
+		ray.direction = character->vel;
+		ray.origin = character->position;
+		BoundingBox tmp = character->opponent->GetBoundingBox();
 		CollisionDetection::RayObbIntersection(&ray, &tmp);
-		if (ray.intersectionDist < maxSpeed / deltaTime_)
+		if (ray.intersectionDist < character->maxSpeed / deltaTime_)
 		{
 			target += glm::cross(ray.direction, glm::vec3(0.0f, 1.0f, 0.0f));
 		}
 
-		steering = KinematicArrive::getSteering(this, target, 1.3f);
-		float preserveY = vel.y;
-		vel = steering.velocity;
-		vel.y = preserveY;
+		steering = KinematicArrive::getSteering(character, target, 1.3f);
+		float preserveY = character->vel.y;
+		character->vel = steering.velocity;
+		character->vel.y = preserveY;
 
 		if (projectile != nullptr)
 		{
 			target = projectile->GetPosition();
 
 
-			if (glm::distance(position, projectile->GetPosition()) < 3.0f)
+			if (glm::distance(character->position, projectile->GetPosition()) < 3.0f)
 			{
-				steering = KinematicFlee::getSteering(this, projectile->GetPosition());
-				float preserveY = vel.y;
-				vel = steering.velocity;
-				vel.y = preserveY;
+				steering = KinematicFlee::getSteering(character, projectile->GetPosition());
+				float preserveY = character->vel.y;
+				character->vel = steering.velocity;
+				character->vel.y = preserveY;
 
 			}
 
-			if (glm::distance(position, projectile->GetPosition()) < 5.0f)
+			if (glm::distance(character->position, projectile->GetPosition()) < 5.0f)
 			{
-				if (getIsAirborne() == false)
+				if (character->getIsAirborne() == false)
 				{
-					SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
+					character->SetVelocity(glm::vec3(character->GetVelocity().x, 10.0f, character->GetVelocity().z));
 				}
 			}
 
 		}
-		angle = steering.rotation;
+		character->angle = steering.rotation;
 	}
 	else
 	{
@@ -158,96 +151,44 @@ void AICharacter::Update(const float deltaTime_)
 		//vel = steering.velocity;
 		//vel.y = preserveY;
 
-		glm::vec3 projection = glm::dot(position - target, axisOf2DMovement) * axisOf2DMovement;
-		glm::vec3 axisMagProj = glm::length(projection) * axisOf2DMovement;
+		glm::vec3 projection = glm::dot(character->position - target, character->axisOf2DMovement) * character->axisOf2DMovement;
+		glm::vec3 axisMagProj = glm::length(projection) * character->axisOf2DMovement;
 
 		if (glm::equal(axisMagProj - projection, glm::vec3(0.0f,0.0f,0.0f)).b) {
-			SetDir2D(-1.0f);
+			character->Move(glm::vec2(-1, 0));
 		}
 		else
 		{
-			SetDir2D(1.0f);
+			character->Move(glm::vec2(1, 0));
 		}
 		
-		projection = glm::dot(target, axisOf2DMovement) * axisOf2DMovement;
+		projection = glm::dot(target, character->axisOf2DMovement) * character->axisOf2DMovement;
 
-		if (glm::distance(projection, position) < 1.0f) {
-			SetDir2D(0.0f);
+		if (glm::distance(projection, character->position) < 1.0f) {
+			character->Move(glm::vec2(0, 0));
 		}
 		if (targetType == TargetType::SELF)
 		{
-			SetDir2D(0.0f);
+			character->Move(glm::vec2(0, 0));
 		}
 
-		if (!opponent->getIsRunning() && getIsAirborne() == false)
-		{
-			axisOf2DMovement = glm::normalize(opponent->GetPosition() - position);
-		}
-		float preserveY = vel.y;
-		vel = axisOf2DMovement * maxSpeed * dir2D;
-		vel.y = preserveY;
 		if (projectile) {
-			if (glm::distance(position, projectile->GetPosition()) < 5.0f)
+			if (glm::distance(character->position, projectile->GetPosition()) < 5.0f)
 			{
-				if (getIsAirborne() == false)
+				if (character->getIsAirborne() == false)
 				{
-					SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
-					isAirborne = true;
+					character->Move(glm::vec2(0, 1));
+					character->isAirborne = true;
 				}
 			}
 		}
 
-		if (glm::distance(position, opponent->GetPosition()) < 2.0f && targetType != TargetType::SELF)
+		if (glm::distance(character->position, opponent->GetPosition()) < 2.0f && targetType != TargetType::SELF)
 		{
-			if (getIsAirborne() == false)
-			{
-				SetVelocity(glm::vec3(GetVelocity().x, 10.0f, GetVelocity().z));
-				isAirborne = true;
-			}
-		}
-	angle = steering.rotation;
-
-	}
-	if (position.y >= 0.1f)
-	{
-		isAirborne = true;
-	}
-
-	if (position.y <= -0.1f)
-	{
-		position.y = 0.0f;
-		vel.y = 0.0f;
-		accel.y = 0.0f;
-		isAirborne = false;
-	}
-
-	if (getIsAirborne())
-	{
-		ApplyForce(glm::vec3(accel.x, -9.81f * mass, accel.z));
-	}
-
-	GameObject::Update(deltaTime_);
-
-	if (!isRunning) {
-		if (!opponent->getIsRunning() && getIsAirborne() == false)
-		{
-			axisOf2DMovement = camera->GetRight();
+			character->Move(glm::vec2(0, 1));
 		}
 
-		dir2D = 0.0f;
-		if (MovingLeft) dir2D = -1.0f;
-		if (MovingRight) dir2D = 1.0f;
-
-
-		float preserveY = vel.y;
-		vel = axisOf2DMovement * maxSpeed * dir2D;
-		vel.y = preserveY;
 	}
-
-
-	if (vel != glm::vec3())	angle = atan2(vel.x, vel.z);;
-
-	//proj->Update(deltaTime_);
 }
 
 void AICharacter::SetDir2D(float dir_)
@@ -256,22 +197,42 @@ void AICharacter::SetDir2D(float dir_)
 	{
 		if (dir_ == 0.0f)
 		{
-			dir2D = 0.0f;
+			character->dir2D = 0.0f;
 		}
 		else
 		{
-			dir2D = (dir_ > 0.0f) ? 1.0f : -1.0f;
+			character->dir2D = (dir_ > 0.0f) ? 1.0f : -1.0f;
 		}
 	}
 	else
 	{
-		dir2D = dir_;
+		character->dir2D = dir_;
 	}
+}
+
+void AICharacter::UseLight()
+{
+	character->Light();
+}
+
+void AICharacter::UseMedium()
+{
+	character->Medium();
+}
+
+void AICharacter::UseHeavy()
+{
+	character->Heavy();
+}
+
+void AICharacter::UseUnique()
+{
+	character->Unique();
 }
 
 void AICharacter::UseEXFireball()
 {
-	QCF(3, true);
+	character->QCF(3, true);
 	wantToEXFireball = 0.0f;
 	wantToSpendMeter = 0.0f;
 	printf("EX Fireball used\n");
@@ -280,14 +241,24 @@ void AICharacter::UseEXFireball()
 
 void AICharacter::UseFireball()
 {
-	QCF(1, true);
+	character->QCF(1, true);
 	wantToAttack = 0.0f;
 	printf("Fireball used\n");
 }
 
+void AICharacter::UseEXTatsu()
+{
+	character->QCB(2, false);
+}
+
+void AICharacter::UseTatsu()
+{
+	character->QCB(0, false);
+}
+
 void AICharacter::MeteredCrossUp()
 {
-	Run(true);
+	character->Run(true);
 	targetType = TargetType::CROSSUP;
 	wantToMeteredCrossUp = 0.0f;
 	wantToSpendMeter = 0.0f;
@@ -296,7 +267,7 @@ void AICharacter::MeteredCrossUp()
 
 void AICharacter::MeterlessCrossUp()
 {
-	Run(false);
+	character->Run(false);
 	targetType = TargetType::CROSSUP;
 	wantToMeterlessCrossUp = 0.0f;
 	printf("Meterless Crossup\n");
@@ -304,21 +275,21 @@ void AICharacter::MeterlessCrossUp()
 
 void AICharacter::BackAway()
 {
-	Run(false);
+	character->Run(false);
 	targetType = TargetType::INFRONTFAR;
 	printf("Back Away\n");
 }
 
 void AICharacter::MoveTowards()
 {
-	Run(false);
+	character->Run(false);
 	targetType = TargetType::INFRONTCLOSE;
 	printf("Move Towards\n");
 }
 
 void AICharacter::RunTowards()
 {
-	Run(true);
+	character->Run(true);
 	targetType = TargetType::INFRONTCLOSE;
 	wantToSpendMeter = 0.0f;
 	printf("Run Towards\n");
@@ -335,6 +306,12 @@ DecisionTreeNode* AICharacter::CreateTree()
 	EXFireball->SetAI(this);
 	wantToSpendMeter->SetTrueNode(wantToEXFireball);
 	wantToEXFireball->SetTrueNode(EXFireball);
+	WantToEXTatsu* wantToEXTatsu = new WantToEXTatsu();
+	wantToEXTatsu->SetAI(this);
+	ActionEXTatsu* EXTatsu = new ActionEXTatsu();
+	EXTatsu->SetAI(this);
+	wantToEXFireball->SetTrueNode(wantToEXTatsu);
+	wantToEXTatsu->SetTrueNode(EXTatsu);
 	WantToMeteredCrossUp* wantToMeteredCrossUp = new WantToMeteredCrossUp();
 	wantToMeteredCrossUp->SetAI(this);
 	ActionMeteredCrossUp* runningCrossUp = new ActionMeteredCrossUp();
@@ -343,7 +320,7 @@ DecisionTreeNode* AICharacter::CreateTree()
 	ActionRunTowards* runTowards = new ActionRunTowards();
 	runTowards->SetAI(this);
 	wantToMeteredCrossUp->SetFalseNode(runTowards);
-	wantToEXFireball->SetFalseNode(wantToMeteredCrossUp);
+	wantToEXTatsu->SetFalseNode(wantToMeteredCrossUp);
 
 	WantToMeterlessCrossUp* wantToMeterlessCrossUp = new WantToMeterlessCrossUp();
 	wantToMeterlessCrossUp->SetAI(this);
@@ -354,9 +331,37 @@ DecisionTreeNode* AICharacter::CreateTree()
 	WantToAttack* wantToAttack = new WantToAttack();
 	wantToAttack->SetAI(this);
 	wantToMeterlessCrossUp->SetFalseNode(wantToAttack);
+	WantToFireball* wantToFireball = new WantToFireball();
 	ActionFireball* fireball = new ActionFireball();
 	fireball->SetAI(this);
 	wantToAttack->SetTrueNode(fireball);
+	WantToTatsu* wantToTatsu = new WantToTatsu();
+	ActionTatsu* tatsu = new ActionTatsu();
+	tatsu->SetAI(this);
+	wantToFireball->SetFalseNode(wantToTatsu);
+	wantToTatsu->SetTrueNode(tatsu);
+	WantToLight* wantToLight = new WantToLight();
+	ActionLight* light = new ActionLight();
+	light->SetAI(this);
+	wantToTatsu->SetFalseNode(wantToLight);
+	wantToLight->SetTrueNode(light);
+
+	WantToMedium* wantToMedium = new WantToMedium();
+	ActionMedium* medium = new ActionMedium();
+	light->SetAI(this);
+	wantToLight->SetFalseNode(wantToMedium);
+	wantToMedium->SetTrueNode(medium);
+
+	WantToHeavy* wantToHeavy = new WantToHeavy();
+	ActionHeavy* heavy = new ActionHeavy();
+	light->SetAI(this);
+	wantToMedium->SetFalseNode(wantToHeavy);
+	wantToHeavy->SetTrueNode(heavy);
+
+	ActionUnique* unique = new ActionUnique();
+	unique->SetAI(this);
+	wantToHeavy->SetFalseNode(unique);
+
 	WantToBackAway* wantToBackAway = new WantToBackAway();
 	wantToBackAway->SetAI(this);
 	wantToAttack->SetFalseNode(wantToBackAway);
@@ -377,7 +382,6 @@ void AICharacter::RunDecisionTree()
 		if (this && decisionTree != nullptr) 
 		{
 			decisionTree->MakeDecision();
-			std::this_thread::sleep_for(std::chrono::seconds(2));
 		}
 	}
 }

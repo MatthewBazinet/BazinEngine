@@ -223,32 +223,13 @@ void Scene2::NotifyOfKeyDown(const SDL_Scancode key_)
 	{
 	case SDL_SCANCODE_P:
 		static_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("ai1"));
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetProjectile(dynamic_cast<Projectile*>(SceneGraph::GetInstance()->GetGameObject("projectile")));
 		break;
 	case SDL_SCANCODE_U:
 		dynamic_cast<Pawn*>(SceneGraph::GetInstance()->GetGameObject("Pawn"))->SetTarget(SceneGraph::GetInstance()->GetGameObject("char1")->GetPosition(), navgrid);
 		break;
 	case SDL_SCANCODE_R:
-		if (static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->getIsRunning()) {
-			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(false);
-		}
-		else
-		{
-			static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->Run(true);
-		}
 		break;
-	case SDL_SCANCODE_LEFT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::CROSSUP);
-		break;
-	case SDL_SCANCODE_RIGHT:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTFAR);
-		break;
-	case SDL_SCANCODE_UP:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::SELF);
-		break;
-	case SDL_SCANCODE_DOWN:
-		static_cast<AICharacter*>(SceneGraph::GetInstance()->GetGameObject("ai1"))->SetTargetType(TargetType::INFRONTCLOSE);
-		break;
+
 	default:
 		Character* char1 = dynamic_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char1"));
 		char1->NotifyOnKeyDown(key_);

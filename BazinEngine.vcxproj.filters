@@ -116,6 +116,19 @@
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Game\Scene\ArcadeScene.cpp" />
     <ClCompile Include="SonicHowl.cpp" />
+    <ClCompile Include="WantToEXTatsu.cpp" />
+    <ClCompile Include="ActionEXTatsu.cpp" />
+    <ClCompile Include="WantToFireball.cpp" />
+    <ClCompile Include="WantToTatsu.cpp" />
+    <ClCompile Include="ActionTatsu.cpp" />
+    <ClCompile Include="ActionLight.cpp" />
+    <ClCompile Include="ActionMedium.cpp" />
+    <ClCompile Include="ActionHeavy.cpp" />
+    <ClCompile Include="ActionUnique.cpp" />
+    <ClCompile Include="WantToLight.cpp" />
+    <ClCompile Include="WantToMedium.cpp" />
+    <ClCompile Include="WantToHeavy.cpp" />
+    <ClCompile Include="WantToUnique.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
@@ -242,6 +255,19 @@
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Game\Scene\ArcadeScene.h" />
     <ClInclude Include="SonicHowl.h" />
+    <ClInclude Include="WantToEXTatsu.h" />
+    <ClInclude Include="ActionEXTatsu.h" />
+    <ClInclude Include="WantToFireball.h" />
+    <ClInclude Include="WantToTatsu.h" />
+    <ClInclude Include="ActionTatsu.h" />
+    <ClInclude Include="ActionLight.h" />
+    <ClInclude Include="ActionMedium.h" />
+    <ClInclude Include="ActionHeavy.h" />
+    <ClInclude Include="ActionUnique.h" />
+    <ClInclude Include="WantToLight.h" />
+    <ClInclude Include="WantToMedium.h" />
+    <ClInclude Include="WantToHeavy.h" />
+    <ClInclude Include="WantToUnique.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BazinEngine.rc" />

@@ -2,7 +2,7 @@
 
 DecisionTreeNode* WantToEXFireball::GetBranch()
 {
-	if (ai->GetWantToEXFireball() > 1.0f && ai->GetOverclock() > 50.0f)
+	if (ai->GetWantToEXFireball() > 1.0f && ai->GetCharacter()->GetOverclock() > 50.0f)
 	{
 		return trueNode;
 	}

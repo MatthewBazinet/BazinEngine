@@ -147,11 +147,17 @@
   <ItemGroup>
     <ClCompile Include="ActionBackAway.cpp" />
     <ClCompile Include="ActionEXFireball.cpp" />
+    <ClCompile Include="ActionEXTatsu.cpp" />
     <ClCompile Include="ActionFireball.cpp" />
+    <ClCompile Include="ActionHeavy.cpp" />
+    <ClCompile Include="ActionLight.cpp" />
+    <ClCompile Include="ActionMedium.cpp" />
     <ClCompile Include="ActionMeteredCrossUp.cpp" />
     <ClCompile Include="ActionMeterlessCrossUp.cpp" />
     <ClCompile Include="ActionMoveTowards.cpp" />
     <ClCompile Include="ActionRunTowards.cpp" />
+    <ClCompile Include="ActionTatsu.cpp" />
+    <ClCompile Include="ActionUnique.cpp" />
     <ClCompile Include="AICharacter.cpp" />
     <ClCompile Include="Game\Scene\ArcadeScene.cpp" />
     <ClCompile Include="CharacterSelectScene.cpp" />
@@ -253,20 +259,33 @@
     <ClCompile Include="WantToAttack.cpp" />
     <ClCompile Include="WantToBackAway.cpp" />
     <ClCompile Include="WantToEXFireball.cpp" />
+    <ClCompile Include="WantToEXTatsu.cpp" />
+    <ClCompile Include="WantToFireball.cpp" />
+    <ClCompile Include="WantToHeavy.cpp" />
+    <ClCompile Include="WantToLight.cpp" />
+    <ClCompile Include="WantToMedium.cpp" />
     <ClCompile Include="WantToMeteredCrossUp.cpp" />
     <ClCompile Include="WantToMeterlessCrossUp.cpp" />
     <ClCompile Include="wantToSpendMeter.cpp" />
+    <ClCompile Include="WantToTatsu.cpp" />
+    <ClCompile Include="WantToUnique.cpp" />
     <ClCompile Include="XMLDecision.cpp" />
     <ClCompile Include="XMLDecisionTreeReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionBackAway.h" />
     <ClInclude Include="ActionEXFireball.h" />
+    <ClInclude Include="ActionEXTatsu.h" />
     <ClInclude Include="ActionFireball.h" />
+    <ClInclude Include="ActionHeavy.h" />
+    <ClInclude Include="ActionLight.h" />
+    <ClInclude Include="ActionMedium.h" />
     <ClInclude Include="ActionMeteredCrossUp.h" />
     <ClInclude Include="ActionMeterlessCrossUp.h" />
     <ClInclude Include="ActionMoveTowards.h" />
     <ClInclude Include="ActionRunTowards.h" />
+    <ClInclude Include="ActionTatsu.h" />
+    <ClInclude Include="ActionUnique.h" />
     <ClInclude Include="AICharacter.h" />
     <ClInclude Include="AnimationTestScene.h" />
     <ClInclude Include="Game\Scene\ArcadeScene.h" />
@@ -374,9 +393,16 @@
     <ClInclude Include="WantToAttack.h" />
     <ClInclude Include="WantToBackAway.h" />
     <ClInclude Include="WantToEXFireball.h" />
+    <ClInclude Include="WantToEXTatsu.h" />
+    <ClInclude Include="WantToFireball.h" />
+    <ClInclude Include="WantToHeavy.h" />
+    <ClInclude Include="WantToLight.h" />
+    <ClInclude Include="WantToMedium.h" />
     <ClInclude Include="WantToMeteredCrossUp.h" />
     <ClInclude Include="WantToMeterlessCrossUp.h" />
     <ClInclude Include="wantToSpendMeter.h" />
+    <ClInclude Include="WantToTatsu.h" />
+    <ClInclude Include="WantToUnique.h" />
     <ClInclude Include="XMLDecision.h" />
     <ClInclude Include="XMLDecisionTreeReader.h" />
   </ItemGroup>

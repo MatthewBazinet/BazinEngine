@@ -35,6 +35,8 @@ public:
 	glm::vec4 northPlane;
 	glm::vec4 southPlane;
 	std::vector<glm::vec4> planes;
+
+	AICharacter* ai;
 };
 
 #endif;
