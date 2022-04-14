@@ -7,6 +7,7 @@ BattleCamera::BattleCamera(float height_) : Camera()
 	height = height_;
 	player1 = nullptr;
 	player2 = nullptr;
+	farPlane = 100.0f;
 }
 
 BattleCamera::BattleCamera() : Camera()
