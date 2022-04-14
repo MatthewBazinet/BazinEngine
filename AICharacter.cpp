@@ -183,11 +183,11 @@ void AICharacter::Update(const float deltaTime_)
 			}
 		}
 
-		if (glm::distance(character->position, opponent->GetPosition()) < 2.0f && targetType != TargetType::SELF)
+		if (glm::distance(character->position, character->opponent->GetPosition()) < 2.0f && targetType != TargetType::SELF)
 		{
 			character->Move(glm::vec2(0, 1));
 		}
-
+		
 	}
 }
 
@@ -310,7 +310,7 @@ DecisionTreeNode* AICharacter::CreateTree()
 	wantToEXTatsu->SetAI(this);
 	ActionEXTatsu* EXTatsu = new ActionEXTatsu();
 	EXTatsu->SetAI(this);
-	wantToEXFireball->SetTrueNode(wantToEXTatsu);
+	wantToEXFireball->SetFalseNode(wantToEXTatsu);
 	wantToEXTatsu->SetTrueNode(EXTatsu);
 	WantToMeteredCrossUp* wantToMeteredCrossUp = new WantToMeteredCrossUp();
 	wantToMeteredCrossUp->SetAI(this);
@@ -377,11 +377,10 @@ DecisionTreeNode* AICharacter::CreateTree()
 
 void AICharacter::RunDecisionTree()
 {
-	while (isExisting)
-	{
+
 		if (this && decisionTree != nullptr) 
 		{
 			decisionTree->MakeDecision();
 		}
-	}
+
 }

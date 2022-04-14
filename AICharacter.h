@@ -20,7 +20,6 @@ class AICharacter
 public:
 	AICharacter(Character* character_);
 	~AICharacter();
-	void SetOpponent(Character* opponent_) { opponent = opponent_; };
 	void SetProjectile(Projectile* projectile_) { projectile = projectile_; };
 
 	void Update(const float deltaTime);
@@ -62,7 +61,6 @@ public:
 	
 private:
 	Character* character;
-	Character* opponent;
 
 	void SetTarget(glm::vec3 target_) { target = target_; };
 	DecisionTreeNode* CreateTree();

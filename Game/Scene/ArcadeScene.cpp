@@ -133,7 +133,7 @@ void ArcadeScene::LoadPlayer2Character()
 
 	SceneGraph::GetInstance()->AddModel(Sphere);
 	SceneGraph::GetInstance()->AddModel(Rock);
-
+	ai = new AICharacter(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	Rock = nullptr;
 	Sphere = nullptr;
 }
