@@ -20,6 +20,8 @@ ArcadeScene::ArcadeScene()
 ArcadeScene::~ArcadeScene()
 {
 	SceneGraph::GetInstance()->OnDestroy();
+	delete ai;
+	ai = nullptr;
 }
 
 bool ArcadeScene::OnCreate()
@@ -44,7 +46,9 @@ bool ArcadeScene::OnCreate()
 	SceneGraph::GetInstance()->AddModel(floor);
 
 	XMLDecisionTreeReader read;
-	read.ReadFile("Tree.xml");
+	//read.ReadFile("Tree.xml");
+	ai = new AICharacter(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
+
 
 	glm::vec3 s(1.0f);
 	glm::vec3 e(6.0f);
@@ -129,7 +133,7 @@ void ArcadeScene::LoadPlayer2Character()
 
 	SceneGraph::GetInstance()->AddModel(Sphere);
 	SceneGraph::GetInstance()->AddModel(Rock);
-
+	ai = new AICharacter(static_cast<Character*>(SceneGraph::GetInstance()->GetGameObject("char2")));
 	Rock = nullptr;
 	Sphere = nullptr;
 }
@@ -162,6 +166,7 @@ void ArcadeScene::Update(const float deltaTime_)
 	SceneGraph::GetInstance()->Update(deltaTime_);
 	static_cast<BattleCamera*>(CoreEngine::GetInstance()->GetCamera())->Update(deltaTime_);
 	inputManager.Update(deltaTime_);
+	ai->Update(deltaTime_);
 	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char1"), planes);
 	EnvironmentalCollisionManager::GetInstance()->Update(SceneGraph::GetInstance()->GetGameObject("char2"), planes);
 

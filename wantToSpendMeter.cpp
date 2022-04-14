@@ -2,7 +2,7 @@
 
 DecisionTreeNode* WantToSpendMeter::GetBranch()
 {
-	if (ai->GetWantToSpendMeter() > 1.0f && ai->GetOverclock() > 5.0f)
+	if (ai->GetWantToSpendMeter() > 1.0f && ai->GetCharacter()->GetOverclock() > 5.0f)
 	{
 		return trueNode;
 	}
