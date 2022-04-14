@@ -117,16 +117,17 @@ void ArcadeScene::LoadPlayer2Character()
 	case(Player2Characters::Hoshi):
 		SceneGraph::GetInstance()->AddGameObject(new Hoshi(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char2");
 		break;
-	case(Player2Characters::Alexis):
+	/*case(Player2Characters::Alexis):
 		SceneGraph::GetInstance()->AddGameObject(new AlexisBruce(glm::vec3(0.0f, 0.0f, 0.0f)), "char2");
 		dynamic_cast<AlexisBruce*>(SceneGraph::GetInstance()->GetGameObject("char2"))->SetModels(Rock, Sphere);
 		break;
+		*/
 	case(Player2Characters::Eldric):
 		SceneGraph::GetInstance()->AddGameObject(new Eldric(glm::vec3(0.0f, 0.0f, 0.0f), Sphere), "char2");
 		break;
-	case(Player2Characters::Wulfrun):
+	/*case(Player2Characters::Wulfrun):
 		SceneGraph::GetInstance()->AddGameObject(new Wulfrun(glm::vec3(0.0f, 0.0f, 0.0f)), "char2");
-		break;
+		break;*/
 	default:
 		break;
 	}

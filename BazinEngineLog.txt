@@ -89,103 +89,6 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[INFO]: Resources/Textures/AlexisBruceBodyTexture.png in: TextureHandler.cpp on line: 44
-[INFO]: Resources/Textures/AlexisBruceHairTexture.png in: TextureHandler.cpp on line: 44
-[INFO]: Resources/Textures/WulfrunTexture.png in: TextureHandler.cpp on line: 44
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunIdleStance.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunIdleStance2.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunJumpStart.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunFall.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunBlock.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunAirHit.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunWalk1.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunWalk2.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunRun1.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunRun2.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunLightStart.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunLightEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunMediumStart.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunMediumEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunHeavyEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunAirLightStart.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunAirLightEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunAirMedium.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunAirHeavyStart.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunAirHeavyEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunSlashWave.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: Cannot open OBJ file: Resources/Models/Wulfrun/WulfrunSlashWave.obj in: LoadOBJModel.cpp on line: 163
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunSlashWaveEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: Cannot open OBJ file: Resources/Models/Wulfrun/WulfrunSlashWave.obj in: LoadOBJModel.cpp on line: 163
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunSlashWaveOverclocked.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunSlashKick.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunSlashKickEnd.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: MorphTarget Resources/Models/Wulfrun/WulfrunDashBite.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
-[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Cannot open OBJ file: Resources/Models/Wulfrun/WulfrunSlashWave.obj in: LoadOBJModel.cpp on line: 163
-[ERROR]: Cannot open OBJ file: Resources/Models/Wulfrun/WulfrunSlashWave.obj in: LoadOBJModel.cpp on line: 163
-[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag 4 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 0 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 2 that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag Hitbox 3 that already exists in: SceneGraph.cpp on line: 87
 [INFO]: Resources/Textures/EldricTexture.png in: TextureHandler.cpp on line: 44
 [ERROR]: MorphTarget Resources/Models/Eldric/EldricIdle.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
 [ERROR]: MorphTarget Resources/Models/Eldric/EldricBlock.obj was not found. Using Default MorphTarget. in: MorphTargetManager.cpp on line: 58
@@ -509,6 +412,4 @@
 [ERROR]: Trying to add a GameObject with a tag Hitbox 1 that already exists in: SceneGraph.cpp on line: 87
 [INFO]: Resources/Textures/FloorTexture.png in: TextureHandler.cpp on line: 44
 [INFO]: Resources/Textures/GravityWaveTexture.png in: TextureHandler.cpp on line: 44
-[ERROR]: Trying to add a GameObject with a tag ProjectileHB that already exists in: SceneGraph.cpp on line: 87
-[ERROR]: Trying to add a GameObject with a tag ProjectileHB that already exists in: SceneGraph.cpp on line: 87
 [ERROR]: Trying to add a GameObject with a tag ProjectileHB that already exists in: SceneGraph.cpp on line: 87
