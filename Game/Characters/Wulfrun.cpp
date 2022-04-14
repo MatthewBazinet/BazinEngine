@@ -479,7 +479,7 @@ void Wulfrun::AirMedium()
 void Wulfrun::AirHeavy()
 {
 	currentMove = moveState::AIRHEAVY;
-	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirLightStart", 0.5f);
+	static_cast<MorphTargetAnimatedModel*>(model)->SetCurrentMorphTarget("AirHeavy", 0.5f);
 	hurtBox = hurtBoxes["aerial"];
 
 	hitBox = nullptr;
