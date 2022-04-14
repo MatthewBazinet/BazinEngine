@@ -122,7 +122,7 @@ Eldric::Eldric(glm::vec3 pos_, Model* hurtBox_) : Character(1000.0f, 0.0f, false
 
 		frameData["airLight"] = FrameData(4.0f / 60.0f, 30.0f / 60.0f, 45.0f / 60.0f, 50.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 		frameData["airMedium"] = FrameData(5.0f / 60.0f, 30.0f / 60.0f, 30.0f / 60.0f, 75.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
-		frameData["airHeavy"] = FrameData(1.0f / 60.0f, 120.0f / 60.0f, 20.0f / 60.0f, 105.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
+		frameData["airHeavy"] = FrameData(0.5f / 60.0f, 45.0f / 60.0f, 20.0f / 60.0f, 105.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
 		frameData["unique"] = FrameData(4.0f / 60.0f, 15.0f / 60.0f, 5.0f / 60.0f, 100.0f, 0.0f, 0.0f, glm::vec3(0.0f, 0.0f, 0.0f), 0);
 
@@ -377,6 +377,7 @@ void Eldric::OnQCFActive(int strength)
 	glm::vec3 dir = glm::vec3(position.x - opponent->GetPosition().x, 0.0f, position.z - opponent->GetPosition().z);
 	eel->SetTarget(nullptr);
 	eel->SetPosition(this->GetPosition() + (glm::vec3(0.0f, 6.0f, 0.0f)));
+	eel->SetVelocity(glm::vec3(-dir));
 	
 	projs.push_back(eel);
 
